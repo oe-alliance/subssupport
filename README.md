@@ -1,5 +1,7 @@
 # subssupport
 
+This is a fork of https://github.com/mx3L/subssupport.
+
 subssupport is enigma2 plugin which provides improved subtitles support for several enigma2 plugins. It can also be used as standalone plugin, since it provides subtitles downloader and dvb subtitles player.
 
 Plugins which use or used subssupport: archivCZSK, TSMedia, MediaPlayer2, EMC with Subssupport
