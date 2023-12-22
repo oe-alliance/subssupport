@@ -22,7 +22,6 @@ from datetime import datetime
 import json
 import os
 import re
-from threading import Thread
 from twisted.internet.defer import Deferred
 from twisted.web import client
 

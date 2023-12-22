@@ -5,9 +5,7 @@ from __future__ import print_function
 import difflib
 import os
 import re
-import string
 from .SubsceneUtilities import geturl, get_language_info
-from six.moves import html_parser
 from six.moves.urllib.request import FancyURLopener
 from six.moves.urllib.parse import quote_plus, urlencode
 
@@ -17,11 +15,7 @@ import urllib3
 import requests
 import re
 import requests
-import json
 import re
-import random
-import string
-import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from six.moves import html_parser

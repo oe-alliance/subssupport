@@ -10,7 +10,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
 import os.path
-from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
+from six.moves.urllib.request import Request, urlopen
 #from six.moves.urllib.request import FancyURLopener
 from six.moves.urllib.parse import quote_plus, urlencode
 from six.moves import html_parser

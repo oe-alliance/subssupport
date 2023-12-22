@@ -9,16 +9,6 @@ from xml.dom import minidom
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..utilities import log, getFileSize, hashFile
 import subprocess
-import six
-from six.moves import urllib
-from six.moves import xmlrpc_client
-import requests
-import json
-import re
-import random
-import string
-import time
-import warnings
 from six.moves import xmlrpc_client
 LINKFILE = '/tmp/link'
 LINKFILE2 = '/tmp/link2'

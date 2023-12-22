@@ -10,17 +10,9 @@ from . import pn_utilities
 from ..utilities import log, languageTranslate, normalizeString
 
 
-from six.moves import urllib
 import os
 import os.path
 import subprocess
-import requests
-import json
-import re
-import random
-import string
-import time
-import warnings
 LINKFILE = '/tmp/link'
 LINKFILE2 = '/tmp/link2'
 

@@ -3,51 +3,20 @@ from __future__ import absolute_import
 from __future__ import print_function
 
 
-import difflib
-import os
-import re
-import string
-from six.moves import html_parser
 from six.moves.urllib.request import FancyURLopener
 from six.moves.urllib.parse import quote_plus, urlencode
-import urllib.request
-import urllib.parse
-from ..utilities import log
-import html
-import urllib3
 import requests
 import re
-import requests
-import json
-import re
-import random
-import string
-import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-from six.moves import html_parser
 warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
 import os.path
-from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
-from six.moves.urllib.parse import urlencode
-from six.moves import http_cookiejar
+from six.moves.urllib.request import Request, urlopen
 from .SubdlUtilities import get_language_info
 from ..utilities import languageTranslate, log, getFileSize
-from ..utilities import log
-import urllib3
-from urllib import request, parse
-from urllib.parse import urlencode
-import urllib.request
-import urllib.parse
-import six
-from six.moves import urllib
-from six.moves import xmlrpc_client
 
-import time
-import calendar
 import re
-from six.moves import html_parser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
 HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0',
@@ -81,8 +50,8 @@ def get_url(url, referer=None):
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
     else:
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
-    req = urllib.request.Request(url, None, headers)
-    response = urllib.request.urlopen(req)
+    req = Request(url, None, headers)
+    response = urlopen(req)
     content = response.read().decode('utf-8')
     response.close()
     content = content.replace('\n', '')
@@ -90,11 +59,10 @@ def get_url(url, referer=None):
 
 
 def get_url2(url, referer=None):
-    from io import BytesIO
-    from urllib.request import urlopen
-    from zipfile import ZipFile
-    req = request.Request(url)
-    response = request.urlopen(req)
+#    from io import BytesIO
+#    from zipfile import ZipFile
+    req = Request(url)
+    response = urlopen(req)
     content = response.read().decode('utf-8')
     #print(content)
     log(__name__, 'Done')
@@ -140,7 +108,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         typeid = "zip"
         filmid = 0
         #postparams = { '__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '' , '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
-        postparams = urllib3.request.urlencode({'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid})
+        postparams = urlencode({'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid})
         #class MyOpener(urllib.FancyURLopener):
             #version = 'User-Agent=Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0'
         #my_urlopener = MyOpener()
@@ -187,7 +155,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
 
 def get_subtitles_list(searchstring, title, languageshort, languagelong, subtitles_list):
     s = languagelong.lower()
-    url = '%s/search?query=%s' % (main_url, urllib.parse.quote_plus(searchstring))
+    url = '%s/search?query=%s' % (main_url, quote_plus(searchstring))
 
     try:
         log(__name__, "%s Getting url: %s" % (debug_pretext, url))
