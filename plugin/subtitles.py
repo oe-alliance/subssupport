@@ -89,9 +89,6 @@ try:
 except ImportError:
     QuickSubtitlesConfigMenu = None
 
-if six.PY3:
-    long = int
-
 
 # localization function
 
@@ -1563,7 +1560,7 @@ class SubsEngine(object):
         if r[0]:
             self.__pts = None
         else:
-            self.__pts = long(r[1]) + self.playerDelay
+            self.__pts = int(r[1]) + self.playerDelay
 
     def validPts(self):
         pass

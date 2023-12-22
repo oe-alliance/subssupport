@@ -37,9 +37,13 @@ def normalizeString(str):
     ).encode('ascii', 'ignore')
 
 
+def _cmp(a, b):
+    return (a > b) - (a < b)
+
+
 def compare_columns(b, a):
-    return cmp(b["language_name"], a["language_name"]) or \
-        cmp(a["sync"], b["sync"])
+    return _cmp(b["language_name"], a["language_name"]) or \
+        _cmp(a["sync"], b["sync"])
 
 
 class OSDBServer:

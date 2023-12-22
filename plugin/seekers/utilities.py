@@ -13,9 +13,6 @@ import os
 
 import six
 
-if six.PY3:
-    long = int
-
 
 SUPRESS_LOG = True
 
@@ -23,10 +20,7 @@ SUPRESS_LOG = True
 def log(module, msg):
     if SUPRESS_LOG:
         return
-    if six.PY2 and isinstance(msg, six.text_type):
-        print(module, msg.encode('utf-8'))
-    else:
-        print(module, msg)
+    print(module, msg)
 
 
 LANGUAGES = (
@@ -391,7 +385,7 @@ def getFileSize(filepath):
     if filepath.startswith('http://'):
         try:
             resp = urlopen(HeadRequest(filepath))
-            return long(resp.info().get('Content-Length'))
+            return int(resp.info().get('Content-Length'))
         except Exception:
             return None
         finally:
