@@ -45,7 +45,7 @@ from Components.ActionMap import NumberActionMap, ActionMap, HelpableActionMap
 from Components.config import ConfigText, KEY_0, KEY_DELETE, KEY_BACKSPACE, config
 from enigma import addFont, eEnv, ePicLoad, getDesktop, eListboxPythonMultiContent, eListbox, eTimer, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_WRAP, loadPNG
 
-from .compat import LanguageEntryComponent, eConnectCallback
+from .compat import eConnectCallback
 from .utils import toString
 from Tools.LoadPixmap import LoadPixmap
 

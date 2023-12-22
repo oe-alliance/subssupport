@@ -2473,7 +2473,6 @@ class SubsChooser(Screen):
         videoName = ref and os.path.split(ref.getPath())[1]
         self["filename"] = StaticText(videoName)
         self["file_list"] = FileList(defaultDir)
-#        self["file_list"] = SubFileList(defaultDir)
         self["menu_list"] = SubsChooserMenuList(self.embeddedList, searchSupport, historySupport)
         self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"],
             {
