@@ -52,7 +52,7 @@ from six.moves import html_parser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
 
-HDR= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
+HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Upgrade-Insecure-Requests': '1',
@@ -115,8 +115,8 @@ def getSearchTitle(title, year=None):
                   href = 'http://www.moviesubtitles.org' + href
                   return href
             if year in blocks:
-                regx = '.*<a href="(.*?)">'+title+' '+year+'</a>\s?'
-                href = re.findall(regx, blocks, re.M|re.I)[0]
+                regx = '.*<a href="(.*?)">' + title + ' ' + year + '</a>\s?'
+                href = re.findall(regx, blocks, re.M | re.I)[0]
                 print("hrefi", href)
                 if "/movie-" in href:
                    href = 'http://www.moviesubtitles.org' + href
@@ -254,7 +254,7 @@ def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list)
     #print(content)
     try:                                         
         log(__name__,"%s Getting '%s' subs ..." % (debug_pretext, languageshort))
-        subtitles = re.compile('(<img src=.+?flags/'+dst+'.gif.+?</b>)').findall(content)
+        subtitles = re.compile('(<img src=.+?flags/' + dst + '.gif.+?</b>)').findall(content)
         print("subtitles", subtitles)
     except:
         log(__name__,"%s Failed to get subtitles" % (debug_pretext))

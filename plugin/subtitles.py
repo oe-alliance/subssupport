@@ -4049,7 +4049,7 @@ class SubsSearch(Screen):
         self.onClose.append(self.closeSeekers) 
         
     def eventinfo(self):         
-        tmdb_file=resolveFilename(SCOPE_PLUGINS, "Extensions/tmdb")
+        tmdb_file = resolveFilename(SCOPE_PLUGINS, "Extensions/tmdb")
         if os.path.exists(tmdb_file):
                from Plugins.Extensions.tmdb import tmdb
                reload_module(tmdb)

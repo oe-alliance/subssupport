@@ -50,7 +50,7 @@ import re
 from six.moves import html_parser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
-HDR= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0',
+HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Content-Type': 'text/html; charset=UTF-8',
@@ -192,13 +192,13 @@ def get_subtitles_list(searchstring, title, languageshort, languagelong, subtitl
         content = get_url(url,referer=main_url)
         subtitles = re.compile('(href="/subtitle/.+?<span)').findall(content)
         subtitles = " ".join(subtitles)
-        regx = '<a.+href="(.+?)">'+title+'\s?<'        
-        downloadlink=re.findall(regx,subtitles, re.M|re.I)[0]
+        regx = '<a.+href="(.+?)">' + title + '\s?<'        
+        downloadlink = re.findall(regx,subtitles, re.M | re.I)[0]
         #print(downloadlink)
         link = '%s%s/%s' % (main_url, downloadlink, s)
         content = get_url(link,referer=main_url)                   
         print(content)
-        subtitles = re.compile('(language":"'+s+'".+?},)').findall(content)
+        subtitles = re.compile('(language":"' + s + '".+?},)').findall(content)
         #print(subtitles)
     except:
         log(__name__,"%s Failed to get subtitles" % (debug_pretext))

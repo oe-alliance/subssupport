@@ -42,7 +42,7 @@ def geturl(url):
     except:
         log(__name__, " Failed to get url:%s" % (url))
         content = None
-    return(content)
+    return (content)
 
 
 def login(username, password):

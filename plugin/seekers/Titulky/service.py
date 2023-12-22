@@ -27,7 +27,7 @@ from six.moves import html_parser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
 
-LINKFILE='/tmp/code'
+LINKFILE = '/tmp/code'
 
 timestamp = str(calendar.timegm(time.gmtime()))
 
@@ -45,7 +45,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id): #standard input
 
-    subtitle_id =  subtitles_list[pos]['ID']
+    subtitle_id = subtitles_list[pos]['ID']
     client = TitulkyClient()
     username = settings_provider.getSetting("Titulkyuser")
     password = settings_provider.getSetting("Titulkypass")
@@ -58,7 +58,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                                           "Login to Titulky.com failed. Check your username/password at the addon configuration")
             return True,subtitles_list[pos]['language_name'], ""
         log(__name__,'Login successfull')
-    log(__name__,'Get page with subtitle (id=%s)'%(subtitle_id))
+    log(__name__,'Get page with subtitle (id=%s)' % (subtitle_id))
     
     content = client.get_subtitle_page(subtitle_id)
     control_img = client.get_control_image(content)
@@ -88,7 +88,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         print(code)
         if solution == None: 
         #if solution:
-            log(__name__,'Solution provided: %s' %solution)
+            log(__name__,'Solution provided: %s' % solution)
             #content = client.get_subtitle_page2(content,solution,subtitle_id)
             #control_img2 = client.get_control_image(content)
             if not control_img2 == None:
@@ -112,9 +112,9 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     log(__name__,'Got the link, wait %i seconds before download' % (wait_time))
     delay = wait_time
     if 'delay_cb' in globals():
-        delay_cb(wait_time+2)
+        delay_cb(wait_time + 2)
     else:
-        for i in range(wait_time+1):
+        for i in range(wait_time + 1):
             line2 = 'Download will start in %i seconds' % (delay,)
             #xbmc.executebuiltin("XBMC.Notification(%s,%s,1000,%s)" % (__scriptname__,line2,os.path.join(__cwd__,'icon.png')))
             delay -= 1
@@ -145,10 +145,10 @@ def lang_xbmclang2titulky(lang):
 def get_episode_season(episode,season):
     return 'S%sE%s' % (get2DigitStr(int(season)),get2DigitStr(int(episode)))
 def get2DigitStr(number):
-    if number>9:
+    if number > 9:
         return str(number)
     else:
-        return '0'+str(number)
+        return '0' + str(number)
 
 def lang2_opensubtitles(lang):
     lang = lang_titulky2xbmclang(lang)
@@ -328,7 +328,7 @@ class TitulkyClient(object):
                        
     def get_subtitle_page2(self, content, code, id):
         url = 'https://www.titulky.com/idown.php'
-        post_data = ({'downkod': code, 'titulky': id, 'zip': 'z', 'securedown': '2', 'histstamp': '', 'T': '2.01-%s'%timestamp})
+        post_data = ({'downkod': code, 'titulky': id, 'zip': 'z', 'securedown': '2', 'histstamp': '', 'T': '2.01-%s' % timestamp})
         data = urllib.parse.urlencode(post_data).encode("utf-8")
         req = request.Request(url,data)
         req = self.add_cookies_into_header(req)
@@ -341,7 +341,7 @@ class TitulkyClient(object):
         return content                                                                            
 
     def get_subtitle_page(self, id):                                                                                               
-        url = self.server_url + '/idown.php?' + urlencode({'R': timestamp, 'titulky': id, 'zip': 'z', 'histstamp': '', 'T': '2.01-%s'%timestamp})
+        url = self.server_url + '/idown.php?' + urlencode({'R': timestamp, 'titulky': id, 'zip': 'z', 'histstamp': '', 'T': '2.01-%s' % timestamp})
         #print(url)
         log(__name__, 'Opening %s' % (url))
         req = Request(url)

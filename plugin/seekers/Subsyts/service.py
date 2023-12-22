@@ -44,7 +44,7 @@ import calendar
 import re
 from six.moves import html_parser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
-HDR= {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0',
+HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Upgrade-Insecure-Requests': '1',
@@ -53,7 +53,7 @@ HDR= {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20
       'Connection': 'keep-alive',
       'Accept-Encoding':'gzip, deflate'}
       
-HDT= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
+HDT = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Upgrade-Insecure-Requests': '1',
@@ -267,14 +267,14 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
         subtitles = re.compile('(<a href="/movie-imdb/.+?</h3>)').findall(content)
         #print(subtitles)
         subtitles = " ".join(subtitles)
-        regx = 'alt="'+title+'".+?href="(.+?)">' 
-        downloadlink=re.findall(regx,subtitles, re.M|re.I)[0]
+        regx = 'alt="' + title + '".+?href="(.+?)">' 
+        downloadlink = re.findall(regx,subtitles, re.M | re.I)[0]
         #print(downloadlink)
         link = '%s%s' % (main_url, downloadlink)
         #print(link)
         content = get_url(link,referer=main_url)                   
         #print(content)
-        subtitles = re.compile('(<span class="sub-lang">'+s+'</span>.+?download</a>)').findall(content)
+        subtitles = re.compile('(<span class="sub-lang">' + s + '</span>.+?download</a>)').findall(content)
         #print(subtitles)
     except:
         log(__name__,"%s Failed to get subtitles" % (debug_pretext))

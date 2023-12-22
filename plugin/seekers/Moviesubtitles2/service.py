@@ -52,7 +52,7 @@ from six.moves import html_parser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
 
-HDR= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
+HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Upgrade-Insecure-Requests': '1',
@@ -67,7 +67,7 @@ s = requests.Session()
  
 
 main_url = "http://www.moviesubtitles.net"
-main_url2="http://www.moviesubtitles.net/subtitles-download"
+main_url2 = "http://www.moviesubtitles.net/subtitles-download"
 debug_pretext = "moviesubtitles.net"
 
 
@@ -146,17 +146,17 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     url = "%s/%s" % (main_url, id)
     content = s.get(url,headers=HDR,verify=False,allow_redirects=True).text
     #print(content) 
-    regx='name="id" value="(.*?)"'
+    regx = 'name="id" value="(.*?)"'
     try:
-        ID=re.findall(regx, content, re.M|re.I)[0]
+        ID = re.findall(regx, content, re.M | re.I)[0]
     except:
         pass                                                                                
-    downloadlink_pattern = 'id='+ID+'&submit=Download the file'
+    downloadlink_pattern = 'id=' + ID + '&submit=Download the file'
     post_data = s.post(main_url2,headers=HDR,data=downloadlink_pattern,verify=False,allow_redirects=False).text
     #print("post_data:",post_data)
-    regx='location.href="(.*?)"'
+    regx = 'location.href="(.*?)"'
     try:
-        hash=re.findall(regx, post_data, re.M|re.I)[0]
+        hash = re.findall(regx, post_data, re.M | re.I)[0]
     except:
         pass                                                                                
     print("hash:",hash)  
@@ -232,7 +232,7 @@ def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list)
         return
     try:        
         log(__name__,"%s Getting '%s' subs ..." % (debug_pretext, languageshort))
-        subtitles = re.compile('(flags/'+dst+'.gif.+?</td></tr><tr)').findall(content)
+        subtitles = re.compile('(flags/' + dst + '.gif.+?</td></tr><tr)').findall(content)
         #print(("subtitles", subtitles)) 
     except:
         log(__name__,"%s Failed to get subtitles" % (debug_pretext))

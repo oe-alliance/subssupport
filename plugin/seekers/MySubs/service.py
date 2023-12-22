@@ -51,7 +51,7 @@ HDR = {'Host': 'my-subs.co',
         'Accept-Encoding': 'gzip, deflate',
         'Referer': 'https://my-subs.co/',
         'Connection': 'keep-alive'}
-HDS={'Host': 'my-subs.co',
+HDS = {'Host': 'my-subs.co',
          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0',
          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
          'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
@@ -110,15 +110,15 @@ def getSearchTitle(title, search_string, year=None): ## new Add quote_plus()
     #title = title.strip()
     url = 'https://my-subs.co/search.php?key=%s' % search_string
     data = get_url(url,referer=main_url)
-    regx = '<a class="list-group-item" title="'+title+'" href="(.+?)">(.+?)</a>'
+    regx = '<a class="list-group-item" title="' + title + '" href="(.+?)">(.+?)</a>'
     try:
-        subtitles = re.findall(regx,data,re.M|re.I|re.DOTALL)
+        subtitles = re.findall(regx,data,re.M | re.I | re.DOTALL)
     except:
-        subtitles='None'
-    if subtitles!='None':
+        subtitles = 'None'
+    if subtitles != 'None':
         for items in subtitles:
             Title = items[1]
-            href  = items[0]
+            href = items[0]
             #print (Title)
             #print (href)
             href = 'https://my-subs.co' + href
@@ -211,10 +211,10 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     lang = subtitles_list[pos]["language_flag"]   
     id = subtitles_list[pos]["id"]
     url = '%s%s' % (main_url, id)
-    data=s.get(url,verify=False).text
+    data = s.get(url,verify=False).text
     #content = get_url(url,referer=main_url)
     regx = '<a href="/download/(.+?)"><button'
-    link = re.findall(regx,data,re.M|re.I|re.DOTALL)[0]  
+    link = re.findall(regx,data,re.M | re.I | re.DOTALL)[0]  
     downloadlink = 'https://my-subs.co/download/' + link
     print(downloadlink) 
     if downloadlink:    
@@ -292,7 +292,7 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
         return
     try:
         log(__name__,"%s Getting '%s' subs ..." % (debug_pretext, languageshort))
-        subtitles = re.compile('(<a rel="nofollow".+?title="'+dst+'"></span>.+?</span></div>)').findall(content)
+        subtitles = re.compile('(<a rel="nofollow".+?title="' + dst + '"></span>.+?</span></div>)').findall(content)
     except:
         log(__name__,"%s Failed to get subtitles" % (debug_pretext))
         return

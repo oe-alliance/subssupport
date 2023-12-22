@@ -50,7 +50,7 @@ import re
 from six.moves import html_parser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
-HDR= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
+HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Upgrade-Insecure-Requests': '1',
@@ -146,7 +146,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     id = subtitles_list[pos]["id"]
     url = 'https://www.subtitlecat.com/%s' % (id)
     content = s.get(url,headers=HDR,verify=False,allow_redirects=True).text
-    downloadlink_pattern = '<a id="download_'+lang+'" onclick=.+?href=\"(.+?)\" class="green-link">Download</a>'
+    downloadlink_pattern = '<a id="download_' + lang + '" onclick=.+?href=\"(.+?)\" class="green-link">Download</a>'
     #print(downloadlink_pattern) 
     match = re.compile(downloadlink_pattern).findall(content)
     if match:

@@ -20,8 +20,8 @@ import random
 import string
 import time
 import warnings
-LINKFILE='/tmp/link'
-LINKFILE2='/tmp/link2'
+LINKFILE = '/tmp/link'
+LINKFILE2 = '/tmp/link2'
 
 
 

@@ -45,7 +45,7 @@ import re
 from six.moves import html_parser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
-HDR= {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; rv:85.0) Gecko/20100101 Firefox/85.0',
+HDR = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; rv:85.0) Gecko/20100101 Firefox/85.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Content-Type':'application/x-www-form-urlencoded',
@@ -56,7 +56,7 @@ HDR= {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; rv:85.0) Gecko/20100101 Firefox
       'Connection': 'keep-alive',
       'Accept-Encoding':'gzip, deflate'} 
       
-HDS= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
+HDS = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Upgrade-Insecure-Requests': '1',
@@ -71,8 +71,8 @@ s = requests.Session()
  
 
 main_url = "https://www.elsubtitle.com"
-url1="https://www.mimastech.com/cs_download/subdownload_p1.php"
-url2="https://www.mimastech.com/cs_download/subdownload_p2.php"
+url1 = "https://www.mimastech.com/cs_download/subdownload_p1.php"
+url2 = "https://www.mimastech.com/cs_download/subdownload_p2.php"
 
 debug_pretext = "https://www.elsubtitle.com"
 
@@ -113,7 +113,7 @@ def getSearchTitle(title, searchstring, year=None): ## new Add  .replace("+","-"
         #regx = '.*<a href="(.+?)"><img.+?alt="(.+?)"'
         regx = '<a href="(.+?)" title.+?>(.+?)</a>'
         try: 
-            href = re.compile('.*<a href="(.+?)"><img.+?alt="'+title+'"\s+').findall(subtitles)[0]
+            href = re.compile('.*<a href="(.+?)"><img.+?alt="' + title + '"\s+').findall(subtitles)[0]
             print(("href", href))
             href = 'https://www.elsubtitle.com' + href
             return href
@@ -228,38 +228,38 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     id = id.split('/')[0]
     print('language ', language)    
     print('lang ', lang)    
-    check_data='site_language=en&subtitle_language='+lang+'&subtitle_id='+id+'&imdb_id='+imdb_id+''
-    data=s.post(url1,headers=HDR,data=check_data,verify=False,allow_redirects=False).text
+    check_data = 'site_language=en&subtitle_language=' + lang + '&subtitle_id=' + id + '&imdb_id=' + imdb_id + ''
+    data = s.post(url1,headers=HDR,data=check_data,verify=False,allow_redirects=False).text
     #print(data)    
-    regx='workid" type="hidden" value="(.*?)"'
-    regx2='rawurlencode" type="hidden" value="(.*?)"'
-    regx3='worktitle" type="hidden" value="(.*?)"'
-    regx4='workyear" type="hidden" value="(.*?)"'
+    regx = 'workid" type="hidden" value="(.*?)"'
+    regx2 = 'rawurlencode" type="hidden" value="(.*?)"'
+    regx3 = 'worktitle" type="hidden" value="(.*?)"'
+    regx4 = 'workyear" type="hidden" value="(.*?)"'
     try:
-        workid=re.findall(regx, data, re.M|re.I)[0]
+        workid = re.findall(regx, data, re.M | re.I)[0]
     except:
         pass                                                                                
     #print("workid:",workid)
     try:
-        rawurlencode=re.findall(regx2, data, re.M|re.I)[0]
+        rawurlencode = re.findall(regx2, data, re.M | re.I)[0]
     except:
         pass                                                                                
     #print("rawurlencode:",rawurlencode)
     try:
-        worktitle=re.findall(regx3, data, re.M|re.I)[0]
+        worktitle = re.findall(regx3, data, re.M | re.I)[0]
     except:
         pass                                                                                
     #print("worktitle:",worktitle)
     try:
-        workyear=re.findall(regx4, data, re.M|re.I)[0]
+        workyear = re.findall(regx4, data, re.M | re.I)[0]
     except:
         pass                                                                                
     #print("workyear:",workyear)
-    check_data2='workid='+workid+'&rawurlencode='+rawurlencode+'&linkback=Back to&linkanother=Download another subtitle file&downloadtext=Download the subtitle file for&worktitle='+worktitle+'&workyear='+workyear+'&sublanguage=""&submit=Download The Subtitle File'
-    post_data=s.post(url2,headers=HDR,data=check_data2,verify=False,allow_redirects=False).text
+    check_data2 = 'workid=' + workid + '&rawurlencode=' + rawurlencode + '&linkback=Back to&linkanother=Download another subtitle file&downloadtext=Download the subtitle file for&worktitle=' + worktitle + '&workyear=' + workyear + '&sublanguage=""&submit=Download The Subtitle File'
+    post_data = s.post(url2,headers=HDR,data=check_data2,verify=False,allow_redirects=False).text
     #print(post_data)
-    regx='<a href="(.*?)" download'
-    link = re.findall(regx, post_data, re.M|re.I)[0]
+    regx = '<a href="(.*?)" download'
+    link = re.findall(regx, post_data, re.M | re.I)[0]
     #print("link:",link)
     downloadlink = 'https://www.mimastech.com/cs_download/%s' % (link)
     #print("downloadlink:",downloadlink)
@@ -338,7 +338,7 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
         return                                                                      
     try:
         log(__name__,"%s Getting '%s' subs ..." % (debug_pretext, languageshort))
-        subtitles = re.compile('(<tr><td.+?name="subtitle_language".+?value="'+dst+'".+?>'+dtt+'</span>)').findall(content)
+        subtitles = re.compile('(<tr><td.+?name="subtitle_language".+?value="' + dst + '".+?>' + dtt + '</span>)').findall(content)
         print(("subtitles", subtitles))
     except:
         log(__name__,"%s Failed to get subtitles" % (debug_pretext))
@@ -348,9 +348,9 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
             filename = re.compile('.*>(.*?)</div><div').findall(subtitle)[0]
             filename = filename.strip()
             #print(filename) 
-            id = re.compile('.*value="'+dst+'" /><input name="subtitle_id" type="hidden" value="(.*?)"').findall(subtitle)[0]
+            id = re.compile('.*value="' + dst + '" /><input name="subtitle_id" type="hidden" value="(.*?)"').findall(subtitle)[0]
             #id = re.compile('name="subtitle_id" type="hidden" value="(.*?)"').findall(subtitle)[0]
-            id= id+'/'+id_imdb
+            id = id + '/' + id_imdb
             #print(id)
             try:
                 downloads = re.compile('action="(.+?)"').findall(subtitle)[0]

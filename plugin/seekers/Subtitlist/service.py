@@ -190,7 +190,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     content = get_url(url,referer=main_url)
     #regx = '<a type="button" href="(.+?)" title'
     regx = '<a.+?href="(.+?)" title'
-    downloadlink = re.findall(regx,content, re.M|re.I)[0] 
+    downloadlink = re.findall(regx,content, re.M | re.I)[0] 
     print('downloadlink', downloadlink)
     #downloadlink = 'https://my-subs.co/download/' + link
     if downloadlink:    
@@ -271,8 +271,8 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
     try:
         log(__name__,"%s Getting '%s' subs ..." % (debug_pretext, languageshort))
         #Language Filter
-        regx = '<a.+?href="(.+?)">'+dst+'</a>'
-        Langfx = re.findall(regx, content, re.M|re.I)[0]
+        regx = '<a.+?href="(.+?)">' + dst + '</a>'
+        Langfx = re.findall(regx, content, re.M | re.I)[0]
         link = "%s%s" % (main_url, Langfx)       
         content = get_url(link,referer=main_url)
         content = content.replace('\n','')

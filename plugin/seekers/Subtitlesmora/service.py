@@ -50,7 +50,7 @@ import re
 from six.moves import html_parser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
-HDR= {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
+HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Content-Type': 'text/html; charset=UTF-8',
@@ -199,7 +199,7 @@ def get_subtitles_list(title, searchstring, languageshort, languagelong, subtitl
         return
     try:
         log(__name__,"%s Getting '%s' subs ..." % (debug_pretext, languageshort))
-        subtitles = re.compile('(<td><a href.+?">'+d+'.+?</a></td>)').findall(content)
+        subtitles = re.compile('(<td><a href.+?">' + d + '.+?</a></td>)').findall(content)
         #print(subtitles)                        
     except:
         log(__name__,"%s Failed to get subtitles" % (debug_pretext))

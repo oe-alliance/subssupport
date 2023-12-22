@@ -362,7 +362,7 @@ class MoviesubtitlesSeeker(XBMCSubtitlesAdapter):
     default_settings = {}
 
 try:
-    from .Moviesubtitles2  import moviesubtitles2 
+    from .Moviesubtitles2 import moviesubtitles2 
 except ImportError as e:
     moviesubtitles2 = e
 
