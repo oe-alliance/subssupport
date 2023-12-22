@@ -2,7 +2,8 @@
 from __future__ import absolute_import
 import os
 
-import urllib
+from six.moves.urllib.request import urlopen
+from six.moves.urllib.parse import urlencode
 import re
 from ..utilities import log, languageTranslate
 
@@ -72,7 +73,7 @@ def download_subtitles(subtitles_list, pos, extract_subs, tmp_sub_dir, sub_folde
 	selected_subtitles = subtitles_list[pos]
 
 	log(__name__, 'Downloading subtitles')
-	res = urllib.urlopen(selected_subtitles['link'])
+	res = urlopen(selected_subtitles['link'])
 	subtitles_filename = re.search("Content\-Disposition: attachment; filename=\"(.+?)\"", str(res.info())).group(1)
 	log(__name__, 'Filename: %s' % subtitles_filename)
 	# subs are in .zip or .rar
@@ -123,8 +124,8 @@ class EdnaClient(object):
 		self.server_url = "http://www.edna.cz"
 
 	def search_show(self, title):
-		enc_title = urllib.urlencode({"q": title})
-		res = urllib.urlopen(self.server_url + "/vyhledavani/?" + enc_title)
+		enc_title = urlencode({"q": title})
+		res = urlopen(self.server_url + "/vyhledavani/?" + enc_title)
 		shows = []
 		if re.search("/vyhledavani/\?q=", res.geturl()):
 			log(__name__, "Parsing search result")
@@ -144,7 +145,7 @@ class EdnaClient(object):
 		return shows
 
 	def list_show_subtitles(self, show_url, show_series):
-		res = urllib.urlopen(self.server_url + show_url + "titulky/?season=" + show_series)
+		res = urlopen(self.server_url + show_url + "titulky/?season=" + show_series)
 		if not res.getcode() == 200:
 			return []
 		subtitles = []

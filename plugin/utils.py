@@ -2,14 +2,14 @@ from __future__ import print_function
 import os
 
 import six
-from six.moves import urllib
+from six.moves.urllib.request import Request, urlopen
 
 
 def load(subpath):
     if subpath.startswith('http'):
-        req = urllib.request.Request(subpath)
+        req = Request(subpath)
         try:
-            response = urllib.request.urlopen(req)
+            response = urlopen(req)
             text = response.read()
         except Exception:
             raise
@@ -72,7 +72,7 @@ def decode(text, encodings, current_encoding=None, decode_from_start=False):
                 continue
 
 
-class HeadRequest(urllib.request.Request):
+class HeadRequest(Request):
     def get_method(self):
         return "HEAD"
 

@@ -8,8 +8,7 @@ try:
     from hashlib import md5
 except:
     from md5 import new as md5
-from six.moves.urllib.request import Request
-from six.moves.urllib.request import urlopen
+from six.moves.urllib.request import Request, urlopen
 import os
 
 import six

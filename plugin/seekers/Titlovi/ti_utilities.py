@@ -6,7 +6,7 @@ from xml.dom import minidom
 from ..utilities import languageTranslate, log
 
 import six
-from six.moves import urllib
+from six.moves.urllib.request import urlopen
 
 
 LANGUAGES = (
@@ -203,7 +203,7 @@ class OSDBServer:
         return tvinfo
 
     def fetch(self, url):
-        socket = urllib.request.urlopen(url)
+        socket = urlopen(url)
         result = socket.read()
         socket.close()
         xmldoc = minidom.parseString(result)

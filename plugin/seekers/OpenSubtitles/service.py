@@ -4,6 +4,7 @@ from __future__ import absolute_import
 import os
 from ..utilities import log, hashFile
 from .os_utilities import OSDBServer
+from six.moves.urllib.request import urlretrieve
 import six
 
 
@@ -54,8 +55,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     destination = os.path.join(six.ensure_str(tmp_sub_dir), "%s.srt" % subtitles_list[pos]["ID"])
     result = OSDBServer(user_agent).download(subtitles_list[pos]["ID"], destination, session_id)
     if not result:
-        import urllib
-        urllib.urlretrieve(subtitles_list[pos]["link"], zip_subs)
+        urlretrieve(subtitles_list[pos]["link"], zip_subs)
 
     language = subtitles_list[pos]["language_name"]
     return not result, language, destination  # standard output

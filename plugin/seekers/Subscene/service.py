@@ -4,16 +4,12 @@ from __future__ import absolute_import
 from __future__ import print_function
 import difflib
 import os
-import re
 from .SubsceneUtilities import geturl, get_language_info
-from six.moves.urllib.request import FancyURLopener
+from six.moves.urllib.request import FancyURLopener, urlopen
 from six.moves.urllib.parse import quote_plus, urlencode
 
 from ..utilities import log
 import html
-import urllib3
-import requests
-import re
 import requests
 import re
 import warnings
@@ -59,7 +55,7 @@ subscene_languages = {
 def geturl(url):
     log(__name__, " Getting url: %s" % (url))
     try:
-        response = urllib.request.urlopen(url)
+        response = urlopen(url)
         content = response.read()
     except:
         log(__name__, " Failed to get url:%s" % (url))
@@ -312,7 +308,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         typeid = "zip"
         filmid = 0
         #postparams = { '__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '' , '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
-        postparams = urllib3.request.urlencode({'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid})
+        postparams = urlencode({'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid})
         #class MyOpener(urllib.FancyURLopener):
             #version = 'User-Agent=Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0'
         #my_urlopener = MyOpener()
