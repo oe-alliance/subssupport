@@ -35,12 +35,12 @@ def openSubsSupportSettings(session, **kwargs):
 
 class SubsSupportSettings(Screen):
     skin = """
-        <screen position="center,center" size="370,200" resolution="1280,720">
-            <widget source="menuList" render="Listbox" scrollbarMode="showOnDemand" position="10,10" size="340,180" zPosition="3" transparent="1" >
+        <screen position="center,center" size="400,220" resolution="1280,720">
+            <widget source="menuList" render="Listbox" scrollbarMode="showOnDemand" position="10,30" size="380,180" zPosition="3" transparent="1" >
                 <convert type="TemplatedMultiContent">
                     {"templates":
                         {"default": (30, [
-                            MultiContentEntryText(pos=(0, 0), size=(340, 30), font = 0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0, color=0xFFFFFF)
+                            MultiContentEntryText(pos=(0, 0), size=(380, 30), font = 0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0, color=0xFFFFFF)
                         ], True, "showOnDemand"),
                         },
                     "fonts": [gFont("Regular", 23)],
