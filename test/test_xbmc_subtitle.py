@@ -3,12 +3,11 @@ Created on Feb 6, 2014
 
 @author: marko
 '''
+from __future__ import print_function
 import os
 import sys
 import time
 import unittest
-import ConfigParser
-
 test = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(test, '..', 'plugin'))
 
@@ -32,17 +31,17 @@ class TestXBMCSubtitleProvider(object):
         cls.download_path = cls.tmp_path
 
     def captcha_cb(self, url):
-        print '[captcha_cb] visit url:"%s"\nre-type captcha:' % url
-        print '[captcha_cb] not visiting just returning empty string'
+        print('[captcha_cb] visit url:"%s"\nre-type captcha:' % url)
+        print('[captcha_cb] not visiting just returning empty string')
         return ""
 
     def message_cb(self, text):
-        print '[message_cb] %s' % text
+        print('[message_cb] %s' % text)
 
     def delay_cb(self, seconds):
-        print '[delay_cb] waiting for %d seconds' % seconds
-        for i in xrange(seconds):
-            print '[delay_cb] %d second'
+        print('[delay_cb] waiting for %d seconds' % seconds)
+        for i in range(seconds):
+            print('[delay_cb] %d second')
             time.sleep(1)
 
     def setUp(self):
@@ -106,19 +105,19 @@ class TestXBMCSubtitleProviderWithCredentials(TestXBMCSubtitleProvider):
 
     @classmethod
     def get_credentials(cls, filename):
-        config = ConfigParser.RawConfigParser()
+        config = configparser.RawConfigParser()
         cfgpath = os.path.join(os.path.dirname(__file__), filename)
         try:
             config.read(cfgpath)
             config.get('Credentials', 'username')
         except:
-            print 'Cannot read config file ' + filename
+            print('Cannot read config file ' + filename)
             config.add_section('Credentials')
             config.set('Credentials', 'username', 'name_')
             config.set('Credentials', 'password', 'pass_')
             with open(cfgpath, 'wb') as configfile:
                 config.write(configfile)
-            print 'Wrote default values to config file'
+            print('Wrote default values to config file')
         return config.get('Credentials', 'username'), config.get('Credentials', 'password')
 
     def test_download(self):
@@ -338,6 +337,9 @@ class TestItasa(TestXBMCSubtitleProviderWithCredentials, unittest.TestCase):
 
 
 from seekers.xbmc_subtitles import TitloviSeeker
+
+from six.moves import configparser
+from six.moves import range
 
 
 class TestTitlovi(TestXBMCSubtitleProvider, unittest.TestCase):

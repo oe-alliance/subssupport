@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import sys
 import unittest
@@ -48,7 +49,7 @@ class LoaderTestCase(unittest.TestCase):
             sublist, encoding = self.subsloader.load(subpath, fps=25)
             self.assertTrue(len(sublist) > 1, 'parsed subtitle list has to have at least 2 entries')
             self.assertTrue(encoding != '', 'cannot detect encoding')
-            print '\n'
+            print('\n')
 
     def test_utf16(self):
         self.subsloader.change_encodings(['utf-8', 'utf-16'])

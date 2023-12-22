@@ -1,8 +1,8 @@
+from __future__ import print_function
 import os
 import sys
 import socket
 import time
-import urllib2
 import unittest
 import shutil
 
@@ -11,6 +11,9 @@ sys.path.append(os.path.join(test, '..', 'plugin'))
 
 from seekers.seeker import BaseSeeker, SubtitlesSearchError, SubtitlesDownloadError, SubtitlesErrors
 from seek import SubsSeeker
+from six.moves import range
+
+from six.moves import urllib
 
 
 def remove_files_in_dir(dirpath):
@@ -21,26 +24,26 @@ def remove_files_in_dir(dirpath):
 
 
 def captcha_cb(self, url):
-        print '[captcha_cb] visit url:"%s"\nre-type captcha:' % url
-        print '[captcha_cb] not visiting just returning empty string'
+        print('[captcha_cb] visit url:"%s"\nre-type captcha:' % url)
+        print('[captcha_cb] not visiting just returning empty string')
         return ""
 
 
 def message_cb(self, text):
-    print '[message_cb] %s' % text
+    print('[message_cb] %s' % text)
 
 
 def delay_cb(self, seconds):
-    print '[delay_cb] waiting for %d seconds' % seconds
-    for i in xrange(seconds):
-        print '[delay_cb] %d second'
+    print('[delay_cb] waiting for %d seconds' % seconds)
+    for i in range(seconds):
+        print('[delay_cb] %d second')
         time.sleep(1)
 
 
 def choosefile_cb(files):
-    print '[choosefile_cb]'
-    print '\n'.join(("%d. ) %s" % (idx, os.path.basename(file)) for idx, file in enumerate(files)))
-    print '[choosefile_cb] selecting [0] - %s' % (os.path.basename(files[0]))
+    print('[choosefile_cb]')
+    print('\n'.join(("%d. ) %s" % (idx, os.path.basename(file)) for idx, file in enumerate(files))))
+    print('[choosefile_cb] selecting [0] - %s' % (os.path.basename(files[0])))
     return files[0]
 
 
@@ -59,7 +62,7 @@ class URLErrorSeeker(BaseSeeker):
     supported_langs = []
 
     def _search(self, title, filepath, langs, season, episode, tvshow, year):
-        raise urllib2.URLError("test")
+        raise urllib.error.URLError("test")
 
 
 class StandardErrorSeeker(BaseSeeker):
