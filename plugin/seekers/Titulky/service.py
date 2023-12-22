@@ -31,7 +31,7 @@ LINKFILE='/tmp/code'
 
 timestamp = str(calendar.timegm(time.gmtime()))
 
-def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack ): #standard input
+def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack): #standard input
     # need to filter titles like <Localized movie name> (<Movie name>)
     br_index = title.find('(')
     if br_index > -1:
@@ -43,9 +43,9 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     return subtitles_list, session_id, ""  #standard output
 
 
-def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id): #standard input
+def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id): #standard input
 
-    subtitle_id =  subtitles_list[pos][ 'ID' ]
+    subtitle_id =  subtitles_list[pos]['ID']
     client = TitulkyClient()
     username = settings_provider.getSetting("Titulkyuser")
     password = settings_provider.getSetting("Titulkypass")
@@ -185,7 +185,7 @@ class TitulkyClient(object):
 
             #return True
 
-    def search_subtitles(self, file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3 ):
+    def search_subtitles(self, file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3):
         br_index = title.find('(')
         if br_index > -1:
             title = title[:br_index]
@@ -328,7 +328,7 @@ class TitulkyClient(object):
                        
     def get_subtitle_page2(self, content, code, id):
         url = 'https://www.titulky.com/idown.php'
-        post_data = ({ 'downkod': code, 'titulky': id, 'zip': 'z', 'securedown': '2', 'histstamp': '', 'T': '2.01-%s'%timestamp })
+        post_data = ({'downkod': code, 'titulky': id, 'zip': 'z', 'securedown': '2', 'histstamp': '', 'T': '2.01-%s'%timestamp})
         data = urllib.parse.urlencode(post_data).encode("utf-8")
         req = request.Request(url,data)
         req = self.add_cookies_into_header(req)
