@@ -162,8 +162,10 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
     check_data='id='+ID+'&name='+name+'&lang='+language+'&url='+id+''
     data=s.post(url2,headers=HDR,data=check_data,verify=False,allow_redirects=True).text
     regx='download_url":"(.*?)"'
-    try:download_url=re.findall(regx, data, re.M|re.I)[0]
-    except:pass   
+    try:
+        download_url=re.findall(regx, data, re.M|re.I)[0]
+    except:
+        pass   
     #print("download_url':",download_url)
     downloadlink = '%s/d/%s/%s/%s/%s.zip' % (main_url, ID, download_url, ttl, zp)
     #print(downloadlink) 

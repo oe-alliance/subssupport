@@ -113,7 +113,8 @@ def getSearchTitle(title, search_string, year=None): ## new Add quote_plus()
     regx = '<a class="list-group-item" title="'+title+'" href="(.+?)">(.+?)</a>'
     try:
         subtitles = re.findall(regx,data,re.M|re.I|re.DOTALL)
-    except:subtitles='None'
+    except:
+        subtitles='None'
     if subtitles!='None':
         for items in subtitles:
             Title = items[1]

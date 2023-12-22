@@ -147,14 +147,18 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
     content = s.get(url,headers=HDR,verify=False,allow_redirects=True).text
     #print(content) 
     regx='name="id" value="(.*?)"'
-    try:ID=re.findall(regx, content, re.M|re.I)[0]
-    except:pass                                                                                
+    try:
+        ID=re.findall(regx, content, re.M|re.I)[0]
+    except:
+        pass                                                                                
     downloadlink_pattern = 'id='+ID+'&submit=Download the file'
     post_data = s.post(main_url2,headers=HDR,data=downloadlink_pattern,verify=False,allow_redirects=False).text
     #print("post_data:",post_data)
     regx='location.href="(.*?)"'
-    try:hash=re.findall(regx, post_data, re.M|re.I)[0]
-    except:pass                                                                                
+    try:
+        hash=re.findall(regx, post_data, re.M|re.I)[0]
+    except:
+        pass                                                                                
     print("hash:",hash)  
     downloadlink = 'http://www.moviesubtitles.net/%s' % (hash)
     if downloadlink:
