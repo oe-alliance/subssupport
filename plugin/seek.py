@@ -57,8 +57,6 @@ SUBTITLES_SEEKERS.append(MoviesubtitlesSeeker)
 SUBTITLES_SEEKERS.append(Moviesubtitles2Seeker)
 SUBTITLES_SEEKERS.append(MySubsSeeker)
 SUBTITLES_SEEKERS.append(OpenSubtitlesSeeker)
-SUBTITLES_SEEKERS.append(PodnapisiSeeker)
-SUBTITLES_SEEKERS.append(SubsceneSeeker)
 SUBTITLES_SEEKERS.append(SubdlSeeker)
 SUBTITLES_SEEKERS.append(SubsytsSeeker)
 SUBTITLES_SEEKERS.append(SubtitlecatSeeker)
@@ -66,7 +64,10 @@ SUBTITLES_SEEKERS.append(SubtitlesGRSeeker)
 SUBTITLES_SEEKERS.append(SubtitlesmoraSeeker)
 SUBTITLES_SEEKERS.append(SubtitlistSeeker)
 SUBTITLES_SEEKERS.append(ItasaSeeker)
-SUBTITLES_SEEKERS.append(TitloviSeeker)
+if six.PY2:
+    SUBTITLES_SEEKERS.append(PodnapisiSeeker)
+    SUBTITLES_SEEKERS.append(SubsceneSeeker)
+    SUBTITLES_SEEKERS.append(TitloviSeeker)
 
 
 class ErrorSeeker(BaseSeeker):

@@ -194,7 +194,7 @@ def get_subtitles_list(searchstring, title, languageshort, languagelong, subtitl
         content = get_url(url, referer=main_url)
         subtitles = re.compile('(href="/subtitle/.+?<span)').findall(content)
         subtitles = " ".join(subtitles)
-        regx = '<a.+href="(.+?)">' + title + '\s?<'
+        regx = '<a.+href="(.+?)">' + title + r'\s?<'
         downloadlink = re.findall(regx, subtitles, re.M | re.I)[0]
         #print(downloadlink)
         link = '%s%s/%s' % (main_url, downloadlink, s)

@@ -18,19 +18,14 @@
 
 from __future__ import absolute_import
 from __future__ import print_function
-
-from Plugins.Plugin import PluginDescriptor
 from datetime import datetime
 import json
 import os
 import re
-import sys
 from threading import Thread
-import traceback
 from twisted.internet.defer import Deferred
 from twisted.web import client
-from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, loadPNG, RT_WRAP, eConsoleAppContainer, eServiceCenter, eServiceReference, getDesktop, loadPic, loadJPG, RT_VALIGN_CENTER, gPixmapPtr, ePicLoad, eTimer
-from ServiceReference import ServiceReference
+
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.GUIComponent import GUIComponent
@@ -55,7 +50,7 @@ from Screens.LocationBox import LocationBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools import Notifications
-from Tools.Directories import SCOPE_CURRENT_SKIN, SCOPE_SKIN, SCOPE_PLUGINS, resolveFilename, pathExists, \
+from Tools.Directories import SCOPE_CURRENT_SKIN, SCOPE_SKIN, SCOPE_PLUGINS, resolveFilename, \
     fileExists
 from Tools.ISO639 import LanguageCodes
 from Tools.LoadPixmap import LoadPixmap
@@ -81,7 +76,6 @@ from .utils import toString, SimpleLogger, toUnicode
 from . import _, __author__, __version__, __email__
 
 import six
-from six.moves.queue import Queue
 from six.moves import range
 from six.moves import urllib
 from six.moves.urllib.parse import quote
@@ -100,8 +94,8 @@ except ImportError:
 if six.PY3:
     long = int
 
-# localization function
 
+# localization function
 
 def warningMessage(session, text):
     session.open(MessageBox, text, type=MessageBox.TYPE_WARNING, timeout=5)
@@ -3159,7 +3153,7 @@ class Suggestions(object):
 class OpenSubtitlesSuggestions(Suggestions):
     def _getSuggestions(self, queryString):
         query = "http://www.opensubtitles.org/libs/suggest.php?format=json2&SubLanguageID=null&MovieName=" + quote(queryString)
-        return client.getPage(six.ensure_binary(query), timeout=6)
+        return client.getPage(six.ensure_binary(query), timeout=6)  # TODO deprecated
 
     def _processResult(self, data):
         return json.loads(data)['result']

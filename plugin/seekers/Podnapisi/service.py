@@ -9,6 +9,7 @@ from . import pn_utilities
 
 from ..utilities import log, languageTranslate, normalizeString
 
+
 from six.moves import urllib
 import os
 import os.path

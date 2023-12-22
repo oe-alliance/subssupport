@@ -9,9 +9,6 @@ import urllib.request
 import urllib.parse
 from ..utilities import log
 import html
-import urllib3
-import requests
-import re
 import requests
 import json
 import re
