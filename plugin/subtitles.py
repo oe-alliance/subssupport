@@ -2315,7 +2315,7 @@ class SubFileList(FileList):
         directories = []
         files = []
 
-        if directory is None and self.showMountpoints: # present available mountpoints
+        if directory is None and self.showMountpoints:  # present available mountpoints
             for p in harddiskmanager.getMountedPartitions():
                 path = os.path.join(p.mountpoint, "")
                 if path not in self.inhibitMounts and not self.inParentDirs(path, self.inhibitDirs):
@@ -4055,7 +4055,7 @@ class SubsSearch(Screen):
                reload_module(tmdb)
                s = self.session.nav.getCurrentService()
                info = s.info()
-               event = info.getEvent(0) # 0 = now, 1 = next
+               event = info.getEvent(0)  # 0 = now, 1 = next
                name = event and event.getEventName() or ''
                self.session.open(tmdb.tmdbScreen, name, 2)
         else:

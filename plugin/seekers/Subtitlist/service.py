@@ -21,7 +21,7 @@ import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from six.moves import html_parser
-warnings.simplefilter('ignore',InsecureRequestWarning)
+warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
 import os.path
 from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
@@ -80,10 +80,10 @@ def get_url(url, referer=None):
     #content = content.replace('\n', '')
     return content
                         
-def getSearchTitle(title, year=None): ## new Add
-    hrf = quote_plus(title).replace("%2B","-")
+def getSearchTitle(title, year=None):  # new Add
+    hrf = quote_plus(title).replace("%2B", "-")
     url = 'https://www.subtitlist.com/search?title=%s' % quote_plus(title)
-    data = get_url(url,referer=main_url)
+    data = get_url(url, referer=main_url)
     data = data.replace('\n', '')
     blocks = re.compile('(<a href="/subtitles/.+?</a></p>)').findall(data)
     #blocks = data.split('<div class="list list-row block"')
@@ -159,7 +159,7 @@ def get_rating(downloads):
     return rating                           
 
 
-def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack): #standard input
+def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
     languagefound = lang1
     language_info = get_language_info(languagefound)
     language_info1 = language_info['name']
@@ -169,17 +169,17 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     subtitles_list = []
     msg = ""   
 
-    if len(tvshow) == 0 and year: # Movie
+    if len(tvshow) == 0 and year:  # Movie
         searchstring = "%s (%s)" % (title, year)
-    elif len(tvshow) > 0 and title == tvshow: # Movie not in Library
+    elif len(tvshow) > 0 and title == tvshow:  # Movie not in Library
         searchstring = "%s (%#02d%#02d)" % (tvshow, int(season), int(episode))
-    elif len(tvshow) > 0: # TVShow
+    elif len(tvshow) > 0:  # TVShow
         searchstring = "%s S%#02dE%#02d" % (tvshow, int(season), int(episode))
     else:
         searchstring = title
     log(__name__, "%s Search string = %s" % (debug_pretext, searchstring))
     get_subtitles_list(searchstring, title, year, language_info2, language_info1, subtitles_list)
-    return subtitles_list, "", msg #standard output
+    return subtitles_list, "", msg  # standard output
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     language = subtitles_list[pos]["language_name"]
@@ -187,10 +187,10 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     id = subtitles_list[pos]["id"]
     url = '%s%s' % (main_url, id)
     #data=s.get(url,verify=False).text
-    content = get_url(url,referer=main_url)
+    content = get_url(url, referer=main_url)
     #regx = '<a type="button" href="(.+?)" title'
     regx = '<a.+?href="(.+?)" title'
-    downloadlink = re.findall(regx,content, re.M | re.I)[0] 
+    downloadlink = re.findall(regx, content, re.M | re.I)[0] 
     print('downloadlink', downloadlink)
     #downloadlink = 'https://my-subs.co/download/' + link
     if downloadlink:    
@@ -210,7 +210,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         #my_urlopener.addheader('Referer', url)
         log(__name__, "%s Fetching subtitles using url '%s' with referer header and post parameters '%s'" % (debug_pretext, downloadlink, postparams))
         #response = my_urlopener.open(downloadlink, postparams) response.
-        response = s.get(downloadlink,headers=HDR,params=postparams,verify=False,allow_redirects=True)
+        response = s.get(downloadlink, headers=HDR, params=postparams, verify=False, allow_redirects=True)
         print(response.content)
         local_tmp_file = zip_subs
         try:
@@ -258,27 +258,27 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
     title = title.strip()
     search_string = prepare_search_string(title)
     #url = getSearchTitle(title, search_string, year)
-    url = getSearchTitle(search_string, year).replace("%2B","-")
+    url = getSearchTitle(search_string, year).replace("%2B", "-")
     print('url', url)
     try:
         log(__name__, "%s Getting url: %s" % (debug_pretext, url))
-        content = get_url(url,referer=main_url)
+        content = get_url(url, referer=main_url)
         #print('content', content)
     except:
         pass
         log(__name__, "%s Failed to get url:%s" % (debug_pretext, url))
         return
     try:
-        log(__name__,"%s Getting '%s' subs ..." % (debug_pretext, languageshort))
+        log(__name__, "%s Getting '%s' subs ..." % (debug_pretext, languageshort))
         #Language Filter
         regx = '<a.+?href="(.+?)">' + dst + '</a>'
         Langfx = re.findall(regx, content, re.M | re.I)[0]
         link = "%s%s" % (main_url, Langfx)       
-        content = get_url(link,referer=main_url)
-        content = content.replace('\n','')
+        content = get_url(link, referer=main_url)
+        content = content.replace('\n', '')
         subtitles = re.compile('(<a href="/subtitles/.+?</a>)').findall(content)
     except:
-        log(__name__,"%s Failed to get subtitles" % (debug_pretext))
+        log(__name__, "%s Failed to get subtitles" % (debug_pretext))
         return
     for subtitle in subtitles:
         try:
@@ -298,7 +298,7 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
                 pass
                 
             if not (downloads == 'Εργαστήρι Υποτίτλων' or downloads == 'subs4series'):
-                log(__name__,"%s Subtitles found: %s (id = %s)" % (debug_pretext, filename, id))
+                log(__name__, "%s Subtitles found: %s (id = %s)" % (debug_pretext, filename, id))
                 subtitles_list.append({'rating': str(rating), 'no_files': 1, 'filename': str(filename), 'id': id, 'sync': False, 'language_flag': languageshort, 'language_name': languagelong})
 
         except:

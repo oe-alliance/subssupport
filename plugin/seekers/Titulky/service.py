@@ -31,7 +31,7 @@ LINKFILE = '/tmp/code'
 
 timestamp = str(calendar.timegm(time.gmtime()))
 
-def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack): #standard input
+def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
     # need to filter titles like <Localized movie name> (<Movie name>)
     br_index = title.find('(')
     if br_index > -1:
@@ -43,22 +43,22 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     return subtitles_list, session_id, ""  #standard output
 
 
-def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id): #standard input
+def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
 
     subtitle_id = subtitles_list[pos]['ID']
     client = TitulkyClient()
     username = settings_provider.getSetting("Titulkyuser")
     password = settings_provider.getSetting("Titulkypass")
     if password == '' or username == '':
-        log(__name__,'Credentials to Titulky.com not provided')
+        log(__name__, 'Credentials to Titulky.com not provided')
     else:
-        if client.login(username,password) == False:
-            log(__name__,'Login to Titulky.com failed. Check your username/password at the addon configuration')
+        if client.login(username, password) == False:
+            log(__name__, 'Login to Titulky.com failed. Check your username/password at the addon configuration')
             raise SubtitlesDownloadError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR,
                                           "Login to Titulky.com failed. Check your username/password at the addon configuration")
-            return True,subtitles_list[pos]['language_name'], ""
-        log(__name__,'Login successfull')
-    log(__name__,'Get page with subtitle (id=%s)' % (subtitle_id))
+            return True, subtitles_list[pos]['language_name'], ""
+        log(__name__, 'Login successfull')
+    log(__name__, 'Get page with subtitle (id=%s)' % (subtitle_id))
     
     content = client.get_subtitle_page(subtitle_id)
     control_img = client.get_control_image(content)
@@ -83,33 +83,33 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                except:
                    pass 
         #s.headers.update({'downkod': code})       
-        content = client.get_subtitle_page2(content,code,subtitle_id)
+        content = client.get_subtitle_page2(content, code, subtitle_id)
         control_img2 = client.get_control_image(content)
         print(code)
         if solution == None: 
         #if solution:
-            log(__name__,'Solution provided: %s' % solution)
+            log(__name__, 'Solution provided: %s' % solution)
             #content = client.get_subtitle_page2(content,solution,subtitle_id)
             #control_img2 = client.get_control_image(content)
             if not control_img2 == None:
-                log(__name__,'Invalid control text')
+                log(__name__, 'Invalid control text')
                 raise SubtitlesDownloadError(SubtitlesErrors.CAPTCHA_RETYPE_ERROR, "Invalid control text")
                 #xbmc.executebuiltin("XBMC.Notification(%s,%s,1000,%s)" % (__scriptname__,"Invalid control text",os.path.join(__cwd__,'icon.png')))
-                return True,subtitles_list[pos]['language_name'], ""
+                return True, subtitles_list[pos]['language_name'], ""
         else:
-            log(__name__,'Dialog was canceled')
-            log(__name__,'Control text not confirmed, returning in error')
-            return True,subtitles_list[pos]['language_name'], ""
+            log(__name__, 'Dialog was canceled')
+            log(__name__, 'Control text not confirmed, returning in error')
+            return True, subtitles_list[pos]['language_name'], ""
 
     wait_time = client.get_waittime(content)
     cannot_download = client.get_cannot_download_error(content)
     if not None == cannot_download:
-        log(__name__,'Subtitles cannot be downloaded, user needs to login')
+        log(__name__, 'Subtitles cannot be downloaded, user needs to login')
         raise SubtitlesDownloadError(SubtitlesErrors.NO_CREDENTIALS_ERROR, "Subtitles cannot be downloaded, user needs to login")
-        return True,subtitles_list[pos]['language_name'], ""
+        return True, subtitles_list[pos]['language_name'], ""
     link = client.get_link(content)
     
-    log(__name__,'Got the link, wait %i seconds before download' % (wait_time))
+    log(__name__, 'Got the link, wait %i seconds before download' % (wait_time))
     delay = wait_time
     if 'delay_cb' in globals():
         delay_cb(wait_time + 2)
@@ -120,13 +120,13 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
             delay -= 1
             time.sleep(1)
 
-    log(__name__,'Downloading subtitle zip')
+    log(__name__, 'Downloading subtitle zip')
     data = client.get_file2(link)
-    log(__name__,'Saving to file %s' % zip_subs)
-    zip_file = open(zip_subs,'wb')
+    log(__name__, 'Saving to file %s' % zip_subs)
+    zip_file = open(zip_subs, 'wb')
     zip_file.write(data)
     zip_file.close()
-    return True,subtitles_list[pos]['language_name'], "zip" #standard output
+    return True, subtitles_list[pos]['language_name'], "zip"  # standard output
 
 def lang_titulky2xbmclang(lang):
     if lang == 'CZ':
@@ -142,8 +142,8 @@ def lang_xbmclang2titulky(lang):
         return 'SK'
     return 'EN'
 
-def get_episode_season(episode,season):
-    return 'S%sE%s' % (get2DigitStr(int(season)),get2DigitStr(int(episode)))
+def get_episode_season(episode, season):
+    return 'S%sE%s' % (get2DigitStr(int(season)), get2DigitStr(int(episode)))
 def get2DigitStr(number):
     if number > 9:
         return str(number)
@@ -152,7 +152,7 @@ def get2DigitStr(number):
 
 def lang2_opensubtitles(lang):
     lang = lang_titulky2xbmclang(lang)
-    return languageTranslate(lang,0,2)
+    return languageTranslate(lang, 0, 2)
 
 class TitulkyClient(object):
 
@@ -168,7 +168,7 @@ class TitulkyClient(object):
             login_postdata = ({'Login': username, 'Password': password, 'foreverlog': '1', 'Detail2': ''})
             data = urllib.parse.urlencode(login_postdata).encode("utf-8")
             req = urllib.request.Request(self.server_url + '/index.php')
-            with urllib.request.urlopen(req,data=data) as f:
+            with urllib.request.urlopen(req, data=data) as f:
                 response = f.read().decode('utf-8')
                 print(response)
             #request = Request(self.server_url + '/index.php', login_postdata)
@@ -205,7 +205,7 @@ class TitulkyClient(object):
         #response = urlopen(req)
         #content = response.read().decode('utf-8')
         #response.close()
-        log(__name__,'Done')
+        log(__name__, 'Done')
         http = urllib3.PoolManager()
         r = http.request('GET', url)
         content = r.data.decode('utf-8')
@@ -232,7 +232,7 @@ class TitulkyClient(object):
             except:
                 log(__name__, 'Exception when parsing subtitle, all I got is  %s' % str(item))
                 continue
-            if item['sync'] == '': # if no sync info is found, just use title instead of None
+            if item['sync'] == '':  # if no sync info is found, just use title instead of None
                 item['filename'] = item['title']
             else:
                 item['filename'] = item['sync']
@@ -330,9 +330,9 @@ class TitulkyClient(object):
         url = 'https://www.titulky.com/idown.php'
         post_data = ({'downkod': code, 'titulky': id, 'zip': 'z', 'securedown': '2', 'histstamp': '', 'T': '2.01-%s' % timestamp})
         data = urllib.parse.urlencode(post_data).encode("utf-8")
-        req = request.Request(url,data)
+        req = request.Request(url, data)
         req = self.add_cookies_into_header(req)
-        log(__name__,'Opening %s POST:%s' % (url,str(post_data)))
+        log(__name__, 'Opening %s POST:%s' % (url, str(post_data)))
         response = request.urlopen(req) 
         content = response.read().decode('utf-8')
         #print(content)
