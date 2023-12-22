@@ -3,7 +3,8 @@
 
 from __future__ import absolute_import
 
-import os, os.path
+import os
+import os.path
 from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
 from six.moves.urllib.parse import urlencode
 from six.moves import http_cookiejar

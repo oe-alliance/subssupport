@@ -16,12 +16,20 @@ from urllib.parse import quote
 from ..utilities import log
 import html
 import urllib3
-import requests, re
-import requests , json, re,random,string,time,warnings
+import requests
+import re
+import requests
+import json
+import re
+import random
+import string
+import time
+import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from six.moves import html_parser
 warnings.simplefilter('ignore',InsecureRequestWarning)
-import os, os.path
+import os
+import os.path
 from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
 from six.moves.urllib.parse import urlencode
 from six.moves import http_cookiejar
