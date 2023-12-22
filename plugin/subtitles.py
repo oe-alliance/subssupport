@@ -578,7 +578,7 @@ class SubsSupportEmbedded(object):
     def getCurrentServiceSubtitle(self):
         service = self.session.nav.getCurrentService()
         return service and service.subtitle()
-        
+
     def __serviceChanged(self):
         if self.selected_subtitle:
             self.selected_subtitle = None
@@ -3936,7 +3936,7 @@ class SubsSearch(Screen):
         self.searchExpression = searchTitles[0]
         self.searchTitles = searchTitles
         self.filepath = filepath
-        if self.filepath:                                         
+        if self.filepath:
             self.filepath = urllib.parse.unquote(self.filepath)
         self.isLocalFilepath = filepath and os.path.isfile(filepath) or False
         self.searchTitle = searchSettings.title
@@ -3957,12 +3957,12 @@ class SubsSearch(Screen):
         self["header_provider"] = StaticText(_("Provider"))
         self["header_sync"] = StaticText(_("S"))
         self["subtitles"] = List([])
-        self["key_info_img"] = Boolean() 
+        self["key_info_img"] = Boolean()
         self["key_menu_img"] = Boolean()
         self["key_red"] = StaticText(_("Update"))
         self["key_green"] = StaticText(_("Search"))
-        self["key_yellow"] = StaticText(_("History"))    
-        self["key_blue"] = StaticText(_("Settings"))      
+        self["key_yellow"] = StaticText(_("History"))
+        self["key_blue"] = StaticText(_("Settings"))
         self["okCancelActions"] = ActionMap(["OkCancelActions"],
         {
             "ok": self.keyOk,
@@ -4047,9 +4047,9 @@ class SubsSearch(Screen):
         self.onClose.append(self.message.exit)
         self.onClose.append(self.searchParamsHelper.resetSearchParams)
         self.onClose.append(self.stopSearchSubs)
-        self.onClose.append(self.closeSeekers) 
-        
-    def eventinfo(self):         
+        self.onClose.append(self.closeSeekers)
+
+    def eventinfo(self):
         tmdb_file = resolveFilename(SCOPE_PLUGINS, "Extensions/tmdb")
         if os.path.exists(tmdb_file):
                from Plugins.Extensions.tmdb import tmdb
@@ -4151,7 +4151,7 @@ class SubsSearch(Screen):
             if self["subtitles"].count() > 0:
                 self["key_menu_img"].boolean = True
                 self["key_info_img"].boolean = True
-                
+
     def updateActionMaps(self):
         if self.__searching:
             self["okCancelActions"].setEnabled(False)

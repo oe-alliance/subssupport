@@ -214,7 +214,7 @@ class PNServer:
             return ""
 
     def fetch(self, url):
-        subprocess.check_output(['wget', '-O', '/tmp/link', url])    
+        subprocess.check_output(['wget', '-O', '/tmp/link', url])
         with open(LINKFILE, 'r') as f:
             result = f.read()
             xmldoc = minidom.parseString(result)
@@ -224,7 +224,6 @@ class PNServer:
         return cmp(b["language_name"], a["language_name"]) or cmp(a["sync"], b["sync"])
 
     def mergesubtitles(self):
-        if (len(self.subtitles_list) > 0):      
+        if (len(self.subtitles_list) > 0):
             #self.subtitles_list.sort(key=lambda x: [not x['sync'], x['lang_index']])
             self.subtitles_list = sorted(self.subtitles_list, key=lambda x: [x['sync'], x['language_name']])
-

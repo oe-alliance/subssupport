@@ -44,7 +44,7 @@ except (ValueError, ImportError):
         getCompressedFileType, detectSearchParams
     from utils import SimpleLogger, toString
 
-import six   
+import six
 
 
 SUBTITLES_SEEKERS = []

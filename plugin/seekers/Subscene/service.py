@@ -36,8 +36,8 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/2
       'Referer': 'https://subscene.com/subtitles/',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate'}
-      
-s = requests.Session()      
+
+s = requests.Session()
 main_url = "https://subscene.com"
 debug_pretext = ""
 ses = requests.Session()
@@ -71,7 +71,7 @@ def geturl(url):
         log(__name__, " Failed to get url:%s" % (url))
         content = None
     return (content)
-    
+
 
 def getSearchTitle(title, year=None):  # new Add
     url = 'https://subscene.com/subtitles/searchbytitle?query=%s&l=' % quote_plus(title)
@@ -100,9 +100,9 @@ def getSearchTitle(title, year=None):  # new Add
                 if "/subtitles/" in href:
                    print(("href", href))
                    return href
-                   
+
         except:
-            break                             
+            break
     return 'https://subscene.com/subtitles/' + quote_plus(title)
 
 
@@ -112,8 +112,8 @@ def find_movie(content, title, year):
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         #print((tuple(matches.groups())))
         found_title = matches.group('title')
-        found_title = html.unescape(found_title) 
-        #print(("found_title", found_title))  
+        found_title = html.unescape(found_title)
+        #print(("found_title", found_title))
         log(__name__, "Found movie on search page: %s (%s)" % (found_title, matches.group('year')))
         if found_title.lower().find(title.lower()) > -1:
             if matches.group('year') == year:
@@ -133,7 +133,7 @@ def find_tv_show_season(content, tvshow, season):
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         found_title = matches.group('title')
         found_title = html.unescape(found_title)
-        print(("found_title2", found_title)) 
+        print(("found_title2", found_title))
         log(__name__, "Found tv show season on search page: %s" % found_title)
         s = difflib.SequenceMatcher(None, string.lower(found_title + ' ' + matches.group('year')), tvshow.lower())
         all_tvshows.append(matches.groups() + (s.ratio() * int(matches.group('numsubtitles')),))
@@ -153,8 +153,8 @@ def find_tv_show_season(content, tvshow, season):
             url_found = all_tvshows[0][0]
             log(__name__, "Selecting tv show with highest fuzzy string score: %s (score: %s subtitles: %s)" % (
                 all_tvshows[0][1], all_tvshows[0][4], all_tvshows[0][3]))
-                                                                   
-    return url_found                                                                     
+
+    return url_found
 
 
 def getallsubs(content, allowed_languages, filename="", search_string=""):
@@ -325,7 +325,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         #my_urlopener.addheader('Referer', url)
         log(__name__, "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, url, postparams))
         #response = my_urlopener.open(downloadlink, postparams)
-        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True) 
+        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True)
         local_tmp_file = zip_subs
         try:
             log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
@@ -360,4 +360,3 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
             subs_file = typeid
         log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
         return packed, language, subs_file  # standard output
-

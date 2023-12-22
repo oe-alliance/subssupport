@@ -7,7 +7,7 @@ from __future__ import absolute_import
 try:
     from . import _
 except ImportError:
-    def _(txt):             
+    def _(txt):
         return txt
 
 from .seeker import SubtitlesDownloadError, SubtitlesSearchError, SubtitlesErrors

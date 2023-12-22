@@ -59,8 +59,8 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
       'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate'}  # , deflate'}
-      
-s = requests.Session()   
+
+s = requests.Session()
 
 main_url2 = "http://gr.greek-subtitles.com"
 main_url = "http://www.subtitles.gr"
@@ -74,7 +74,7 @@ def get_url(url, referer=None):
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
     req = urllib.request.Request(url, None, headers)
     response = urllib.request.urlopen(req)
-    content = response.read().decode('utf-8') 
+    content = response.read().decode('utf-8')
     response.close()
     content = content.replace('\n', '')
     return content
@@ -128,7 +128,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     id = re.compile('(.+?.+?)/').findall(id)[-1]
     downloadlink = 'http://www.greeksubtitles.info/getp.php?id=%s' % (id)
     #id = 'http://www.findsubtitles.eu/getp.php?id=%s' % (id)
-    print(downloadlink)   
+    print(downloadlink)
     if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
         viewstate = 0
@@ -144,7 +144,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         #my_urlopener.addheader('Referer', url)
         log(__name__, "%s Fetching subtitles using url with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, postparams))
         #response = my_urlopener.open(downloadlink, postparams)
-        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True) 
+        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True)
         print(response.content)
         local_tmp_file = zip_subs
         try:
@@ -187,7 +187,7 @@ def get_subtitles_list(searchstring, languageshort, languagelong, subtitles_list
     try:
         log(__name__, "%s Getting url: %s" % (debug_pretext, url))
         content = get_url(url, referer=main_url2)
-        print(content)        
+        print(content)
     except:
         pass
         log(__name__, "%s Failed to get url:%s" % (debug_pretext, url))

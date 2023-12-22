@@ -60,10 +60,10 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
             return True, subtitles_list[pos]['language_name'], ""
         log(__name__, 'Login successfull')
     log(__name__, 'Get page with subtitle (id=%s)' % (subtitle_id))
-    
+
     content = client.get_subtitle_page(subtitle_id)
     control_img = client.get_control_image(content)
-    
+
     if not control_img == None:
         log(__name__, 'Found control image :(, asking user for input')
         # subtitle limit was reached .. we need to ask user to rewrite image code :(
@@ -73,7 +73,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         img_file.write(img)
         img_file.flush()
         img_file.close()
-        
+
         solution = captcha_cb(os.path.join(tmp_sub_dir, 'image.png'))
         if os.path.exists(LINKFILE):
            f = open(LINKFILE, 'r')
@@ -82,12 +82,12 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                try:
                    code = "{0}".format(id)
                except:
-                   pass 
-        #s.headers.update({'downkod': code})       
+                   pass
+        #s.headers.update({'downkod': code})
         content = client.get_subtitle_page2(content, code, subtitle_id)
         control_img2 = client.get_control_image(content)
         print(code)
-        if solution == None: 
+        if solution == None:
         #if solution:
             log(__name__, 'Solution provided: %s' % solution)
             #content = client.get_subtitle_page2(content,solution,subtitle_id)
@@ -109,7 +109,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         raise SubtitlesDownloadError(SubtitlesErrors.NO_CREDENTIALS_ERROR, "Subtitles cannot be downloaded, user needs to login")
         return True, subtitles_list[pos]['language_name'], ""
     link = client.get_link(content)
-    
+
     log(__name__, 'Got the link, wait %i seconds before download' % (wait_time))
     delay = wait_time
     if 'delay_cb' in globals():
@@ -217,7 +217,7 @@ class TitulkyClient(object):
         http = urllib3.PoolManager()
         r = http.request('GET', url)
         content = r.data.decode('utf-8')
-        
+
         subtitles_list = []
         max_downloads = 1
         log(__name__, 'Searching for subtitles')
@@ -246,11 +246,11 @@ class TitulkyClient(object):
                 item['filename'] = item['sync']
                 item['language_flag'] = "flags/%s.gif" % (lang2_opensubtitles(item['lang']))
                 sync = False
-                
-            if not item['sync'] == '': 
+
+            if not item['sync'] == '':
                 log(__name__, 'found sync : filename match')
                 sync = True
-  
+
             #if file_size == item['size']:
                 #log(__name__, 'found sync : size match')
                 #sync = True
@@ -262,7 +262,7 @@ class TitulkyClient(object):
                     max_downloads = downloads
             except:
                   downloads = 0
-             
+
                   item['downloads'] = downloads
 
             if year:
@@ -333,7 +333,7 @@ class TitulkyClient(object):
         log(__name__, 'Done')
         response.close()
         return content
-                       
+
     def get_subtitle_page2(self, content, code, id):
         url = 'https://www.titulky.com/idown.php'
         post_data = ({'downkod': code, 'titulky': id, 'zip': 'z', 'securedown': '2', 'histstamp': '', 'T': '2.01-%s' % timestamp})
@@ -341,14 +341,14 @@ class TitulkyClient(object):
         req = request.Request(url, data)
         req = self.add_cookies_into_header(req)
         log(__name__, 'Opening %s POST:%s' % (url, str(post_data)))
-        response = request.urlopen(req) 
+        response = request.urlopen(req)
         content = response.read().decode('utf-8')
         #print(content)
         log(__name__, 'Done')
         #response.close()
-        return content                                                                            
+        return content
 
-    def get_subtitle_page(self, id):                                                                                               
+    def get_subtitle_page(self, id):
         url = self.server_url + '/idown.php?' + urlencode({'R': timestamp, 'titulky': id, 'zip': 'z', 'histstamp': '', 'T': '2.01-%s' % timestamp})
         #print(url)
         log(__name__, 'Opening %s' % (url))

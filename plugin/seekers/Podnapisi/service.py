@@ -91,7 +91,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     if url != None:
         local_file = open(zip_subs, "w" + "b")
         #f = urllib.request.urlopen(url)
-        subprocess.check_output(['wget', '-O', '/tmp/link2', url])    
+        subprocess.check_output(['wget', '-O', '/tmp/link2', url])
         with open(LINKFILE2, 'rb') as f:
             local_file.write(f.read())
             local_file.close()

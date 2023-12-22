@@ -58,9 +58,9 @@ HDS = {'Host': 'my-subs.co',
          'Accept-Encoding': 'gzip, deflate',
          'Referer': 'https://my-subs.co/',
          'Connection': 'keep-alive'}
-      
-s = requests.Session()  
- 
+
+s = requests.Session()
+
 
 main_url = "https://my-subs.co"
 #main_url2 = "https://my-subs.co"
@@ -83,16 +83,16 @@ def get_url(url, referer=None):
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
     req = urllib.request.Request(url, None, headers)
     response = urllib.request.urlopen(req)
-    content = response.read().decode('utf-8') 
+    content = response.read().decode('utf-8')
     response.close()
     content = content.replace('\n', '')
     return content
-    
+
 
 def get_file2(downloadlink):
     def __init__(self):
-        url = '%s%s' % (main_url2, downloadlink) 
-        print(url) 
+        url = '%s%s' % (main_url2, downloadlink)
+        print(url)
         log(__name__, 'Downloading file %s' % (url))
         req = Request(url)
         req = self.add_cookies_into_header(req)
@@ -103,7 +103,7 @@ def get_file2(downloadlink):
                 log(__name__, "Storing PHPSessionID")
                 self.cookies['PHPSESSID'] = phpsessid.group(1)
         content = response.read()
-        print(content) 
+        print(content)
         log(__name__, 'Done')
         response.close()
         return content
@@ -126,11 +126,11 @@ def getSearchTitle(title, search_string, year=None):  # new Add quote_plus()
             #print (href)
             href = 'https://my-subs.co' + href
             return href
-            
-    else:       
+
+    else:
             return 'https://my-subs.co%s' % quote_plus(title)
     return
-    
+
 
 def find_movie(content, title, year):
     d = content
@@ -140,8 +140,8 @@ def find_movie(content, title, year):
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         print((tuple(matches.groups())))
         found_title = matches.group('title')
-        found_title = html.unescape(found_title) 
-        print(("found_title", found_title))  
+        found_title = html.unescape(found_title)
+        print(("found_title", found_title))
         log(__name__, "Found movie on search page: %s (%s)" % (found_title, matches.group('year')))
         if found_title.lower().find(title.lower()) > -1:
             if matches.group('year') == year:
@@ -149,7 +149,7 @@ def find_movie(content, title, year):
                 url_found = matches.group('link')
                 break
     return url_found
-        
+
 
 def get_url(url, referer=None):
     if referer is None:
@@ -158,7 +158,7 @@ def get_url(url, referer=None):
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
     req = urllib.request.Request(url, None, headers)
     response = urllib.request.urlopen(req)
-    content = response.read().decode('utf-8') 
+    content = response.read().decode('utf-8')
     response.close()
     content = content.replace('\n', '')
     return content
@@ -186,7 +186,7 @@ def get_rating(downloads):
         rating = 9
     elif (rating >= 450):
         rating = 10
-    return rating                           
+    return rating
 
 
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
@@ -197,7 +197,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     language_info3 = language_info['3et']
 
     subtitles_list = []
-    msg = ""   
+    msg = ""
 
     if len(tvshow) == 0 and year:  # Movie
         searchstring = "%s (%s)" % (title, year)
@@ -214,16 +214,16 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     language = subtitles_list[pos]["language_name"]
-    lang = subtitles_list[pos]["language_flag"]   
+    lang = subtitles_list[pos]["language_flag"]
     id = subtitles_list[pos]["id"]
     url = '%s%s' % (main_url, id)
     data = s.get(url, verify=False).text
     #content = get_url(url,referer=main_url)
     regx = '<a href="/download/(.+?)"><button'
-    link = re.findall(regx, data, re.M | re.I | re.DOTALL)[0]  
+    link = re.findall(regx, data, re.M | re.I | re.DOTALL)[0]
     downloadlink = 'https://my-subs.co/download/' + link
-    print(downloadlink) 
-    if downloadlink:    
+    print(downloadlink)
+    if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
         viewstate = 0
         previouspage = 0
@@ -283,7 +283,7 @@ def prepare_search_string(s):
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     s = quote_plus(s)
     return s
-    
+
 
 def get_subtitles_list(searchstring, title, year, languageshort, languagelong, subtitles_list):
     dst = languagelong
@@ -320,7 +320,7 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
             except:
                 rating = 0
                 pass
-                
+
             if not (downloads == 'Εργαστήρι Υποτίτλων' or downloads == 'subs4series'):
                 log(__name__, "%s Subtitles found: %s (id = %s)" % (debug_pretext, filename, id))
                 subtitles_list.append({'rating': str(rating), 'no_files': 1, 'filename': str(filename), 'id': id, 'sync': False, 'language_flag': languageshort, 'language_name': languagelong})

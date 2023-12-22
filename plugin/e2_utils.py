@@ -53,7 +53,7 @@ from .utils import toString
 
 import six
 
-          
+
 def getDesktopSize():
     s = getDesktop(0).size()
     return (s.width(), s.height())
@@ -267,7 +267,7 @@ class CaptchaDialog(VirtualKeyBoard):
         self['key_green'] = StaticText(_('Save'))
         self["text"] = self['text']
         self["myActionMap"] = NumberActionMap(["WizardActions", "InputBoxActions", "ColorActions"],
-        	{           		
+        	{
                         "green": self.save
            	}, -1)
         self.Scale = AVSwitch().getFramebufferScale()
@@ -294,7 +294,7 @@ class CaptchaDialog(VirtualKeyBoard):
     def __onClose(self):
         del self.picLoad_conn
         del self.picLoad
-                
+
     def save(self):
         Password = self['text'].getText()
         code = str(Password)
@@ -307,7 +307,7 @@ class CaptchaDialog(VirtualKeyBoard):
                 file = open(Path, 'w')
                 file.write(Password.replace(' ', ''))
                 file.close()
-      
+
 
 class DelayMessageBox(MessageBox):
     def __init__(self, session, seconds, message):

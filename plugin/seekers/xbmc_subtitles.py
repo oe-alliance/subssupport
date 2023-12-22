@@ -1,7 +1,7 @@
 '''
 Created on Feb 10, 2014
 
-@author: marko   
+@author: marko
 '''
 from __future__ import absolute_import
 import os
@@ -162,7 +162,7 @@ class SerialZoneSeeker(XBMCSubtitlesAdapter):
     default_settings = {}
     movie_search = False
     tvshow_search = True
-    
+
 
 try:
     from .Elsubtitle import elsubtitle
@@ -228,7 +228,7 @@ class ElsubtitleSeeker(XBMCSubtitlesAdapter):
                                             "tr",
                                             "uk",
                                             "vi"]
-    default_settings = {}   
+    default_settings = {}
 
 
 try:
@@ -295,7 +295,7 @@ class IndexsubtitleSeeker(XBMCSubtitlesAdapter):
                                             "tr",
                                             "uk",
                                             "vi"]
-    default_settings = {}    
+    default_settings = {}
 
 
 try:
@@ -366,7 +366,7 @@ class MoviesubtitlesSeeker(XBMCSubtitlesAdapter):
 
 
 try:
-    from .Moviesubtitles2 import moviesubtitles2 
+    from .Moviesubtitles2 import moviesubtitles2
 except ImportError as e:
     moviesubtitles2 = e
 
@@ -430,13 +430,13 @@ class Moviesubtitles2Seeker(XBMCSubtitlesAdapter):
                                             "uk",
                                             "vi"]
     default_settings = {}
-    
+
 
 try:
     from .MySubs import mysubs
 except ImportError as e:
     mysubs = e
-    
+
 
 class MySubsSeeker(XBMCSubtitlesAdapter):
     id = 'mysubs'
@@ -943,8 +943,8 @@ class SubtitlesGRSeeker(XBMCSubtitlesAdapter):
 try:
     from .Subtitlesmora import subtitlesmora
 except ImportError as e:
-    subtitlesmora = e 
-    
+    subtitlesmora = e
+
 
 class SubtitlesmoraSeeker(XBMCSubtitlesAdapter):
     module = subtitlesmora
@@ -955,7 +955,7 @@ class SubtitlesmoraSeeker(XBMCSubtitlesAdapter):
     supported_langs = ['ar']
     default_settings = {}
     movie_search = True
-    tvshow_search = True  
+    tvshow_search = True
 
 
 try:
@@ -1023,14 +1023,14 @@ class SubtitlistSeeker(XBMCSubtitlesAdapter):
                                             "uk",
                                             "vi"]
     default_settings = {}
-       
-    
+
+
 try:
     from .Itasa import itasa
 except ImportError as e:
     itasa = e
 
-       
+
 class ItasaSeeker(XBMCSubtitlesAdapter):
     module = itasa
     if isinstance(module, Exception):
@@ -1059,6 +1059,4 @@ class TitloviSeeker(XBMCSubtitlesAdapter):
     supported_langs = ['bs', 'hr', 'en', 'mk', 'sr', 'sl']
     default_settings = {}
     movie_search = True
-    tvshow_search = True  
-  
-    
+    tvshow_search = True
