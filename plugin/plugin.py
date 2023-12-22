@@ -7,7 +7,6 @@ from Components.config import config
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
-from .e2_utils import isFullHD
 from .subtitles import E2SubsSeeker, SubsSearch, initSubsSettings, \
     SubsSetupGeneral, SubsSearchSettings, SubsSetupExternal, SubsSetupEmbedded
 from .subtitlesdvb import SubsSupportDVB, SubsSetupDVBPlayer
@@ -35,40 +34,22 @@ def openSubsSupportSettings(session, **kwargs):
 
 
 class SubsSupportSettings(Screen):
-    if isFullHD():
-        skin = """
-            <screen position="center,center" size="710,378">
-                <widget source="menuList" render="Listbox" scrollbarMode="showOnDemand" position="10,10" size="692,362" zPosition="3" transparent="1" >
-                    <convert type="TemplatedMultiContent">
-                        {"templates":
-                            {"default": (50, [
-                                MultiContentEntryText(pos=(0, 0), size=(530, 45), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0, color=0xFFFFFF)
-                            ], True, "showOnDemand"),
-                            },
-                        "fonts": [gFont("Regular", 38)],
-                        "itemHeight": 50
-                        }
-                    </convert>
-                </widget>
-            </screen>
-            """
-    else:
-        skin = """
-            <screen position="center,center" size="370,200">
-                <widget source="menuList" render="Listbox" scrollbarMode="showOnDemand" position="10,10" size="340,180" zPosition="3" transparent="1" >
-                    <convert type="TemplatedMultiContent">
-                        {"templates":
-                            {"default": (30, [
-                                MultiContentEntryText(pos=(0, 0), size=(340, 30), font = 0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0, color=0xFFFFFF)
-                            ], True, "showOnDemand"),
-                            },
-                        "fonts": [gFont("Regular", 23)],
-                        "itemHeight": 30
-                        }
-                    </convert>
-                </widget>
-            </screen>
-            """
+    skin = """
+        <screen position="center,center" size="370,200" resolution="1280,720">
+            <widget source="menuList" render="Listbox" scrollbarMode="showOnDemand" position="10,10" size="340,180" zPosition="3" transparent="1" >
+                <convert type="TemplatedMultiContent">
+                    {"templates":
+                        {"default": (30, [
+                            MultiContentEntryText(pos=(0, 0), size=(340, 30), font = 0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=0, color=0xFFFFFF)
+                        ], True, "showOnDemand"),
+                        },
+                    "fonts": [gFont("Regular", 23)],
+                    "itemHeight": 30
+                    }
+                </convert>
+            </widget>
+        </screen>
+        """
 
     def __init__(self, session, generalSettings, searchSettings, externalSettings, embeddedSettings, dvbSettings):
         Screen.__init__(self, session)
