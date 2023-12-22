@@ -24,9 +24,6 @@ import traceback
 from .utilities import langToCountry, languageTranslate, SimpleLogger, toString
 
 
-import six
-
-
 class SubtitlesErrors:
     UNKNOWN_ERROR = 0
     INVALID_CREDENTIALS_ERROR = 1
@@ -63,8 +60,8 @@ class SettingsProvider(object):
 
     def getSetting(self, key):
         if isinstance(self.settings[key], dict):
-            if not 'value' in self.settings[key]:
-                if not 'default' in self.settings[key]:
+            if 'value' not in self.settings[key]:
+                if 'default' not in self.settings[key]:
                     raise Exception("Invalid settings provided, missing 'value/default' entry")
                 return self.settings[key]['default']
             return self.settings[key]['value']
@@ -80,8 +77,8 @@ class BaseSeeker(object):
 
     def __init__(self, tmp_path, download_path, settings=None, settings_provider=None, logo=None, *args, **kwargs):
         self.log = SimpleLogger(self.__class__.__name__, log_level=SimpleLogger.LOG_INFO)
-        assert hasattr(self, 'id') and isinstance(self.id, six.string_types), 'you have to provide class variable: "id" with provider id'
-        assert hasattr(self, 'provider_name') and isinstance(self.provider_name, six.string_types), 'you have to provide class variable: "provider_name" with provider name'
+        assert hasattr(self, 'id') and isinstance(self.id, str), 'you have to provide class variable: "id" with provider id'
+        assert hasattr(self, 'provider_name') and isinstance(self.provider_name, str), 'you have to provide class variable: "provider_name" with provider name'
         assert hasattr(self, 'supported_langs') and isinstance(self.supported_langs, list), 'you have to provide class variable: "supported_langs" with list of supported langs'
         if not hasattr(self, 'description'):
             self.description = ""

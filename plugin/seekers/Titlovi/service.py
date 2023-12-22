@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
+from urllib.request import urlopen
 from .ti_utilities import OSDBServer
-
 from ..utilities import languageTranslate, log
-
-from six.moves.urllib.request import urlopen
 
 
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input

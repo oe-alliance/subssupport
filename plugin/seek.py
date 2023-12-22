@@ -63,8 +63,8 @@ SUBTITLES_SEEKERS.append(SubtitlesmoraSeeker)
 SUBTITLES_SEEKERS.append(SubtitlistSeeker)
 SUBTITLES_SEEKERS.append(ItasaSeeker)
 #SUBTITLES_SEEKERS.append(PodnapisiSeeker)
-#SUBTITLES_SEEKERS.append(SubsceneSeeker)
-#SUBTITLES_SEEKERS.append(TitloviSeeker)
+SUBTITLES_SEEKERS.append(SubsceneSeeker)
+SUBTITLES_SEEKERS.append(TitloviSeeker)
 
 
 class ErrorSeeker(BaseSeeker):

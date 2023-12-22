@@ -20,34 +20,45 @@ from __future__ import print_function
 from . import _
 import os
 import shutil
-from twisted.web.client import downloadPage  # TODO deprecated !!
+import requests
+from twisted.internet.threads import deferToThread
 import xml.etree.cElementTree
-from Tools.Directories import fileExists, pathExists
 from Components.Label import Label
 from Components.ConfigList import ConfigList
 from Components.Sources.StaticText import StaticText
-from Components.AVSwitch import AVSwitch
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigList
 from Components.Console import Console
 from Components.Language import language
 from Components.Pixmap import Pixmap
+from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigListScreen
 from Components.config import ConfigText, ConfigSubsection, ConfigDirectory, \
     ConfigYesNo, ConfigPassword, getConfigListEntry, configfile
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Tools.Directories import fileExists, SCOPE_SKIN, resolveFilename
+from Tools.Directories import pathExists, fileExists, SCOPE_SKIN, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.ActionMap import NumberActionMap, ActionMap, HelpableActionMap
 from Components.config import ConfigText, KEY_0, KEY_DELETE, KEY_BACKSPACE, config
 from enigma import addFont, eEnv, ePicLoad, getDesktop, eListboxPythonMultiContent, eListbox, eTimer, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_WRAP, loadPNG
 
 from .compat import LanguageEntryComponent, eConnectCallback
 from .utils import toString
+from Tools.LoadPixmap import LoadPixmap
 
-import six
+
+def downloadPage(url, filename, params=None, headers=None, cookies=None):
+    return getPage(url, params, headers, cookies)
+
+
+def getPage(url, params=None, headers=None, cookies=None, timeout=None):
+    headers = headers or {}
+    timeout = timeout or 30.05
+    headers["user-agent"] = "Mozilla/5.0 Gecko/20100101 Firefox/100.0"
+    return deferToThread(requests.get, url, params=params, headers=headers, cookies=cookies, timeout=timeout)
 
 
 def getDesktopSize():
@@ -58,6 +69,16 @@ def getDesktopSize():
 def isFullHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1920
+
+
+def LanguageEntryComponent(file, name, index):
+    png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'countries/' + index + '.png'))
+    if png is None:
+        png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'countries/' + file + '.png'))
+        if png is None:
+            png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, 'countries/missing.png'))
+    res = (index, name, png)
+    return res
 
 
 class MyConfigList(ConfigList):
@@ -226,7 +247,7 @@ class Captcha(object):
 
     def downloadCaptchaSuccess(self, txt=""):
         print("[Captcha] downloaded successfully:")
-        self.openCaptchaDialog(self.dest)
+        self.openCaptchaDialog(self.destPath)
 
     def downloadCaptchaError(self, err):
         print("[Captcha] download error:", err)
@@ -260,7 +281,6 @@ class CaptchaDialog(VirtualKeyBoard):
         	{
                         "green": self.save
            	}, -1)
-        self.Scale = AVSwitch().getFramebufferScale()
         self.picPath = captcha_file
         self.picLoad = ePicLoad()
         self.picLoad_conn = eConnectCallback(self.picLoad.PictureData, self.decodePicture)
@@ -268,7 +288,7 @@ class CaptchaDialog(VirtualKeyBoard):
         self.onClose.append(self.__onClose)
 
     def showPicture(self):
-        self.picLoad.setPara([self["captcha"].instance.size().width(), self["captcha"].instance.size().height(), self.Scale[0], self.Scale[1], 0, 1, "#002C2C39"])
+        self.picLoad.setPara([self["captcha"].instance.size().width(), self["captcha"].instance.size().height(), 1, 1, 0, 1, "#002C2C39"])
         self.picLoad.startDecode(self.picPath)
 
     def decodePicture(self, PicInfo=""):
@@ -347,10 +367,8 @@ class E2SettingsProvider(dict):
         return dict((key, self.getConfigEntry(key).value) for key in self.__defaults.keys())
 
     def createSettings(self):
-        for name, value in six.iteritems(self.__defaults):
-            type = value['type']
-            default = value['default']
-            self.createConfigEntry(name, type, default)
+        for name, value in self.__defaults.items():
+            self.createConfigEntry(name, value['type'], value['default'])
 
     def createConfigEntry(self, name, type, default, *args, **kwargs):
         if type == 'text':
@@ -518,19 +536,11 @@ def getFonts():
 
 
 class BaseMenuScreen(Screen, ConfigListScreen):
-    skin = """
-            <screen position="center,center" size="610,435" resolution="1280,720">
-                <widget name="key_red" position="10,5" zPosition="1" size="140,45" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" shadowOffset="-2,-2" shadowColor="black" />
-                <widget name="key_green" position="160,5" zPosition="1" size="140,45" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" shadowOffset="-2,-2" shadowColor="black" />
-                <widget name="key_yellow" position="310,5" zPosition="1" size="140,45" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" shadowOffset="-2,-2" shadowColor="black" />
-                <widget name="key_blue" position="460,5" zPosition="1" size="140,45" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" shadowOffset="-2,-2" shadowColor="black" />
-                <eLabel position="-1,55" size="612,1" backgroundColor="#999999" />
-                <widget name="config" position="0,75" size="610,355" scrollbarMode="showOnDemand" />
-            </screen>"""
 
     def __init__(self, session, title):
         Screen.__init__(self, session)
         ConfigListScreen.__init__(self, [], session=session)
+        self.skinName = "Setup"
         self["actions"] = ActionMap(["SetupActions", "ColorActions"],
             {
                 "cancel": self.keyCancel,
@@ -539,16 +549,17 @@ class BaseMenuScreen(Screen, ConfigListScreen):
                 "blue": self.resetDefaults,
             }, -2)
 
-        self["key_green"] = Label(_("Save"))
-        self["key_red"] = Label(_("Cancel"))
-        self["key_blue"] = Label(_("Reset Defaults"))
-        self["key_yellow"] = Label("")
-        self.title = title
-        self.onLayoutFinish.append(self.setWindowTitle)
+        self["key_green"] = StaticText(_("Save"))
+        self["key_red"] = StaticText(_("Cancel"))
+        self["key_blue"] = StaticText(_("Reset Defaults"))
+        self["key_yellow"] = StaticText("")
+        self["VKeyIcon"] = Boolean(False)
+        self["HelpWindow"] = Pixmap()
+        self["HelpWindow"].hide()
+        self["footnote"] = Label()
+        self["description"] = Label()
+        self.setTitle(title)
         self.onLayoutFinish.append(self.buildMenu)
-
-    def setWindowTitle(self):
-        self.setTitle(self.title)
 
     def buildMenu(self):
         pass

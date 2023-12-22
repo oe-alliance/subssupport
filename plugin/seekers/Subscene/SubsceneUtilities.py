@@ -4,8 +4,6 @@ from __future__ import print_function
 import requests
 from ..utilities import log as _log
 
-import six
-
 
 ses = requests.Session()
 
@@ -91,7 +89,7 @@ def get_language_info(language):
 
 
 def log(module, msg):
-    _log(module, msg.encode('utf-8') if six.PY2 else msg)
+    _log(module, msg)
 
 
 def geturl(url1, headers=None, params=None):
@@ -99,7 +97,10 @@ def geturl(url1, headers=None, params=None):
         res = ses.get(url1, headers=headers, verify=False, timeout=5)
         print('res.status_code', res.status_code)
         if res.status_code == 200:
-            return six.ensure_str(res.content)
+            content = res.content
+            if isinstance(content, bytes):
+                content = content.decode(encoding='utf-8', errors='strict')
+            return content
         e = res.raise_for_status()
         print(('Download error', e))
         return ''

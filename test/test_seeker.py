@@ -5,15 +5,13 @@ import socket
 import time
 import unittest
 import shutil
+from urllib.error import URLError
 
 test = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(test, '..', 'plugin'))
 
 from seekers.seeker import BaseSeeker, SubtitlesSearchError, SubtitlesDownloadError, SubtitlesErrors
 from seek import SubsSeeker
-from six.moves import range
-
-from six.moves import urllib
 
 
 def remove_files_in_dir(dirpath):
@@ -62,7 +60,7 @@ class URLErrorSeeker(BaseSeeker):
     supported_langs = []
 
     def _search(self, title, filepath, langs, season, episode, tvshow, year):
-        raise urllib.error.URLError("test")
+        raise URLError("test")
 
 
 class StandardErrorSeeker(BaseSeeker):

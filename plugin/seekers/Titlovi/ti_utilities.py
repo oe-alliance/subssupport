@@ -2,11 +2,9 @@
 from __future__ import absolute_import
 import base64
 import unicodedata
+from urllib.request import urlopen
 from xml.dom import minidom
 from ..utilities import languageTranslate, log
-
-import six
-from six.moves.urllib.request import urlopen
 
 
 LANGUAGES = (
@@ -33,7 +31,7 @@ def languageTranslate(lang, lang_from, lang_to):
 
 def normalizeString(str):
     return unicodedata.normalize(
-        'NFKD', six.text_type(six.text_type(str, 'utf-8'))
+        'NFKD', str
     ).encode('ascii', 'ignore')
 
 

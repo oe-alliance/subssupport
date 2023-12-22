@@ -1,18 +1,10 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
 import re
 import struct
 import unicodedata
-
-try:
-    from hashlib import md5
-except:
-    from md5 import new as md5
-from six.moves.urllib.request import Request, urlopen
+from hashlib import md5
+from urllib.request import Request, urlopen
 import os
-
-import six
-
 
 SUPRESS_LOG = True
 
@@ -20,7 +12,7 @@ SUPRESS_LOG = True
 def log(module, msg):
     if SUPRESS_LOG:
         return
-    print(module, msg)
+    print("%s %s" % (module, msg))
 
 
 LANGUAGES = (
@@ -299,7 +291,7 @@ def hashFile(file_path, rar):
 
 def normalizeString(str):
     return unicodedata.normalize(
-           'NFKD', six.text_type(six.text_type(str, 'utf-8'))
+           'NFKD', str
            ).encode('ascii', 'ignore')
 
 
@@ -484,7 +476,4 @@ class SimpleLogger(object):
 
 
 def toString(text):
-    if six.PY2 and isinstance(text, six.string_types):
-        if isinstance(text, six.text_type):
-            return text.encode('utf-8')
     return text

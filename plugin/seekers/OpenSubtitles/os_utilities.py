@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
+from xmlrpc.client import Server
 
 from ..utilities import languageTranslate, log
-
-from six.moves import xmlrpc_client
-
 
 __scriptname__ = 'XBMC Subtitles'
 __version__ = '3.9.18'
@@ -15,7 +13,7 @@ BASE_URL_XMLRPC = u"http://api.opensubtitles.org/xml-rpc"
 class OSDBServer:
 
     def __init__(self, user_agent=''):
-        self.server = xmlrpc_client.Server(BASE_URL_XMLRPC, verbose=0)
+        self.server = Server(BASE_URL_XMLRPC, verbose=0)
         #login = self.server.LogIn("", "", "en", "%s_v%s" % (__scriptname__.replace(" ", "_"), __version__))
         login = self.server.LogIn('', '', 'en', user_agent)
         self.osdb_token = login["token"]

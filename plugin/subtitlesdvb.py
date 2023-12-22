@@ -12,7 +12,7 @@ from Components.Label import Label
 from Components.config import ConfigSubsection, getConfigListEntry
 from Components.config import config, ConfigOnOff
 from Screens.HelpMenu import HelpableScreen
-from .compat import MessageBox, eConnectCallback
+from Screens.MessageBox import MessageBox
 from Screens.MinuteInput import MinuteInput
 from Screens.Screen import Screen
 

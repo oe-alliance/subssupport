@@ -8,6 +8,8 @@ import os
 import sys
 import time
 import unittest
+from configparser import RawConfigParser
+
 test = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(test, '..', 'plugin'))
 
@@ -105,7 +107,7 @@ class TestXBMCSubtitleProviderWithCredentials(TestXBMCSubtitleProvider):
 
     @classmethod
     def get_credentials(cls, filename):
-        config = configparser.RawConfigParser()
+        config = RawConfigParser()
         cfgpath = os.path.join(os.path.dirname(__file__), filename)
         try:
             config.read(cfgpath)
@@ -337,9 +339,6 @@ class TestItasa(TestXBMCSubtitleProviderWithCredentials, unittest.TestCase):
 
 
 from seekers.xbmc_subtitles import TitloviSeeker
-
-from six.moves import configparser
-from six.moves import range
 
 
 class TestTitlovi(TestXBMCSubtitleProvider, unittest.TestCase):

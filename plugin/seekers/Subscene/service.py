@@ -77,8 +77,8 @@ def getSearchTitle(title, year=None):  # new Add
             matches = re.findall(regx, block)
             name = matches[0][1]
             href = matches[0][0]
-            print(("hrefxxx", href))
-            print(("yearxx", year))
+            print("hrefxxx", href)
+            print("yearxx", year)
             href = 'https://subscene.com' + href
             if year and year == '':
               if "/subtitles/" in href:
@@ -88,7 +88,7 @@ def getSearchTitle(title, year=None):  # new Add
                   return href
             if year and str(year) in name:
                 if "/subtitles/" in href:
-                   print(("href", href))
+                   print("href", href)
                    return href
 
         except:
@@ -324,7 +324,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
             local_file_handle = open(local_tmp_file, 'wb')
             local_file_handle.write(response.content)
             local_file_handle.close()
-            # Check archive type (rar/zip/else) through the file header (rar=Rar!, zip=PK) urllib3.request.urlencode
+            # Check archive type (rar/zip/else) through the file header (rar=Rar!, zip=PK)
             myfile = open(local_tmp_file, "rb")
             myfile.seek(0)
             if (myfile.read(1).decode('utf-8') == 'R'):

@@ -5,23 +5,14 @@ from __future__ import print_function
 import os
 import zlib
 from xml.dom import minidom
+from urllib.request import urlopen
+from xmlrpc.client import Server
 
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..utilities import log, getFileSize, hashFile
-import subprocess
-from six.moves import xmlrpc_client
-LINKFILE = '/tmp/link'
-LINKFILE2 = '/tmp/link2'
-LINKFILE0 = '/tmp/link0'
 
-try:
-    # Python 2.6 +
-    from hashlib import md5 as md5
-    from hashlib import sha256
-except ImportError:
-    # Python 2.5 and earlier
-    from md5 import md5
-    from .sha256 import sha256
+from hashlib import md5 as md5
+from hashlib import sha256
 
 __scriptid__ = 'podnapisi'
 __scriptname__ = 'XBMC Subtitles'
@@ -69,7 +60,7 @@ def calculateSublightHash(filename):
 
     if filesize < DATA_SIZE:
         return "000000000000"
-    fileToHash = open(filename, 'r')
+    fileToHash = open(filename, 'rb')
 
     sum = 0
     hash = ""
@@ -86,7 +77,7 @@ def calculateSublightHash(filename):
     sum = sum + (begining & 0xff) + ((begining & 0xff00) >> 8) + ((begining & 0xff0000) >> 16) + ((begining & 0xff000000) >> 24)
     hash = hash + invert(dec2hex(begining, 8))
 
-    fileToHash.seek(filesize / 2, 0)
+    fileToHash.seek(filesize // 2, 0)
     buffer = fileToHash.read(DATA_SIZE)
     middle = zlib.adler32(buffer) & 0xffffffff
     sum = sum + (middle & 0xff) + ((middle & 0xff00) >> 8) + ((middle & 0xff0000) >> 16) + ((middle & 0xff000000) >> 24)
@@ -110,7 +101,7 @@ class PNServer:
         self.connected = False
 
     def Login(self):
-        self.podserver = xmlrpc_client.Server('http://ssp.podnapisi.net:8000')
+        self.podserver = Server('http://ssp.podnapisi.net:8000')  # NOSONAR
         init = self.podserver.initiate(USER_AGENT)
         hash = md5()
         hash.update(settings_provider.getSetting("PNpass"))
@@ -204,16 +195,15 @@ class PNServer:
             return ""
 
     def fetch(self, url):
-        subprocess.check_output(['wget', '-O', '/tmp/link', url])
-        with open(LINKFILE, 'r') as f:
-            result = f.read()
-            xmldoc = minidom.parseString(result)
-            return xmldoc.getElementsByTagName("subtitle")
+        socket = urlopen(url)
+        result = socket.read()
+        socket.close()
+        xmldoc = minidom.parseString(result)
+        return xmldoc.getElementsByTagName("subtitle")
 
     def compare_columns(self, b, a):
         return cmp(b["language_name"], a["language_name"]) or cmp(a["sync"], b["sync"])
 
     def mergesubtitles(self):
         if (len(self.subtitles_list) > 0):
-            #self.subtitles_list.sort(key=lambda x: [not x['sync'], x['lang_index']])
-            self.subtitles_list = sorted(self.subtitles_list, key=lambda x: [x['sync'], x['language_name']])
+            self.subtitles_list = sorted(self.subtitles_list, self.compare_columns)

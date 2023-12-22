@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from __future__ import absolute_import
-from six.moves.urllib.request import urlopen
-from six.moves.urllib.parse import urlencode
+from urllib.parse import urlencode
+from urllib.request import urlopen
 import re
 from ..utilities import log, hashFile, languageTranslate
 

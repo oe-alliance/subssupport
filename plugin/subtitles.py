@@ -23,7 +23,6 @@ import json
 import os
 import re
 from twisted.internet.defer import Deferred
-from twisted.web import client
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.ConfigList import ConfigListScreen
@@ -32,6 +31,7 @@ from Components.Harddisk import harddiskmanager
 from Components.Label import Label
 from Components.Language import language
 from Components.MenuList import MenuList
+from Components.Pixmap import Pixmap
 from Components.MultiContent import MultiContentEntryText, \
     MultiContentEntryPixmapAlphaTest
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -53,11 +53,12 @@ from Tools.Directories import SCOPE_CURRENT_SKIN, SCOPE_SKIN, SCOPE_PLUGINS, res
     fileExists
 from Tools.ISO639 import LanguageCodes
 from Tools.LoadPixmap import LoadPixmap
+from Components.FileList import FileList
 from six.moves import reload_module
-from .compat import eConnectCallback, FileList
+from .compat import eConnectCallback
 from .e2_utils import messageCB, E2SettingsProvider, MyLanguageSelection, unrar, \
     ConfigFinalText, Captcha, DelayMessageBox, MyConfigList, getFps, fps_float, \
-    getFonts, BaseMenuScreen, isFullHD, getDesktopSize
+    getFonts, BaseMenuScreen, isFullHD, getDesktopSize, getPage
 from enigma import eTimer, eConsoleAppContainer, ePythonMessagePump, eSize, ePoint, RT_HALIGN_LEFT, \
     RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eListboxPythonMultiContent, \
     getDesktop, eServiceCenter, eServiceReference, \
@@ -102,7 +103,7 @@ def debug(text, *args):
             text = text % args[0]
         else:
             text = text % (args)
-        print("[SubsSupport]", toString('utf-8'))
+        print("[SubsSupport] %s" % text)
 
 
 # set the name of plugin in which this library belongs
@@ -316,9 +317,9 @@ def initSearchSettings(configsubsection):
     configsubsection.tvshowProvider = ConfigSelection(default="all", choices=[("all", _("All")), ])
     configsubsection.manualSearch = ConfigYesNo(default=False)
     configsubsection.defaultSort = ConfigSelection(default='lang', choices=[('lang', _("Language")), ('provider', _("Provider"))])
-    configsubsection.saveAs = ConfigSelection(default='version', choices=[('default', _("Default")), ('version', _("Release")), ('video', _("Video filename"))])
+    configsubsection.saveAs = ConfigSelection(default='video', choices=[('default', _("Default")), ('version', _("Release")), ('video', _("Video filename"))])
     configsubsection.saveAsFallback = ConfigSelection(default='version', choices=[('default', _("Default")), ('version', _("Release"))])
-    configsubsection.saveTo = ConfigSelection(default='custom', choices=[('custom', _('User defined')), ('video', _('Next to video'))])
+    configsubsection.saveTo = ConfigSelection(default='video', choices=[('custom', _('User defined')), ('video', _('Next to video'))])
     configsubsection.addLangToSubsFilename = ConfigYesNo(default=False)
     configsubsection.askOverwriteExistingSubs = ConfigYesNo(default=True)
     configsubsection.loadSubtitlesAfterDownload = ConfigYesNo(default=True)
@@ -1138,14 +1139,13 @@ class SubsSupport(SubsSupportEmbedded):
         self.__isServiceSet = False
 
     def __seekableStatusChanged(self):
-        if not hasattr(self, 'seekstate'):
-            return
-        if self.seekstate == self.SEEK_STATE_PLAY:
-            self.pauseSubs()
-        elif self.seekstate == self.SEEK_STATE_PAUSE:
-            self.resumeSubs()
-        elif self.seekstate == self.SEEK_STATE_EOF:
-            self.resetSubs(True)
+        if hasattr(self, 'seekstate'):
+            if self.seekstate == self.SEEK_STATE_PLAY:
+                self.pauseSubs()
+            elif self.seekstate == self.SEEK_STATE_PAUSE:
+                self.resumeSubs()
+            elif self.seekstate == self.SEEK_STATE_EOF:
+                self.resetSubs(True)
 
 ########### Methods which extends InfobarSeek seek methods
 
@@ -2472,7 +2472,8 @@ class SubsChooser(Screen):
             self.videoPath = None
         videoName = ref and os.path.split(ref.getPath())[1]
         self["filename"] = StaticText(videoName)
-        self["file_list"] = SubFileList(defaultDir)
+        self["file_list"] = FileList(defaultDir)
+#        self["file_list"] = SubFileList(defaultDir)
         self["menu_list"] = SubsChooserMenuList(self.embeddedList, searchSupport, historySupport)
         self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"],
             {
@@ -2511,7 +2512,8 @@ class SubsChooser(Screen):
         if self['file_list'].canDescent():
             self['file_list'].descent()
         else:
-            filePath = os.path.join(self['file_list'].current_directory, self['file_list'].getFilename())
+            filePath = self['file_list'].getPath()
+#            filePath = os.path.join(self['file_list'].current_directory, self['file_list'].getFilename())
             self.close(filePath, False)
 
     def checkEmbeddedSubsSelection(self, embeddedSubtitle=None):
@@ -3069,7 +3071,8 @@ class Suggestions(object):
 class OpenSubtitlesSuggestions(Suggestions):
     def _getSuggestions(self, queryString):
         query = "http://www.opensubtitles.org/libs/suggest.php?format=json2&SubLanguageID=null&MovieName=" + quote(queryString)
-        return client.getPage(six.ensure_binary(query), timeout=6)  # TODO deprecated
+        query = query.encode("UTF-8", "strict")
+        return getPage(query, timeout=6)
 
     def _processResult(self, data):
         return json.loads(data)['result']
@@ -3489,10 +3492,8 @@ class SubsSearchDownloadOptions(Screen, ConfigListScreen):
         saveToOptions.append(('custom', _('User defined')))
         if vPath is not None and os.path.isfile(vPath):
             saveToOptions.append(('video', _('Next to video')))
-        if saveAs == 'default':
+        if saveAs == 'default' or (saveAs == 'video' and vPath is None):
             # we don't know what the default filename will be
-            saveAs = 'version'
-        elif saveAs == 'video' and vPath is None:
             saveAs = 'version'
         if saveTo == 'video' and vPath is None:
             saveTo = 'custom'
@@ -3504,15 +3505,23 @@ class SubsSearchDownloadOptions(Screen, ConfigListScreen):
             getConfigListEntry(_("Save as"), self.configSaveAs),
             getConfigListEntry(_("Append language to filename"), self.configAddLang),
         ]
+        self.skinName = "Setup"
         ConfigListScreen.__init__(self, configList, session)
         self.subtitle = subtitle
-        self.dPath = dPath
+        self.olddPath = dPath
         self.vPath = vPath
-        self["fname"] = StaticText()
-        self["dpath"] = StaticText()
+        self.fname = ""
+        self.dpath = ""
         self["key_red"] = StaticText(_("Filename"))
         self["key_green"] = StaticText(_("Path"))
         self["key_blue"] = StaticText(_("Reset"))
+
+        self["VKeyIcon"] = Boolean(False)
+        self["HelpWindow"] = Pixmap()
+        self["HelpWindow"].hide()
+        self["footnote"] = Label()
+        self["description"] = Label()
+
         self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"],
         {
             "right": self.keyRight,
@@ -3523,9 +3532,9 @@ class SubsSearchDownloadOptions(Screen, ConfigListScreen):
              "green": self.editDPath,
              "blue": self.resetDefaults
         }, -2)
-        self.onLayoutFinish.append(self.updateWindowTitle)
         self.onLayoutFinish.append(self.updateFName)
         self.onLayoutFinish.append(self.updateDPath)
+        self.setTitle(_("Download options"))
 
     def buildMenu(self):
         configList = []
@@ -3535,8 +3544,8 @@ class SubsSearchDownloadOptions(Screen, ConfigListScreen):
             configList.append(getConfigListEntry(_("Append language to filename"), self.configAddLang))
         self["config"].setList(configList)
 
-    def updateWindowTitle(self):
-        self.setTitle(_("Download options"))
+    def updateDescription(self):
+        self["description"].text = "%s / %s" % (self.dpath, self.fname)
 
     def updateFName(self):
         fname = None
@@ -3544,19 +3553,21 @@ class SubsSearchDownloadOptions(Screen, ConfigListScreen):
             fname = os.path.splitext(os.path.basename(self.vPath))[0]
         elif self.configSaveAs.value == "version":
             fname = os.path.splitext(self.subtitle['filename'])[0]
-        if self.configAddLang.value and not self.configSaveAs.value == "custom":
+        if self.configAddLang.value and self.configSaveAs.value != "custom":
             fname = "%s.%s" % (fname, languageTranslate(self.subtitle['language_name'], 0, 2))
         if fname:
-            self["fname"].text = toString(fname)
+            self.fname = fname
+        self.updateDescription()
 
     def updateDPath(self):
         dpath = None
         if self.configSaveTo.value == "video":
             dpath = os.path.dirname(self.vPath)
         elif self.configSaveTo.value == "custom":
-            dpath = self.dPath
+            dpath = self.olddPath
         if dpath:
-            self["dpath"].text = toString(dpath)
+            self.dpath = dpath
+        self.updateDescription()
 
     def resetDefaults(self):
         for x in self["config"].list:
@@ -3568,31 +3579,29 @@ class SubsSearchDownloadOptions(Screen, ConfigListScreen):
     def editFName(self):
         def editFnameCB(callback=None):
             if callback is not None and len(callback):
-                self["fname"].text = callback
+                self.fname = callback
                 self.configSaveAs.value = "custom"
                 self.buildMenu()
                 self.updateFName()
         from Screens.VirtualKeyBoard import VirtualKeyBoard
-        self.session.openWithCallback(editFnameCB, VirtualKeyBoard, _("Edit Filename"), text=toString(self["fname"].text.strip()))
+        self.session.openWithCallback(editFnameCB, VirtualKeyBoard, _("Edit Filename"), text=toString(self.fname.strip()))
 
     def editDPath(self):
         def editDPathCB(callback=None):
             if callback is not None and len(callback):
-                self["dpath"].text = callback
+                self.dpath = callback
                 self.configSaveTo.value = "custom"
                 self["config"].invalidate(self.configSaveTo)
-        self.session.openWithCallback(editDPathCB, LocationBox, _("Edit download path"), currDir=toString(self["dpath"].text.strip()))
+        self.session.openWithCallback(editDPathCB, LocationBox, _("Edit download path"), currDir=toString(self.dpath.strip()))
 
     def confirm(self):
-        fname = self["fname"].text.strip()
-        if len(fname) == "":
+        if not self.fname.strip():
             self.session.open(MessageBox, _("Filename cannot be empty!"), type=MessageBox.TYPE_WARNING)
             return
-        dpath = self["dpath"].text.strip()
-        if not os.path.isdir(dpath):
+        if not os.path.isdir(self.dpath.strip()):
             self.session.open(MessageBox, _("Path doesn't exist!"), type=MessageBox.TYPE_WARNING)
             return
-        self.close(dpath, fname)
+        self.close(self.dpath.strip(), self.fname.strip())
 
     def cancel(self):
         self.close(None, None)
@@ -3782,14 +3791,15 @@ class SubsSearch(Screen):
             "ok": self.keyOk,
             "cancel": self.keyCancel,
         })
-        self["menuActions"] = ActionMap(["ColorActions", "MenuActions", "MovieSelectionActions"],
+        self["menuActions"] = ActionMap(["ColorActions", "MenuActions", "InfoActions"],
         {
             "red": self.updateSearchParams,
             "green": self.searchSubs,
             "yellow": self.openDownloadHistory,
             "blue": self.openSettings,
+
             "menu": self.openContextMenu,
-            "showEventInfo": self.eventinfo,
+            "info": self.eventinfo,
          })
 
         self["listActions"] = ActionMap(["DirectionActions"],

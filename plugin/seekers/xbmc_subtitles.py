@@ -6,10 +6,9 @@ Created on Feb 10, 2014
 from __future__ import absolute_import
 import os
 import time
-import six
 
 from .seeker import BaseSeeker
-from .utilities import languageTranslate, toString, allLang
+from .utilities import languageTranslate, allLang
 
 from . import _
 
@@ -63,7 +62,7 @@ class XBMCSubtitlesAdapter(BaseSeeker):
             lang1 = languageTranslate(langs[0], 2, 0)
             lang2 = languageTranslate(langs[1], 2, 0)
             lang3 = languageTranslate(langs[2], 2, 0)
-        self.log.info('using langs %s %s %s' % (toString(lang1), toString(lang2), toString(lang3)))
+        self.log.info('using langs %s %s %s' % (lang1, lang2, lang3))
         self.module.settings_provider = self.settings_provider
         # Standard output -
         # subtitles list
@@ -77,12 +76,12 @@ class XBMCSubtitlesAdapter(BaseSeeker):
         subtitles_list = subtitles['list']
         session_id = subtitles['session_id']
         pos = subtitles_list.index(selected_subtitle)
-        zip_subs = os.path.join(toString(self.tmp_path), toString(selected_subtitle['filename']))
-        tmp_sub_dir = toString(self.tmp_path)
+        zip_subs = os.path.join(self.tmp_path, selected_subtitle['filename'])
+        tmp_sub_dir = self.tmp_path
         if path is not None:
-            sub_folder = toString(path)
+            sub_folder = path
         else:
-            sub_folder = toString(self.tmp_path)
+            sub_folder = self.tmp_path
         self.module.settings_provider = self.settings_provider
         # Standard output -
         # True if the file is packed as zip: addon will automatically unpack it.
@@ -98,7 +97,9 @@ class XBMCSubtitlesAdapter(BaseSeeker):
             if not os.path.isfile(filepath):
                 filepath = zip_subs
         else:
-            filepath = os.path.join(six.ensure_str(sub_folder), filepath)
+            if isinstance(sub_folder, bytes):
+                sub_folder = sub_folder.decode(encoding='utf-8', errors='strict')
+            filepath = os.path.join(sub_folder, filepath)
         return compressed, language, filepath
 
     def close(self):
@@ -113,8 +114,8 @@ class XBMCSubtitlesAdapter(BaseSeeker):
 
 try:
     from .Titulky import titulkycom
-except ImportError as e:
-    titulkycom = e
+except ImportError as ie:
+    titulkycom = ie
 
 
 class TitulkyComSeeker(XBMCSubtitlesAdapter):
@@ -130,8 +131,8 @@ class TitulkyComSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Edna import edna
-except ImportError as e:
-    edna = e
+except ImportError as ie:
+    edna = ie
 
 
 class EdnaSeeker(XBMCSubtitlesAdapter):
@@ -148,8 +149,8 @@ class EdnaSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .SerialZone import serialzone
-except ImportError as e:
-    serialzone = e
+except ImportError as ie:
+    serialzone = ie
 
 
 class SerialZoneSeeker(XBMCSubtitlesAdapter):
@@ -166,8 +167,8 @@ class SerialZoneSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Elsubtitle import elsubtitle
-except ImportError as e:
-    elsubtitle = e
+except ImportError as ie:
+    elsubtitle = ie
 
 
 class ElsubtitleSeeker(XBMCSubtitlesAdapter):
@@ -182,8 +183,8 @@ class ElsubtitleSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Indexsubtitle import indexsubtitle
-except ImportError as e:
-    indexsubtitle = e
+except ImportError as ie:
+    indexsubtitle = ie
 
 
 class IndexsubtitleSeeker(XBMCSubtitlesAdapter):
@@ -198,8 +199,8 @@ class IndexsubtitleSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Moviesubtitles import moviesubtitles
-except ImportError as e:
-    moviesubtitles = e
+except ImportError as ie:
+    moviesubtitles = ie
 
 
 class MoviesubtitlesSeeker(XBMCSubtitlesAdapter):
@@ -214,8 +215,8 @@ class MoviesubtitlesSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Moviesubtitles2 import moviesubtitles2
-except ImportError as e:
-    moviesubtitles2 = e
+except ImportError as ie:
+    moviesubtitles2 = ie
 
 
 class Moviesubtitles2Seeker(XBMCSubtitlesAdapter):
@@ -230,8 +231,8 @@ class Moviesubtitles2Seeker(XBMCSubtitlesAdapter):
 
 try:
     from .MySubs import mysubs
-except ImportError as e:
-    mysubs = e
+except ImportError as ie:
+    mysubs = ie
 
 
 class MySubsSeeker(XBMCSubtitlesAdapter):
@@ -246,8 +247,8 @@ class MySubsSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .OpenSubtitles import opensubtitles
-except ImportError as e:
-    opensubtitles = e
+except ImportError as ie:
+    opensubtitles = ie
 
 
 class OpenSubtitlesSeeker(XBMCSubtitlesAdapter):
@@ -260,12 +261,12 @@ class OpenSubtitlesSeeker(XBMCSubtitlesAdapter):
     default_settings = {}
 
     def _search(self, title, filepath, lang, season, episode, tvshow, year):
-        from six.moves import xmlrpc_client
+        from xmlrpc.client import ProtocolError
         tries = 4
         for i in range(tries):
             try:
                 return XBMCSubtitlesAdapter._search(self, title, filepath, lang, season, episode, tvshow, year)
-            except xmlrpc_client.Client.ProtocolError as e:
+            except ProtocolError as e:
                 self.log.error(e.errcode)
                 if i == (tries - 1):
                     raise
@@ -275,8 +276,8 @@ class OpenSubtitlesSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Podnapisi import podnapisi
-except ImportError as e:
-    podnapisi = e
+except ImportError as ie:
+    podnapisi = ie
 
 
 class PodnapisiSeeker(XBMCSubtitlesAdapter):
@@ -293,8 +294,8 @@ class PodnapisiSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Subscene import subscene
-except ImportError as e:
-    subscene = e
+except ImportError as ie:
+    subscene = ie
 
 
 class SubsceneSeeker(XBMCSubtitlesAdapter):
@@ -309,8 +310,8 @@ class SubsceneSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Subdl import subdl
-except ImportError as e:
-    subdl = e
+except ImportError as ie:
+    subdl = ie
 
 
 class SubdlSeeker(XBMCSubtitlesAdapter):
@@ -327,8 +328,8 @@ class SubdlSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Subsyts import subsyts
-except ImportError as e:
-    subsyts = e
+except ImportError as ie:
+    subsyts = ie
 
 
 class SubsytsSeeker(XBMCSubtitlesAdapter):
@@ -345,8 +346,8 @@ class SubsytsSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Subtitlecat import subtitlecat
-except ImportError as e:
-    subtitlecat = e
+except ImportError as ie:
+    subtitlecat = ie
 
 
 class SubtitlecatSeeker(XBMCSubtitlesAdapter):
@@ -363,8 +364,8 @@ class SubtitlecatSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .SubtitlesGR import subtitlesgr
-except ImportError as e:
-    subtitlesgr = e
+except ImportError as ie:
+    subtitlesgr = ie
 
 
 class SubtitlesGRSeeker(XBMCSubtitlesAdapter):
@@ -381,8 +382,8 @@ class SubtitlesGRSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Subtitlesmora import subtitlesmora
-except ImportError as e:
-    subtitlesmora = e
+except ImportError as ie:
+    subtitlesmora = ie
 
 
 class SubtitlesmoraSeeker(XBMCSubtitlesAdapter):
@@ -399,8 +400,8 @@ class SubtitlesmoraSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Subtitlist import subtitlist
-except ImportError as e:
-    subtitlist = e
+except ImportError as ie:
+    subtitlist = ie
 
 
 class SubtitlistSeeker(XBMCSubtitlesAdapter):
@@ -415,8 +416,8 @@ class SubtitlistSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Itasa import itasa
-except ImportError as e:
-    itasa = e
+except ImportError as ie:
+    itasa = ie
 
 
 class ItasaSeeker(XBMCSubtitlesAdapter):
@@ -434,8 +435,8 @@ class ItasaSeeker(XBMCSubtitlesAdapter):
 
 try:
     from .Titlovi import titlovi
-except ImportError as e:
-    titlovi = e
+except ImportError as ie:
+    titlovi = ie
 
 
 class TitloviSeeker(XBMCSubtitlesAdapter):

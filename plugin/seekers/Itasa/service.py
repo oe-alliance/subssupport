@@ -3,10 +3,10 @@ from __future__ import absolute_import
 import os
 import re
 
+from urllib.request import build_opener, install_opener, urlopen, Request, HTTPCookieProcessor
+from urllib.parse import urlencode
+from http.cookiejar import CookieJar
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
-from six.moves import http_cookiejar
-from six.moves.urllib.request import urlopen, build_opener, install_opener, HTTPCookieProcessor, Request
-from six.moves.urllib.parse import urlencode
 
 from ..utilities import log
 
@@ -60,7 +60,7 @@ def login(username, password):
                 unique_name = match.group(2)
                 unique_value = match.group(3)
                 login_postdata = urlencode({'username': username, 'passwd': password, 'remember': 'yes', 'Submit': 'Login', 'remember': 'yes', 'option': 'com_user', 'task': 'login', 'silent': 'true', 'return': return_value, unique_name: unique_value})
-                cj = http_cookiejar.CookieJar()
+                cj = CookieJar()
                 my_opener = build_opener(HTTPCookieProcessor(cj))
                 my_opener.addheaders = [('Referer', main_url)]
                 install_opener(my_opener)
