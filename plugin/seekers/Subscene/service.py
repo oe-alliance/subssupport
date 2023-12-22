@@ -61,6 +61,7 @@ subscene_languages = {
     'Farsi/Persian': 'Persian'
 }
 
+
 def geturl(url):
     log(__name__, " Getting url: %s" % (url))
     try:
@@ -71,6 +72,7 @@ def geturl(url):
         content = None
     return (content)
     
+
 def getSearchTitle(title, year=None):  # new Add
     url = 'https://subscene.com/subtitles/searchbytitle?query=%s&l=' % quote_plus(title)
     #data = geturl(url)
@@ -99,10 +101,10 @@ def getSearchTitle(title, year=None):  # new Add
                    print(("href", href))
                    return href
                    
-
         except:
             break                             
     return 'https://subscene.com/subtitles/' + quote_plus(title)
+
 
 def find_movie(content, title, year):
     url_found = None
@@ -153,6 +155,7 @@ def find_tv_show_season(content, tvshow, season):
                 all_tvshows[0][1], all_tvshows[0][4], all_tvshows[0][3]))
                                                                    
     return url_found                                                                     
+
 
 def getallsubs(content, allowed_languages, filename="", search_string=""):
     subtitle_pattern = ("<a href=\"(?P<link>/subtitles/[^\"]+)\">\s+"
@@ -225,6 +228,7 @@ def prepare_search_string(s):
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     s = quote_plus(s)
     return s
+
 
 def search_movie(title, year, languages, filename):
     try:

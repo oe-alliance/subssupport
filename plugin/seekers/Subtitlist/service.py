@@ -68,6 +68,7 @@ subtitlist_languages = {
     'Farsi/Persian': 'Persian'
 }
 
+
 def get_url(url, referer=None):
     if referer is None:
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
@@ -80,6 +81,7 @@ def get_url(url, referer=None):
     #content = content.replace('\n', '')
     return content
                         
+
 def getSearchTitle(title, year=None):  # new Add
     hrf = quote_plus(title).replace("%2B", "-")
     url = 'https://www.subtitlist.com/search?title=%s' % quote_plus(title)
@@ -110,11 +112,11 @@ def getSearchTitle(title, year=None):  # new Add
                    print(("href", href))
                    return href
                    
-
         except:
             break                             
     return 'https://www.subtitlist.com/subtitles/%s' % hrf
     
+
 def find_movie(content, title, year):
     d = content
     print(d)
@@ -180,6 +182,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     log(__name__, "%s Search string = %s" % (debug_pretext, searchstring))
     get_subtitles_list(searchstring, title, year, language_info2, language_info1, subtitles_list)
     return subtitles_list, "", msg  # standard output
+
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     language = subtitles_list[pos]["language_name"]
@@ -247,12 +250,14 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
         return packed, language, subs_file  # standard output
 
+
 def prepare_search_string(s):
     s = s.strip()
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     s = quote_plus(s)
     return s
     
+
 def get_subtitles_list(searchstring, title, year, languageshort, languagelong, subtitles_list):
     dst = languagelong
     title = title.strip()

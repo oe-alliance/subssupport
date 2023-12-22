@@ -102,6 +102,7 @@ if six.PY3:
 
 # localization function
 
+
 def warningMessage(session, text):
     session.open(MessageBox, text, type=MessageBox.TYPE_WARNING, timeout=5)
 
@@ -1125,7 +1126,6 @@ class SubsSupport(SubsSupportEmbedded):
 
 
 ############ Methods triggered by videoEvents when SubsSupport is subclass of Screen ################
-
 
     def __serviceStarted(self):
         print('[SubsSupport] Service Started')
@@ -3809,6 +3809,7 @@ class SubsSearchContextMenu(Screen):
 
     def getSelection(self):
         return self.options[self["context_menu"].index][1]
+
 
 class SubsSearch(Screen):
     if isFullHD():

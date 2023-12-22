@@ -92,6 +92,7 @@ def get_url(url, referer=None):
     content = content.replace('\n', '')
     return content
     
+
 def get_rating(downloads):
     rating = int(downloads)
     if (rating < 50):
@@ -138,6 +139,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     log(__name__, "%s Search string = %s" % (debug_pretext, searchstring))
     get_subtitles_list(title, year, language_info2, language_info1, subtitles_list)
     return subtitles_list, "", msg  # standard output
+
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     language = subtitles_list[pos]["language_name"]
@@ -220,6 +222,7 @@ def prepare_search_string(s):
     s = quote_plus(s)
     return s
     
+
 def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list):
     url = "http://www.moviesubtitles.net/search.php?searchString=%s&start=1" % quote_plus(title)
     dst = languageshort.lower()

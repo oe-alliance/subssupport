@@ -308,6 +308,7 @@ class CaptchaDialog(VirtualKeyBoard):
                 file.write(Password.replace(' ', ''))
                 file.close()
       
+
 class DelayMessageBox(MessageBox):
     def __init__(self, session, seconds, message):
         MessageBox.__init__(self, session, message, type=MessageBox.TYPE_INFO, timeout=seconds, close_on_any_key=False, enable_input=False)

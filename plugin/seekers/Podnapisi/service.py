@@ -24,7 +24,6 @@ LINKFILE = '/tmp/link'
 LINKFILE2 = '/tmp/link2'
 
 
-
 def Search(item):
     pn_server = PNServer()
     pn_server.Create()

@@ -88,6 +88,7 @@ def get_url(url, referer=None):
     content = content.replace('\n', '')
     return content
     
+
 def get_url2(url, referer=None):
     from io import BytesIO
     from urllib.request import urlopen
@@ -183,6 +184,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
         return packed, language, subs_file  # standard output
 
+
 def get_subtitles_list(searchstring, title, languageshort, languagelong, subtitles_list):
     s = languagelong.lower()
     url = '%s/search?query=%s' % (main_url, urllib.parse.quote_plus(searchstring))
@@ -214,7 +216,6 @@ def get_subtitles_list(searchstring, title, languageshort, languagelong, subtitl
                 #print(id)
             except:
                 pass
-
 
             if not (filename == 'Εργαστήρι Υποτίτλων' or filename == 'subs4series'):
                 log(__name__, "%s Subtitles found: %s (id = %s)" % (debug_pretext, filename, id))

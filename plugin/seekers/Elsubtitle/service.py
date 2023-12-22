@@ -85,6 +85,7 @@ elsubtitle_languages = {
     'Farsi/Persian': 'Persian'
 }
 
+
 def get_url(url, referer=None):
     if referer is None:
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
@@ -96,6 +97,7 @@ def get_url(url, referer=None):
     response.close()
     content = content.replace('\n', '')
     return content
+
 
 def getSearchTitle(title, searchstring, year=None):  # new Add  .replace("+","-")
     title = title.strip()
@@ -136,6 +138,7 @@ def getSearchTitle(title, searchstring, year=None):  # new Add  .replace("+","-"
             break                             
     return 'https://www.elsubtitle.com/search-results/?search_name=/' + hrf
     
+
 def find_movie(content, title, year):
     d = content
     print(d)
@@ -154,6 +157,7 @@ def find_movie(content, title, year):
                 break
     return url_found
         
+
 def get_url(url, referer=None):
     if referer is None:
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
@@ -214,12 +218,14 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     get_subtitles_list(searchstring, title, year, language_info2, language_info1, subtitles_list)
     return subtitles_list, "", msg  # standard output
 
+
 def prepare_search_string(s):
     s = s.strip()
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title    type="hidden" value="ar" /><input name="subtitle_id" type="hidden" value="SUL_360528" /><input name="imdb_id" t
     s = quote_plus(s)
     return s
     
+
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     language = subtitles_list[pos]["language_name"]   
     lang = subtitles_list[pos]["language_flag"]   
