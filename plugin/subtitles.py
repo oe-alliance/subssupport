@@ -19,9 +19,13 @@
 from __future__ import absolute_import
 from __future__ import print_function
 from datetime import datetime
+from importlib import reload
 import json
 import os
 import re
+from urllib.parse import quote, unquote
+from xml.etree.ElementTree import parse as parse_xml
+
 from twisted.internet.defer import Deferred
 
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -54,7 +58,6 @@ from Tools.Directories import SCOPE_CURRENT_SKIN, SCOPE_SKIN, SCOPE_PLUGINS, res
 from Tools.ISO639 import LanguageCodes
 from Tools.LoadPixmap import LoadPixmap
 from Components.FileList import FileList
-from six.moves import reload_module
 from .compat import eConnectCallback
 from .e2_utils import messageCB, E2SettingsProvider, MyLanguageSelection, unrar, \
     ConfigFinalText, Captcha, DelayMessageBox, MyConfigList, getFps, fps_float, \
@@ -75,23 +78,13 @@ from .utils import toString, SimpleLogger, toUnicode
 
 from . import _, __author__, __version__, __email__
 
-import six
-from six.moves import range
-from six.moves.urllib.parse import quote, unquote
-
-try:
-    from xml.etree.cElementTree import parse as parse_xml
-except ImportError:
-    from xml.etree.ElementTree import parse as parse_xml
-
-
 try:
     from Screens.AudioSelection import QuickSubtitlesConfigMenu
 except ImportError:
     QuickSubtitlesConfigMenu = None
 
-
 # localization function
+
 
 def warningMessage(session, text):
     session.open(MessageBox, text, type=MessageBox.TYPE_WARNING, timeout=5)
@@ -3870,7 +3863,7 @@ class SubsSearch(Screen):
         tmdb_file = resolveFilename(SCOPE_PLUGINS, "Extensions/tmdb")
         if os.path.exists(tmdb_file):
                from Plugins.Extensions.tmdb import tmdb
-               reload_module(tmdb)
+               reload(tmdb)
                s = self.session.nav.getCurrentService()
                info = s.info()
                event = info.getEvent(0)  # 0 = now, 1 = next

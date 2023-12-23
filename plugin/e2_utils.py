@@ -109,7 +109,7 @@ class MyConfigList(ConfigList):
 
 class MyLanguageSelection(Screen):
     skin = """
-    <screen name="MyLanguageSelection" position="center,center" size="380,400" title="Language selection" zPosition="3">
+    <screen name="MyLanguageSelection" position="center,center" size="380,400" title="Language selection" zPosition="3" resolution="1280,720">
         <widget source="languages" render="Listbox" position="0,0" size="380,400" scrollbarMode="showOnDemand">
             <convert type="TemplatedMultiContent">
                 {"template": [
@@ -256,13 +256,13 @@ class Captcha(object):
 
 class CaptchaDialog(VirtualKeyBoard):
     skin = """
-    <screen name="CaptchDialog" position="center,center" size="560,485" zPosition="99" title="Virtual keyboard">
+    <screen name="CaptchDialog" position="center,center" size="560,485" zPosition="99" title="Virtual keyboard" resolution="1280,720">
         <ePixmap pixmap="skin_default/vkey_text.png" position="9,165" zPosition="-4" size="542,52" alphatest="on" />
         <widget source="country" render="Pixmap" position="490,0" size="60,40" alphatest="on" borderWidth="2" borderColor="yellow" >
             <convert type="ValueToPixmap">LanguageCode</convert>
         </widget>
         <widget name="header" position="10,10" size="500,20" font="Regular;20" transparent="1" noWrap="1" />
-	<widget position="10,455" size="60,35" name="Green" pixmap="skin_default/buttons/key_green.png" zPosition="3"  alphatest="blend" />
+	    <widget position="10,455" size="60,35" name="Green" pixmap="skin_default/buttons/key_green.png" zPosition="3"  alphatest="blend" />
         <eLabel text="Save" zPosition="3" position="50,450" size="120,35" font="Regular;20" transparent="1" backgroundColor="black" halign="center" valign="center" />
         <widget name="captcha" position="10, 50" size ="540,110" alphatest="blend" zPosition="-1" />
         <widget name="text" position="12,165" size="536,46" font="Regular;46" transparent="1" noWrap="1" halign="right" />
@@ -279,7 +279,7 @@ class CaptchaDialog(VirtualKeyBoard):
         self["text"] = self['text']
         self["myActionMap"] = NumberActionMap(["WizardActions", "InputBoxActions", "ColorActions"],
         	{
-                        "green": self.save
+                "green": self.save
            	}, -1)
         self.picPath = captcha_file
         self.picLoad = ePicLoad()
