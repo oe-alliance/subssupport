@@ -4430,12 +4430,12 @@ class SubsSearchSettings(Screen, ConfigListScreen):
         return configList
     skin = """
     <screen position="center,center" size="650,500" zPosition="3" resolution="1280,720">
-        <widget name="key_red" position="10,5" zPosition="1" size="150,45" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" shadowOffset="-2,-2" shadowColor="black" />
-        <widget name="key_green" position="170,5" zPosition="1" size="150,45" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" shadowOffset="-2,-2" shadowColor="black" />
-        <widget name="key_yellow" position="330,5" zPosition="1" size="150,45" font="Regular;20" halign="center" valign="center" backgroundColor="#a08500" shadowOffset="-2,-2" shadowColor="black" />
-        <widget name="key_blue" position="490,5" zPosition="1" size="150,45" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" shadowOffset="-2,-2" shadowColor="black" />
+        <widget name="key_red" position="10,5" zPosition="1" size="150,45" font="Regular;18" halign="center" valign="center" backgroundColor="#9f1313" shadowOffset="-2,-2" shadowColor="black" />
+        <widget name="key_green" position="170,5" zPosition="1" size="150,45" font="Regular;18" halign="center" valign="center" backgroundColor="#1f771f" shadowOffset="-2,-2" shadowColor="black" />
+        <widget name="key_yellow" position="330,5" zPosition="1" size="150,45" font="Regular;18" halign="center" valign="center" backgroundColor="#a08500" shadowOffset="-2,-2" shadowColor="black" />
+        <widget name="key_blue" position="490,5" zPosition="1" size="150,45" font="Regular;18" halign="center" valign="center" backgroundColor="#18188b" shadowOffset="-2,-2" shadowColor="black" />
         <eLabel position="-1,55" size="650,1" backgroundColor="#999999" />
-        <widget name="config" position="10,75" size="630,178" scrollbarMode="showOnDemand" />
+        <widget name="config" position="10,75" size="630,178" scrollbarMode="showOnDemand" itemHeight="20"/>
         <!-- <eLabel position="5,245" size="640,1" backgroundColor="#999999" /> -->
         <widget source="header_name" render="Label" position = "10,265" size="200,25" font="Regular;18" halign="left" foregroundColor="#0xcccccc" />
         <widget source="header_lang" render="Label" position = "220,265" size="180,25" font="Regular;18" halign="left" foregroundColor="#0xcccccc" />
