@@ -4,8 +4,8 @@ from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Components.PluginComponent import PluginDescriptor
 from Components.config import config
-from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 
 from .subtitles import E2SubsSeeker, SubsSearch, initSubsSettings, \
     SubsSetupGeneral, SubsSearchSettings, SubsSetupExternal, SubsSetupEmbedded
@@ -58,12 +58,7 @@ class SubsSupportSettings(Screen):
         self.externalSettings = externalSettings
         self.embeddedSettings = embeddedSettings
         self.dvbSettings = dvbSettings
-        self["menuList"] = List([
-            (_("General settings"), "general"),
-            (_("External subtitles settings"), "external"),
-            (_("Embedded subtitles settings"), "embedded"),
-            (_("Search settings"), "search"),
-            (_("DVB player settings"), "dvb")])
+        self["menuList"] = List()
         self["actionmap"] = ActionMap(["OkCancelActions", "DirectionActions"],
         {
             "up": self["menuList"].selectNext,
@@ -71,11 +66,16 @@ class SubsSupportSettings(Screen):
             "ok": self.confirmSelection,
             "cancel": self.close,
         })
-        self.onLayoutFinish.append(self.setWindowTitle)
+        self.onLayoutFinish.append(self.layoutFinished)
+        self.setTitle(_("SubsSupport settings"))
 
-    def setWindowTitle(self):
-        self.setup_title = _("SubsSupport settings")
-        self.setTitle(self.setup_title)
+    def layoutFinished(self):
+        self["menuList"].setList([
+            (_("General settings"), "general"),
+            (_("External subtitles settings"), "external"),
+            (_("Embedded subtitles settings"), "embedded"),
+            (_("Search settings"), "search"),
+            (_("DVB player settings"), "dvb")])
 
     def confirmSelection(self):
         selection = self["menuList"].getCurrent()[1]
@@ -101,12 +101,7 @@ class SubsSupportSettings(Screen):
         self.session.open(SubsSetupExternal, self.externalSettings)
 
     def openEmbeddedSettings(self):
-        try:
-            from Screens.AudioSelection import QuickSubtitlesConfigMenu
-        except ImportError:
-            self.session.open(SubsSetupEmbedded, self.embeddedSettings)
-        else:
-            self.session.open(MessageBox, _("You have OpenPli-based image, please change embedded subtitles settings in Settings / System / Subtitles settings"), MessageBox.TYPE_INFO)
+        self.session.open(Setup, "Subtitle")
 
     def openDVBPlayerSettings(self):
         self.session.open(SubsSetupDVBPlayer, self.dvbSettings)
