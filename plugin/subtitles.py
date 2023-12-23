@@ -2814,12 +2814,9 @@ class SubsEmbeddedSelection(Screen):
         self["actions"] = ActionMap(["SetupActions", "DirectionActions", "MenuActions"],
         {
             "ok": self.keyOk,
-            "cancel": self.cancel,
+            "cancel": self.close,
         }, -2)
-        self.onLayoutFinish.append(self.updateTitle)
         self.onLayoutFinish.append(self.fillList)
-
-    def updateTitle(self):
         self.setTitle(_("Choose subtitles"))
 
     def fillList(self):
@@ -2878,9 +2875,6 @@ class SubsEmbeddedSelection(Screen):
 
         self.selectedSubtitle = None
         return subtitlelist
-
-    def cancel(self):
-        self.close()
 
     def keyOk(self):
         cur = self["streams"].getCurrent()
@@ -3930,7 +3924,7 @@ class SubsSearch(Screen):
         searchInfoList.append((_("Use File path") + ":", useFilePathStr))
         self['search_info'].list = searchInfoList
 
-    def updateSubsList(self):
+    def updateSubsList(self):  # TODO get country imgages from default skin
         imgDict = {
             'sync': loadPNG(os.path.join(os.path.dirname(__file__), 'img', 'check.png')),
             'unk': loadPNG(os.path.join(os.path.dirname(__file__), 'img', 'countries', 'UNK.png'))
@@ -3952,14 +3946,7 @@ class SubsSearch(Screen):
         self['subtitles'].list = subtitleListGUI
 
     def updateBottomMenu(self):
-        if self.__searching:
-            self["key_red"].text = ""
-            self["key_green"].text = ""
-            self["key_yellow"].text = ""
-            self["key_blue"].text = ""
-            self["key_menu_img"].boolean = False
-            self["key_info_img"].boolean = False
-        elif self.__downloading:
+        if self.__searching or self.__downloading:
             self["key_red"].text = ""
             self["key_green"].text = ""
             self["key_yellow"].text = ""
@@ -4507,12 +4494,9 @@ class SubsSearchSettings(Screen, ConfigListScreen):
             "pageUp": self.switchList,
             "pageDown": self.switchList,
         }, -2)
-        self.onLayoutFinish.append(self.setWindowTitle)
         self.onLayoutFinish.append(self.buildMenu)
         self.onLayoutFinish.append(self.updateProvidersList)
         self.onLayoutFinish.append(self.setConfigFocus)
-
-    def setWindowTitle(self):
         self.setTitle(_("Subtitles search settings"))
 
     def buildMenu(self):
