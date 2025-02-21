@@ -26,10 +26,12 @@ LANGUAGES = (
 	("Slovenian", "1", "sl", "slv", "38", 30239, "Slovenski"),
 	("SerbianLatin", "36", "sr", "scc", "100", 30237, "SrpskiLatinica"))  # ?
 
+
 def languageTranslate(lang, lang_from, lang_to):
 	for x in LANGUAGES:
 		if lang == x[lang_from]:
 			return x[lang_to]
+
 
 class OSDBServer:
 	#KEY = "UGE4Qk0tYXNSMWEtYTJlaWZfUE9US1NFRC1WRUQtWA=="

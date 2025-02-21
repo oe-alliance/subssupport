@@ -63,6 +63,7 @@ subscenebest_languages = {
     'Farsi/Persian': 'Persian'
 }
 
+
 def geturl(url):
     log(__name__, " Getting url: %s" % (url))
     try:
@@ -74,6 +75,7 @@ def geturl(url):
         content = None
     return (content)
     
+
 def getSearchTitle(title, year=None):  # new Add
     url = 'https://sub-scene.com/search?query=%s' % quote_plus(title)
     #data = geturl(url)
@@ -108,10 +110,10 @@ def getSearchTitle(title, year=None):  # new Add
                    print(("href", href))
                    return href
                    
-
         except:
             break                             
     return 'https://sub-scene.com/search?query=' + quote_plus(title)
+
 
 def find_movie(content, title, year):
     url_found = None
@@ -145,6 +147,7 @@ def find_tv_show_season(content, tvshow, season):
         url_found = matches.group('link')
                                                                    
     return url_found                                                                     
+
 
 def getallsubs(content, allowed_languages, filename="", search_string=""):
     soup = BeautifulSoup(content.text, 'html.parser')
@@ -198,6 +201,7 @@ def prepare_search_string(s):
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     s = quote_plus(s)
     return s
+
 
 def search_movie(title, year, languages, filename):
     try:

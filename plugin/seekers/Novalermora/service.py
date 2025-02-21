@@ -183,6 +183,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
         return packed, language, subs_file  # standard output
 
+
 def get_subtitles_list(title, searchstring, languageshort, languagelong, subtitles_list):
     url = '%s/subtitles' % (main_url) 
     title = title.strip()
