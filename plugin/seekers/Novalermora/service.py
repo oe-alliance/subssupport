@@ -10,10 +10,17 @@ import urllib.request
 import urllib.parse
 import html
 import urllib3
-import requests, json, re, random, string, time, warnings
+import requests
+import json
+import re
+import random
+import string
+import time
+import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore',InsecureRequestWarning)
-import os, os.path
+import os
+import os.path
 from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen, FancyURLopener
 from six.moves import http_cookiejar
 from ..utilities import languageTranslate, log, getFileSize
