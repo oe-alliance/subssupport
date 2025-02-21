@@ -45,7 +45,7 @@ if sys.version_info[0] == 3:
     from urllib.parse import quote  # Python 3
 else:
     from urllib import quote  # Python 2
-    from urllib3 import quote 
+    from urllib3 import quote
 
 
 try:
@@ -62,8 +62,8 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
       'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate'}  # , deflate'}
-      
-s = requests.Session()   
+
+s = requests.Session()
 
 main_url = "http://subs.ath.cx"
 debug_pretext = "subs.ath.cx"
@@ -76,7 +76,7 @@ def get_url(url, referer=None):
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
     req = urllib.request.Request(url, None, headers)
     response = urllib.request.urlopen(req)
-    content = response.read().decode('utf-8') 
+    content = response.read().decode('utf-8')
     response.close()
     content = content.replace('\n', '')
     return content
@@ -130,7 +130,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     #id = re.compile('(.+?.+?)/').findall(id)[-1]
     downloadlink = 'http://subs.ath.cx/subtitles/%s' % (id)
     #id = 'http://www.findsubtitles.eu/getp.php?id=%s' % (id)
-    print(downloadlink)   
+    print(downloadlink)
     if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
         viewstate = 0
@@ -146,7 +146,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         #my_urlopener.addheader('Referer', url)
         log(__name__, "%s Fetching subtitles using url with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, postparams))
         #response = my_urlopener.open(downloadlink, postparams)
-        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True) 
+        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True)
         print(response.content)
         local_tmp_file = zip_subs
         try:
@@ -185,9 +185,9 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
 
 
 def get_subtitles_list(title, searchstring, languageshort, languagelong, subtitles_list):
-    url = '%s/subtitles' % (main_url) 
+    url = '%s/subtitles' % (main_url)
     title = title.strip()
-    
+
     #url = 'https://archive.org/download/iptvworld-1/A/'  quote_plus(title)
     d = quote_plus(title)
     d = d.replace('+', '.')
@@ -197,7 +197,7 @@ def get_subtitles_list(title, searchstring, languageshort, languagelong, subtitl
     try:
         log(__name__, "%s Getting url: %s" % (debug_pretext, url))
         content = s.get(url, headers=HDR, verify=False, allow_redirects=True).text
-        #print(content)  
+        #print(content)
     except:
         pass
         log(__name__, "%s Failed to get url:%s" % (debug_pretext, url))
@@ -205,7 +205,7 @@ def get_subtitles_list(title, searchstring, languageshort, languagelong, subtitl
     try:
         log(__name__, "%s Getting '%s' subs ..." % (debug_pretext, languageshort))
         subtitles = re.compile(r'(<td><a href.+?">' + d + '.+?</a></td>)', re.IGNORECASE).findall(content)
-        #print(subtitles)                        
+        #print(subtitles)
     except:
         log(__name__, "%s Failed to get subtitles" % (debug_pretext))
         return
@@ -213,9 +213,9 @@ def get_subtitles_list(title, searchstring, languageshort, languagelong, subtitl
         try:
             filename = re.compile('<td><a href=".+?">(.+?)</a></td>').findall(subtitle)[0]
             filename = filename.strip().replace('.srt', '')
-            #print(filename) 
+            #print(filename)
             id = re.compile('href="(.+?)"').findall(subtitle)[0]
-            #print(id) 
+            #print(id)
             if not (filename == 'Εργαστήρι Υποτίτλων' or filename == 'subs4series'):
                 log(__name__, "%s Subtitles found: %s (id = %s)" % (debug_pretext, filename, id))
                 subtitles_list.append({'no_files': 1, 'filename': filename, 'sync': True, 'id': id, 'language_flag': 'flags/' + languageshort + '.gif', 'language_name': languagelong})
