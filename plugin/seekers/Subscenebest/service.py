@@ -30,7 +30,7 @@ from six.moves import html_parser
 warnings.simplefilter('ignore',InsecureRequestWarning)
 
 
-HDR= {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36',
+HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Upgrade-Insecure-Requests': '1',
@@ -72,7 +72,7 @@ def geturl(url):
     except:
         log(__name__, " Failed to get url:%s" % (url))
         content = None
-    return(content)
+    return (content)
     
 def getSearchTitle(title, year=None): ## new Add
     url = 'https://sub-scene.com/search?query=%s' % quote_plus(title)
