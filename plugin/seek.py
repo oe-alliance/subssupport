@@ -18,6 +18,7 @@
 
 from __future__ import absolute_import
 import os
+from re import sub
 import shutil
 import socket
 import threading
@@ -27,18 +28,18 @@ import zipfile
 
 try:
     from .seekers import SubtitlesDownloadError, SubtitlesSearchError, \
-        SubtitlesErrors, TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
-        OpenSubtitlesSeeker, PodnapisiSeeker, SubsceneSeeker, SubdlSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker, SubtitlesmoraSeeker, SubtitlistSeeker, \
-          ItasaSeeker, TitloviSeeker
+        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker,TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
+        OpenSubtitlesSeeker, PodnapisiSeeker, SubsceneSeeker, SubdlSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker,  SubtitlistSeeker, \
+          ItasaSeeker, TitloviSeeker, OpenSubtitlesMoraSeeker, PrijevodiOnlineSeeker, SubscenebestSeeker
     from .seekers.seeker import BaseSeeker
     from .seekers.utilities import languageTranslate, langToCountry, \
         getCompressedFileType, detectSearchParams
     from .utils import SimpleLogger, toString
 except (ValueError, ImportError):
     from seekers import SubtitlesDownloadError, SubtitlesSearchError, \
-        SubtitlesErrors, TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
-        OpenSubtitlesSeeker, PodnapisiSeeker, SubsceneSeeker, SubdlSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker, SubtitlesmoraSeeker, SubtitlistSeeker, \
-         ItasaSeeker, TitloviSeeker
+        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker,TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
+        OpenSubtitlesSeeker, PodnapisiSeeker, SubsceneSeeker, SubdlSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker,  SubtitlistSeeker, \
+         ItasaSeeker, TitloviSeeker, OpenSubtitlesMoraSeeker, PrijevodiOnlineSeeker, SubscenebestSeeker
     from seekers.seeker import BaseSeeker
     from seekers.utilities import languageTranslate, langToCountry, \
         getCompressedFileType, detectSearchParams
@@ -46,25 +47,31 @@ except (ValueError, ImportError):
 
 
 SUBTITLES_SEEKERS = []
-SUBTITLES_SEEKERS.append(TitulkyComSeeker)
-SUBTITLES_SEEKERS.append(EdnaSeeker)
-SUBTITLES_SEEKERS.append(SerialZoneSeeker)
-SUBTITLES_SEEKERS.append(ElsubtitleSeeker)
-SUBTITLES_SEEKERS.append(IndexsubtitleSeeker)
-SUBTITLES_SEEKERS.append(MoviesubtitlesSeeker)
-SUBTITLES_SEEKERS.append(Moviesubtitles2Seeker)
-SUBTITLES_SEEKERS.append(MySubsSeeker)
+SUBTITLES_SEEKERS.append(NovalermoraSeeker)
+SUBTITLES_SEEKERS.append(SubtitlesmoraSeeker)
+SUBTITLES_SEEKERS.append(SubscenebestSeeker)
 SUBTITLES_SEEKERS.append(OpenSubtitlesSeeker)
+SUBTITLES_SEEKERS.append(OpenSubtitlesMoraSeeker)
+SUBTITLES_SEEKERS.append(MySubsSeeker)
+SUBTITLES_SEEKERS.append(SubsourceSeeker)
+SUBTITLES_SEEKERS.append(OpenSubtitles2Seeker)
 SUBTITLES_SEEKERS.append(SubdlSeeker)
+SUBTITLES_SEEKERS.append(ElsubtitleSeeker)
+SUBTITLES_SEEKERS.append(TitulkyComSeeker)
+#SUBTITLES_SEEKERS.append(PodnapisiSeeker)
 SUBTITLES_SEEKERS.append(SubsytsSeeker)
 SUBTITLES_SEEKERS.append(SubtitlecatSeeker)
 SUBTITLES_SEEKERS.append(SubtitlesGRSeeker)
-SUBTITLES_SEEKERS.append(SubtitlesmoraSeeker)
 SUBTITLES_SEEKERS.append(SubtitlistSeeker)
 SUBTITLES_SEEKERS.append(ItasaSeeker)
-#SUBTITLES_SEEKERS.append(PodnapisiSeeker)
 SUBTITLES_SEEKERS.append(SubsceneSeeker)
 SUBTITLES_SEEKERS.append(TitloviSeeker)
+SUBTITLES_SEEKERS.append(PrijevodiOnlineSeeker)
+SUBTITLES_SEEKERS.append(SerialZoneSeeker)
+SUBTITLES_SEEKERS.append(IndexsubtitleSeeker)
+SUBTITLES_SEEKERS.append(MoviesubtitlesSeeker)
+SUBTITLES_SEEKERS.append(Moviesubtitles2Seeker)
+SUBTITLES_SEEKERS.append(EdnaSeeker)
 
 
 class ErrorSeeker(BaseSeeker):
@@ -245,6 +252,9 @@ class SubsSeeker(object):
             if save_as == 'version':
                 self.log.debug('filename creating by "version" setting')
                 filename = toString(selected_subtitle['filename'])
+				# Sanitize the filename to remove slashes and double dots
+                filename = sub(r'[\\/]', '_', filename)  # Replace slashes with underscores
+                filename = sub(r'\.\.', '.', filename)  # Replace double dots with a single dot
                 if os.path.splitext(filename)[1] not in self.SUBTILES_EXTENSIONS:
                     filename = os.path.splitext(filename)[0] + ext
             elif save_as == 'video':
@@ -266,6 +276,10 @@ class SubsSeeker(object):
             self.log.debug('using custom download path: "%s"', path)
             download_path = os.path.join(toString(path), filename)
         self.log.debug('download path: "%s"', download_path)
+
+		# Ensure the destination directory exists
+        os.makedirs(os.path.dirname(download_path), exist_ok=True)
+
         if os.path.isfile(download_path) and overwrite_cb is not None:
             ret = overwrite_cb(download_path)
             if ret is None:

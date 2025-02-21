@@ -10,6 +10,8 @@ AC_CONFIG_FILES([
 Makefile
 plugin/Makefile
 plugin/seekers/Makefile
+plugin/seekers/PrijevodiOnline/Makefile
+plugin/seekers/Novalermora/Makefile
 plugin/seekers/Edna/Makefile
 plugin/seekers/Elsubtitle/Makefile
 plugin/seekers/Indexsubtitle/Makefile
@@ -19,10 +21,13 @@ plugin/seekers/Moviesubtitles2/Makefile
 plugin/seekers/MySubs/Makefile
 plugin/seekers/OpenSubtitles/Makefile
 plugin/seekers/OpenSubtitles2/Makefile
+plugin/seekers/OpenSubtitlesMora/Makefile
 plugin/seekers/Podnapisi/Makefile
 plugin/seekers/SerialZone/Makefile
 plugin/seekers/Subdl/Makefile
 plugin/seekers/Subscene/Makefile
+plugin/seekers/Subscenebest/Makefile
+plugin/seekers/Subssource/Makefile
 plugin/seekers/SubtitlesGR/Makefile
 plugin/seekers/Subsyts/Makefile
 plugin/seekers/Subtitlecat/Makefile

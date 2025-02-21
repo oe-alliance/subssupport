@@ -130,117 +130,33 @@ class TitulkyComSeeker(XBMCSubtitlesAdapter):
 
 
 try:
-    from .Edna import edna
-except ImportError as ie:
-    edna = ie
+    from .Subscenebest import subscenebest
+except ImportError as e:
+    subscenebest = e
 
 
-class EdnaSeeker(XBMCSubtitlesAdapter):
-    module = edna
+class SubscenebestSeeker(XBMCSubtitlesAdapter):
+    id = 'subscenebest'
+    module = subscenebest
     if isinstance(module, Exception):
         error, module = module, None
-    id = 'edna.cz'
-    provider_name = 'Edna.cz'
-    supported_langs = ['sk', 'cs']
-    default_settings = {}
-    movie_search = False
-    tvshow_search = True
-
-
-try:
-    from .SerialZone import serialzone
-except ImportError as ie:
-    serialzone = ie
-
-
-class SerialZoneSeeker(XBMCSubtitlesAdapter):
-    module = serialzone
-    if isinstance(module, Exception):
-        error, module = module, None
-    id = 'serialzone.cz'
-    provider_name = 'Serialzone.cz'
-    supported_langs = ['sk', 'cs']
-    default_settings = {}
-    movie_search = False
-    tvshow_search = True
-
-
-try:
-    from .Elsubtitle import elsubtitle
-except ImportError as ie:
-    elsubtitle = ie
-
-
-class ElsubtitleSeeker(XBMCSubtitlesAdapter):
-    id = 'elsubtitle'
-    module = elsubtitle
-    if isinstance(module, Exception):
-        error, module = module, None
-    provider_name = 'Elsubtitle.com'
+    provider_name = 'Subscenebest'
     supported_langs = allLang()
     default_settings = {}
 
 
 try:
-    from .Indexsubtitle import indexsubtitle
-except ImportError as ie:
-    indexsubtitle = ie
+    from .Subsource import subsource
+except ImportError as e:
+    subsource = e
 
 
-class IndexsubtitleSeeker(XBMCSubtitlesAdapter):
-    id = 'indexsubtitle'
-    module = indexsubtitle
+class SubsourceSeeker(XBMCSubtitlesAdapter):
+    id = 'subsource'
+    module = subsource
     if isinstance(module, Exception):
         error, module = module, None
-    provider_name = 'Indexsubtitle.cc'
-    supported_langs = allLang()
-    default_settings = {}
-
-
-try:
-    from .Moviesubtitles import moviesubtitles
-except ImportError as ie:
-    moviesubtitles = ie
-
-
-class MoviesubtitlesSeeker(XBMCSubtitlesAdapter):
-    id = 'moviesubtitles'
-    module = moviesubtitles
-    if isinstance(module, Exception):
-        error, module = module, None
-    provider_name = 'Moviesubtitles.org'
-    supported_langs = allLang()
-    default_settings = {}
-
-
-try:
-    from .Moviesubtitles2 import moviesubtitles2
-except ImportError as ie:
-    moviesubtitles2 = ie
-
-
-class Moviesubtitles2Seeker(XBMCSubtitlesAdapter):
-    id = 'moviesubtitles2'
-    module = moviesubtitles2
-    if isinstance(module, Exception):
-        error, module = module, None
-    provider_name = 'Moviesubtitles.net'
-    supported_langs = allLang()
-    default_settings = {}
-
-
-try:
-    from .MySubs import mysubs
-except ImportError as ie:
-    mysubs = ie
-
-
-class MySubsSeeker(XBMCSubtitlesAdapter):
-    id = 'mysubs'
-    module = mysubs
-    if isinstance(module, Exception):
-        error, module = module, None
-    provider_name = 'Mysubs'
+    provider_name = 'Subsource'
     supported_langs = allLang()
     default_settings = {}
 
@@ -256,7 +172,7 @@ class OpenSubtitlesSeeker(XBMCSubtitlesAdapter):
     if isinstance(module, Exception):
         error, module = module, None
     id = 'opensubtitles'
-    provider_name = 'OpenSubtitles'
+    provider_name = 'OpenSubtitles.org'
     supported_langs = allLang()
     default_settings = {}
 
@@ -275,6 +191,22 @@ class OpenSubtitlesSeeker(XBMCSubtitlesAdapter):
 
 
 try:
+    from .OpenSubtitlesMora import opensubtitlesmora
+except ImportError as e:
+    opensubtitlesmora = e
+
+
+class OpenSubtitlesMoraSeeker(XBMCSubtitlesAdapter):
+    module = opensubtitlesmora
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'opensubtitlesmora'
+    provider_name = 'OpenSubtitles.mora'
+    supported_langs = ['ar']
+    default_settings = {}
+
+
+try:
     from .OpenSubtitles2 import opensubtitles2
 except ImportError as ie:
     opensubtitles2 = ie
@@ -288,7 +220,26 @@ class OpenSubtitles2Seeker(XBMCSubtitlesAdapter):
     provider_name = 'OpenSubtitles.com'
     supported_langs = allLang()
 
-    default_settings = {}
+    default_settings = {
+        'OpenSubtitles_username': {'label': _("USERNAME"), 'type': 'text', 'default': "", 'pos': 0},
+        'OpenSubtitles_password': {'label': _("PASSWORD"), 'type': 'text', 'default': "", 'pos': 1},
+        'OpenSubtitles_API_KEY': {'label': _("API_KEY"), 'type': 'text', 'default': '', 'pos': 2}
+    }
+
+    def __init__(self, *args, **kwargs):
+        super(OpenSubtitles2Seeker, self).__init__(*args, **kwargs)
+        if self.module is None:
+            raise ImportError("OpenSubtitles2 module could not be loaded.")
+
+    def _search(self, title, filepath, langs, season, episode, tvshow, year):
+        if self.module is None:
+            return {'list': [], 'session_id': '', 'msg': 'OpenSubtitles2 module not loaded'}
+        return super(OpenSubtitles2Seeker, self)._search(title, filepath, langs, season, episode, tvshow, year)
+
+    def _download(self, subtitles, selected_subtitle, path=None):
+        if self.module is None:
+            return False, '', ''
+        return super(OpenSubtitles2Seeker, self)._download(subtitles, selected_subtitle, path)
 
 
 try:
@@ -338,6 +289,24 @@ class SubdlSeeker(XBMCSubtitlesAdapter):
     id = 'subdl.com'
     provider_name = 'Subdl'
     supported_langs = allLang()
+    default_settings = {}
+    movie_search = True
+    tvshow_search = True
+
+
+try:
+    from .Novalermora import novalermora
+except ImportError as e:
+    novalermora = e
+
+
+class NovalermoraSeeker(XBMCSubtitlesAdapter):
+    module = novalermora
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'novalermora'
+    provider_name = 'Novalermora'
+    supported_langs = ['ar']
     default_settings = {}
     movie_search = True
     tvshow_search = True
@@ -460,9 +429,145 @@ class TitloviSeeker(XBMCSubtitlesAdapter):
     module = titlovi
     if isinstance(module, Exception):
         error, module = module, None
-    id = 'titlovi.com'
+    id = 'titlovi'
     provider_name = 'Titlovi'
     supported_langs = ['bs', 'hr', 'en', 'mk', 'sr', 'sl']
     default_settings = {}
+    default_settings = {'username': {'label': _("Username") + " (" + _("Restart e2 required") + ")", 'type': 'text', 'default': "", 'pos': 0},
+                                       'password': {'label': _("Password") + " (" + _("Restart e2 required") + ")", 'type': 'password', 'default': "", 'pos': 1}}
     movie_search = True
     tvshow_search = True
+
+
+try:
+    from .PrijevodiOnline import prijevodionline
+except ImportError as e:
+    prijevodionline = e
+
+
+class PrijevodiOnlineSeeker(XBMCSubtitlesAdapter):
+    module = prijevodionline
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'prijevodionline'
+    provider_name = 'Prijevodi-Online'
+    supported_langs = ['bs', 'hr', 'sr']
+    default_settings = {}
+    movie_search = False
+    tvshow_search = True
+
+
+try:
+    from .MySubs import mysubs
+except ImportError as ie:
+    mysubs = ie
+
+
+class MySubsSeeker(XBMCSubtitlesAdapter):
+    id = 'mysubs'
+    module = mysubs
+    if isinstance(module, Exception):
+        error, module = module, None
+    provider_name = 'Mysubs'
+    supported_langs = allLang()
+    default_settings = {}
+
+
+try:
+    from .Elsubtitle import elsubtitle
+except ImportError as ie:
+    elsubtitle = ie
+
+
+class ElsubtitleSeeker(XBMCSubtitlesAdapter):
+    id = 'elsubtitle'
+    module = elsubtitle
+    if isinstance(module, Exception):
+        error, module = module, None
+    provider_name = 'Elsubtitle.com'
+    supported_langs = allLang()
+    default_settings = {}
+
+
+try:
+    from .Edna import edna
+except ImportError as ie:
+    edna = ie
+
+
+class EdnaSeeker(XBMCSubtitlesAdapter):
+    module = edna
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'edna.cz'
+    provider_name = 'Edna.cz'
+    supported_langs = ['sk', 'cs']
+    default_settings = {}
+    movie_search = False
+    tvshow_search = True
+
+
+try:
+    from .SerialZone import serialzone
+except ImportError as ie:
+    serialzone = ie
+
+
+class SerialZoneSeeker(XBMCSubtitlesAdapter):
+    module = serialzone
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'serialzone.cz'
+    provider_name = 'Serialzone.cz'
+    supported_langs = ['sk', 'cs']
+    default_settings = {}
+    movie_search = False
+    tvshow_search = True
+
+
+try:
+    from .Indexsubtitle import indexsubtitle
+except ImportError as ie:
+    indexsubtitle = ie
+
+
+class IndexsubtitleSeeker(XBMCSubtitlesAdapter):
+    id = 'indexsubtitle'
+    module = indexsubtitle
+    if isinstance(module, Exception):
+        error, module = module, None
+    provider_name = 'Indexsubtitle.cc'
+    supported_langs = allLang()
+    default_settings = {}
+
+
+try:
+    from .Moviesubtitles import moviesubtitles
+except ImportError as ie:
+    moviesubtitles = ie
+
+
+class MoviesubtitlesSeeker(XBMCSubtitlesAdapter):
+    id = 'moviesubtitles'
+    module = moviesubtitles
+    if isinstance(module, Exception):
+        error, module = module, None
+    provider_name = 'Moviesubtitles.org'
+    supported_langs = allLang()
+    default_settings = {}
+
+
+try:
+    from .Moviesubtitles2 import moviesubtitles2
+except ImportError as ie:
+    moviesubtitles2 = ie
+
+
+class Moviesubtitles2Seeker(XBMCSubtitlesAdapter):
+    id = 'moviesubtitles2'
+    module = moviesubtitles2
+    if isinstance(module, Exception):
+        error, module = module, None
+    provider_name = 'Moviesubtitles.net'
+    supported_langs = allLang()
+    default_settings = {}

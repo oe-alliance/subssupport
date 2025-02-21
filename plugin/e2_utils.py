@@ -165,6 +165,7 @@ class MyLanguageSelection(Screen):
                 ("Frysk", "fy", "NL"),
                 ("Hebrew", "he", "IL"),
                 ("Hrvatski", "hr", "HR"),
+                ("Bosanski", "bs", "BS"),
                 ("Magyar", "hu", "HU"),
                 ("Íslenska", "is", "IS"),
                 ("Italiano", "it", "IT"),
