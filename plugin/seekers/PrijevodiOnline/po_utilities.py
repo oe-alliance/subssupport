@@ -24,7 +24,7 @@ LANGUAGES = (
 	("Macedonian", "35", "mk", "mac", "28", 30229, "Makedosnki"),
 	("Serbian", "36", "sr", "scc", "36", 30237, "Srpski"),
 	("Slovenian", "1", "sl", "slv", "38", 30239, "Slovenski"),
-	("SerbianLatin", "36", "sr", "scc", "100", 30237, "SrpskiLatinica")) #?
+	("SerbianLatin", "36", "sr", "scc", "100", 30237, "SrpskiLatinica"))  # ?
 
 def languageTranslate(lang, lang_from, lang_to):
 	for x in LANGUAGES:
@@ -81,7 +81,7 @@ class OSDBServer:
 					broj_sezona = re.findall('<h3 id="sezona-.*?">.*?</h3>', data)
 					duzina = str(len(broj_sezona))
 					#IZVADI TRAZENU SEZONU U BLOCK. ALI AKO JE ZADNJA SEZONA ONDA MORAS POSTAVITI REGEX DRUGACIJE
-					if season == duzina:	#ZADNJA SEZONA NA STRANICI
+					if season == duzina:  # ZADNJA SEZONA NA STRANICI
 						block = re.findall('<h3 id="sezona-.*?">Sezona ' + season + '</h3>(.*?)<script type="text/javascript">', data)
 					else:
 						block = re.findall('<h3 id="sezona-.*?">Sezona ' + season + '</h3>(.*?)<h3', data)
@@ -111,7 +111,7 @@ class OSDBServer:
 							link = '{0}{1}'.format(api_url, url)
 
 							if lang_id != "razno":
-								lang_name = languageTranslate((lang_id),2,0)		#Hrvatski --> Croatian, itd..
+								lang_name = languageTranslate((lang_id), 2, 0)		#Hrvatski --> Croatian, itd..
 								flag_image = lang_id
 							else:
 								lang_name = ""

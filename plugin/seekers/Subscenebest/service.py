@@ -27,7 +27,7 @@ import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from six.moves import html_parser
-warnings.simplefilter('ignore',InsecureRequestWarning)
+warnings.simplefilter('ignore', InsecureRequestWarning)
 
 
 HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36',
@@ -37,7 +37,7 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.
       'Content-Type': 'application/x-www-form-urlencoded',
       'Referer': 'https://sub-scene.com',
       'Connection': 'keep-alive',
-      'Accept-Encoding':'gzip, deflate'}
+      'Accept-Encoding': 'gzip, deflate'}
       
 s = requests.Session()      
 main_url = "https://sub-scene.com"
@@ -74,10 +74,10 @@ def geturl(url):
         content = None
     return (content)
     
-def getSearchTitle(title, year=None): ## new Add
+def getSearchTitle(title, year=None):  # new Add
     url = 'https://sub-scene.com/search?query=%s' % quote_plus(title)
     #data = geturl(url)
-    data = requests.get(url,headers=HDR,verify=False,allow_redirects=True).content
+    data = requests.get(url, headers=HDR, verify=False, allow_redirects=True).content
     data = data.decode('utf-8')
     div1 = data.split('<footer>')
     div1.pop(1)
@@ -205,9 +205,9 @@ def search_movie(title, year, languages, filename):
         print(("title", title))
         search_string = prepare_search_string(title)
         print(("getSearchTitle", getSearchTitle))
-        url = getSearchTitle(title, year)#.replace("%2B"," ")
+        url = getSearchTitle(title, year)  # .replace("%2B"," ")
         print(("true url", url))
-        content = requests.get(url,headers=HDR,verify=False,allow_redirects=True)
+        content = requests.get(url, headers=HDR, verify=False, allow_redirects=True)
         #print("true url", url)
         #content = geturl(url)
 
@@ -227,7 +227,7 @@ def search_tvshow(tvshow, season, episode, languages, filename):
     #print(("tvshow", tvshow))
     search_string = prepare_search_string(tvshow)
     #print(("search_string", search_string))
-    search_string = search_string.replace("+"," ")
+    search_string = search_string.replace("+", " ")
     print(("search_string", search_string))
     search_string += " - " + seasons[int(season)] + " Season"
     print(("search_string", search_string))
@@ -235,7 +235,7 @@ def search_tvshow(tvshow, season, episode, languages, filename):
     log(__name__, "Search tvshow = %s" % search_string)
     url = main_url + "/search?query=" + quote_plus(search_string)
     print(("url", url))
-    content = requests.get(url,headers=HDR,verify=False,allow_redirects=True).text
+    content = requests.get(url, headers=HDR, verify=False, allow_redirects=True).text
     print("content", content)
     if content is not None:
         log(__name__, "Multiple tv show seasons found, searching for the right one ...")
@@ -244,7 +244,7 @@ def search_tvshow(tvshow, season, episode, languages, filename):
             log(__name__, "Tv show season found in list, getting subs ...")
             url = main_url + tv_show_seasonurl
             print(("season_url", url))
-            content = requests.get(url,headers=HDR,verify=False,allow_redirects=True)
+            content = requests.get(url, headers=HDR, verify=False, allow_redirects=True)
             if content is not None:
                 search_string = "s%#02de%#02d" % (int(season), int(episode))
                 print(("search_string", search_string))
@@ -254,7 +254,7 @@ def search_tvshow(tvshow, season, episode, languages, filename):
 def search_manual(searchstr, languages, filename):
     search_string = prepare_search_string(searchstr)
     url = main_url + "/subtitles/release?q=" + search_string + '&r=true'
-    content, response_url = requests.get(url,headers=HDR,verify=False,allow_redirects=True).text
+    content, response_url = requests.get(url, headers=HDR, verify=False, allow_redirects=True).text
 
     if content is not None:
         return getallsubs(content, languages, filename)

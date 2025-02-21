@@ -28,7 +28,7 @@ import zipfile
 
 try:
     from .seekers import SubtitlesDownloadError, SubtitlesSearchError, \
-        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker,TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
+        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker, TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
         OpenSubtitlesSeeker, PodnapisiSeeker, SubsceneSeeker, SubdlSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker, SubtitlistSeeker, \
           ItasaSeeker, TitloviSeeker, OpenSubtitlesMoraSeeker, PrijevodiOnlineSeeker, SubscenebestSeeker
     from .seekers.seeker import BaseSeeker
@@ -37,7 +37,7 @@ try:
     from .utils import SimpleLogger, toString
 except (ValueError, ImportError):
     from seekers import SubtitlesDownloadError, SubtitlesSearchError, \
-        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker,TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
+        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker, TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
         OpenSubtitlesSeeker, PodnapisiSeeker, SubsceneSeeker, SubdlSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker, SubtitlistSeeker, \
          ItasaSeeker, TitloviSeeker, OpenSubtitlesMoraSeeker, PrijevodiOnlineSeeker, SubscenebestSeeker
     from seekers.seeker import BaseSeeker
