@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from __future__ import absolute_import
-import os
+from os.path import join
 
 from urllib.parse import urlencode
 from urllib.request import urlopen
@@ -81,7 +81,7 @@ def download_subtitles(subtitles_list, pos, extract_subs, tmp_sub_dir, sub_folde
 	log(__name__, "Subs in %s" % subtitles_format)
 	if subtitles_format in ['srt', 'sub']:
 		compressed = False
-		store_path = os.path.join(sub_folder, subtitles_filename)
+		store_path = join(sub_folder, subtitles_filename)
 		subtitles_file = store_path
 	else:
 		compressed = True

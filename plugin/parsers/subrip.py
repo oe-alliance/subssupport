@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-import re
+from re import finditer, search, sub, DOTALL, MULTILINE
 
 from .baseparser import BaseParser, ParseError, HEX_COLORS
 
@@ -12,7 +12,7 @@ class SubRipParser(BaseParser):
         return self._srt_to_dict(text)
 
     def _removeTags(self, text):
-        return re.sub('<[^>]*>', '', text)
+        return sub('<[^>]*>', '', text)
 
     def _getColor(self, text, color):
         newColor = color
@@ -21,7 +21,7 @@ class SubRipParser(BaseParser):
                 if text.find('</font>') != -1 or text.find('</Font>') != -1:
                     newColor = 'default'
             else:
-                colorMatch = re.search('<[Ff]ont [Cc]olor=(.+?)>', text, re.DOTALL)
+                colorMatch = search('<[Ff]ont [Cc]olor=(.+?)>', text, DOTALL)
                 colorText = colorMatch and colorMatch.group(1)
                 colorText = colorText and colorText.replace("'", "").replace('"', '')
                 if text.find('</font>') != -1 or text.find('</Font>') != -1:
@@ -30,12 +30,12 @@ class SubRipParser(BaseParser):
                     newColor = color
         else:
             color = 'default'
-            colorMatch = re.search('<[Ff]ont [Cc]olor=(.+?)>', text, re.DOTALL)
+            colorMatch = search('<[Ff]ont [Cc]olor=(.+?)>', text, DOTALL)
             colorText = colorMatch and colorMatch.group(1) or color
             colorText = colorText.replace("'", "").replace('"', '')
 
         if colorText:
-            hexColor = re.search("(\#[0-9,a-f,A-F]{6})", colorText)
+            hexColor = search("(\#[0-9,a-f,A-F]{6})", colorText)
             if hexColor:
                 color = hexColor.group(1)[1:]
             else:
@@ -90,7 +90,7 @@ class SubRipParser(BaseParser):
         subs = []
         idx = 0
         srtText = srtText.replace('\r\n', '\n').strip() + "\n\n"
-        for s in re.finditer(r'(^\d+)\s*\:\s*(\d+)\s*\:\s*(\d+)\s*\,\s*(\d+)\s*-->\s*(\d+)\s*\:\s*(\d+)\s*\:\s*(\d+)\s*\,\s*(\d+)\s*\n(.+?)(?:\n\n|\n\d+\s*\n)', srtText, re.DOTALL | re.MULTILINE):
+        for s in finditer(r'(^\d+)\s*\:\s*(\d+)\s*\:\s*(\d+)\s*\,\s*(\d+)\s*-->\s*(\d+)\s*\:\s*(\d+)\s*\:\s*(\d+)\s*\,\s*(\d+)\s*\n(.+?)(?:\n\n|\n\d+\s*\n)', srtText, DOTALL | MULTILINE):
             try:
                 idx += 1
                 shour, smin, ssec, smsec = int(s.group(1)), int(s.group(2)), int(s.group(3)), int(s.group(4))

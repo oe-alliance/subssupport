@@ -7,8 +7,8 @@ import re
 import zipfile
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from bs4 import BeautifulSoup
-from .SubscenebestUtilities import geturl, get_language_info
-from urllib.parse import quote_plus, urlencode
+from .SubscenebestUtilities import get_language_info
+from urllib.parse import quote_plus
 from ..utilities import log
 import html
 import re

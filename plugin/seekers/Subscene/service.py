@@ -4,8 +4,8 @@ from __future__ import absolute_import
 from __future__ import print_function
 import difflib
 import os
-from .SubsceneUtilities import geturl, get_language_info
-from urllib.request import FancyURLopener, urlopen
+from .SubsceneUtilities import get_language_info
+from urllib.request import urlopen
 from urllib.parse import quote_plus, urlencode
 
 from ..utilities import log

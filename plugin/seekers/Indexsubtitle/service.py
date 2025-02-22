@@ -9,15 +9,13 @@ import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
-import os.path
+from os.path import exists
 from urllib.request import Request, urlopen
-#from urllib.request import FancyURLopener
 from urllib.parse import quote_plus, urlencode
 
 from html.parser import HTMLParser
 from .IndexsubtitleUtilities import get_language_info
-from ..utilities import languageTranslate, log, getFileSize
-from ..seeker import SubtitlesDownloadError, SubtitlesErrors
+from ..utilities import log
 
 HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/117.0',
       'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -169,7 +167,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         local_tmp_file = zip_subs
         try:
             log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
-            if not os.path.exists(tmp_sub_dir):
+            if not exists(tmp_sub_dir):
                 os.makedirs(tmp_sub_dir)
             local_file_handle = open(local_tmp_file, 'wb')
             local_file_handle.write(response.content)

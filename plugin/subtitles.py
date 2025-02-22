@@ -59,7 +59,7 @@ from Tools.ISO639 import LanguageCodes
 from Tools.LoadPixmap import LoadPixmap
 from Components.FileList import FileList
 from .compat import eConnectCallback
-from .e2_utils import messageCB, E2SettingsProvider, MyLanguageSelection, unrar, \
+from .e2_utils import messageCB, E2SettingsProvider, MyLanguageSelection, \
     ConfigFinalText, Captcha, DelayMessageBox, MyConfigList, getFps, fps_float, \
     getFonts, BaseMenuScreen, isFullHD, getDesktopSize, getPage
 from enigma import eTimer, eConsoleAppContainer, ePythonMessagePump, eSize, ePoint, RT_HALIGN_LEFT, \

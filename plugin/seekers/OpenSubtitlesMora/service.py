@@ -7,8 +7,8 @@ import os
 import re
 import string
 from bs4 import BeautifulSoup
-from .OpensubtitlesmoraUtilities import geturl, get_language_info
-from urllib.parse import quote_plus, urlencode
+from .OpensubtitlesmoraUtilities import get_language_info
+from urllib.parse import quote_plus
 from ..utilities import log
 from html import unescape
 import requests

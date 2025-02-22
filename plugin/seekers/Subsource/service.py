@@ -6,8 +6,8 @@ import difflib
 import os
 import re
 import string
-from .SubsourceUtilities import geturl, get_language_info
-from urllib.parse import quote_plus, urlencode
+from .SubsourceUtilities import get_language_info
+from urllib.parse import quote_plus
 from ..utilities import log
 import html
 import requests

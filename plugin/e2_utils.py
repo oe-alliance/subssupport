@@ -411,54 +411,6 @@ class E2SettingsProvider(dict):
             print(repr(self), e, 'cannot set setting:', key, ':', val)
 
 
-def unrar(rarPath, destDir, successCB, errorCB):
-    def rarSubNameCB(result, retval, extra_args):
-        if retval == 0:
-            print('[Unrar] getting rar sub name', result)
-            rarSubNames = result.split('\n')
-            rarPath = extra_args[0]
-            destDir = extra_args[1]
-            try:
-                for subName in rarSubNames:
-                    os.unlink(os.path.join(destDir, subName))
-            except OSError as e:
-                print(e)
-            # unrar needs rar Extension?
-            if os.path.splitext(rarPath)[1] != '.rar':
-                oldRarPath = rarPath
-                rarPath = os.path.splitext(rarPath)[0] + '.rar'
-                shutil.move(oldRarPath, rarPath)
-            cmdRarUnpack = 'unrar e "%s" %s' % (rarPath, destDir)
-            Console().ePopen(toString(cmdRarUnpack), rarUnpackCB, (tuple(rarSubNames),))
-        else:
-            try:
-                os.unlink(extra_args[0])
-            except OSError:
-                pass
-            print('[Unrar] problem when getting rar sub name:', result)
-            errorCB(_("unpack error: cannot get subname"))
-
-    def rarUnpackCB(result, retval, extra_args):
-        if retval == 0:
-            print('[Unrar] successfully unpacked rar archive')
-            result = []
-            rarSubNames = extra_args[0]
-            for subName in rarSubNames:
-                result.append(os.path.join(destDir, subName))
-            successCB(result)
-        else:
-            print('[Unrar] problem when unpacking rar archive', result)
-            try:
-                os.unlink(extra_args[0])
-            except OSError:
-                pass
-            errorCB(_("unpack error: cannot open archive"))
-
-    cmdRarSubName = 'unrar lb "%s"' % rarPath
-    extraArgs = (rarPath, destDir)
-    Console().ePopen(toString(cmdRarSubName), rarSubNameCB, extraArgs)
-
-
 class fps_float(float):
     def __eq__(self, other):
         return "%.3f" % self == "%.3f" % other

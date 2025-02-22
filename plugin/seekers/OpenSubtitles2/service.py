@@ -2,18 +2,13 @@
 from __future__ import absolute_import
 
 import os
-import re
 import requests
 from .OpenSubtitles2Utilities import get_language_info
-import os.path
-import http.client
-import json
-import sys
+from os.path import exists
 from bs4 import BeautifulSoup
-from urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
+from urllib.request import Request, urlopen
 from urllib.parse import urlencode
-from ..utilities import languageTranslate, getFileSize, log
-from ..seeker import SubtitlesDownloadError, SubtitlesErrors
+from ..utilities import log
 
 
 HDR = {
@@ -181,7 +176,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         local_tmp_file = zip_subs
         try:
             log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
-            if not os.path.exists(tmp_sub_dir):
+            if not exists(tmp_sub_dir):
                 os.makedirs(tmp_sub_dir)
             local_file_handle = open(local_tmp_file, 'wb')
             local_file_handle.write(response.content)

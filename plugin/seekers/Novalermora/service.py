@@ -9,9 +9,8 @@ import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
-import os.path
-from ..utilities import languageTranslate, log, getFileSize
-from ..seeker import SubtitlesDownloadError, SubtitlesErrors
+from os.path import exists
+from ..utilities import log
 
 from urllib.request import urlopen, Request
 
@@ -114,7 +113,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         local_tmp_file = zip_subs
         try:
             log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
-            if not os.path.exists(tmp_sub_dir):
+            if not exists(tmp_sub_dir):
                 os.makedirs(tmp_sub_dir)
             local_file_handle = open(local_tmp_file, 'wb')
             local_file_handle.write(response.content)

@@ -5,7 +5,7 @@ Created on Feb 10, 2014
 '''
 from __future__ import absolute_import
 import os
-import time
+from time import sleep
 
 from .seeker import BaseSeeker
 from .utilities import languageTranslate, allLang
@@ -187,7 +187,7 @@ class OpenSubtitlesSeeker(XBMCSubtitlesAdapter):
                 if i == (tries - 1):
                     raise
                 if e.errcode == 503:
-                    time.sleep(0.5)
+                    sleep(0.5)
 
 
 try:

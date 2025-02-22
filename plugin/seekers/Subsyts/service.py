@@ -9,14 +9,13 @@ import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
-import os.path
+from os.path import exists
 from urllib.request import Request, urlopen
 from .SubsytsUtilities import get_language_info
-from ..utilities import languageTranslate, log, getFileSize
+from ..utilities import log
 
 import re
 from html.parser import HTMLParser
-from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
@@ -186,7 +185,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         local_tmp_file = zip_subs
         try:
             log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
-            if not os.path.exists(tmp_sub_dir):
+            if not exists(tmp_sub_dir):
                 os.makedirs(tmp_sub_dir)
 
             local_file_handle = open(local_tmp_file, 'wb')

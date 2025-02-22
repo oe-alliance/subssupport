@@ -3,8 +3,7 @@
 
 from __future__ import absolute_import
 
-import os
-import os.path
+from os.path import exists, join
 from urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
 from urllib.parse import urlencode
 from http.cookiejar import LWPCookieJar
@@ -61,13 +60,13 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         # subtitle limit was reached .. we need to ask user to rewrite image code :(
         log(__name__, 'Download control image')
         img = client.get_file(control_img)
-        img_file = open(os.path.join(tmp_sub_dir, 'image.png'), 'wb')
+        img_file = open(join(tmp_sub_dir, 'image.png'), 'wb')
         img_file.write(img)
         img_file.flush()
         img_file.close()
 
-        solution = captcha_cb(os.path.join(tmp_sub_dir, 'image.png'))
-        if os.path.exists(LINKFILE):
+        solution = captcha_cb(join(tmp_sub_dir, 'image.png'))
+        if exists(LINKFILE):
            f = open(LINKFILE, 'r')
            for line in f.readlines():
                id = line.strip('\n')
@@ -87,7 +86,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
             if not control_img2 == None:
                 log(__name__, 'Invalid control text')
                 raise SubtitlesDownloadError(SubtitlesErrors.CAPTCHA_RETYPE_ERROR, "Invalid control text")
-                #xbmc.executebuiltin("XBMC.Notification(%s,%s,1000,%s)" % (__scriptname__,"Invalid control text",os.path.join(__cwd__,'icon.png')))
+                #xbmc.executebuiltin("XBMC.Notification(%s,%s,1000,%s)" % (__scriptname__,"Invalid control text",join(__cwd__,'icon.png')))
                 return True, subtitles_list[pos]['language_name'], ""
         else:
             log(__name__, 'Dialog was canceled')
@@ -109,7 +108,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     else:
         for i in range(wait_time + 1):
             line2 = 'Download will start in %i seconds' % (delay,)
-            #xbmc.executebuiltin("XBMC.Notification(%s,%s,1000,%s)" % (__scriptname__,line2,os.path.join(__cwd__,'icon.png')))
+            #xbmc.executebuiltin("XBMC.Notification(%s,%s,1000,%s)" % (__scriptname__,line2,join(__cwd__,'icon.png')))
             delay -= 1
             time.sleep(1)
 
