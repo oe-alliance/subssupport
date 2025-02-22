@@ -140,6 +140,25 @@ ISO6391_LANGNAME = dict(map(lambda lang: (lang[2], lang[0]), LANGUAGES))
 ISO6392_LANGNAME = dict(map(lambda lang: (lang[3], lang[0]), LANGUAGES))
 
 
+
+def languageTranslate(lang, lang_from, lang_to):
+    if lang_from == 0 and lang_to == 2:
+        if lang in LANGNAME_ISO6391:
+            return LANGNAME_ISO6391[lang]
+    elif lang_from == 0 and lang_to == 3:
+        if lang in LANGNAME_ISO6392:
+            return LANGNAME_ISO6392[lang]
+    if lang_from == 2 and lang_to == 0:
+        if lang in ISO6391_LANGNAME:
+            return ISO6391_LANGNAME[lang]
+    elif lang_from == 3 and lang_to == 0:
+        if lang in ISO6392_LANGNAME:
+            return ISO6392_LANGNAME[lang]
+    else:
+        for x in LANGUAGES:
+            if lang == x[lang_from]:
+                return x[lang_to]
+
 def allLang():
     return ["en",
             "fr",
@@ -193,25 +212,6 @@ def allLang():
             "tr",
             "uk",
             "vi"]
-
-
-def languageTranslate(lang, lang_from, lang_to):
-    if lang_from == 0 and lang_to == 2:
-        if lang in LANGNAME_ISO6391:
-            return LANGNAME_ISO6391[lang]
-    elif lang_from == 0 and lang_to == 3:
-        if lang in LANGNAME_ISO6392:
-            return LANGNAME_ISO6392[lang]
-    if lang_from == 2 and lang_to == 0:
-        if lang in ISO6391_LANGNAME:
-            return ISO6391_LANGNAME[lang]
-    elif lang_from == 3 and lang_to == 0:
-        if lang in ISO6392_LANGNAME:
-            return ISO6392_LANGNAME[lang]
-    else:
-        for x in LANGUAGES:
-            if lang == x[lang_from]:
-                return x[lang_to]
 
 
 def regex_movie(title):

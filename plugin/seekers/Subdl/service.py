@@ -3,20 +3,16 @@ from __future__ import absolute_import
 from __future__ import print_function
 
 
-from six.moves.urllib.request import FancyURLopener
-from six.moves.urllib.parse import quote_plus, urlencode
-import requests
+import os
+import os.path
 import re
+import requests
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
-import os
-import os.path
-from six.moves.urllib.request import Request, urlopen
 from .SubdlUtilities import get_language_info
-from ..utilities import languageTranslate, log, getFileSize
+from ..utilities import log
 
-import re
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
 HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0',
@@ -32,7 +28,7 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101
 s = requests.Session()
 
 
-main_url = "https://www.subdl.com"
+main_url = "https://subdl.com"
 debug_pretext = "subdl.com"
 
 
@@ -43,6 +39,7 @@ subdl_languages = {
     'Ukranian': 'Ukrainian',
     'Farsi/Persian': 'Persian'
 }
+headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
 
 
 def get_url(url, referer=None):
@@ -50,17 +47,12 @@ def get_url(url, referer=None):
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
     else:
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
-    req = Request(url, None, headers)
-    response = urlopen(req)
-    content = response.read().decode('utf-8')
-    response.close()
-    content = content.replace('\n', '')
+    content = requests.get(url, None, headers).text
     return content
 
 
 def get_url2(url, referer=None):
-#    from io import BytesIO
-#    from zipfile import ZipFile
+    from urllib.request import urlopen, Request
     req = Request(url)
     response = urlopen(req)
     content = response.read().decode('utf-8')
@@ -87,7 +79,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     elif len(tvshow) > 0:  # TVShow
         searchstring = "%s S%#02dE%#02d" % (tvshow, int(season), int(episode))
     else:
-        searchstring = title
+        searchstring = title.replace(' ', '%20').lower()
     log(__name__, "%s Search string = %s" % (debug_pretext, searchstring))
     get_subtitles_list(searchstring, title, language_info2, language_info1, subtitles_list)
     return subtitles_list, "", msg  # standard output
@@ -99,7 +91,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     id = subtitles_list[pos]["id"]
     url = 'https://dl.subdl.com/subtitle/%s' % (id)
     downloadlink = 'https://dl.subdl.com/subtitle/%s' % (id)
-    #print(downloadlink)
+    print(downloadlink)
     if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
         viewstate = 0
@@ -107,15 +99,15 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         subtitleid = 0
         typeid = "zip"
         filmid = 0
-        #postparams = { '__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '' , '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
-        postparams = urlencode({'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid})
+        postparams = {'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
+        #postparams = urllib3.request.urlencode({ '__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '' , '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid})
         #class MyOpener(urllib.FancyURLopener):
             #version = 'User-Agent=Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0'
         #my_urlopener = MyOpener()
         #my_urlopener.addheader('Referer', url)
         log(__name__, "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, url, postparams))
         #response = my_urlopener.open(downloadlink, postparams)
-        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True)
+        response = requests.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True)
         #print(response.content)
         local_tmp_file = zip_subs
         try:
@@ -155,21 +147,24 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
 
 def get_subtitles_list(searchstring, title, languageshort, languagelong, subtitles_list):
     s = languagelong.lower()
-    url = '%s/search?query=%s' % (main_url, quote_plus(searchstring))
+    url = '%s/search/%s' % (main_url, searchstring)
+    print(("url", url))
 
     try:
         log(__name__, "%s Getting url: %s" % (debug_pretext, url))
-        content = get_url(url, referer=main_url)
-        subtitles = re.compile('(href="/subtitle/.+?<span)').findall(content)
+        content = requests.get(url, headers).text
+        #print(("content", content))
+        subtitles = re.compile('(href="/subtitle/.*?"><div)').findall(content)
+        #print(subtitles)
         subtitles = " ".join(subtitles)
-        regx = '<a.+href="(.+?)">' + title + r'\s?<'
+        regx = 'href="(.*?)"><div'
         downloadlink = re.findall(regx, subtitles, re.M | re.I)[0]
         #print(downloadlink)
         link = '%s%s/%s' % (main_url, downloadlink, s)
-        content = get_url(link, referer=main_url)
-        print(content)
+        content = requests.get(link, headers).text
+        #print(("content", content))
         subtitles = re.compile('(language":"' + s + '".+?},)').findall(content)
-        #print(subtitles)
+        #print(("subtitles", subtitles))
     except:
         log(__name__, "%s Failed to get subtitles" % (debug_pretext))
         return
@@ -177,11 +172,11 @@ def get_subtitles_list(searchstring, title, languageshort, languagelong, subtitl
         try:
             filename = re.compile('"title":"(.+?)"').findall(subtitle)[0]
             filename = filename.strip()
-            #print(filename)
+            print(filename)
 
             try:
                 id = re.compile('"link":"(.+?)"').findall(subtitle)[0]
-                #print(id)
+                print(id)
             except:
                 pass
 

@@ -27,7 +27,7 @@ plugin/seekers/SerialZone/Makefile
 plugin/seekers/Subdl/Makefile
 plugin/seekers/Subscene/Makefile
 plugin/seekers/Subscenebest/Makefile
-plugin/seekers/Subssource/Makefile
+plugin/seekers/Subsource/Makefile
 plugin/seekers/SubtitlesGR/Makefile
 plugin/seekers/Subsyts/Makefile
 plugin/seekers/Subtitlecat/Makefile

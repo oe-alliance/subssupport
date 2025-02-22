@@ -261,22 +261,6 @@ class PodnapisiSeeker(XBMCSubtitlesAdapter):
 
 
 try:
-    from .Subscene import subscene
-except ImportError as ie:
-    subscene = ie
-
-
-class SubsceneSeeker(XBMCSubtitlesAdapter):
-    id = 'subscene'
-    module = subscene
-    if isinstance(module, Exception):
-        error, module = module, None
-    provider_name = 'Subscene'
-    supported_langs = allLang()
-    default_settings = {}
-
-
-try:
     from .Subdl import subdl
 except ImportError as ie:
     subdl = ie
@@ -313,60 +297,6 @@ class NovalermoraSeeker(XBMCSubtitlesAdapter):
 
 
 try:
-    from .Subsyts import subsyts
-except ImportError as ie:
-    subsyts = ie
-
-
-class SubsytsSeeker(XBMCSubtitlesAdapter):
-    module = subsyts
-    if isinstance(module, Exception):
-        error, module = module, None
-    id = 'syt-subs.com'
-    provider_name = 'Subsyts'
-    supported_langs = allLang()
-    default_settings = {}
-    movie_search = True
-    tvshow_search = True
-
-
-try:
-    from .Subtitlecat import subtitlecat
-except ImportError as ie:
-    subtitlecat = ie
-
-
-class SubtitlecatSeeker(XBMCSubtitlesAdapter):
-    module = subtitlecat
-    if isinstance(module, Exception):
-        error, module = module, None
-    id = 'subtitlecat.com'
-    provider_name = 'Subtitlecat'
-    supported_langs = allLang()
-    default_settings = {}
-    movie_search = True
-    tvshow_search = True
-
-
-try:
-    from .SubtitlesGR import subtitlesgr
-except ImportError as ie:
-    subtitlesgr = ie
-
-
-class SubtitlesGRSeeker(XBMCSubtitlesAdapter):
-    module = subtitlesgr
-    if isinstance(module, Exception):
-        error, module = module, None
-    id = 'subtitles.gr'
-    provider_name = 'SubtitlesGR'
-    supported_langs = ['el']
-    default_settings = {}
-    movie_search = True
-    tvshow_search = True
-
-
-try:
     from .Subtitlesmora import subtitlesmora
 except ImportError as ie:
     subtitlesmora = ie
@@ -385,41 +315,6 @@ class SubtitlesmoraSeeker(XBMCSubtitlesAdapter):
 
 
 try:
-    from .Subtitlist import subtitlist
-except ImportError as ie:
-    subtitlist = ie
-
-
-class SubtitlistSeeker(XBMCSubtitlesAdapter):
-    id = 'subtitlist'
-    module = subtitlist
-    if isinstance(module, Exception):
-        error, module = module, None
-    provider_name = 'Subtitlist.com'
-    supported_langs = allLang()
-    default_settings = {}
-
-
-try:
-    from .Itasa import itasa
-except ImportError as ie:
-    itasa = ie
-
-
-class ItasaSeeker(XBMCSubtitlesAdapter):
-    module = itasa
-    if isinstance(module, Exception):
-        error, module = module, None
-    id = 'itasa'
-    provider_name = 'Itasa'
-    supported_langs = ['it']
-    default_settings = {'ITuser': {'label': _("Username"), 'type': 'text', 'default': "", 'pos': 0},
-                                       'ITpass': {'label': _("Password"), 'type': 'password', 'default': "", 'pos': 1}, }
-    movie_search = False
-    tvshow_search = True
-
-
-try:
     from .Titlovi import titlovi
 except ImportError as ie:
     titlovi = ie
@@ -432,7 +327,6 @@ class TitloviSeeker(XBMCSubtitlesAdapter):
     id = 'titlovi'
     provider_name = 'Titlovi'
     supported_langs = ['bs', 'hr', 'en', 'mk', 'sr', 'sl']
-    default_settings = {}
     default_settings = {'username': {'label': _("Username") + " (" + _("Restart e2 required") + ")", 'type': 'text', 'default': "", 'pos': 0},
                                        'password': {'label': _("Password") + " (" + _("Restart e2 required") + ")", 'type': 'password', 'default': "", 'pos': 1}}
     movie_search = True
@@ -571,3 +465,108 @@ class Moviesubtitles2Seeker(XBMCSubtitlesAdapter):
     provider_name = 'Moviesubtitles.net'
     supported_langs = allLang()
     default_settings = {}
+
+
+try:
+    from .Subscene import subscene
+except ImportError as ie:
+    subscene = ie
+
+
+class SubsceneSeeker(XBMCSubtitlesAdapter):
+    id = 'subscene'
+    module = subscene
+    if isinstance(module, Exception):
+        error, module = module, None
+    provider_name = 'Subscene'
+    supported_langs = allLang()
+    default_settings = {}
+
+
+try:
+    from .Subsyts import subsyts
+except ImportError as ie:
+    subsyts = ie
+
+
+class SubsytsSeeker(XBMCSubtitlesAdapter):
+    module = subsyts
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'syt-subs.com'
+    provider_name = 'Subsyts'
+    supported_langs = allLang()
+    default_settings = {}
+    movie_search = True
+    tvshow_search = True
+
+
+try:
+    from .Subtitlecat import subtitlecat
+except ImportError as ie:
+    subtitlecat = ie
+
+
+class SubtitlecatSeeker(XBMCSubtitlesAdapter):
+    module = subtitlecat
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'subtitlecat.com'
+    provider_name = 'Subtitlecat'
+    supported_langs = allLang()
+    default_settings = {}
+    movie_search = True
+    tvshow_search = True
+
+
+try:
+    from .SubtitlesGR import subtitlesgr
+except ImportError as ie:
+    subtitlesgr = ie
+
+
+class SubtitlesGRSeeker(XBMCSubtitlesAdapter):
+    module = subtitlesgr
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'subtitles.gr'
+    provider_name = 'SubtitlesGR'
+    supported_langs = ['el']
+    default_settings = {}
+    movie_search = True
+    tvshow_search = True
+
+
+try:
+    from .Subtitlist import subtitlist
+except ImportError as ie:
+    subtitlist = ie
+
+
+class SubtitlistSeeker(XBMCSubtitlesAdapter):
+    id = 'subtitlist'
+    module = subtitlist
+    if isinstance(module, Exception):
+        error, module = module, None
+    provider_name = 'Subtitlist.com'
+    supported_langs = allLang()
+    default_settings = {}
+
+
+try:
+    from .Itasa import itasa
+except ImportError as ie:
+    itasa = ie
+
+
+class ItasaSeeker(XBMCSubtitlesAdapter):
+    module = itasa
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'itasa'
+    provider_name = 'Itasa'
+    supported_langs = ['it']
+    default_settings = {'ITuser': {'label': _("Username"), 'type': 'text', 'default': "", 'pos': 0},
+                                       'ITpass': {'label': _("Password"), 'type': 'password', 'default': "", 'pos': 1}, }
+    movie_search = False
+    tvshow_search = True

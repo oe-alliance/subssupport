@@ -28,18 +28,22 @@ import zipfile
 
 try:
     from .seekers import SubtitlesDownloadError, SubtitlesSearchError, \
-        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker, TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
-        OpenSubtitlesSeeker, PodnapisiSeeker, SubsceneSeeker, SubdlSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker, SubtitlistSeeker, \
-          ItasaSeeker, TitloviSeeker, OpenSubtitlesMoraSeeker, PrijevodiOnlineSeeker, SubscenebestSeeker
+        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker, ElsubtitleSeeker, OpenSubtitles2Seeker, TitulkyComSeeker, \
+        OpenSubtitlesSeeker, OpenSubtitlesMoraSeeker, PodnapisiSeeker, SubscenebestSeeker, SubdlSeeker, \
+        TitloviSeeker, PrijevodiOnlineSeeker, MySubsSeeker, SubsourceSeeker,  \
+        ItasaSeeker, SubsceneSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker, SubtitlistSeeker, \
+        EdnaSeeker, SerialZoneSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker
     from .seekers.seeker import BaseSeeker
     from .seekers.utilities import languageTranslate, langToCountry, \
         getCompressedFileType, detectSearchParams
     from .utils import SimpleLogger, toString
 except (ValueError, ImportError):
     from seekers import SubtitlesDownloadError, SubtitlesSearchError, \
-        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker, TitulkyComSeeker, EdnaSeeker, SerialZoneSeeker, ElsubtitleSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker, MySubsSeeker, \
-        OpenSubtitlesSeeker, PodnapisiSeeker, SubsceneSeeker, SubdlSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker, SubtitlistSeeker, \
-         ItasaSeeker, TitloviSeeker, OpenSubtitlesMoraSeeker, PrijevodiOnlineSeeker, SubscenebestSeeker
+        SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker, ElsubtitleSeeker, OpenSubtitles2Seeker, TitulkyComSeeker, \
+        OpenSubtitlesMoraSeeker, OpenSubtitlesSeeker, PodnapisiSeeker, SubscenebestSeeker, SubdlSeeker, \
+        TitloviSeeker, PrijevodiOnlineSeeker, MySubsSeeker, SubsourceSeeker,  \
+        ItasaSeeker, SubsceneSeeker, SubsytsSeeker, SubtitlecatSeeker, SubtitlesGRSeeker, SubtitlistSeeker, \
+        EdnaSeeker, SerialZoneSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Moviesubtitles2Seeker
     from seekers.seeker import BaseSeeker
     from seekers.utilities import languageTranslate, langToCountry, \
         getCompressedFileType, detectSearchParams
