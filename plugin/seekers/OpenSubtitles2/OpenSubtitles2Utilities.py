@@ -7,8 +7,6 @@ except ImportError:
     def _log(module, msg):
         print(f"[{module}] {msg}")  # Temporary logging function
 
-import six
-
 
 ses = requests.Session()
 
@@ -102,7 +100,7 @@ def geturl(url1, headers=None, params=None):
         res = ses.get(url1, headers=headers, verify=False, timeout=5)
         print('res.status_code', res.status_code)
         if res.status_code == 200:
-            return six.ensure_str(res.content)
+            return res.content.decode() if isinstance(res.content, bytes) else res.content
         e = res.raise_for_status()
         print(('Download error', e))
         return ''

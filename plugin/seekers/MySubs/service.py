@@ -2,8 +2,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
-from six.moves.urllib.request import FancyURLopener
-from six.moves.urllib.parse import quote_plus, urlencode
+from urllib.parse import quote_plus, urlencode
 import html
 import requests
 import warnings
@@ -11,12 +10,12 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
 import os.path
-from six.moves.urllib.request import Request, urlopen
+from urllib.request import Request, urlopen
 from .MySubsUtilities import get_language_info
 from ..utilities import languageTranslate, log, getFileSize
 
 import re
-from six.moves import html_parser
+from html.parser import HTMLParser
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 HDR = {'Host': 'my-subs.co',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0',
@@ -110,7 +109,7 @@ def find_movie(content, title, year):
     d = content
     print(d)
     url_found = None
-    h = html_parser.HTMLParser()
+    h = HTMLParser()
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         print((tuple(matches.groups())))
         found_title = matches.group('title')

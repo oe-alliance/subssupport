@@ -5,9 +5,9 @@ from __future__ import absolute_import
 
 import os
 import os.path
-from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
-from six.moves.urllib.parse import urlencode
-from six.moves import http_cookiejar
+from urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
+from urllib.parse import urlencode
+from http.cookiejar import LWPCookieJar
 
 from ..utilities import languageTranslate, log, getFileSize
 from ..utilities import log
@@ -159,7 +159,7 @@ class TitulkyClient(object):
     def __init__(self):
         self.cookies = {}
         self.server_url = 'https://www.titulky.com'
-        opener = build_opener(HTTPCookieProcessor(http_cookiejar.LWPCookieJar()))
+        opener = build_opener(HTTPCookieProcessor(LWPCookieJar()))
         opener.addheaders = [('User-agent', 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3 ( .NET CLR 3.5.30729)')]
         install_opener(opener)
 

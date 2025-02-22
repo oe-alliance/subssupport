@@ -5,8 +5,8 @@ from __future__ import print_function
 import difflib
 import os
 from .SubsceneUtilities import geturl, get_language_info
-from six.moves.urllib.request import FancyURLopener, urlopen
-from six.moves.urllib.parse import quote_plus, urlencode
+from urllib.request import FancyURLopener, urlopen
+from urllib.parse import quote_plus, urlencode
 
 from ..utilities import log
 import html
@@ -14,7 +14,7 @@ import requests
 import re
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-from six.moves import html_parser
+from html.parser import HTMLParser
 warnings.simplefilter('ignore', InsecureRequestWarning)
 
 
@@ -97,7 +97,7 @@ def getSearchTitle(title, year=True):  # new Add
 
 def find_movie(content, title, year):
     url_found = None
-    # h = html_parser.HTMLParser()
+    # h = HTMLParser()
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         #print((tuple(matches.groups())))
         found_title = matches.group('title')
@@ -118,7 +118,7 @@ def find_tv_show_season(content, tvshow, season):
     possible_matches = []
     all_tvshows = []
 
-    h = html_parser.HTMLParser()
+    h = HTMLParser()
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         found_title = matches.group('title')
         found_title = html.unescape(found_title)
@@ -157,7 +157,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
     comment_pattern = "<td class=\"a6\">\s+<div>\s+(?P<comment>[^\"]+)&nbsp;\s*</div>"
 
     subtitles = []
-    # h = html_parser.HTMLParser()
+    # h = HTMLParser()
     allmatches = re.finditer(subtitle_pattern, content, re.IGNORECASE | re.DOTALL)
     print(('allmatches', allmatches))
     i = 0

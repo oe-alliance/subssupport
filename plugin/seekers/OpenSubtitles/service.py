@@ -2,18 +2,16 @@
 
 from __future__ import absolute_import
 import os
-from urllib.request import urlretrieve
 from urllib.parse import quote_plus
-from ..utilities import log, hashFile
+from ..utilities import log
 import requests
 import difflib
 import re
 import string
 from bs4 import BeautifulSoup
-from .OpensubtitlesorgUtilities import geturl, get_language_info
+from .OpensubtitlesorgUtilities import get_language_info
 from html.parser import HTMLParser
 from html import unescape
-import json
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
@@ -66,19 +64,6 @@ opensubtitlesorg_languages = {
     'Ukranian': 'Ukrainian',
     'Farsi/Persian': 'Persian'
 }
-
-
-def geturl(url):
-    log(__name__, " Getting url: %s" % (url))
-    params = {"query": quote_plus(title)}
-    try:
-        response = requests.get(url, headers=HDR, timeout=10).text
-        content = json.loads(response)
-        print(content)
-    except:
-        log(__name__, " Failed to get url:%s" % (url))
-        content = None
-    return (content)
 
 
 def getSearchTitle(title, year=None):  # new Add

@@ -6,25 +6,15 @@ import difflib
 import os
 import re
 import string
-from bs4 import BeautifulSoup
 from .SubsourceUtilities import geturl, get_language_info
-from six.moves import html_parser
-from six.moves.urllib.request import FancyURLopener
-from six.moves.urllib.parse import quote_plus, urlencode
+from urllib.parse import quote_plus, urlencode
 from ..utilities import log
 import html
-import urllib3
-import requests
-import re
 import requests
 import json
-import re
-import random
-import string
-import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-from six.moves import html_parser
+from html.parser import HTMLParser
 warnings.simplefilter('ignore', InsecureRequestWarning)
 
 
@@ -117,7 +107,7 @@ def getSearchTitle(title, year=None):  # new Add
 
 def find_movie(content, title, year):
     url_found = None
-    h = html_parser.HTMLParser()
+    h = HTMLParser()
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         print((tuple(matches.groups())))
         found_title = matches.group('title')
@@ -138,7 +128,7 @@ def find_tv_show_season(content, tvshow, season):
     possible_matches = []
     all_tvshows = []
 
-    h = html_parser.HTMLParser()
+    h = HTMLParser()
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         found_title = matches.group('title')
         found_title = html.unescape(found_title)

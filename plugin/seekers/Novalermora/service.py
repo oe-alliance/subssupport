@@ -2,56 +2,19 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
-import sys
-import difflib
-from six.moves import html_parser
-from six.moves.urllib.parse import quote_plus, urlencode
-import urllib.request
-import urllib.parse
-import html
-import urllib3
+from urllib.parse import quote_plus, urlencode, quote, unquote
 import requests
-import json
 import re
-import random
-import string
-import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
 import os.path
-from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen, FancyURLopener
-from six.moves import http_cookiejar
 from ..utilities import languageTranslate, log, getFileSize
-from urllib import request, parse
-from urllib.parse import urlencode
-import six
-from six.moves import urllib
-from six.moves import xmlrpc_client
-import calendar
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
-PY3 = False
-if sys.version_info[0] == 3:
-    from urllib.request import urlopen, Request
-    PY3 = True
-else:
-    from urllib2 import urlopen, Request
-    from urllib3 import urlopen, Request
+from urllib.request import urlopen, Request
 
-
-if sys.version_info[0] == 3:
-    from urllib.parse import quote  # Python 3
-else:
-    from urllib import quote  # Python 2
-    from urllib3 import quote
-
-
-try:
-    from urllib import unquote
-except ImportError:
-    from urllib.parse import unquote
 
 HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
@@ -74,8 +37,8 @@ def get_url(url, referer=None):
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
     else:
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
-    req = urllib.request.Request(url, None, headers)
-    response = urllib.request.urlopen(req)
+    req = Request(url, None, headers)
+    response = urlopen(req)
     content = response.read().decode('utf-8')
     response.close()
     content = content.replace('\n', '')

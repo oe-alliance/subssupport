@@ -10,10 +10,11 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
 import os.path
-from six.moves.urllib.request import Request, urlopen
-#from six.moves.urllib.request import FancyURLopener
-from six.moves.urllib.parse import quote_plus, urlencode
-from six.moves import html_parser
+from urllib.request import Request, urlopen
+#from urllib.request import FancyURLopener
+from urllib.parse import quote_plus, urlencode
+
+from html.parser import HTMLParser
 from .IndexsubtitleUtilities import get_language_info
 from ..utilities import languageTranslate, log, getFileSize
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
@@ -64,7 +65,7 @@ def find_movie(content, title, year):
     d = content
     print(d)
     url_found = None
-    h = html_parser.HTMLParser()
+    h = HTMLParser()
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         print((tuple(matches.groups())))
         found_title = matches.group('title')

@@ -2,15 +2,14 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
-from six.moves.urllib.request import FancyURLopener
-from six.moves.urllib.parse import quote_plus, urlencode
+from urllib.parse import quote_plus, urlencode
 import requests
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
 import os.path
-from six.moves.urllib.request import Request, urlopen
+from urllib.request import Request, urlopen
 from .MoviesubtitlesUtilities import get_language_info
 from ..utilities import languageTranslate, log, getFileSize
 

@@ -98,7 +98,7 @@ class XBMCSubtitlesAdapter(BaseSeeker):
                 filepath = zip_subs
         else:
             if isinstance(sub_folder, bytes):
-                sub_folder = sub_folder.decode(encoding='utf-8', errors='strict')
+                sub_folder = sub_folder.decode()
             filepath = os.path.join(sub_folder, filepath)
         return compressed, language, filepath
 

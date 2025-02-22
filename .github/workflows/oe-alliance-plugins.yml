@@ -33,7 +33,6 @@ jobs:
 
       - name: Build plugins, python ${{ matrix.python }}
         run: |
-          pip3 install six
           autoreconf -i
           ./configure
           make
