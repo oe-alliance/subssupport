@@ -299,7 +299,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     downloadlink_pattern = "...<a href=\"(.+?)\" rel=\"nofollow\" onclick=\"DownloadSubtitle"
     match = re.compile(downloadlink_pattern).findall(content)
     if match:
-        downloadlink = "http://subscene.com" + match[0]
+        downloadlink = "https://subscene.com" + match[0]
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
         viewstate = 0
         previouspage = 0

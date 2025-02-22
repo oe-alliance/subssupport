@@ -25,7 +25,7 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
       'Upgrade-Insecure-Requests': '1',
       'Content-Type': 'application/x-www-form-urlencoded',
       'Host': 'www.moviesubtitles.net',
-      'Referer': 'http://www.moviesubtitles.net/search.php',
+      'Referer': 'https://www.moviesubtitles.net/search.php',
       'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip'}  # , deflate'}
@@ -33,8 +33,8 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
 s = requests.Session()
 
 
-main_url = "http://www.moviesubtitles.net"
-main_url2 = "http://www.moviesubtitles.net/subtitles-download"
+main_url = "https://www.moviesubtitles.net"
+main_url2 = "https://www.moviesubtitles.net/subtitles-download"
 debug_pretext = "moviesubtitles.net"
 
 
@@ -129,7 +129,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     except:
         pass
     print("hash:", hash)
-    downloadlink = 'http://www.moviesubtitles.net/%s' % (hash)
+    downloadlink = 'https://www.moviesubtitles.net/%s' % (hash)
     if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
         viewstate = 0
@@ -191,7 +191,7 @@ def prepare_search_string(s):
 
 
 def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list):
-    url = "http://www.moviesubtitles.net/search.php?searchString=%s&start=1" % quote_plus(title)
+    url = "https://www.moviesubtitles.net/search.php?searchString=%s&start=1" % quote_plus(title)
     dst = languageshort.lower()
     try:
         log(__name__, "%s Getting url: %s" % (debug_pretext, url))

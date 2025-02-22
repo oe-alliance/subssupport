@@ -121,7 +121,7 @@ def lng_short2flag(lang):
 class EdnaClient(object):
 
 	def __init__(self):
-		self.server_url = "http://www.edna.cz"
+		self.server_url = "https://www.edna.cz"
 
 	def search_show(self, title):
 		enc_title = urlencode({"q": title})

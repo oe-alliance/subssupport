@@ -24,15 +24,15 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Content-Type': 'text/html; charset=UTF-8',
       'Host': 'www.greeksubtitles.info',
-      'Referer': 'http://www.greeksubtitles.info',
+      'Referer': 'https://www.greeksubtitles.info',
       'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate'}  # , deflate'}
 
 s = requests.Session()
 
-main_url2 = "http://gr.greek-subtitles.com"
-main_url = "http://www.subtitles.gr"
+main_url2 = "https://gr.greek-subtitles.com"
+main_url = "https://www.subtitles.gr"
 debug_pretext = "subtitles.gr"
 
 
@@ -95,8 +95,8 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     language = subtitles_list[pos]["language_name"]
     id = subtitles_list[pos]["id"]
     id = re.compile('(.+?.+?)/').findall(id)[-1]
-    downloadlink = 'http://www.greeksubtitles.info/getp.php?id=%s' % (id)
-    #id = 'http://www.findsubtitles.eu/getp.php?id=%s' % (id)
+    downloadlink = 'https://www.greeksubtitles.info/getp.php?id=%s' % (id)
+    #id = 'https://www.findsubtitles.eu/getp.php?id=%s' % (id)
     print(downloadlink)
     if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))

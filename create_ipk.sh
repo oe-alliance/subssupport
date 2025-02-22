@@ -8,8 +8,8 @@ P=${D}/ipkg.tmp.$$
 B=${D}/ipkg.build.$$
 DP=${D}/ipkg.deps
 
-P26="http://www.python.org/ftp/python/2.6/Python-2.6.tgz"
-P27="http://www.python.org/ftp/python/2.7.5/Python-2.7.5.tgz"
+P26="https://www.python.org/ftp/python/2.6/Python-2.6.tgz"
+P27="https://www.python.org/ftp/python/2.7.5/Python-2.7.5.tgz"
 
 pushd ${D} &> /dev/null
 

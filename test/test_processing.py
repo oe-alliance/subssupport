@@ -62,7 +62,7 @@ class LoaderTestCase(unittest.TestCase):
         self.assertRaises(LoadError, self.subsloader.load, 'dsadsa')
 
     def test_invalid_path_remote(self):
-        self.assertRaises(LoadError, self.subsloader.load, 'http://dsakldmskla.srt')
+        self.assertRaises(LoadError, self.subsloader.load, 'https://dsakldmskla.srt')
 
     def test_invalid_encoding(self):
         self.subsloader.change_encodings(['utf-8'])

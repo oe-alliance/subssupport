@@ -1024,8 +1024,8 @@ msgstr "Heslo"
 #~ msgid "Listings"
 #~ msgstr "Stránkování"
 
-#~ msgid "Plugin to play TV video archive http://www.b-tv.cz"
-#~ msgstr "Plugin pro přehrávání videí z archívu http://www.b-tv.cz"
+#~ msgid "Plugin to play TV video archive https://www.b-tv.cz"
+#~ msgstr "Plugin pro přehrávání videí z archívu https://www.b-tv.cz"
 
 #~ msgid "Plugin to play TV video archive Huste.tv"
 #~ msgstr "Plugin pro přehrávání videí z archívu Huste.tv"
@@ -1033,8 +1033,8 @@ msgstr "Heslo"
 #~ msgid "Plugin to play TV video archive Metropol.cz"
 #~ msgstr "Plugin pro přehrávání videí z archívu Metropol.cz"
 
-#~ msgid "Plugin to play TV video archive http://www.muvi.cz"
-#~ msgstr "Plugin pro přehrávání videí z archívu http://www.muvi.cz"
+#~ msgid "Plugin to play TV video archive https://www.muvi.cz"
+#~ msgstr "Plugin pro přehrávání videí z archívu https://www.muvi.cz"
 
 #~ msgid "Plugin to play TV video archive iprima.cz/videoarchiv"
 #~ msgstr "Plugin pro přehrávání videí z archívu iprima.cz/videoarchív"

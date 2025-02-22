@@ -109,7 +109,7 @@ DEBUG = False
 # libraries in %PYTHON_PATH%/encodings/ (ie. iso-8859-2 requires iso_8859_2.searchsubs library)
 
 # to choose encodings for region you want, visit:
-# http://docs.python.org/release/2.4.4/lib/standard-encodings.html
+# https://docs.python.org/release/2.4.4/lib/standard-encodings.html
 
 # Common encodings for all languages
 ALL_LANGUAGES_ENCODINGS = ['utf-8', 'utf-16']
@@ -3056,7 +3056,7 @@ class Suggestions(object):
 
 class OpenSubtitlesSuggestions(Suggestions):
     def _getSuggestions(self, queryString):
-        query = "http://www.opensubtitles.org/libs/suggest.php?format=json2&SubLanguageID=null&MovieName=" + quote(queryString)
+        query = "https://www.opensubtitles.org/libs/suggest.php?format=json2&SubLanguageID=null&MovieName=" + quote(queryString)
         query = query.encode("UTF-8", "strict")
         return getPage(query, timeout=6)
 

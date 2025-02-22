@@ -133,7 +133,7 @@ def lng_short2flag(lang):
 class SerialZoneClient(object):
 
 	def __init__(self):
-		self.server_url = "http://www.serialzone.cz"
+		self.server_url = "https://www.serialzone.cz"
 
 	def search_show(self, title):
 		enc_title = urlencode({"co": title, "kde": "serialy"})

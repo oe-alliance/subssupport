@@ -65,7 +65,7 @@ class OSDBServer:
 
         search_string = name.replace(" ", "+")
 
-        search_url_base = "http://api.titlovi.com/xml_get_api.ashx?x-dev_api_id=%s&keyword=%s&language=%s&uiculture=en" % (api_key, search_string, "%s")
+        search_url_base = "https://api.titlovi.com/xml_get_api.ashx?x-dev_api_id=%s&keyword=%s&language=%s&uiculture=en" % (api_key, search_string, "%s")
         subtitles = None
         supported_languages = ["bs", "hr", "en", "mk", "sr", "sl", "rs", "ba", "si", None]
 
@@ -92,7 +92,7 @@ class OSDBServer:
                 log(__name__, "Unsupported lang: %s" % lang1)
         try:
             if subtitles:
-                url_base = "http://en.titlovi.com/downloads/default.ashx?type=1&mediaid=%s"
+                url_base = "https://en.titlovi.com/downloads/default.ashx?type=1&mediaid=%s"
                 log(__name__, "Found subs: %s" % len(subtitles))
                 for subtitle in subtitles:
                     subtitle_id = 0

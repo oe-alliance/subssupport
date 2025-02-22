@@ -94,7 +94,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     id = subtitles_list[pos]["id"]
     #id = re.compile('(.+?.+?)/').findall(id)[-1]
     downloadlink = 'https://archive.org/download/mora25r/%s' % (id)
-    #id = 'http://www.findsubtitles.eu/getp.php?id=%s' % (id)
+    #id = 'https://www.findsubtitles.eu/getp.php?id=%s' % (id)
     print(downloadlink)
     if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))

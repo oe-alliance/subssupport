@@ -24,7 +24,7 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
       'Upgrade-Insecure-Requests': '1',
       'Content-Type': 'application/x-www-form-urlencoded',
       'Host': 'moviesubtitles.com',
-      'Referer': 'http://www.moviesubtitles.org',
+      'Referer': 'https://www.moviesubtitles.org',
       'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip'}  # , deflate'}
@@ -32,7 +32,7 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
 s = requests.Session()
 
 
-main_url = "http://www.moviesubtitles.org"
+main_url = "https://www.moviesubtitles.org"
 debug_pretext = "moviesubtitles.org"
 
 
@@ -61,7 +61,7 @@ def get_url(url, referer=None):
 def getSearchTitle(title, year=None):
     title = title.strip()
     year = str(year)
-    url = "http://www.moviesubtitles.org/search.php"
+    url = "https://www.moviesubtitles.org/search.php"
     params = ({'q': title, 'submit': 'Search'})
     data = s.post(url, data=params, headers=HDR, verify=False, allow_redirects=True).text
     data = data.replace("\n", "").replace("(", "").replace(")", "")
@@ -79,18 +79,18 @@ def getSearchTitle(title, year=None):
             print(("yearxx", year))
             if year is None:
                if "/movie-" in href:
-                  href = 'http://www.moviesubtitles.org' + href
+                  href = 'https://www.moviesubtitles.org' + href
                   return href
             if year in blocks:
                 regx = '.*<a href="(.*?)">' + title + ' ' + year + '</a>\s?'
                 href = re.findall(regx, blocks, re.M | re.I)[0]
                 print("hrefi", href)
                 if "/movie-" in href:
-                   href = 'http://www.moviesubtitles.org' + href
+                   href = 'https://www.moviesubtitles.org' + href
                    return href
         except:
             break
-    return 'http://www.moviesubtitles.org' + href
+    return 'https://www.moviesubtitles.org' + href
 
 
 def get_rating(downloads):
@@ -148,7 +148,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     print(filename)
     id = subtitles_list[pos]["id"]
     id = id.replace("subtitle", "download")
-    downloadlink = 'http://www.moviesubtitles.org%s' % (id)
+    downloadlink = 'https://www.moviesubtitles.org%s' % (id)
     #downloadlink_pattern = '<a id="download_'+lang+'" onclick=.+?href=\"(.+?)\" class="green-link">Download</a>'
     #print(downloadlink_pattern)
     if downloadlink:

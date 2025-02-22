@@ -140,7 +140,6 @@ ISO6391_LANGNAME = dict(map(lambda lang: (lang[2], lang[0]), LANGUAGES))
 ISO6392_LANGNAME = dict(map(lambda lang: (lang[3], lang[0]), LANGUAGES))
 
 
-
 def languageTranslate(lang, lang_from, lang_to):
     if lang_from == 0 and lang_to == 2:
         if lang in LANGNAME_ISO6391:
@@ -158,6 +157,7 @@ def languageTranslate(lang, lang_from, lang_to):
         for x in LANGUAGES:
             if lang == x[lang_from]:
                 return x[lang_to]
+
 
 def allLang():
     return ["en",
@@ -374,7 +374,7 @@ def getFileSize(filepath):
             return os.path.getsize(filepath)
     except Exception:
         return None
-    if filepath.startswith('http://'):
+    if filepath.startswith('http://') or filepath.startswith('https://'):
         try:
             resp = urlopen(HeadRequest(filepath))
             return int(resp.info().get('Content-Length'))
@@ -385,7 +385,7 @@ def getFileSize(filepath):
                 locals()['resp'].close()
     return None
 
-# http://www.garykessler.net/library/file_sigs.html
+# https://www.garykessler.net/library/file_sigs.html
 
 
 def getCompressedFileType(filepath):

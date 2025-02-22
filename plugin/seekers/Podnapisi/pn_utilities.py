@@ -19,10 +19,10 @@ __scriptname__ = 'XBMC Subtitles'
 __version__ = '3.9.18'
 
 USER_AGENT = "%s_v%s" % (__scriptname__.replace(" ", "_"), __version__)
-SEARCH_URL = "http://www.podnapisi.net/ppodnapisi/search?tbsl=1&sK=%s&sJ=%s&sY=%s&sTS=%s&sTE=%s&sXML=1&lang=0"
-SEARCH_URL_HASH = "http://www.podnapisi.net/ppodnapisi/search?tbsl=1&sK=%s&sJ=%s&sY=%s&sTS=%s&sTE=%s&sMH=%s&sXML=1&lang=0"
+SEARCH_URL = "https://www.podnapisi.net/ppodnapisi/search?tbsl=1&sK=%s&sJ=%s&sY=%s&sTS=%s&sTE=%s&sXML=1&lang=0"
+SEARCH_URL_HASH = "https://www.podnapisi.net/ppodnapisi/search?tbsl=1&sK=%s&sJ=%s&sY=%s&sTS=%s&sTE=%s&sMH=%s&sXML=1&lang=0"
 
-DOWNLOAD_URL = "http://www.podnapisi.net/subtitles/%s/download"
+DOWNLOAD_URL = "https://www.podnapisi.net/subtitles/%s/download"
 
 
 def OpensubtitlesHash(item):
@@ -101,7 +101,7 @@ class PNServer:
         self.connected = False
 
     def Login(self):
-        self.podserver = Server('http://ssp.podnapisi.net:8000')  # NOSONAR
+        self.podserver = Server('https://ssp.podnapisi.net:8000')  # NOSONAR
         init = self.podserver.initiate(USER_AGENT)
         hash = md5()
         hash.update(settings_provider.getSetting("PNpass"))

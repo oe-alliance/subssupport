@@ -58,14 +58,14 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'Content-Type': 'text/html; charset=UTF-8',
       'Host': 'subs.ath.cx',
-      'Referer': 'http://subs.ath.cx',
+      'Referer': 'https://subs.ath.cx',
       'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate'}  # , deflate'}
 
 s = requests.Session()
 
-main_url = "http://subs.ath.cx"
+main_url = "https://subs.ath.cx"
 debug_pretext = "subs.ath.cx"
 
 
@@ -128,8 +128,8 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     language = subtitles_list[pos]["language_name"]
     id = subtitles_list[pos]["id"]
     #id = re.compile('(.+?.+?)/').findall(id)[-1]
-    downloadlink = 'http://subs.ath.cx/subtitles/%s' % (id)
-    #id = 'http://www.findsubtitles.eu/getp.php?id=%s' % (id)
+    downloadlink = 'https://subs.ath.cx/subtitles/%s' % (id)
+    #id = 'https://www.findsubtitles.eu/getp.php?id=%s' % (id)
     print(downloadlink)
     if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
