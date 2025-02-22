@@ -176,9 +176,9 @@ class BaseSeeker(object):
 
         raises SubtitlesDownloadError
         """
-        self.log.info("download - selected_subtitle: %s, path: %s" % (toString(selected_subtitle['filename']), toString(path)))
+        self.log.info("download - selected_subtitle: %s, path: %s" % (selected_subtitle['filename'], path))
         try:
-            compressed, lang, filepath = self._download(subtitles, selected_subtitle, toString(path))
+            compressed, lang, filepath = self._download(subtitles, selected_subtitle, path)
         except SubtitlesDownloadError as e:
             self.log.error("download error occured: %s" % str(e))
             e.provider = self.id
@@ -192,7 +192,7 @@ class BaseSeeker(object):
             err.wrapped_error = exc_value
             raise err
 
-        self.log.info("download finished, compressed: %s, lang: %s, filepath:%s" % (toString(compressed), toString(lang), toString(filepath)))
+        self.log.info("download finished, compressed: %s, lang: %s, filepath:%s" % (compressed, lang, filepath))
         return compressed, lang, filepath
 
     def _download(self, subtitles, selected_subtitle, path):

@@ -769,9 +769,9 @@ class SubsSupport(SubsSupportEmbedded):
 
             self.onClose.append(self.exitSubs)
 
-        if defaultPath is not None and os.path.isdir(toString(defaultPath)):
-            self.__defaultPath = toString(defaultPath)
-            self.__subsDir = toString(defaultPath)
+        if defaultPath is not None and os.path.isdir(defaultPath):
+            self.__defaultPath = defaultPath
+            self.__subsDir = defaultPath
 
         if subsPath is not None and self.__autoLoad:
             self.loadSubs(subsPath)
@@ -791,7 +791,6 @@ class SubsSupport(SubsSupportEmbedded):
             self.__subsDir = None
 
         if subsPath is not None:
-            subsPath = toString(subsPath)
             if not subsPath.startswith('http'):
                 if self.__defaultPath is not None and self.__forceDefaultPath:
                     self.__subsDir = self.__defaultPath
@@ -1458,7 +1457,7 @@ class SubsScreen(Screen):
         if color == "default":
             color = self.font[sub['style']]['color']
         self.setColor(color)
-        self["subtitles"].setText(toString(sub['text']))
+        self["subtitles"].setText(sub['text'])
         self.subShown = True
 
     def hideSubtitle(self):
@@ -1910,7 +1909,7 @@ class SubsMenu(Screen):
             self["subfile_label"].setText(_("Embedded Subtitles"))
             self["subfile_label"].instance.setForegroundColor(parseColor("#ffff00"))
         elif self.subfile is not None:
-            self["subfile_label"].setText(toString(os.path.split(self.subfile)[1]))
+            self["subfile_label"].setText(os.path.split(self.subfile)[1])
             self["subfile_label"].instance.setForegroundColor(parseColor("#DAA520"))
 
             if self.newSelection:
@@ -2244,9 +2243,9 @@ class SubsSetupGeneral(BaseMenuScreen):
 def FileEntryComponent(name, absolute=None, isDir=False):
     res = [(absolute, isDir)]
     if isFullHD():
-        res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 770, 30, 1, RT_HALIGN_LEFT, toString(name)))
+        res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 770, 30, 1, RT_HALIGN_LEFT, name))
     else:
-        res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 570, 30, 0, RT_HALIGN_LEFT, toString(name)))
+        res.append((eListboxPythonMultiContent.TYPE_TEXT, 35, 1, 570, 30, 0, RT_HALIGN_LEFT, name))
     if isDir:
         png = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "extensions/directory.png"))
     else:
@@ -2579,7 +2578,7 @@ class SubsDownloadedSelection(Screen):
 
         def __init__(self, session, subtitle):
             Screen.__init__(self, session)
-            self["path"] = StaticText(_(toString(subtitle['fpath'])))
+            self["path"] = StaticText(_(subtitle['fpath']))
 
     skin = """
     <screen  position="center,center" size="700,520" zPosition="3" resolution="1280,720">
@@ -2662,14 +2661,14 @@ class SubsDownloadedSelection(Screen):
         imgDict = {'unk': loadPNG(os.path.join(os.path.dirname(__file__), 'img', 'countries', 'UNK.png'))}
         subtitleListGUI = []
         for sub in self.subtitles[:]:
-            fpath = toString(sub['fpath'])
+            fpath = sub['fpath']
             if not os.path.isfile(fpath):
                 self.subtitles.remove(sub)
                 continue
             if sub.get('country', 'unk') not in imgDict:
                 countryImgPath = os.path.join(os.path.dirname(__file__), 'img', 'countries', sub['country'] + '.png')
                 if os.path.isfile(countryImgPath):
-                    imgDict[sub['country']] = loadPNG(toString(countryImgPath))
+                    imgDict[sub['country']] = loadPNG(countryImgPath)
                     countryPng = imgDict[sub['country']]
                 else:
                     countryPng = imgDict['unk']
@@ -2679,7 +2678,7 @@ class SubsDownloadedSelection(Screen):
                 color = 0xffffff
             date = datetime.fromtimestamp(os.path.getctime(fpath)).strftime("%d-%m-%Y %H:%M")
             name = os.path.splitext(os.path.basename(fpath))[0]
-            subtitleListGUI.append((countryPng, toString(name), toString(sub['provider']), date, color),)
+            subtitleListGUI.append((countryPng, name, sub['provider'], date, color),)
         imgDict = None
         self['subtitles'].list = subtitleListGUI
 
@@ -2719,14 +2718,14 @@ class SubsDownloadedSelection(Screen):
             subtitle = self.subtitles[self["subtitles"].index]
             if self.historySettings.removeAction.value == 'file':
                 if self.historySettings.removeActionAsk.value:
-                    message = _("Subtitle") + " '" + toString(subtitle['name']) + "' " + _("will be removed from file system")
+                    message = _("Subtitle") + " '" + subtitle['name'] + "' " + _("will be removed from file system")
                     message += "\n\n" + _("Do you want to proceed?")
                     self.session.openWithCallback(removeEntryCB, MessageBox, message, type=MessageBox.TYPE_YESNO)
                 else:
                     removeEntryCB(True)
             else:
                 if self.historySettings.removeActionAsk.value:
-                    message = _("Subtitle") + " '" + toString(subtitle['name']) + "' " + _("will be removed from list")
+                    message = _("Subtitle") + " '" + subtitle['name'] + "' " + _("will be removed from list")
                     message += "\n\n" + _("Do you want to proceed?")
                     self.session.openWithCallback(removeEntryCB, MessageBox, message, type=MessageBox.TYPE_YESNO)
                 else:
@@ -3115,7 +3114,7 @@ class BaseSuggestionsListScreen(Screen):
         Screen.__init__(self, session)
         self.list = []
         self["suggestionslist"] = List(self.list)
-        self["suggestionstitle"] = StaticText(toString(title))
+        self["suggestionstitle"] = StaticText(title)
         self.configTextWithSuggestion = configTextWithSuggestions
 
     def update(self, suggestions):
@@ -3126,7 +3125,7 @@ class BaseSuggestionsListScreen(Screen):
             suggestions.reverse()
             self.list = []
             for s in suggestions:
-                self.list.append((toString(s['name']),))
+                self.list.append((s['name'],))
             self["suggestionslist"].setList(self.list)
             self["suggestionslist"].setIndex(0)
             print(suggestions)
@@ -3570,7 +3569,7 @@ class SubsSearchDownloadOptions(Screen, ConfigListScreen):
                 self.buildMenu()
                 self.updateFName()
         from Screens.VirtualKeyBoard import VirtualKeyBoard
-        self.session.openWithCallback(editFnameCB, VirtualKeyBoard, _("Edit Filename"), text=toString(self.fname.strip()))
+        self.session.openWithCallback(editFnameCB, VirtualKeyBoard, _("Edit Filename"), text=self.fname.strip())
 
     def editDPath(self):
         def editDPathCB(callback=None):
@@ -3578,7 +3577,7 @@ class SubsSearchDownloadOptions(Screen, ConfigListScreen):
                 self.dpath = callback
                 self.configSaveTo.value = "custom"
                 self["config"].invalidate(self.configSaveTo)
-        self.session.openWithCallback(editDPathCB, LocationBox, _("Edit download path"), currDir=toString(self.dpath.strip()))
+        self.session.openWithCallback(editDPathCB, LocationBox, _("Edit download path"), currDir=self.dpath.strip())
 
     def confirm(self):
         if not self.fname.strip():
@@ -3670,7 +3669,7 @@ class SubsSearchContextMenu(Screen):
         self["context_menu"].selectPrevious()
 
     def updateGUI(self, subtitle, options):
-        self["subtitle_release"].text = toString(subtitle['filename'])
+        self["subtitle_release"].text = subtitle['filename']
         self["context_menu"].list = [(o[0],) for o in options]
         self.options = options
 
@@ -3933,8 +3932,8 @@ class SubsSearch(Screen):
                 else:
                     countryPng = imgDict['unk']
             syncPng = sync and imgDict['sync'] or None
-            subtitleListGUI.append((countryPng, _(toString(sub['language_name'])),
-                toString(sub['filename']), toString(sub['provider']), syncPng),)
+            subtitleListGUI.append((countryPng, _(sub['language_name']),
+                sub['filename'], sub['provider'], syncPng),)
         imgDict = None
         self['subtitles'].list = subtitleListGUI
 
@@ -4194,7 +4193,7 @@ class SubsSearch(Screen):
         SubsSearchProcess().start(params, callbacks)
 
     def downloadSubsSuccess(self, subFile):
-        print('[SubsSearch] download success %s' % toString(subFile))
+        print('[SubsSearch] download success %s' % subFile)
         dsubtitle = {
             "name": toUnicode(os.path.basename(subFile)),
             "country": toUnicode(self.__downloadingSubtitle['country']),
@@ -4509,7 +4508,7 @@ class SubsSearchSettings(Screen, ConfigListScreen):
             else:
                 providerState = _("disabled")
                 providerStateColor = 0xffff00
-            providerListGUI.append((toString(providerName), providerLangs, providerState, providerStateColor))
+            providerListGUI.append((providerName, providerLangs, providerState, providerStateColor))
         self['providers'].list = providerListGUI
 
     def setConfigFocus(self):
@@ -4938,7 +4937,7 @@ class SubsSearchParamsMenu(Screen, ConfigListScreen):
 
 class SubsSearchProviderMenu(BaseMenuScreen):
     def __init__(self, session, provider):
-        title = toString(provider.provider_name) + " " + _("settings")
+        title = provider.provider_name + " " + _("settings")
         BaseMenuScreen.__init__(self, session, title)
         self.provider = provider
 

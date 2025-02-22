@@ -24,10 +24,6 @@ def load(subpath):
             return ""
 
 
-def toString(text):
-    return text
-
-
 def toUnicode(text):
     if isinstance(text, bytes):
         text = text.decode("UTF-8", errors='ignore')
@@ -106,29 +102,29 @@ class SimpleLogger(object):
     def error(self, text, *args):
         if self.log_level >= self.LOG_ERROR:
             text = self._eval_message(text, args)
-            text = "[error] {0}".format(toString(text))
+            text = "[error] {0}".format(text)
             out = self._format_output(text)
             self._out_fnc(out)
 
     def info(self, text, *args):
         if self.log_level >= self.LOG_INFO:
             text = self._eval_message(text, args)
-            text = "[info] {0}".format(toString(text))
+            text = "[info] {0}".format(text)
             out = self._format_output(text)
             self._out_fnc(out)
 
     def debug(self, text, *args):
         if self.log_level == self.LOG_DEBUG:
             text = self._eval_message(text, args)
-            text = "[debug] {0}".format(toString(text))
+            text = "[debug] {0}".format(text)
             out = self._format_output(text)
             self._out_fnc(out)
 
     def _eval_message(self, text, *args):
         if len(args) == 1 and isinstance(args[0], tuple):
-                text = text % toString(args[0])
+                text = text % args[0]
         elif len(args) >= 1:
-            text = text % tuple([toString(a) for a in args])
+            text = text % tuple([a for a in args])
         return text
 
     def _format_output(self, text):

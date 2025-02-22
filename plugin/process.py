@@ -103,7 +103,7 @@ class SubsLoader(object):
         size = getFileSize(subfile)
         if size and size > SUBTITLES_FILE_MAX_SIZE:
             self.log.error("<%s> not supported subtitles size ({%d}KB > {%d}KB)!", filename, size // 1024, SUBTITLES_FILE_MAX_SIZE // 1024)
-            raise LoadError('"%s" - not supported subtitles size: "%dKB"' % (toString(os.path.basename(subfile)), size // 1024))
+            raise LoadError('"%s" - not supported subtitles size: "%dKB"' % (os.path.basename(subfile), size // 1024))
         try:
             text = load(subfile)
         except (URLError, HTTPError, IOError) as e:

@@ -99,8 +99,8 @@ class SubsSeeker(object):
 
     def __init__(self, download_path, tmp_path, captcha_cb, delay_cb, message_cb, settings=None, settings_provider_cls=None, settings_provider_args=None, debug=False, providers=None):
         self.log = SimpleLogger(self.__class__.__name__, log_level=debug and SimpleLogger.LOG_DEBUG or SimpleLogger.LOG_INFO)
-        self.download_path = toString(download_path)
-        self.tmp_path = toString(tmp_path)
+        self.download_path = download_path
+        self.tmp_path = tmp_path
         self.seekers = []
         providers = providers or SUBTITLES_SEEKERS
         for seeker in providers:
@@ -138,7 +138,7 @@ class SubsSeeker(object):
 
     def getSubtitles(self, providers, updateCB=None, title=None, filepath=None, langs=None, year=None, tvshow=None, season=None, episode=None, timeout=10):
         self.log.info('getting subtitles list - title: %s, filepath: %s, year: %s, tvshow: %s, season: %s, episode: %s' % (
-            toString(title), toString(filepath), toString(year), toString(tvshow), toString(season), toString(episode)))
+            title, filepath, year, tvshow, season, episode))
         subtitlesDict = {}
         threads = []
         socket.setdefaulttimeout(timeout)
@@ -215,7 +215,7 @@ class SubsSeeker(object):
         return subtitles_list
 
     def downloadSubtitle(self, selected_subtitle, subtitles_dict, choosefile_cb, path=None, fname=None, overwrite_cb=None, settings=None):
-        self.log.info('downloading subtitle "%s" with settings "%s"' % (selected_subtitle['filename'], toString(settings) or {}))
+        self.log.info('downloading subtitle "%s" with settings "%s"' % (selected_subtitle['filename'], settings or {}))
         if settings is None:
             settings = {}
         seeker = None
@@ -231,7 +231,7 @@ class SubsSeeker(object):
             subfiles = self._unpack_subtitles(filepath, self.tmp_path)
         else:
             subfiles = [filepath]
-        subfiles = [toString(s) for s in subfiles]
+        subfiles = [s for s in subfiles]
         if len(subfiles) == 0:
             self.log.error("no subtitles were downloaded!")
             raise SubtitlesDownloadError(msg="[error] no subtitles were downloaded")
@@ -247,7 +247,7 @@ class SubsSeeker(object):
             self.log.debug('selected subtitle: "%s"', subfile)
         ext = os.path.splitext(subfile)[1]
         if ext not in self.SUBTILES_EXTENSIONS:
-            ext = os.path.splitext(toString(selected_subtitle['filename']))[1]
+            ext = os.path.splitext(selected_subtitle['filename'])[1]
             if ext not in self.SUBTILES_EXTENSIONS:
                 ext = '.srt'
         if fname is None:
@@ -255,7 +255,7 @@ class SubsSeeker(object):
             save_as = settings.get('save_as', 'default')
             if save_as == 'version':
                 self.log.debug('filename creating by "version" setting')
-                filename = toString(selected_subtitle['filename'])
+                filename = selected_subtitle['filename']
 				# Sanitize the filename to remove slashes and double dots
                 filename = sub(r'[\\/]', '_', filename)  # Replace slashes with underscores
                 filename = sub(r'\.\.', '.', filename)  # Replace double dots with a single dot
@@ -263,22 +263,22 @@ class SubsSeeker(object):
                     filename = os.path.splitext(filename)[0] + ext
             elif save_as == 'video':
                 self.log.debug('filename creating by "video" setting')
-                videopath = toString(subtitles_dict[seeker.id]['params'].get('filepath'))
+                videopath = subtitles_dict[seeker.id]['params'].get('filepath')
                 filename = os.path.splitext(os.path.basename(videopath))[0] + ext
 
             if settings.get('lang_to_filename', False):
-                lang_iso639_1_2 = toString(languageTranslate(lang, 0, 2))
+                lang_iso639_1_2 = languageTranslate(lang, 0, 2)
                 self.log.debug('appending language "%s" to filename', lang_iso639_1_2)
                 filename, ext = os.path.splitext(filename)
                 filename = "%s.%s%s" % (filename, lang_iso639_1_2, ext)
         else:
             self.log.debug('using provided filename')
-            filename = toString(fname) + ext
+            filename = fname + ext
         self.log.debug('filename: "%s"', filename)
-        download_path = os.path.join(toString(self.download_path), filename)
+        download_path = os.path.join(self.download_path, filename)
         if path is not None:
             self.log.debug('using custom download path: "%s"', path)
-            download_path = os.path.join(toString(path), filename)
+            download_path = os.path.join(path, filename)
         self.log.debug('download path: "%s"', download_path)
 
 		# Ensure the destination directory exists
