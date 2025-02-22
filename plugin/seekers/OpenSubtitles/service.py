@@ -42,9 +42,7 @@ root_url = 'https://www.opensubtitles.org/en/search/sublanguageid-all/idmovie-'
 main_url = "https://www.opensubtitles.org"
 main_download_url = 'https://www.opensubtitles.org/en/subtitleserve/sub/'
 
-s = requests.Session()
 debug_pretext = ""
-ses = requests.Session()
 # Seasons as strings for searching  </div>
 # Seasons as strings for searching
 seasons = ["Specials", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth"]

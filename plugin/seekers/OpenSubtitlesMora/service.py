@@ -31,9 +31,7 @@ root_url = 'https://www.opensubtitles.org/en/search/sublanguageid-ara/uploader-m
 main_url = "https://www.opensubtitles.org"
 main_download_url = 'https://www.opensubtitles.org/en/subtitleserve/sub/'
 
-s = requests.Session()
 debug_pretext = ""
-ses = requests.Session()
 
 seasons = ["Specials", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth"]
 seasons = seasons + ["Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth", "Seventeenth",
@@ -52,18 +50,6 @@ opensubtitlesmora_languages = {
     'Ukranian': 'Ukrainian',
     'Farsi/Persian': 'Persian'
 }
-
-# def geturl(url):
-    # log(__name__, " Getting url: %s" % (url))
-    # params = {"query": quote_plus(title) }
-    # try:
-        # response = requests.get(url, headers=HDR, timeout=10).text
-        # content = json.loads(response)
-        # print(content)
-    # except:
-        # log(__name__, " Failed to get url:%s" % (url))
-        # content = None
-    # return(content)
 
 
 def getSearchTitle(title, year=None):  # new Add

@@ -5,7 +5,6 @@ from __future__ import print_function
 import difflib
 import os
 from .SubsceneUtilities import get_language_info
-from urllib.request import urlopen
 from urllib.parse import quote_plus, urlencode
 
 from ..utilities import log
@@ -49,17 +48,6 @@ subscene_languages = {
     'Ukranian': 'Ukrainian',
     'Farsi/Persian': 'Persian'
 }
-
-
-def geturl(url):
-    log(__name__, " Getting url: %s" % (url))
-    try:
-        response = urlopen(url)
-        content = response.read()
-    except:
-        log(__name__, " Failed to get url:%s" % (url))
-        content = None
-    return (content)
 
 
 def getSearchTitle(title, year=True):  # new Add

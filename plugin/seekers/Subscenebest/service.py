@@ -28,10 +28,8 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate'}
 
-s = requests.Session()
 main_url = "https://sub-scene.com"
 debug_pretext = ""
-ses = requests.Session()
 # Seasons as strings for searching  </div>
 # Seasons as strings for searching
 seasons = ["Specials", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth"]
@@ -51,18 +49,6 @@ subscenebest_languages = {
     'Ukranian': 'Ukrainian',
     'Farsi/Persian': 'Persian'
 }
-
-
-def geturl(url):
-    log(__name__, " Getting url: %s" % (url))
-    try:
-        response = urllib.request.urlopen(url)
-        content = response.read()
-        print(content)
-    except:
-        log(__name__, " Failed to get url:%s" % (url))
-        content = None
-    return (content)
 
 
 def getSearchTitle(title, year=None):  # new Add

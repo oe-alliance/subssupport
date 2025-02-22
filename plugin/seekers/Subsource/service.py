@@ -42,9 +42,7 @@ __download = __api + "downloadSub/"
 root_url = "https://subsource.net/subtitles/"
 main_url = "https://subsource.net"
 
-s = requests.Session()
 debug_pretext = ""
-ses = requests.Session()
 # Seasons as strings for searching  </div>
 # Seasons as strings for searching
 seasons = ["Specials", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth"]
@@ -64,19 +62,6 @@ subsource_languages = {
     'Ukranian': 'Ukrainian',
     'Farsi/Persian': 'Persian'
 }
-
-
-def geturl(url):
-    log(__name__, " Getting url: %s" % (url))
-    params = {"query": quote_plus(title)}
-    try:
-        response = requests.post(url, headers=HDR, data=json.dumps(params), timeout=10).text
-        content = json.loads(response)
-        print(content)
-    except:
-        log(__name__, " Failed to get url:%s" % (url))
-        content = None
-    return (content)
 
 
 def getSearchTitle(title, year=None):  # new Add
