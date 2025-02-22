@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        python: ['3.10','3.11','3.12']
+        python: ['3.10','3.11','3.12','3.13']
     steps:
       - name: Install prerequisites
         run: |
@@ -23,11 +23,11 @@ jobs:
           sudo apt remove -y libunwind-14-dev
           sudo apt-get install -y build-essential autoconf gettext python${{ matrix.python }}-dev libntirpc-dev
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
