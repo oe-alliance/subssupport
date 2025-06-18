@@ -49,7 +49,7 @@ def getSearchTitle(title, year=None):
 def getallsubs(response):
     soup = BeautifulSoup(response.text, 'html.parser')
     subtitles = []
-    
+
     for row in soup.find_all('tr'):
         link_tag = row.find('a')
         if link_tag:
@@ -57,7 +57,7 @@ def getallsubs(response):
             href = main_url + "/" + link_tag['href'].strip()
             download_count = row.find_all('td')[-2].text.strip() if len(row.find_all('td')) > 2 else "0"
             languages = row.find_all('td')[-1].text.strip() if len(row.find_all('td')) > 1 else "Unknown"
-            
+
             subtitles.append({
                 'filename': title,
                 'link': href,
@@ -65,7 +65,7 @@ def getallsubs(response):
                 'language_name': languages,
                 'sync': True  # Fix KeyError by always adding this key
             })
-    
+
     return subtitles
 
 
@@ -73,7 +73,7 @@ def search_movie(title, year, languages, filename):
     url = getSearchTitle(title, year)
     print(("url_search_movie", url))
     response = session.get(url, verify=False)
-    
+
     if response.status_code == 200:
         return getallsubs(response)
     return []
@@ -149,4 +149,3 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         file.write(subtitle_response.content)
 
     return False, language, file_path  # Standard return format for Enigma2 plugin
-

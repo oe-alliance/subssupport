@@ -1291,7 +1291,7 @@ class SubtitlesWidget(GUIComponent):
                 self.instance.show()
                 self.instance2.setText(text)
                 self.instance2.show()
-                
+
                 # Ensure the fixed background maintains the correct height
                 bs = self.boundSize = (self.desktopSize[0], self.calcWidgetHeight())
                 self.instance.resize(eSize(int(bs[0]), int(bs[1])))

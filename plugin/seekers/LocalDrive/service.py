@@ -75,10 +75,10 @@ def extract_language(filename):
     """Extracts the last two letters before '.srt' as the language code and converts it to a full name."""
     match = re.search(r'([a-zA-Z-]{2,5})\.srt$', filename)  # Match language code (supports 2-5 characters)
     lang_code = match.group(1).lower() if match else "unknown"
-    
+
     # Get full language name from LANGUAGE_MAP
     language_name = LANGUAGE_MAP.get(lang_code, ("Unknown", "flags/unknown.gif"))[0]  # Extract only name
-    
+
     return language_name  # Return as a string, not a list or tuple
 
 

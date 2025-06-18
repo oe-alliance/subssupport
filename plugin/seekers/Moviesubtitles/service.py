@@ -58,9 +58,9 @@ HDR = {'User-Agent': get_random_ua(),
       'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate, br, zstd'}
-      
-s = requests.Session()  
- 
+
+s = requests.Session()
+
 
 main_url = "http://www.moviesubtitles.org"
 debug_pretext = "moviesubtitles.org"
@@ -74,7 +74,7 @@ moviesubtitles_languages = {
     'Farsi/Persian': 'Persian'
 }
 
-        
+
 def get_url(url, referer=None):
     if referer is None:
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
@@ -82,34 +82,34 @@ def get_url(url, referer=None):
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
     req = urllib.request.Request(url, None, headers)
     response = urllib.request.urlopen(req)
-    content = response.read().decode('utf-8') 
+    content = response.read().decode('utf-8')
     response.close()
     content = content.replace('\n', '')
     return content
-    
+
 
 def getSearchTitle(title, year=None):
     # Use the original title without altering its case.
     title_clean = title.strip()
     print("title_getSearchTitle:", title_clean)
-    
+
     url = "https://www.moviesubtitles.org/search.php"
     # Send the title as-is in the POST data.
     params = {"q": title_clean}
     print("params:", params)
-    
+
     # Send the POST request.
     data = s.post(url, data=params, headers=HDR, verify=False, allow_redirects=True).text
     # Remove newlines for easier regex matching.
     data = data.replace("\n", "")
     #print("data_all:", data)
-    
+
     # Look for movie links that match the expected pattern.
     # For example: <a href="/movie-13392.html">Hotel Transylvania 2 (2015)</a>
     pattern = r'<a\s+href="(/movie-\d+\.html)">([^<]+)</a>'
     matches = re.findall(pattern, data, re.IGNORECASE)
     print("matches found:", matches)
-    
+
     # Loop through the found links.
     for href, link_text in matches:
         # Compare titles in a case-insensitive manner.
@@ -117,13 +117,13 @@ def getSearchTitle(title, year=None):
             if year is None or str(year) in link_text:
                 #print("Match found:", href, link_text)
                 return 'http://www.moviesubtitles.org' + href
-                
+
     # Fallback: if no match meets the criteria, return the first movie link (if any).
     if matches:
         href, link_text = matches[0]
         print("Fallback match:", href, link_text)
         return 'http://www.moviesubtitles.org' + href
-        
+
     print("No movie link found")
     return None
 
@@ -150,7 +150,7 @@ def get_rating(downloads):
         rating = 9
     elif (rating >= 450):
         rating = 10
-    return rating                           
+    return rating
 
 
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
@@ -161,7 +161,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     language_info3 = language_info['3et']
 
     subtitles_list = []
-    msg = ""   
+    msg = ""
 
     if len(tvshow) == 0 and year:  # Movie
         searchstring = "%s (%s)" % (title, year)
@@ -188,7 +188,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     downloadlink = 'http://www.moviesubtitles.org%s' % (id)
     print(("downloadlink", downloadlink))
     #downloadlink_pattern = '<a id="download_'+lang+'" onclick=.+?href=\"(.+?)\" class="green-link">Download</a>'
-    #print(downloadlink_pattern) 
+    #print(downloadlink_pattern)
     if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
         viewstate = 0
@@ -205,7 +205,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         #my_urlopener.addheader('Referer', url)
         log(__name__, "%s Fetching subtitles using url with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, postparams))
         #response = my_urlopener.open(downloadlink, postparams)
-        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True) 
+        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True)
         print(response.content)
         local_tmp_file = zip_subs
         try:
@@ -247,7 +247,7 @@ def prepare_search_string(s):
     s = s.strip()
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     return s
-    
+
 
 def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list):
     # Prepare the search string and get the movie page URL.
@@ -256,11 +256,11 @@ def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list)
     search_string = prepare_search_string(title)
     url = getSearchTitle(search_string, year)
     print(("true url", url))
-    
+
     # Fetch the movie page content.
     content = s.get(url, headers=HDR, verify=False, allow_redirects=True).text
     #print(content)
-    
+
     try:
         log(__name__, "%s Getting '%s' subs ..." % (debug_pretext, languageshort))
         # New regex pattern:
@@ -279,7 +279,7 @@ def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list)
     except Exception as e:
         log(__name__, "%s Failed to get subtitles: %s" % (debug_pretext, str(e)))
         return
-    
+
     for match in matches:
         try:
             sub_url, filename, downloads = match
@@ -308,4 +308,3 @@ def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list)
             print("Error processing subtitle block:", ex)
             pass
     return
-

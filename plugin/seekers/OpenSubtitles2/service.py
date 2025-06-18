@@ -51,7 +51,7 @@ BASE_URL = "https://api.opensubtitles.com/api/v1"
 def get_opensubtitles_token():
     """Authenticate and get JWT token using credentials from SettingsProvider."""
     global settings_provider  # Ensure we're using the existing instance
-    
+
     API_KEY = settings_provider.getSetting("OpenSubtitles_API_KEY")
     USERNAME = settings_provider.getSetting("OpenSubtitles_username")
     PASSWORD = settings_provider.getSetting("OpenSubtitles_password")
@@ -160,7 +160,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     file_id = subtitles_list[pos]["id"]
     #print(f"file_id_down: {file_id}")
     url = f"{BASE_URL}/download"
-    
+
     headers = {
         "Authorization": f"Bearer {token}",
         "Api-Key": API_KEY,
@@ -231,7 +231,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
 
 def get_subtitles_list_movie(searchstring, languageshort, languagelong, subtitles_list):
     """Fetch subtitle list for movies from OpenSubtitles API."""
-    
+
     token = get_opensubtitles_token()
     if not token:
         print("Error: Failed to authenticate with OpenSubtitles API.")
@@ -297,7 +297,7 @@ def get_subtitles_list_movie(searchstring, languageshort, languagelong, subtitle
 
 def get_subtitles_list_tv(searchstring, tvshow, season, episode, languageshort, languagelong, subtitles_list):
     """Fetch subtitle list for TV episodes from OpenSubtitles API."""
-    
+
     token = get_opensubtitles_token()
     if not token:
         print("Error: Failed to authenticate with OpenSubtitles API.")
@@ -363,5 +363,3 @@ def get_subtitles_list_tv(searchstring, tvshow, season, episode, languageshort, 
 
     except requests.exceptions.RequestException as e:
         log(__name__, f"Error fetching subtitles: {e}")
-
-

@@ -29,7 +29,7 @@ def prepare_search_string(s):
 
 def get_subtitles_list_movie(searchstring, title, languageshort, languagelong, subtitles_list):
     """Fetches subtitles from the SubDL API and adds them to subtitles_list."""
-    
+
     API_KEY = get_subdl_api()
     if not API_KEY:
         print("Error: SubDL API key is missing.")
@@ -74,7 +74,7 @@ def get_subtitles_list_movie(searchstring, title, languageshort, languagelong, s
 
 def get_subtitles_list_tv(searchstring, tvshow, season, episode, languageshort, languagelong, subtitles_list):
     """Fetches subtitles from the SubDL API and adds them to subtitles_list."""
-    
+
     API_KEY = get_subdl_api()
     if not API_KEY:
         print("Error: SubDL API key is missing.")
@@ -125,7 +125,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     language_info3 = language_info['3et']
 
     subtitles_list = []
-    msg = ""   
+    msg = ""
 
     if len(tvshow) == 0 and year:  # Movie
         searchstring = "%s (%s)" % (title, year)
@@ -164,7 +164,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
             for chunk in response.iter_content(chunk_size=1024):
                 if chunk:
                     file.write(chunk)
-        
+
         with open(local_tmp_file, "rb") as f:
             header = f.read(2)
             if header.startswith(b'R'):
@@ -175,5 +175,5 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                 subs_file = "zip"
             else:
                 subs_file = local_tmp_file
-    
+
     return packed, language, subs_file

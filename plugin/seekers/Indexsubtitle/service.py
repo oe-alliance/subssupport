@@ -75,9 +75,9 @@ HDR = {'User-Agent': get_random_ua(),
       'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate'}
-      
-s = requests.Session()  
- 
+
+s = requests.Session()
+
 
 main_url = "https://indexsubtitle.cc"
 url2 = "https://indexsubtitle.cc/subtitlesInfo"
@@ -100,7 +100,7 @@ def get_url(url, referer=None):
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
     req = urllib.request.Request(url, None, headers)
     response = urllib.request.urlopen(req)
-    content = response.read().decode('utf-8') 
+    content = response.read().decode('utf-8')
     response.close()
     content = content.replace('\n', '')
     return content
@@ -114,8 +114,8 @@ def find_movie(content, title, year):
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         print((tuple(matches.groups())))
         found_title = matches.group('title')
-        found_title = html.unescape(found_title) 
-        print(("found_title", found_title))  
+        found_title = html.unescape(found_title)
+        print(("found_title", found_title))
         log(__name__, "Found movie on search page: %s (%s)" % (found_title, matches.group('year')))
         if found_title.lower().find(title.lower()) > -1:
             if matches.group('year') == year:
@@ -147,7 +147,7 @@ def get_rating(downloads):
         rating = 9
     elif (rating >= 450):
         rating = 10
-    return rating                           
+    return rating
 
 
 def getSearchTitle(title, year=None):
@@ -158,7 +158,7 @@ def getSearchTitle(title, year=None):
     if year:
         search_query += ' ' + str(year)
     params = {"query": search_query}
-    
+
     try:
         # Use the HDR header that sets content-type to application/x-www-form-urlencoded
         # and form-encode the parameters.
@@ -205,7 +205,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     language_info3 = language_info['3et']
 
     subtitles_list = []
-    msg = ""   
+    msg = ""
 
     if len(tvshow) == 0 and year:  # Movie
         searchstring = "%s (%s)" % (title, year)
@@ -226,31 +226,31 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     lang = subtitles_list[pos]["language_flag"]
     print('lang:', lang)
     name = subtitles_list[pos]["filename"]
-    print('name:', name)    
+    print('name:', name)
     id = subtitles_list[pos]["id"]
-    print('id:', id) 
+    print('id:', id)
     ID = id.split('/')[4]
-    print('ID:', ID) 
+    print('ID:', ID)
     ttl = id.split('/')[5]
     print('ttl:', ttl)
     id = re.sub("/\\d+$", "", id)
     print('id2:', id)
     zp = id.replace('/[^\w ]/', '').replace('/', '_').replace('_subtitle_', '[indexsubtitle.cc]_')
-    print('zp:', zp)  
+    print('zp:', zp)
     #.replace('_subtitles_','[indexsubtitle.cc]_')
     check_data = 'id=' + ID + '&lang=' + language + '&url=' + id + ''
     print('check_data:', check_data)
     data = s.post(url2, headers=HDR, data=check_data, verify=False, allow_redirects=True).text
     print('data:', data)
-    
+
     # regx='download_url":"(.*?)"'
     # try:download_url=re.findall(regx, data, re.M|re.I)[0]
-    # except:pass   
+    # except:pass
     #print('download_url', download_url)
     downloadlink = '%s/d/%s/%s/%s.zip' % (main_url, ID, ttl, zp)
-    print('downloadlink', downloadlink) 
-    #print(downloadlink) 
-    if downloadlink:    
+    print('downloadlink', downloadlink)
+    #print(downloadlink)
+    if downloadlink:
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
         viewstate = 0
         previouspage = 0
@@ -310,7 +310,7 @@ def prepare_search_string(s):
     s = quote_plus(s)
     print(s)
     return s
-    
+
 
 def get_subtitles_list(searchstring, title, year, languageshort, languagelong, subtitles_list):
     lang = languagelong
@@ -318,18 +318,18 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
     hrf = quote_plus(title).replace("+", "-").replace(":", "-")
     print('hrf', hrf)
     print('lang', lang)
-    
+
     # Get the url_id from the search function
     url_id = getSearchTitle(title, year)  # Get the URL ID from the search
     print('url_id', url_id)
     if not url_id:
         print("No matching movie found, returning.")
         return
-    
+
     # Construct the full movie URL (adjusted)
     movie_url = f"{main_url}{url_id}"
     print(f"Fetching subtitles from: {movie_url}")
-    
+
     try:
         content = get_url(movie_url, referer=main_url)  # Scrape the movie page for subtitles
         print('Content:', content)
@@ -345,14 +345,14 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
     except Exception as e:
         print(f"Failed to get subtitles: {e}")
         return
-    
+
     for subtitle in subtitles:
         try:
             filename = re.compile('title":"(.+?)"').findall(subtitle)[0]
             filename = filename.strip()
             subtitle_id = re.compile('.*url":"(.+?)"},{"title').findall(subtitle)[0].replace("\/", "/")
             subtitle_id = subtitle_id + "/" + ttl
-            
+
             # Add subtitle information to the list
             subtitles_list.append({
                 'filename': filename,
@@ -367,5 +367,3 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
             print(f"Error processing subtitle: {e}")
             continue
     return
-
-

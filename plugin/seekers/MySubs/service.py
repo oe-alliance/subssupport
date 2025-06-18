@@ -51,7 +51,7 @@ header = {
     }
 
 
-session = requests.Session()   
+session = requests.Session()
 debug_pretext = ""
 session.headers.update({
     "User-Agent": get_random_ua(),
@@ -59,7 +59,7 @@ session.headers.update({
     "Accept-Language": "en-US,en;q=0.9,ar-EG;q=0.8,ar;q=0.7",
     "Referer": "https://www.google.com/",
 })
-    
+
 # Seasons as strings for searching  </div>
 # Seasons as strings for searching
 seasons = ["Specials", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth"]
@@ -110,7 +110,7 @@ def getSearchTitle(title, year=None):
 
 def getSearchTitle_tv(title):
     url = __api + prepare_search_string(title)
-    
+
     print(f"Searching for: {params}")  # Debugging step
 
     try:
@@ -154,7 +154,7 @@ def getSearchTitle_tv(title):
             return {"title": linkName, "seasons": seasons_list}
 
     print("FAILED: No matching TV show found.")
-    return None                             
+    return None
 
 
 def getallsubs(content, allowed_languages, filename="", search_string=""):
@@ -178,7 +178,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
             if not lang_name:
                 # If there's no 'title' attribute, we could use the inner text or other logic
                 lang_name = lang_section.text.strip()
-                
+
             print(f"Processing language: {lang_name}")
 
             # Check if the language is in the allowed languages list
@@ -223,7 +223,7 @@ def prepare_search_string(s):
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     #s = quote_plus(s).replace("+"," ")
     return s
-    
+
 
 def search_movie(title, year, languages, filename):
     try:
@@ -247,7 +247,7 @@ def search_movie(title, year, languages, filename):
             # Send the GET request to fetch the subtitle page
             response = session.get(url)
             response.raise_for_status()  # Ensure the request was successful
-            
+
             # Parse the HTML content of the response
             content = BeautifulSoup(response.content, 'html.parser')
 
@@ -296,7 +296,7 @@ def search_tvshow(title, season, episode, languages, filename):
             "movieName": linkName,
             "season": f"season-{season}"  # Correct API format
         }
-        
+
         try:
             content = s.post(__getMovie, headers=HDR, data=json.dumps(params), timeout=10).text
             response_json = json.loads(content)

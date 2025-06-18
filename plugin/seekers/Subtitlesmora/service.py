@@ -32,7 +32,7 @@ def get_url(url, referer=None):
     headers = {'User-Agent': HEADERS['User-Agent']}
     if referer:
         headers['Referer'] = referer
-    
+
     response = SESSION.get(url, headers=headers, verify=False)
     return response.text.replace('\n', '')
 
@@ -44,7 +44,7 @@ def get_rating(downloads):
 def search_subtitles(file_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):
     subtitles_list = []
     msg = ""
-    
+
     title = re.sub(r'[:,"&!?-]', '', title).replace("  ", " ").title()
     title = re.sub(r"'", '', title)
     print(title)
@@ -52,7 +52,7 @@ def search_subtitles(file_path, title, tvshow, year, season, episode, set_temp, 
         search_string = f"{tvshow} S{int(season):02d}E{int(episode):02d}" if title != tvshow else f"{tvshow} ({int(season):02d}{int(episode):02d})"
     else:
         search_string = f"{title} ({year})" if year else title
-    
+
     log(__name__, f"{DEBUG_PRETEXT} Search string = {search_string}")
     get_subtitles_list(title, search_string, "ar", "Arabic", subtitles_list)
     return subtitles_list, "", msg
@@ -61,7 +61,7 @@ def search_subtitles(file_path, title, tvshow, year, season, episode, set_temp, 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):
     subtitle_info = subtitles_list[pos]
     language = subtitle_info["language_name"]
-    subtitle_id = subtitle_info["id"]    
+    subtitle_id = subtitle_info["id"]
     print(subtitle_id)
     download_link = f"{MAIN_URL}/download/mora25r/{subtitle_id}"
     print(download_link)
@@ -99,7 +99,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                 subs_file = local_tmp_file
     except Exception as e:
         log(__name__, f"{DEBUG_PRETEXT} Error checking file type: {e}")
-    
+
     log(__name__, f"{DEBUG_PRETEXT} Returning: packed={packed}, language={language}, subs_file={subs_file}")
     return packed, language, subs_file
 
@@ -107,17 +107,17 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
 def get_subtitles_list(title, search_string, lang_short, lang_long, subtitles_list):
     url = f"{MAIN_URL}/download/mora25r"
     log(__name__, f"{DEBUG_PRETEXT} Fetching: {url}")
-    
+
     try:
         content = SESSION.get(url, headers=HEADERS, verify=False).text
     except requests.RequestException as e:
         log(__name__, f"{DEBUG_PRETEXT} Failed to fetch subtitles: {e}")
         return
-    
+
     try:
         encoded_title = quote_plus(title).replace('+', '.')
         subtitles = re.findall(rf'(<td><a href.+?>{encoded_title}.+?</a></td>)', content, re.IGNORECASE)
-        
+
         for subtitle in subtitles:
             match = re.search(r'<td><a href="(.+?)">(.+?)</a></td>', subtitle)
             if match:

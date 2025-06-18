@@ -34,7 +34,7 @@ def get_user_pass():
 		# from Components.config import config
 		# user = config.plugins.streamlordfnc.opensubtitlesusername.value
 		# passw = config.plugins.streamlordfnc.opensubtitlesusername.value
-		
+
 		#ZATO, CITAJ KONFIGURACIJU KAO PLAIN TEXT/FILE, PA FILTRIRAJ QUERY. LUDO? DA, ALI...
 		with open("/etc/enigma2/settings") as file:
 			for line in file:
@@ -63,14 +63,14 @@ class OSDBServer:
 		search_params = {}
 		if len(tvshow) > 1:
 			name = tvshow
-			
+
 			#SEARCH PARAMS - DICTIONARY
 			#OVA DVA SU ZA SERIJE:
 			season = "%02d" % (int(season,))
 			episode = "%02d" % (int(episode,))
 			search_params['season'] = season
 			search_params['episode'] = episode
-			
+
 		search_string = name
 		#-----------------------------------------------------------------------------------
 		#-----------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ class OSDBServer:
 				search_params['token'] = token
 				search_params['userid'] = user_id
 				search_params['json'] = True
-				
+
 				#KRENI U PRETRAGU. BEZ USER AGENTA, ZA SADA
 				response = requests.get('{0}/search'.format(api_url), params=search_params)
 				if response.status_code == requests.codes.ok:
@@ -149,7 +149,7 @@ class OSDBServer:
 
 							filename = str(result_item['Release'])
 							filename = filename.split("/")
-							
+
 							if len(tvshow) < 1:			#Movies?
 								if len(filename) > 1:
 									filename = movie.replace(" ", ".") + "." + year + "." + str(filename[0]).replace(" ", ".")
@@ -163,7 +163,7 @@ class OSDBServer:
 
 							if filename.endswith("."):
 								filename = filename[:-1]
-								
+
 							try:
 								rating = str(result_item['Rating'])
 							except Exception as e:

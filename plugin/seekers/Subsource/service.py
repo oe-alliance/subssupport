@@ -57,8 +57,8 @@ __getSub = __api + "getSub"
 __download = __api + "downloadSub/"
 root_url = "https://subsource.net/subtitles/"
 main_url = "https://subsource.net"
-      
-s = requests.Session()      
+
+s = requests.Session()
 debug_pretext = ""
 ses = requests.Session()
 # Seasons as strings for searching  </div>
@@ -73,7 +73,7 @@ seasons = seasons + ["Twenty-first", "Twenty-second", "Twenty-third", "Twenty-fo
 def getSearchTitle(title, year=None):
     url = __api + "searchMovie"
     params = {"query": prepare_search_string(title)}
-    
+
     try:
         content = requests.post(url, headers=HDR, data=json.dumps(params), timeout=10).text
         response_json = json.loads(content)
@@ -88,10 +88,10 @@ def getSearchTitle(title, year=None):
                 name = res.get('title')
                 release_year = res.get('releaseYear')
                 linkName = res.get('linkName')
-                
+
                 if not linkName:
                     continue  # Skip if no linkName
-                
+
                 print(f"Found: {name} ({release_year}) -> {linkName}")
                 return linkName
 
@@ -106,7 +106,7 @@ def getSearchTitle(title, year=None):
 def getSearchTitle_tv(title):
     url = __api + "searchMovie"
     params = {"query": prepare_search_string(title)}
-    
+
     print(f"Searching for: {params}")  # Debugging step
 
     try:
@@ -150,7 +150,7 @@ def getSearchTitle_tv(title):
             return {"title": linkName, "seasons": seasons_list}
 
     print("FAILED: No matching TV show found.")
-    return None                             
+    return None
 
 
 def getallsubs(content, allowed_languages, filename="", search_string=""):
@@ -205,7 +205,7 @@ def prepare_search_string(s):
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     s = quote_plus(s).replace("+", " ")
     return s
-    
+
 
 def search_movie(title, year, languages, filename):
     try:
@@ -270,7 +270,7 @@ def search_tvshow(title, season, episode, languages, filename):
             "movieName": linkName,
             "season": f"season-{season}"  # Correct API format
         }
-        
+
         try:
             content = s.post(__getMovie, headers=HDR, data=json.dumps(params), timeout=10).text
             response_json = json.loads(content)
@@ -349,7 +349,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         filmid = 0
         postparams = {'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
         log(__name__, "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, main_url, postparams))
-        response = requests.get(downloadlink, data=postparams, headers=HDRDL, verify=False, allow_redirects=True) 
+        response = requests.get(downloadlink, data=postparams, headers=HDRDL, verify=False, allow_redirects=True)
         local_tmp_file = zip_subs
         try:
             log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
@@ -384,4 +384,3 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
             subs_file = typeid
         log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
         return packed, language, subs_file  # standard output
-

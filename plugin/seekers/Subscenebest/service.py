@@ -38,8 +38,8 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.
       'Referer': 'https://sub-scene.com',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate'}
-      
-s = requests.Session()      
+
+s = requests.Session()
 main_url = "https://sub-scene.com"
 debug_pretext = ""
 ses = requests.Session()
@@ -74,7 +74,7 @@ def geturl(url):
         log(__name__, " Failed to get url:%s" % (url))
         content = None
     return (content)
-    
+
 
 def getSearchTitle(title, year=None):  # new Add
     url = 'https://sub-scene.com/search?query=%s' % quote_plus(title)
@@ -109,9 +109,9 @@ def getSearchTitle(title, year=None):  # new Add
                 if "/subscene/" in href:
                    print(("href", href))
                    return href
-                   
+
         except:
-            break                             
+            break
     return 'https://sub-scene.com/search?query=' + quote_plus(title)
 
 
@@ -121,8 +121,8 @@ def find_movie(content, title, year):
     for matches in re.finditer(movie_season_pattern, content, re.IGNORECASE | re.DOTALL):
         print((tuple(matches.groups())))
         found_title = matches.group('title')
-        found_title = html.unescape(found_title) 
-        print(("found_title", found_title))  
+        found_title = html.unescape(found_title)
+        print(("found_title", found_title))
         log(__name__, "Found movie on search page: %s (%s)" % (found_title, matches.group('year')))
         if found_title.lower().find(title.lower()) > -1:
             if matches.group('year') == year:
@@ -142,22 +142,22 @@ def find_tv_show_season(content, tvshow, season):
     for matches in re.finditer(season_pattern, content, re.IGNORECASE | re.DOTALL):
         found_title = matches.group('title')
         #found_title = html.unescape(found_title)
-        print(("found_title2", found_title)) 
+        print(("found_title2", found_title))
         log(__name__, "Found tv show season on search page: %s" % found_title)
         url_found = matches.group('link')
-                                                                   
-    return url_found                                                                     
+
+    return url_found
 
 
 def getallsubs(content, allowed_languages, filename="", search_string=""):
     soup = BeautifulSoup(content.text, 'html.parser')
     block = soup.find('tbody')
-    
+
     # Check if block is None (no movies found)
     if block is None:
         log(__name__, "No movies found in the content.")
         return []
-    
+
     movies = block.find_all("tr")
     i = 0
     subtitles = []
@@ -301,7 +301,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
 
         response = requests.get(downloadlink, headers=HDR, verify=False, allow_redirects=True)
-        
+
         # Sanitize the filename to remove slashes
         sanitized_filename = re.sub(r'[\\/]', '_', zip_subs)
         local_tmp_file = os.path.join(tmp_sub_dir, sanitized_filename)

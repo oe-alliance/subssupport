@@ -63,10 +63,10 @@ def prepare_search_string(s):
 def getallsubs(html_content, allowed_languages, filename=""):
     """ Extract subtitle links from YIFYSubtitles.ch subtitle page with multiple filenames """
     subtitles = []
-    
+
     soup = BeautifulSoup(html_content, "html.parser")
     subtitle_rows = soup.select("tr[data-id]")  # Select subtitle rows
-    
+
     for row in subtitle_rows:
         try:
             # Extract language
@@ -78,7 +78,7 @@ def getallsubs(html_content, allowed_languages, filename=""):
                 continue  # Skip if no valid link
 
             subtitle_page_link = subtitle_link_tag["href"]
-            
+
             # Ensure correct `<br>` splitting, even if first two names are joined
             subtitle_names = re.split(r"<br\s*/?>", subtitle_link_tag.decode_contents(), flags=re.IGNORECASE)
 
