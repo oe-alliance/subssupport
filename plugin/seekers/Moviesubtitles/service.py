@@ -9,10 +9,19 @@ import urllib.request
 import urllib.parse
 from urllib.parse import quote
 import html
-import requests , json, random, string, time, warnings, calendar, difflib, re
+import requests
+import json
+import random
+import string
+import time
+import warnings
+import calendar
+import difflib
+import re
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore',InsecureRequestWarning)
-import os, os.path
+import os
+import os.path
 from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
 from six.moves import http_cookiejar
 from .MoviesubtitlesUtilities import get_language_info

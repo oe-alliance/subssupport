@@ -7,7 +7,8 @@ import requests
 from .OpenSubtitles2Utilities import get_language_info
 import os.path
 import http.client
-import json, random
+import json
+import random
 import sys
 from urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
 from urllib.parse import urlencode

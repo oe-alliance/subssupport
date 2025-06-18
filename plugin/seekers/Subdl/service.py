@@ -1,6 +1,7 @@
 import requests
 import os
-import re, json
+import re
+import json
 from urllib.parse import quote_plus
 from ..utilities import log
 from .SubdlUtilities import get_language_info

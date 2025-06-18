@@ -6,7 +6,9 @@ Created 2021
 '''
 from __future__ import absolute_import
 from ..utilities import languageTranslate, log
-import json, requests, re
+import json
+import requests
+import re
 
 LANGUAGES = (
 	# Full Language name[0]
