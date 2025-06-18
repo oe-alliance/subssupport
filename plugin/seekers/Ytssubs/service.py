@@ -20,8 +20,11 @@ USER_AGENTS = [
     "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Mobile/15E148 Safari/604.1"
 ]
 
+
 def get_random_ua():
     return random.choice(USER_AGENTS)
+
+
 HDR = {
     "accept": "application/json, text/plain, */*",
     "accept-language": "en-US,en;q=0.9",
@@ -47,12 +50,15 @@ session.headers.update({
 
 BASE_URL = "https://yifysubtitles.ch"
 debug_pretext = ""
+
+
 def prepare_search_string(s):
     s = s.replace("'", "").strip()
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     s = s.replace(" :", ":").replace(".", " ")
     print(("s_title", s))
     return s
+
 
 def getallsubs(html_content, allowed_languages, filename=""):
     """ Extract subtitle links from YIFYSubtitles.ch subtitle page with multiple filenames """
@@ -102,6 +108,7 @@ def getallsubs(html_content, allowed_languages, filename=""):
 
     return subtitles
 
+
 def split_movie_title(movie_entry):
     """Extracts movie name and year from the API response."""
     movie_title = movie_entry.get("movie", "").strip()
@@ -110,6 +117,7 @@ def split_movie_title(movie_entry):
     if match:
         return match.group(1).strip(), match.group(2)  # (Movie Name, Year)
     return movie_title, None  # Return title as-is if no year found
+
 
 def search_movie(title, year, languages, filename):
     """ Search for a movie on YIFYSubtitles.ch and retrieve subtitles """
@@ -160,8 +168,6 @@ def search_movie(title, year, languages, filename):
         return []
 
 
-
-
 def search_tvshow(title, season, episode, languages, filename):
     """ Search for a movie on YTS-Subs and retrieve subtitles """
     tv_title = prepare_search_string(title)
@@ -200,6 +206,7 @@ def search_tvshow(title, season, episode, languages, filename):
         print(f"Error in search_movie: {error}")
         return []
 
+
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
     log(__name__, "%s Search_subtitles = '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'" %
          (debug_pretext, file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack))
@@ -221,10 +228,10 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     return sublist, "", ""
 
 
-
 import os
 import requests
 from bs4 import BeautifulSoup
+
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):
     """ Download selected subtitle (ZIP/RAR) from scraped link """

@@ -3,7 +3,6 @@ import re
 import shutil
 
 
-
 LANGUAGE_MAP = {
     "sq": ("Albanian", "flags/sq.gif"),
     "ar": ("Arabic", "flags/ar.gif"),
@@ -66,11 +65,11 @@ LANGUAGE_MAP = {
 }
 
 
-
 def get_first_word(title):
     """Extracts the first word before a space or any special symbol."""
     match = re.match(r'^([\w]+)', title)  # Match only the first word
     return match.group(1) if match else title  # Return first word or full title
+
 
 def extract_language(filename):
     """Extracts the last two letters before '.srt' as the language code and converts it to a full name."""
@@ -81,6 +80,7 @@ def extract_language(filename):
     language_name = LANGUAGE_MAP.get(lang_code, ("Unknown", "flags/unknown.gif"))[0]  # Extract only name
     
     return language_name  # Return as a string, not a list or tuple
+
 
 def search_subtitles(file_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):
     global settings_provider  # Ensure we're using the existing instance
@@ -125,11 +125,10 @@ def search_subtitles(file_path, title, tvshow, year, season, episode, set_temp, 
     return subtitles_list, "", msg
 
 
-
-
 def remove_language_code(filename):
     """Removes repeated or single language codes before '.srt'."""
     return re.sub(r'([._-][a-zA-Z]{2,5})+\.srt$', ".srt", filename)  # Remove repeated codes
+
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):
     """

@@ -22,8 +22,11 @@ USER_AGENTS = [
     "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Mobile/15E148 Safari/604.1"
 ]
 
+
 def get_random_ua():
     return random.choice(USER_AGENTS)
+
+
 HDR = {
     "User-Agent": get_random_ua(),
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
@@ -43,6 +46,7 @@ debug_pretext = "opensubtitles.com"
 
 
 BASE_URL = "https://api.opensubtitles.com/api/v1"
+
 
 def get_opensubtitles_token():
     """Authenticate and get JWT token using credentials from SettingsProvider."""
@@ -73,6 +77,7 @@ def get_opensubtitles_token():
     except requests.exceptions.RequestException as e:
         print("Error getting token:", e)
         return None
+
 
 def get_url(url, referer=None):
     if referer is None:
@@ -173,12 +178,10 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         remaining_downloads = data.get("remaining")
         print(f"remaining_downloads: {remaining_downloads}")
 
-
     except requests.exceptions.RequestException as e:
         log(__name__, f"Error downloading subtitle: {e}")
         return None
 
-        
     downloadlink = download_url
     if downloadlink:
         #print(downloadlink)

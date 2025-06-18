@@ -76,6 +76,7 @@ opensubtitlesorg_languages = {
     'Farsi/Persian': 'Persian'
 }
 
+
 def geturl(url):
     log(__name__, " Getting url: %s" % (url))
     params = {"query": quote_plus(title)}
@@ -88,6 +89,7 @@ def geturl(url):
         content = None
     return (content)
     
+
 def getSearchTitle(title, year=None):  # new Add
     title = prepare_search_string(title).replace('%26', '&')
     data_url = 'https://www.opensubtitles.org/libs/suggest.php?format=json3&MovieName=%s' % title
@@ -112,6 +114,7 @@ def getSearchTitle(title, year=None):  # new Add
         return movie_id
     else:
         print("FAILED")
+
 
 def find_movie(content, title, year):
     url_found = None
@@ -162,6 +165,7 @@ def find_tv_show_season(content, tvshow, season):
                 all_tvshows[0][1], all_tvshows[0][4], all_tvshows[0][3]))
                                                                    
     return url_found                                                                     
+
 
 def getallsubs(content, allowed_languages, filename="", search_string=""):
     #content = requests.get(url, timeout=10)
@@ -231,6 +235,7 @@ def prepare_search_string(s):
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     s = quote_plus(s)
     return s
+
 
 def search_movie(title, year, languages, filename):
     root_url = 'https://www.opensubtitles.org/en/search/sublanguageid-all/idmovie-'

@@ -11,7 +11,6 @@ SEARCH_URL = "https://api.subdl.com/api/v1/subtitles"
 DOWNLOAD_URL = "https://dl.subdl.com"
 
 
-
 def get_subdl_api():
     global settings_provider  # Ensure we're using the existing instance
     API_KEY = settings_provider.getSetting("Subdl_API_KEY")
@@ -71,6 +70,7 @@ def get_subtitles_list_movie(searchstring, title, languageshort, languagelong, s
         except json.JSONDecodeError:
             print("Error: Failed to decode JSON response.")
     return
+
 
 def get_subtitles_list_tv(searchstring, tvshow, season, episode, languageshort, languagelong, subtitles_list):
     """Fetches subtitles from the SubDL API and adds them to subtitles_list."""

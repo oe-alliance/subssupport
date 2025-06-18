@@ -43,8 +43,10 @@ USER_AGENTS = [
     "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Mobile/15E148 Safari/604.1"
 ]
 
+
 def get_random_ua():
     return random.choice(USER_AGENTS)
+
 
 HDR = {'User-Agent': get_random_ua(),
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.',
@@ -126,10 +128,6 @@ def getSearchTitle(title, year=None):
     return None
 
 
-
-
-
-    
 def get_rating(downloads):
     rating = int(downloads)
     if (rating < 50):
@@ -176,6 +174,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     log(__name__, "%s Search string = %s" % (debug_pretext, searchstring))
     get_subtitles_list(title, year, language_info2, language_info1, subtitles_list)
     return subtitles_list, "", msg  # standard output
+
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     language = subtitles_list[pos]["language_name"]
@@ -243,11 +242,13 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
         return packed, language, subs_file  # standard output
 
+
 def prepare_search_string(s):
     s = s.strip()
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     return s
     
+
 def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list):
     # Prepare the search string and get the movie page URL.
     dst = languageshort.lower()

@@ -71,7 +71,6 @@ SUBTITLES_SEEKERS.append(TitloviSeeker)
 SUBTITLES_SEEKERS.append(PrijevodiOnlineSeeker)
 
 
-
 class ErrorSeeker(BaseSeeker):
     def __init__(self, wseeker_cls, *args, **kwargs):
         self.id = wseeker_cls.id

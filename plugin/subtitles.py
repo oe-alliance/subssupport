@@ -1110,6 +1110,7 @@ class SubsSupport(SubsSupportEmbedded):
 
 ############ Methods triggered by videoEvents when SubsSupport is subclass of Screen ################
 
+
     def __serviceStarted(self):
         print('[SubsSupport] Service Started')
 
@@ -1324,11 +1325,11 @@ class SubtitlesWidget(GUIComponent):
         else:
             self.state = self.STATE_BACKGROUND
             self.instance.setBackgroundColor(parseColor(color))
+
     def setFixedBackgroundHeight(self, height):
         self.boundSize = (self.desktopSize[0], int(height) * self.font[1] + 15)
         self.instance.resize(eSize(int(self.boundSize[0]), int(self.boundSize[1])))
         self.instance.move(ePoint(int(self.desktopSize[0] / 2 - self.boundSize[0] / 2), int(self.calcWidgetYPosition())))
-
 
     def setBorderColor(self, color):
         self.instance.setBorderColor(parseColor(color))
@@ -1427,7 +1428,6 @@ class SubsScreen(Screen):
         # Apply height only for "fixed" background
         if type == "fixed" and height:
             self["subtitles"].setFixedBackgroundHeight(height)
-
 
     def setColor(self, color):
         self.currentColor = color

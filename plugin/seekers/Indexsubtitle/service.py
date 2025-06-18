@@ -52,8 +52,10 @@ USER_AGENTS = [
     "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Mobile/15E148 Safari/604.1"
 ]
 
+
 def get_random_ua():
     return random.choice(USER_AGENTS)
+
 
 HDRJSON = {
     "accept": "application/json, text/plain, */*",
@@ -90,6 +92,7 @@ indexsubtitle_languages = {
     'Farsi\/Persian': 'Persian'
 }
 
+
 def get_url(url, referer=None):
     if referer is None:
         headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
@@ -101,6 +104,7 @@ def get_url(url, referer=None):
     response.close()
     content = content.replace('\n', '')
     return content
+
 
 def find_movie(content, title, year):
     d = content
@@ -119,6 +123,7 @@ def find_movie(content, title, year):
                 url_found = matches.group('link')
                 break
     return url_found
+
 
 def get_rating(downloads):
     rating = int(downloads)
@@ -143,6 +148,7 @@ def get_rating(downloads):
     elif (rating >= 450):
         rating = 10
     return rating                           
+
 
 def getSearchTitle(title, year=None):
     url = "https://indexsubtitle.cc/search"
@@ -191,8 +197,6 @@ def getSearchTitle(title, year=None):
     return None
 
 
-
-
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
     languagefound = lang1
     language_info = get_language_info(languagefound)
@@ -214,6 +218,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     log(__name__, "%s Search string = %s" % (debug_pretext, searchstring))
     get_subtitles_list(searchstring, title, year, language_info2, language_info1, subtitles_list)
     return subtitles_list, "", msg  # standard output
+
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     language = subtitles_list[pos]["language_name"]
@@ -298,6 +303,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
         return packed, language, subs_file  # standard output
 
+
 def prepare_search_string(s):
     s = s.strip()
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
@@ -305,6 +311,7 @@ def prepare_search_string(s):
     print(s)
     return s
     
+
 def get_subtitles_list(searchstring, title, year, languageshort, languagelong, subtitles_list):
     lang = languagelong
     title = title.strip().lower()

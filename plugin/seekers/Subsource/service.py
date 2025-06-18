@@ -29,8 +29,10 @@ USER_AGENTS = [
     "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Mobile/15E148 Safari/604.1"
 ]
 
+
 def get_random_ua():
     return random.choice(USER_AGENTS)
+
 
 HDR = {
     "accept": "application/json, text/plain, */*",
@@ -68,7 +70,6 @@ seasons = seasons + ["Twenty-first", "Twenty-second", "Twenty-third", "Twenty-fo
                      "Twenty-seventh", "Twenty-eighth", "Twenty-ninth"]
 
 
-    
 def getSearchTitle(title, year=None):
     url = __api + "searchMovie"
     params = {"query": prepare_search_string(title)}
@@ -100,6 +101,7 @@ def getSearchTitle(title, year=None):
 
     print("FAILED")
     return None  # Ensure None is returned if nothing is found
+
 
 def getSearchTitle_tv(title):
     url = __api + "searchMovie"
@@ -150,6 +152,7 @@ def getSearchTitle_tv(title):
     print("FAILED: No matching TV show found.")
     return None                             
 
+
 def getallsubs(content, allowed_languages, filename="", search_string=""):
     response_json = json.loads(content)
     success = response_json['success']
@@ -196,12 +199,14 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
     else:
         print("FAILED")
 
+
 def prepare_search_string(s):
     s = s.replace("'", "").strip()
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
     s = quote_plus(s).replace("+", " ")
     return s
     
+
 def search_movie(title, year, languages, filename):
     try:
         movie_title = prepare_search_string(title)
@@ -234,6 +239,7 @@ def search_movie(title, year, languages, filename):
     except Exception as error:
         print(("error", error))
         return []
+
 
 def search_tvshow(title, season, episode, languages, filename):
     try:
@@ -286,6 +292,7 @@ def search_tvshow(title, season, episode, languages, filename):
         print(f"Error in search_tvshow: {error}")
         return []
 
+
 def search_manual(searchstr, languages, filename):
     search_string = prepare_search_string(searchstr)
     url = main_url + "/subtitles/release?q=" + search_string + '&r=true'
@@ -293,6 +300,7 @@ def search_manual(searchstr, languages, filename):
 
     if content is not None:
         return getallsubs(content, languages, filename)
+
 
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
     log(__name__, "%s Search_subtitles = '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'" %
@@ -313,6 +321,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
         except:
             print("error")
     return sublist, "", ""
+
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     sub_id = subtitles_list[pos]["sub_id"]

@@ -29,6 +29,7 @@ SESSION = requests.Session()
 MAIN_URL = "http://subs.ath.cx"
 DEBUG_PRETEXT = "subs.ath.cx"
 
+
 def get_url(url, referer=None):
     headers = {'User-Agent': HEADERS['User-Agent']}
     if referer:
@@ -37,8 +38,10 @@ def get_url(url, referer=None):
     response = SESSION.get(url, headers=headers, verify=False)
     return response.text.replace('\n', '')
 
+
 def get_rating(downloads):
     return min(10, max(1, downloads // 50 + 1))
+
 
 def search_subtitles(file_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):
     subtitles_list = []
@@ -55,6 +58,7 @@ def search_subtitles(file_path, title, tvshow, year, season, episode, set_temp, 
     log(__name__, f"{DEBUG_PRETEXT} Search string = {search_string}")
     get_subtitles_list(title, search_string, "ar", "Arabic", subtitles_list)
     return subtitles_list, "", msg
+
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):
     subtitle_info = subtitles_list[pos]

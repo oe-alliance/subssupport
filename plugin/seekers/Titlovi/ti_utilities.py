@@ -27,7 +27,6 @@ LANGUAGES = (
 	("BosnianLatin", "10", "bs", "bos", "3", 30204, "Bosanski"))  # ?
 
 
-
 def get_user_pass():
 	try:
 		#OVO NE BUM RADILO! ZASTO? NEMAM IDEJU ZA SADA. No module named _enigma?
@@ -50,10 +49,12 @@ def get_user_pass():
 		_USER = ""
 	return _USER, _PASSW
 
+
 def languageTranslate(lang, lang_from, lang_to):
 	for x in LANGUAGES:
 		if lang == x[lang_from]:
 			return x[lang_to]
+
 
 class OSDBServer:
 	#KEY = "UGE4Qk0tYXNSMWEtYTJlaWZfUE9US1NFRC1WRUQtWA=="

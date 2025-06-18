@@ -17,6 +17,7 @@ SUBTITLES_URL = "https://www.4subscene.com/media_subtitles"
 DOWNLOAD_URL = "https://www.4subscene.com/download?subtitle_id="
 debug_pretext = ""
 
+
 def get_csrf_token(session):
     """Fetch CSRF token from homepage."""
     response = session.get(HOMEPAGE_URL)
@@ -25,6 +26,7 @@ def get_csrf_token(session):
         token_input = soup.find("input", {"name": "_token"})
         return token_input["value"] if token_input else None
     return None
+
 
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):
     log(__name__, "Starting search_subtitles - title: %s, tvshow: %s, season: %s, episode: %s" % (title, tvshow, season, episode))
@@ -39,10 +41,12 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     else:
         return [], "", ""
 
+
 def search_movie(title, year, languages, filename):
     """Search for movie subtitles."""
     log(__name__, "Searching movie: %s, Year: %s" % (title, year))
     return search_media(title, languages)
+
 
 def search_tvshow(title, season, episode, languages, filename):
     """Search for TV show subtitles and filter by season/episode."""
@@ -67,6 +71,7 @@ def search_tvshow(title, season, episode, languages, filename):
         log(__name__, "No matching subtitles found for S%02dE%02d" % (season, episode))
     
     return filtered_subs
+
 
 def search_media(title, languages):
     """Generic function to search for subtitles on 4Subscene."""
@@ -104,6 +109,7 @@ def search_media(title, languages):
             subtitles_list.extend(get_subtitles_for_media(session, csrf_token, media_id, lang))
     
     return subtitles_list
+
 
 def get_subtitles_for_media(session, csrf_token, media_id, language):
     """Fetch available subtitles for a given media ID."""

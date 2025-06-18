@@ -20,8 +20,11 @@ user_agents = [
 ]
 
 # Function to get a random User-Agent string
+
+
 def get_random_ua():
     return random.choice(user_agents)
+
 
 session = requests.Session()
 
@@ -35,11 +38,13 @@ session.headers.update({
 
 main_url = "https://www.subtitlecat.com"
 
+
 def getSearchTitle(title, year=None):
     url = f'{main_url}/index.php?search={quote_plus(title)}'
     print(("url_getSearchTitle", url))
     response = session.get(url, verify=False)
     return response.url  # Return final URL
+
 
 def getallsubs(response):
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -63,6 +68,7 @@ def getallsubs(response):
     
     return subtitles
 
+
 def search_movie(title, year, languages, filename):
     url = getSearchTitle(title, year)
     print(("url_search_movie", url))
@@ -72,12 +78,15 @@ def search_movie(title, year, languages, filename):
         return getallsubs(response)
     return []
 
+
 def search_tvshow(tvshow, season, episode, languages, filename):
     search_query = f"{tvshow} S{int(season):02d}E{int(episode):02d}"
     return search_movie(search_query, None, languages, filename)
 
+
 def search_manual(searchstr, languages, filename):
     return search_movie(searchstr, None, languages, filename)
+
 
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):
     if tvshow:
@@ -86,6 +95,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
         return search_movie(title, year, [lang1, lang2, lang3], file_original_path), "", ""
     else:
         return search_manual(title, [lang1, lang2, lang3], file_original_path), "", ""
+
 
 def get_real_srt_links(page_url):
     """
