@@ -314,15 +314,15 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
             print("error")
     return sublist, "", ""
 
-def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
-    sub_id = subtitles_list[pos][ "sub_id" ]
-    language = subtitles_list[pos][ "language_name" ]
-    linkName = subtitles_list[pos][ "linkName" ]
+def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
+    sub_id = subtitles_list[pos]["sub_id"]
+    language = subtitles_list[pos]["language_name"]
+    linkName = subtitles_list[pos]["linkName"]
     #print(("sub_id", sub_id))
     #print(("language", language))
     #print(("linkName", linkName))
     params = {"movie":linkName,"lang":language,"id":sub_id}
-    content = requests.post(__getSub, headers=HDR , data=json.dumps(params), timeout=10).text
+    content = requests.post(__getSub, headers=HDR, data=json.dumps(params), timeout=10).text
     response_json = json.loads(content)
     success = response_json['success']
     if (success == True):
@@ -332,18 +332,18 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
         #print(("downloadlink", downloadlink))
         local_tmp_file = fileName
         #print(("local_tmp_file", local_tmp_file))
-        log(__name__ , "%s Downloadlink: %s " % (debug_pretext, downloadlink))
+        log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
         viewstate = 0
         previouspage = 0
         subtitleid = 0
         typeid = "zip"
         filmid = 0
-        postparams = { '__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '' , '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
-        log(__name__ , "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, main_url, postparams))
+        postparams = {'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
+        log(__name__, "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, main_url, postparams))
         response = requests.get(downloadlink,data=postparams,headers=HDRDL,verify=False,allow_redirects=True) 
         local_tmp_file = zip_subs
         try:
-            log(__name__ , "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
+            log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
             if not os.path.exists(tmp_sub_dir):
                 os.makedirs(tmp_sub_dir)
             local_file_handle = open(local_tmp_file, 'wb')
@@ -355,24 +355,24 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
             if (myfile.read(1).decode('utf-8') == 'R'):
                 typeid = "rar"
                 packed = True
-                log(__name__ , "Discovered RAR Archive")
+                log(__name__, "Discovered RAR Archive")
             else:
                 myfile.seek(0)
                 if (myfile.read(1).decode('utf-8') == 'P'):
                     typeid = "zip"
                     packed = True
-                    log(__name__ , "Discovered ZIP Archive")
+                    log(__name__, "Discovered ZIP Archive")
                 else:
                     typeid = "srt"
                     packed = False
                     subs_file = local_tmp_file
-                    log(__name__ , "Discovered a non-archive file")
+                    log(__name__, "Discovered a non-archive file")
             myfile.close()
-            log(__name__ , "%s Saving to %s" % (debug_pretext, local_tmp_file))
+            log(__name__, "%s Saving to %s" % (debug_pretext, local_tmp_file))
         except:
-            log(__name__ , "%s Failed to save subtitle to %s" % (debug_pretext, local_tmp_file))
+            log(__name__, "%s Failed to save subtitle to %s" % (debug_pretext, local_tmp_file))
         if packed:
             subs_file = typeid
-        log(__name__ , "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
+        log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
         return packed, language, subs_file  # standard output
 

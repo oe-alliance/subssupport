@@ -78,7 +78,7 @@ opensubtitlesorg_languages = {
 
 def geturl(url):
     log(__name__, " Getting url: %s" % (url))
-    params = {"query": quote_plus(title) }
+    params = {"query": quote_plus(title)}
     try:
         response = requests.get(url, headers=HDR, timeout=10).text
         content = json.loads(response)
@@ -189,7 +189,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
             moviename = re.sub(r'\s+', " ", moviename)
             year = re.search(r'\S+$', moviename)
             year = year.group(0)
-            year = re.search(r'\d+', year , re.IGNORECASE | re.DOTALL)
+            year = re.search(r'\d+', year, re.IGNORECASE | re.DOTALL)
             year = year.group(0)
             print(('moviename', moviename))
             print(('year', year))
@@ -310,10 +310,10 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     return sublist, "", ""
 
 
-def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
-    url = subtitles_list[pos][ "link" ]
+def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
+    url = subtitles_list[pos]["link"]
     print(("url", url))
-    language = subtitles_list[pos][ "language_name" ]
+    language = subtitles_list[pos]["language_name"]
     #content = requests.get(url,verify=False,allow_redirects=True).text
     #year = subtitles_list[pos][ "year" ]
     #title = title.strip()
@@ -336,30 +336,30 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
     #match = re.compile(downloadlink_pattern).findall(content)
     #success = response_json['success']
     #if (success == True):
-    filename = subtitles_list[pos][ "filename" ]
+    filename = subtitles_list[pos]["filename"]
     #downloadToken = response_json['sub']['downloadToken']
     downloadlink = url
     print(("downloadlink", downloadlink))
     local_tmp_file = filename
     print(("local_tmp_file", local_tmp_file))
-    log(__name__ , "%s Downloadlink: %s " % (debug_pretext, downloadlink))
+    log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
     viewstate = 0
     previouspage = 0
     subtitleid = 0
     typeid = "zip"
     filmid = 0
-    postparams = { '__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '' , '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
+    postparams = {'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
     #postparams = urllib3.request.urlencode({ '__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '' , '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid})
     #class MyOpener(urllib.FancyURLopener):
         #version = 'User-Agent=Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0'
     #my_urlopener = MyOpener()
     #my_urlopener.addheader('Referer', url)
-    log(__name__ , "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, url, postparams))
+    log(__name__, "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, url, postparams))
     #response = my_urlopener.open(downloadlink, postparams)
     response = requests.get(downloadlink,verify=False,allow_redirects=True) 
     local_tmp_file = zip_subs
     try:
-        log(__name__ , "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
+        log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
         if not os.path.exists(tmp_sub_dir):
             os.makedirs(tmp_sub_dir)
         local_file_handle = open(local_tmp_file, 'wb')
@@ -371,24 +371,24 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
         if (myfile.read(1).decode('utf-8') == 'R'):
             typeid = "rar"
             packed = True
-            log(__name__ , "Discovered RAR Archive")
+            log(__name__, "Discovered RAR Archive")
         else:
             myfile.seek(0)
             if (myfile.read(1).decode('utf-8') == 'P'):
                 typeid = "zip"
                 packed = True
-                log(__name__ , "Discovered ZIP Archive")
+                log(__name__, "Discovered ZIP Archive")
             else:
                 typeid = "srt"
                 packed = False
                 subs_file = local_tmp_file
-                log(__name__ , "Discovered a non-archive file")
+                log(__name__, "Discovered a non-archive file")
         myfile.close()
-        log(__name__ , "%s Saving to %s" % (debug_pretext, local_tmp_file))
+        log(__name__, "%s Saving to %s" % (debug_pretext, local_tmp_file))
     except:
-        log(__name__ , "%s Failed to save subtitle to %s" % (debug_pretext, local_tmp_file))
+        log(__name__, "%s Failed to save subtitle to %s" % (debug_pretext, local_tmp_file))
     if packed:
         subs_file = typeid
-    log(__name__ , "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
+    log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
     return packed, language, subs_file  # standard output
 

@@ -181,7 +181,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
                 moviename = re.sub(r'\s+', " ", moviename)
                 year = re.search(r'\S+$', moviename)
                 year = year.group(0)
-                year = re.search(r'\d+', year , re.IGNORECASE | re.DOTALL)
+                year = re.search(r'\d+', year, re.IGNORECASE | re.DOTALL)
                 year = year.group(0)
                 print(('moviename', moviename))
                 print(('year', year))
@@ -233,7 +233,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
         moviename = soup.find('a', class_="bt-dwl external adds_trigger").get("data-product-title")
         year = re.search(r'\S+$', moviename)
         year = year.group(0)
-        year = re.search(r'\d+', year , re.IGNORECASE | re.DOTALL)
+        year = re.search(r'\d+', year, re.IGNORECASE | re.DOTALL)
         year = year.group(0)
         print(('moviename', moviename))
         print(('year', year))
@@ -354,27 +354,27 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     return sublist, "", ""
 
 
-def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
-    url = subtitles_list[pos][ "link" ]
+def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
+    url = subtitles_list[pos]["link"]
     print(("url", url))
-    language = subtitles_list[pos][ "language_name" ]
-    filename = subtitles_list[pos][ "filename" ]
+    language = subtitles_list[pos]["language_name"]
+    filename = subtitles_list[pos]["filename"]
     downloadlink = url
     print(("downloadlink", downloadlink))
     local_tmp_file = filename
     print(("local_tmp_file", local_tmp_file))
-    log(__name__ , "%s Downloadlink: %s " % (debug_pretext, downloadlink))
+    log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
     viewstate = 0
     previouspage = 0
     subtitleid = 0
     typeid = "zip"
     filmid = 0
-    postparams = { '__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '' , '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
-    log(__name__ , "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, url, postparams))
+    postparams = {'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
+    log(__name__, "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, url, postparams))
     response = requests.get(downloadlink,verify=False,allow_redirects=True) 
     local_tmp_file = zip_subs
     try:
-        log(__name__ , "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
+        log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
         if not os.path.exists(tmp_sub_dir):
             os.makedirs(tmp_sub_dir)
         local_file_handle = open(local_tmp_file, 'wb')
@@ -385,24 +385,24 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
         if (myfile.read(1).decode('utf-8') == 'R'):
             typeid = "rar"
             packed = True
-            log(__name__ , "Discovered RAR Archive")
+            log(__name__, "Discovered RAR Archive")
         else:
             myfile.seek(0)
             if (myfile.read(1).decode('utf-8') == 'P'):
                 typeid = "zip"
                 packed = True
-                log(__name__ , "Discovered ZIP Archive")
+                log(__name__, "Discovered ZIP Archive")
             else:
                 typeid = "srt"
                 packed = False
                 subs_file = local_tmp_file
-                log(__name__ , "Discovered a non-archive file")
+                log(__name__, "Discovered a non-archive file")
         myfile.close()
-        log(__name__ , "%s Saving to %s" % (debug_pretext, local_tmp_file))
+        log(__name__, "%s Saving to %s" % (debug_pretext, local_tmp_file))
     except:
-        log(__name__ , "%s Failed to save subtitle to %s" % (debug_pretext, local_tmp_file))
+        log(__name__, "%s Failed to save subtitle to %s" % (debug_pretext, local_tmp_file))
     if packed:
         subs_file = typeid
-    log(__name__ , "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
+    log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
     return packed, language, subs_file  # standard output
 

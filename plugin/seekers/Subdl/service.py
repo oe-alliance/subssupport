@@ -65,7 +65,7 @@ def get_subtitles_list_movie(searchstring, title, languageshort, languagelong, s
                     id = item["url"]
                     link = (DOWNLOAD_URL) + id
                     #print(language , filename , sync , id , link)
-                    subtitles_list.append({'filename': filename, 'sync': True, 'id' : id, 'language_flag': languageshort, 'language_name': languagelong})
+                    subtitles_list.append({'filename': filename, 'sync': True, 'id': id, 'language_flag': languageshort, 'language_name': languagelong})
                 except:
                     pass
         except json.JSONDecodeError:
@@ -109,7 +109,7 @@ def get_subtitles_list_tv(searchstring, tvshow, season, episode, languageshort, 
                     id = item["url"]
                     link = (DOWNLOAD_URL) + id
                     #print(language , filename , sync , id , link)
-                    subtitles_list.append({'filename': filename, 'sync': True, 'id' : id, 'language_flag': languageshort, 'language_name': languagelong})
+                    subtitles_list.append({'filename': filename, 'sync': True, 'id': id, 'language_flag': languageshort, 'language_name': languagelong})
                 except:
                     pass
         except json.JSONDecodeError:
