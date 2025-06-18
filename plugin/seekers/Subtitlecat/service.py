@@ -1,211 +1,142 @@
-# -*- coding: UTF-8 -*-
-from __future__ import absolute_import
-from __future__ import print_function
+# -*- coding: utf-8 -*-
 
-from urllib.parse import quote_plus, urlencode
-import requests
-import re
-import warnings
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-warnings.simplefilter('ignore', InsecureRequestWarning)
+from __future__ import absolute_import, print_function
 import os
-from os.path import exists
-from urllib.request import Request, urlopen
-from .SubtitlecatUtilities import get_language_info
-from ..utilities import log
+import re
+import requests
+import random
+import json
+import warnings
+from bs4 import BeautifulSoup
+from six.moves.urllib.parse import quote_plus
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+warnings.simplefilter('ignore', InsecureRequestWarning)
+user_agents = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 11; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Mobile/15E148 Safari/604.1"
+]
 
-HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-      'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
-      'Upgrade-Insecure-Requests': '1',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Host': 'www.subtitlecat.com',
-      'Referer': 'https://www.subtitlecat.com/index.php?search=',
-      'Upgrade-Insecure-Requests': '1',
-      'Connection': 'keep-alive',
-      'Accept-Encoding': 'gzip'}  # , deflate'}
+# Function to get a random User-Agent string
+def get_random_ua():
+    return random.choice(user_agents)
 
-s = requests.Session()
+session = requests.Session()
 
+# Set headers for the request
+session.headers.update({
+    "User-Agent": get_random_ua(),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Language": "en-US,en;q=0.9,ar-EG;q=0.8,ar;q=0.7",
+    "Referer": "https://www.subtitlecat.com/",
+})
 
 main_url = "https://www.subtitlecat.com"
-debug_pretext = "subtitlecat.com"
 
+def getSearchTitle(title, year=None):
+    url = f'{main_url}/index.php?search={quote_plus(title)}'
+    print(("url_getSearchTitle", url))
+    response = session.get(url, verify=False)
+    return response.url  # Return final URL
 
-subtitlecat_languages = {
-    'Chinese BG code': 'Chinese',
-    'Brazillian Portuguese': 'Portuguese (Brazil)',
-    'Serbian': 'SerbianLatin',
-    'Ukranian': 'Ukrainian',
-    'Farsi/Persian': 'Persian'
-}
+def getallsubs(response):
+    soup = BeautifulSoup(response.text, 'html.parser')
+    subtitles = []
+    
+    for row in soup.find_all('tr'):
+        link_tag = row.find('a')
+        if link_tag:
+            title = link_tag.text.strip()
+            href = main_url + "/" + link_tag['href'].strip()
+            download_count = row.find_all('td')[-2].text.strip() if len(row.find_all('td')) > 2 else "0"
+            languages = row.find_all('td')[-1].text.strip() if len(row.find_all('td')) > 1 else "Unknown"
+            
+            subtitles.append({
+                'filename': title,
+                'link': href,
+                'downloads': download_count,
+                'language_name': languages,
+                'sync': True  # Fix KeyError by always adding this key
+            })
+    
+    return subtitles
 
+def search_movie(title, year, languages, filename):
+    url = getSearchTitle(title, year)
+    print(("url_search_movie", url))
+    response = session.get(url, verify=False)
+    
+    if response.status_code == 200:
+        return getallsubs(response)
+    return []
 
-def get_url(url, referer=None):
-    if referer is None:
-        headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0'}
+def search_tvshow(tvshow, season, episode, languages, filename):
+    search_query = f"{tvshow} S{int(season):02d}E{int(episode):02d}"
+    return search_movie(search_query, None, languages, filename)
+
+def search_manual(searchstr, languages, filename):
+    return search_movie(searchstr, None, languages, filename)
+
+def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):
+    if tvshow:
+        return search_tvshow(tvshow, season, episode, [lang1, lang2, lang3], file_original_path), "", ""
+    elif title:
+        return search_movie(title, year, [lang1, lang2, lang3], file_original_path), "", ""
     else:
-        headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0', 'Referer': referer}
-    req = Request(url, None, headers)
-    response = urlopen(req)
-    content = response.read().decode('utf-8')
-    response.close()
-    content = content.replace('\n', '')
-    return content
+        return search_manual(title, [lang1, lang2, lang3], file_original_path), "", ""
+
+def get_real_srt_links(page_url):
+    """
+    Extracts only ready-to-download subtitles (.srt links) from a subtitle page.
+    """
+    response = requests.get(page_url, verify=False)
+    if response.status_code != 200:
+        return []  # Return empty if fetching page fails
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    srt_links = []
+
+    # Find all available subtitles (ignores translation-needed ones)
+    for sub_single in soup.find_all('div', class_='sub-single'):
+        language = sub_single.find_all('span')[1].text.strip()
+        download_tag = sub_single.find('a', class_='green-link')
+
+        if download_tag:
+            download_link = "https://www.subtitlecat.com" + download_tag['href']
+            srt_links.append({"language": language, "download_link": download_link})
+
+    return srt_links  # Returns only valid SRT links
 
 
-def get_rating(downloads):
-    rating = int(downloads)
-    if (rating < 50):
-        rating = 1
-    elif (rating >= 50 and rating < 100):
-        rating = 2
-    elif (rating >= 100 and rating < 150):
-        rating = 3
-    elif (rating >= 150 and rating < 200):
-        rating = 4
-    elif (rating >= 200 and rating < 250):
-        rating = 5
-    elif (rating >= 250 and rating < 300):
-        rating = 6
-    elif (rating >= 300 and rating < 350):
-        rating = 7
-    elif (rating >= 350 and rating < 400):
-        rating = 8
-    elif (rating >= 400 and rating < 450):
-        rating = 9
-    elif (rating >= 450):
-        rating = 10
-    return rating
+def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):
+    """
+    Downloads a subtitle file. If the provided link is a page, it extracts the real SRT file link first.
+    """
+    page_url = subtitles_list[pos]["link"]  # This is a page, not a direct .srt file
 
+    # Step 1: Extract the real .srt link
+    srt_links = get_real_srt_links(page_url)  # Fetch all available SRT files
 
-def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
-    languagefound = lang1
-    language_info = get_language_info(languagefound)
-    language_info1 = language_info['name']
-    language_info2 = language_info['2et']
-    language_info3 = language_info['3et']
+    if not srt_links:
+        raise Exception("No downloadable SRT file found")
 
-    subtitles_list = []
-    msg = ""
+    # Step 2: Choose the first available SRT file (assuming the user picks the first result)
+    srt_download_link = srt_links[0]["download_link"]
+    language = srt_links[0]["language"]
 
-    if len(tvshow) == 0 and year:  # Movie
-        searchstring = "%s (%s)" % (title, year)
-    elif len(tvshow) > 0 and title == tvshow:  # Movie not in Library
-        searchstring = "%s (%#02d%#02d)" % (tvshow, int(season), int(episode))
-    elif len(tvshow) > 0:  # TVShow
-        searchstring = "%s S%#02dE%#02d" % (tvshow, int(season), int(episode))
-    else:
-        searchstring = title
-    log(__name__, "%s Search string = %s" % (debug_pretext, searchstring))
-    get_subtitles_list(searchstring, language_info2, language_info1, subtitles_list)
-    return subtitles_list, "", msg  # standard output
+    # Step 3: Download the subtitle file
+    subtitle_response = requests.get(srt_download_link, verify=False)
+    if subtitle_response.status_code != 200:
+        raise Exception("Failed to download subtitle file")
 
+    # Step 4: Define file path and save the subtitle
+    file_name = srt_download_link.split("/")[-1]  # Extract filename from URL
+    file_path = os.path.join(tmp_sub_dir, file_name)
 
-def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
-    language = subtitles_list[pos]["language_name"]
-    lang = subtitles_list[pos]["language_flag"]
-    filename = subtitles_list[pos]["filename"]
-    print(filename)
-    id = subtitles_list[pos]["id"]
-    url = 'https://www.subtitlecat.com/%s' % (id)
-    content = s.get(url, headers=HDR, verify=False, allow_redirects=True).text
-    downloadlink_pattern = '<a id="download_' + lang + '" onclick=.+?href=\"(.+?)\" class="green-link">Download</a>'
-    #print(downloadlink_pattern)
-    match = re.compile(downloadlink_pattern).findall(content)
-    if match:
-        downloadlink = "https://www.subtitlecat.com" + match[0]
-        print(downloadlink)
-        log(__name__, "%s Downloadlink: %s " % (debug_pretext, downloadlink))
-        viewstate = 0
-        previouspage = 0
-        subtitleid = 0
-        typeid = "zip"
-        filmid = 0
-        postparams = urlencode({'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid})
-        log(__name__, "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, url, postparams))
-        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True)
-        local_tmp_file = zip_subs
-        try:
-            log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))
-            if not exists(tmp_sub_dir):
-                os.makedirs(tmp_sub_dir)
-            local_file_handle = open(local_tmp_file, 'wb')
-            local_file_handle.write(response.content)
-            local_file_handle.close()
-            # Check archive type (rar/zip/else) through the file header (rar=Rar!, zip=PK) urllib3.request.urlencode
-            myfile = open(local_tmp_file, "rb")
-            myfile.seek(0)
-            if (myfile.read(1) == 'R'):
-                typeid = "rar"
-                packed = True
-                log(__name__, "Discovered RAR Archive")
-            else:
-                myfile.seek(0)
-                if (myfile.read(1) == 'P'):
-                    typeid = "zip"
-                    packed = True
-                    log(__name__, "Discovered ZIP Archive")
-                else:
-                    typeid = "srt"
-                    packed = False
-                    subs_file = local_tmp_file
-                    log(__name__, "Discovered a non-archive file")
-            myfile.close()
-            log(__name__, "%s Saving to %s" % (debug_pretext, local_tmp_file))
-        except:
-            log(__name__, "%s Failed to save subtitle to %s" % (debug_pretext, local_tmp_file))
-        if packed:
-            subs_file = typeid
-        log(__name__, "%s Subtitles saved to '%s'" % (debug_pretext, local_tmp_file))
-        return packed, language, subs_file  # standard output
+    with open(file_path, 'wb') as file:
+        file.write(subtitle_response.content)
 
+    return False, language, file_path  # Standard return format for Enigma2 plugin
 
-def get_subtitles_list(searchstring, languageshort, languagelong, subtitles_list):
-    url = '%s/index.php?search=%s' % (main_url, quote_plus(searchstring))
-
-    try:
-        log(__name__, "%s Getting url: %s" % (debug_pretext, url))
-        content = get_url(url, referer=main_url)
-        print(content)
-    except:
-        pass
-        log(__name__, "%s Failed to get url:%s" % (debug_pretext, url))
-        return
-    try:
-        log(__name__, "%s Getting '%s' subs ..." % (debug_pretext, languageshort))
-        subtitles = re.compile('(<td><a.+?</tr>)').findall(content)
-        print(subtitles)
-
-    except:
-        log(__name__, "%s Failed to get subtitles" % (debug_pretext))
-        return
-    for subtitle in subtitles:
-        try:
-            filename = re.compile('<td><a.+?">(.+?)</a>').findall(subtitle)[0]
-            filename = filename.strip()
-            print(filename)
-            id = re.compile('href="(.+?)"').findall(subtitle)[0]
-            #print(id)
-
-            try:
-                downloads = re.compile(';</td><td>(.+?) downloads</td><td>').findall(subtitle)[0]
-                print(downloads)
-                downloads = re.sub("\D", "", downloads)
-            except:
-                pass
-            try:
-                rating = get_rating(downloads)
-                print(rating)
-            except:
-                rating = 0
-                pass
-
-            if not (downloads == 'Εργαστήρι Υποτίτλων' or downloads == 'subs4series'):
-                log(__name__, "%s Subtitles found: %s (id = %s)" % (debug_pretext, filename, id))
-                subtitles_list.append({'rating': str(rating), 'no_files': 1, 'filename': filename, 'sync': False, 'id': id, 'language_flag': languageshort, 'language_name': languagelong})
-
-        except:
-            pass
-    return

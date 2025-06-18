@@ -3,7 +3,9 @@ __author__ = "mx3L"
 __email__ = "mx3Lmail@gmail.com"
 __copyright__ = 'Copyright (c) 2014-2025 mx3L, jbleyel, popking159'
 __license__ = "GPL-v2"
-__version__ = "1.7.0-r12"
+__mod__ = "MNASR"
+__mod_email__ = "popking159@gmail.com"
+__version__ = "1.7.0-r20"
 
 from gettext import bindtextdomain, dgettext, gettext, textdomain
 from os.path import dirname, join

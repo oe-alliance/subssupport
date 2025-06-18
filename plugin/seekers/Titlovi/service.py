@@ -17,7 +17,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     OSDBServer()
-    url_base = "https://en.titlovi.com/downloads/default.ashx?type=1&mediaid=%s"
+    url_base = "https://titlovi.com/download/?type=1&mediaid=%s"
     params = subtitles_list[pos]
     url = url_base % params["ID"]
     log(__name__, 'link: %s' % url)

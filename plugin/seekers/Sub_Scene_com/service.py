@@ -9,7 +9,7 @@ import string
 import zipfile
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from bs4 import BeautifulSoup
-from .SubscenebestUtilities import geturl, get_language_info
+from .Sub_sceneUtilities import geturl, get_language_info
 from six.moves import html_parser
 from six.moves.urllib.request import FancyURLopener
 from six.moves.urllib.parse import quote_plus, urlencode
@@ -66,7 +66,8 @@ def geturl(url):
         log(__name__, " Failed to get url:%s" % (url))
         content = None
     return(content)
-    
+
+
 def getSearchTitle(title, year=None): ## new Add
     url = 'https://sub-scene.com/search?query=%s' % quote_plus(title)
     #data = geturl(url)
@@ -192,22 +193,56 @@ def prepare_search_string(s):
     s = quote_plus(s)
     return s
 
+def getimdbid(title):
+    # Search query (movie name)
+    search_string = prepare_search_string(title)
+    url = f"https://www.imdb.com/find/?q={search_string}&s=tt"
+
+    # Set headers to mimic a browser visit
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
+
+    # Send request to IMDb
+    response = requests.get(url, headers=headers)
+
+    # Parse HTML with BeautifulSoup
+    soup = BeautifulSoup(response.text, 'html.parser')
+    #print(f"soup: {soup}")
+    # Extract first search result
+    result = soup.find('a', href=True, class_='ipc-metadata-list-summary-item__t')
+
+    if result:
+        movie_link = result['href']
+        movie_id = movie_link.split('/')[2]  # Extract 'tt20201748' from '/title/tt20201748/'
+        movie_title = result.text.strip()
+
+        print(f"Movie ID: {movie_id}")
+        print(f"Title: {movie_title}")
+        print(f"IMDb Link: https://www.imdb.com/title/{movie_id}/")
+    else:
+        print("Movie not found.")
+    return movie_id
+
 def search_movie(title, year, languages, filename):
     try:
-        title = title.replace("MISSION IMPOSSIBLE : ROGUE NATION", "Mission: Impossible - Rogue Nation").strip()
-        print(("title", title))
-        search_string = prepare_search_string(title)
-        print(("getSearchTitle", getSearchTitle))
-        url = getSearchTitle(title, year)#.replace("%2B"," ")
-        print(("true url", url))
-        content = requests.get(url,headers=HDR,verify=False,allow_redirects=True)
-        #print("true url", url)
+        movie_id = getimdbid(title)
+        print(("movie_id", movie_id))
+        url2 = f"https://sub-scene.com/search?query={movie_id}"
+        print(("true url", url2))
+        content2 = requests.get(url2,headers=HDR,allow_redirects=True)
+        soup = BeautifulSoup(content2.text, 'html.parser')
+        block = soup.find('div', class_='search-result').find("a")
+        movie_link = block.get("href")
+        url = main_url + movie_link
+        print("movie_url", url)
+        content = requests.get(url,headers=HDR,allow_redirects=True)
         #content = geturl(url)
 
-        #print("content", content)
+        
         if content != '':
             _list = getallsubs(content, languages, filename)
-            print(("_list", _list))
+            #print(("_list", _list))
             return _list
         else:
             return []
@@ -217,7 +252,8 @@ def search_movie(title, year, languages, filename):
 
 def search_tvshow(tvshow, season, episode, languages, filename):
     tvshow = tvshow.strip()
-    #print(("tvshow", tvshow))
+    print(("tvshow", tvshow))
+    movie_id = getimdbid(title)
     search_string = prepare_search_string(tvshow)
     #print(("search_string", search_string))
     search_string = search_string.replace("+"," ")

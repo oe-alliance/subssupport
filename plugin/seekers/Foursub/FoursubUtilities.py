@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from __future__ import print_function
+import requests
+import re
 from ..utilities import log as _log
 
+from six.moves import urllib
+import six
+
+
+ses = requests.Session()
 
 LANGUAGES = (
     ("Albanian", "29", "sq", "alb", "0", 30201),
@@ -67,7 +74,7 @@ LANGUAGES = (
     ("Chinese (Traditional)", "17", "zh", "chi", "100", 30207),
     ("Chinese (Simplified)", "17", "zh", "chi", "100", 30207))
 
-subscene_languages = {
+foursub_languages = {
     'Chinese BG code': 'Chinese',
     'Brazillian Portuguese': 'Portuguese (Brazil)',
     'Serbian': 'SerbianLatin',
@@ -77,8 +84,8 @@ subscene_languages = {
 
 
 def get_language_info(language):
-    if language in subscene_languages:
-        language = subscene_languages[language]
+    if language in foursub_languages:
+        language = foursub_languages[language]
 
     for lang in LANGUAGES:
         if lang[0] == language:
@@ -86,4 +93,18 @@ def get_language_info(language):
 
 
 def log(module, msg):
-    _log(module, msg)
+    _log(module, msg.encode('utf-8'))
+
+
+def geturl(url1, headers=None, params=None):
+    try:
+        res = ses.get(url1, headers=headers, verify=False, timeout=5)
+        print('res.status_code', res.status_code)
+        if res.status_code == 200:
+            return six.ensure_str(res.content)
+        e = res.raise_for_status()
+        print(('Download error', e))
+        return ''
+    except requests.exceptions.RequestException as e:
+        print(('Download error', str(e)))
+        return ''

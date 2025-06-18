@@ -191,7 +191,7 @@ def getEmbeddedFontSizeCfg(defaultFontSizeCfg):
 GLOBAL_CONFIG_INIT = False
 
 fontChoiceList = [f for f in getFonts()]
-fontSizeChoiceList = [("%d" % i, "%d px" % i) for i in range(10, 60, 1)]
+fontSizeChoiceList = [("%d" % i, "%d px" % i) for i in range(10, 101, 1)]
 positionChoiceList = [("0", _("top"))]
 positionChoiceList.extend([("%d" % i, "%d %%" % i) for i in range(1, 100, 1)])
 positionChoiceList.append(("100", _("bottom")))
@@ -202,7 +202,7 @@ colorChoiceList = []
 colorChoiceList.append(("ff0000", _("red")))
 colorChoiceList.append(("DCDCDC", _("grey")))
 colorChoiceList.append(("00ff00", _("green")))
-colorChoiceList.append(("ff00ff", _("purple")))
+colorChoiceList.append(("a020f0", _("purple")))
 colorChoiceList.append(("ffff00", _("yellow")))
 colorChoiceList.append(("ffffff", _("white")))
 colorChoiceList.append(("00ffff", _("blue")))
@@ -232,35 +232,36 @@ def initGeneralSettings(configsubsection):
 
 
 def initExternalSettings(configsubsection):
-    configsubsection.position = ConfigSelection(default="94", choices=positionChoiceList)
+    configsubsection.position = ConfigSelection(default="98", choices=positionChoiceList)
     configsubsection.font = ConfigSubsection()
     configsubsection.font.regular = ConfigSubsection()
     configsubsection.font.regular.type = ConfigSelection(default=getDefaultFont("regular"), choices=fontChoiceList)
     configsubsection.font.regular.alpha = ConfigSelection(default="00", choices=alphaChoiceList)
-    configsubsection.font.regular.color = ConfigSelection(default="ffffff", choices=colorChoiceList)
+    configsubsection.font.regular.color = ConfigSelection(default="ffff00", choices=colorChoiceList)
     configsubsection.font.italic = ConfigSubsection()
     configsubsection.font.italic.type = ConfigSelection(default=getDefaultFont("italic"), choices=fontChoiceList)
     configsubsection.font.italic.alpha = ConfigSelection(default="00", choices=alphaChoiceList)
-    configsubsection.font.italic.color = ConfigSelection(default="ffffff", choices=colorChoiceList)
+    configsubsection.font.italic.color = ConfigSelection(default="ffff00", choices=colorChoiceList)
     configsubsection.font.bold = ConfigSubsection()
     configsubsection.font.bold.type = ConfigSelection(default=getDefaultFont("bold"), choices=fontChoiceList)
     configsubsection.font.bold.alpha = ConfigSelection(default="00", choices=alphaChoiceList)
-    configsubsection.font.bold.color = ConfigSelection(default="ffffff", choices=colorChoiceList)
-    configsubsection.font.size = ConfigSelection(default="43", choices=fontSizeChoiceList)
+    configsubsection.font.bold.color = ConfigSelection(default="ffff00", choices=colorChoiceList)
+    configsubsection.font.size = ConfigSelection(default="75", choices=fontSizeChoiceList)
     configsubsection.shadow = ConfigSubsection()
     configsubsection.shadow.enabled = ConfigOnOff(default=True)
     configsubsection.shadow.type = ConfigSelection(default="border", choices=[("offset", _("offset")), ("border", _('border'))])
     configsubsection.shadow.color = ConfigSelection(default="000000", choices=colorChoiceList)
-    configsubsection.shadow.size = ConfigSelection(default="2", choices=shadowSizeChoiceList)
+    configsubsection.shadow.size = ConfigSelection(default="3", choices=shadowSizeChoiceList)
     configsubsection.shadow.xOffset = ConfigSelection(default="-3", choices=shadowOffsetChoiceList)
     configsubsection.shadow.yOffset = ConfigSelection(default="-3", choices=shadowOffsetChoiceList)
     configsubsection.background = ConfigSubsection()
     configsubsection.background.enabled = ConfigOnOff(default=True)
-    configsubsection.background.type = ConfigSelection(default="dynamic", choices=[("dynamic", _("dynamic")), ("static", _("static"))])
-    configsubsection.background.xOffset = ConfigSelection(default="10", choices=backgroundOffsetChoiceList)
-    configsubsection.background.yOffset = ConfigSelection(default="10", choices=backgroundOffsetChoiceList)
+    configsubsection.background.type = ConfigSelection(default="dynamic", choices=[("dynamic", _("dynamic")), ("static", _("static")), ("fixed", _("fixed"))])
+    configsubsection.background.xOffset = ConfigSelection(default="5", choices=backgroundOffsetChoiceList)
+    configsubsection.background.yOffset = ConfigSelection(default="5", choices=backgroundOffsetChoiceList)
     configsubsection.background.color = ConfigSelection(default="000000", choices=colorChoiceList)
     configsubsection.background.alpha = ConfigSelection(default="80", choices=alphaChoiceList)
+    configsubsection.background.height = ConfigSelection(default="4", choices=["2", "3", "4", "5", "6", "7", "8"])
 
 
 def initEmbeddedSettings(configsubsection):
@@ -1194,7 +1195,7 @@ class SubsEmbeddedScreen(Screen):
 
 
 class SubtitlesWidget(GUIComponent):
-    STATE_NO_BACKGROUND, STATE_BACKGROUND = range(2)
+    STATE_NO_BACKGROUND, STATE_BACKGROUND, STATE_FIXED_BACKGROUND = range(3)
 
     def __init__(self, boundDynamic=True, boundXOffset=10, boundYOffset=10, boundSize=None, fontSize=25, positionPercent=94):
         GUIComponent.__init__(self)
@@ -1226,10 +1227,15 @@ class SubtitlesWidget(GUIComponent):
         pass
 
     def calcWidgetYPosition(self):
-        return int((self.desktopSize[1] - self.calcWidgetHeight() - self.boundYOffset) / float(100) * self.positionPercent)
+        return int((self.desktopSize[1] - self.calcWidgetHeight() - self.boundYOffset) / float(100) * self.positionPercent) + 40
 
     def calcWidgetHeight(self):
-        return int(4 * self.font[1] + 15)
+        backgroundType = config.plugins.subtitlesSupport.external.background.type.value  # Get background type
+        if backgroundType == "fixed":
+            heightFactor = int(config.plugins.subtitlesSupport.external.background.height.value)  # Use user setting
+        else:
+            heightFactor = 4  # Default value for dynamic & static
+        return int(heightFactor * self.font[1] + 15)  # Calculate final height
 
     def update(self):
         ds = self.desktopSize
@@ -1280,6 +1286,15 @@ class SubtitlesWidget(GUIComponent):
                 self.instance.setVAlign(self.instance.alignCenter)
                 self.instance.setText(text)
                 self.instance.show()
+            elif self.state == self.STATE_FIXED_BACKGROUND:
+                self.instance.show()
+                self.instance2.setText(text)
+                self.instance2.show()
+                
+                # Ensure the fixed background maintains the correct height
+                bs = self.boundSize = (self.desktopSize[0], self.calcWidgetHeight())
+                self.instance.resize(eSize(int(bs[0]), int(bs[1])))
+                self.instance.move(ePoint(int(self.desktopSize[0] / 2 - bs[0] / 2), int(self.calcWidgetYPosition())))
 
     def setPosition(self, percent):
         self.positionPercent = percent
@@ -1299,11 +1314,21 @@ class SubtitlesWidget(GUIComponent):
         self.instance2.setForegroundColor(parseColor(color))
 
     def setBackgroundColor(self, color):
+        backgroundType = config.plugins.subtitlesSupport.external.background.type.value  # Correct config path
         if color[1:3] == "ff":
             self.state = self.STATE_NO_BACKGROUND
+        elif backgroundType == "fixed":  # Check for "fixed" background mode
+            self.state = self.STATE_FIXED_BACKGROUND
+            self.instance.setBackgroundColor(parseColor(color))
+            self.instance.show()  # Ensure background remains visible
         else:
             self.state = self.STATE_BACKGROUND
             self.instance.setBackgroundColor(parseColor(color))
+    def setFixedBackgroundHeight(self, height):
+        self.boundSize = (self.desktopSize[0], int(height) * self.font[1] + 15)
+        self.instance.resize(eSize(int(self.boundSize[0]), int(self.boundSize[1])))
+        self.instance.move(ePoint(int(self.desktopSize[0] / 2 - self.boundSize[0] / 2), int(self.calcWidgetYPosition())))
+
 
     def setBorderColor(self, color):
         self.instance.setBorderColor(parseColor(color))
@@ -1388,14 +1413,21 @@ class SubsScreen(Screen):
         elif self.__shadowType == 'offset' and (xOffset is not None and yOffset is not None):
             self["subtitles"].setShadowOffset(str(-xOffset) + ',' + str(-yOffset), self.scale)
 
-    def setBackground(self, type, alpha, color, xOffset=None, yOffset=None):
+    def setBackground(self, type, alpha, color, xOffset=None, yOffset=None, height=None):
         if type == 'dynamic':
             self["subtitles"].setBoundDynamic(True)
             self["subtitles"].setBoundOffset(xOffset, yOffset)
         else:
             self["subtitles"].setBoundDynamic(False)
+
+        # Apply background color
         color = "#" + alpha + color
         self["subtitles"].setBackgroundColor(color)
+
+        # Apply height only for "fixed" background
+        if type == "fixed" and height:
+            self["subtitles"].setFixedBackgroundHeight(height)
+
 
     def setColor(self, color):
         self.currentColor = color
@@ -1420,6 +1452,7 @@ class SubsScreen(Screen):
             shadowXOffset = shadowYOffset = shadowSize = 0
         backgroundType = self.externalSettings.background.type.getValue()
         backgroundAlpha = self.externalSettings.background.alpha.getValue()
+        backgroundHeight = self.externalSettings.background.height.getValue()
         backgroundColor = self.externalSettings.background.color.getValue()
         backgroundXOffset = self.externalSettings.background.xOffset.getValue()
         backgroundYOffset = self.externalSettings.background.yOffset.getValue()
@@ -1432,7 +1465,7 @@ class SubsScreen(Screen):
 
         self.setPosition(position)
         self.setShadow(shadowType, shadowColor, shadowSize, shadowXOffset, shadowYOffset)
-        self.setBackground(backgroundType, backgroundAlpha, backgroundColor, backgroundXOffset, backgroundYOffset)
+        self.setBackground(backgroundType, backgroundAlpha, backgroundColor, backgroundXOffset, backgroundYOffset, backgroundHeight)
         externalSettings = self.externalSettings
         self.setFonts({
             "regular": {
@@ -1548,7 +1581,11 @@ class SubsEngine(object):
                 self.__seek = service.seek()
         except Exception:
             return
-        r = self.__seek.getPlayPosition()
+        try:
+            r = self.__seek.getPlayPosition()
+        except:
+            return
+
         if r[0]:
             self.__pts = None
         else:
@@ -1960,6 +1997,7 @@ class SubsMenu(Screen):
             self.cancel()
         elif mode == 'subsoff':
             self.turnOff = True
+            if self.subfile is not None: self.subfile = None
             self.cancel()
 
     def getSearchTitleList(self, sName, sPath):
@@ -2092,6 +2130,7 @@ class SubsSetupExternal(BaseMenuScreen):
                 configList.append(getConfigListEntry(_("Background Y-offset"), externalSettings.background.yOffset))
             configList.append(getConfigListEntry(_("Background color"), externalSettings.background.color))
             configList.append(getConfigListEntry(_("Background transparency"), externalSettings.background.alpha))
+            configList.append(getConfigListEntry(_("Background height"), externalSettings.background.height))
         return configList
 
     def __init__(self, session, externalSettings):
@@ -2883,6 +2922,7 @@ class SubsSearchProcess(object):
         self.pPayload = None
         self.data = ""
         self.__stopping = False
+        self.mpart = False
         self.appContainer = eConsoleAppContainer()
         self.stdoutAvail_conn = eConnectCallback(self.appContainer.stdoutAvail, self.dataOutCB)
         self.stderrAvail_conn = eConnectCallback(self.appContainer.stderrAvail, self.dataErrCB)
@@ -2892,7 +2932,12 @@ class SubsSearchProcess(object):
         def getMessage(data):
             mSize = int(data[:7])
             mPayload = data[7:mSize]
-            mPart = mSize > len(data)
+            if self.mpart == False:
+                mPart = mSize > len(data)
+            else:
+                mPart = False
+                self.mpart = False
+
             return mSize, mPayload, mPart
 
         def readMessage(payload):

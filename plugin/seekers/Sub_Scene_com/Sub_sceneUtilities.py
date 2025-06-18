@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from __future__ import print_function
+import requests
+import re
 from ..utilities import log as _log
+from six.moves import urllib
+import six
 
+ses = requests.Session()
 
 LANGUAGES = (
     ("Albanian", "29", "sq", "alb", "0", 30201),
@@ -16,7 +21,7 @@ LANGUAGES = (
     ("Czech", "7", "cs", "cze", "8", 30209),
     ("Danish", "24", "da", "dan", "9", 30210),
     ("Dutch", "23", "nl", "dut", "10", 30211),
-    ("English", "2", "gb", "eng", "11", 30212),
+    ("English", "2", "en", "eng", "11", 30212),
     ("Estonian", "20", "et", "est", "12", 30213),
     ("Persian", "52", "fa", "per", "13", 30247),
     ("Finnish", "31", "fi", "fin", "14", 30214),
@@ -67,7 +72,7 @@ LANGUAGES = (
     ("Chinese (Traditional)", "17", "zh", "chi", "100", 30207),
     ("Chinese (Simplified)", "17", "zh", "chi", "100", 30207))
 
-moviesubtitles2_languages = {
+subscene_languages = {
     'Chinese BG code': 'Chinese',
     'Brazillian Portuguese': 'Portuguese (Brazil)',
     'Serbian': 'SerbianLatin',
@@ -77,8 +82,8 @@ moviesubtitles2_languages = {
 
 
 def get_language_info(language):
-    if language in moviesubtitles2_languages:
-        language = moviesubtitles2_languages[language]
+    if language in subscene_languages:
+        language = subscene_languages[language]
 
     for lang in LANGUAGES:
         if lang[0] == language:
@@ -87,3 +92,17 @@ def get_language_info(language):
 
 def log(module, msg):
     _log(module, msg.encode('utf-8'))
+
+
+def geturl(url1, headers=None, params=None):
+    try:
+        res = ses.get(url1, headers=headers, verify=False, timeout=5)
+        print('res.status_code', res.status_code)
+        if res.status_code == 200:
+            return six.ensure_str(res.content)
+        e = res.raise_for_status()
+        print(('Download error', e))
+        return ''
+    except requests.exceptions.RequestException as e:
+        print(('Download error', str(e)))
+        return ''
