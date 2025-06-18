@@ -25,7 +25,7 @@ import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from six.moves import html_parser
-warnings.simplefilter('ignore',InsecureRequestWarning)
+warnings.simplefilter('ignore', InsecureRequestWarning)
 
 
 HDR = {
@@ -33,14 +33,14 @@ HDR = {
     "accept-language": "en-US,en;q=0.9",
     "content-type": "application/json",
     "priority": "u=1, i",
-    "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
     }
 HDRDL = {
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
     "accept-language": "en-US,en;q=0.9",
     "content-type": "application/x-www-form-urlencoded",
     "priority": "u=1, i",
-    "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
     }
 
 __api = "https://api.subsource.net/api/"
@@ -88,7 +88,7 @@ def geturl(url):
         content = None
     return (content)
     
-def getSearchTitle(title, year=None): ## new Add
+def getSearchTitle(title, year=None):  # new Add
     title = prepare_search_string(title).replace('%26', '&')
     data_url = 'https://www.opensubtitles.org/libs/suggest.php?format=json3&MovieName=%s' % title
     content = requests.get(data_url, timeout=10)
@@ -267,14 +267,14 @@ def search_tvshow(tvshow, season, episode, languages, filename):
 
     log(__name__, "Search tvshow = %s" % search_string)
     url = main_url + "/subtitles/title?q=" + quote_plus(search_string) + '&r=true'
-    content, response_url = requests.get(url,headers=HDR,verify=False,allow_redirects=True).text
+    content, response_url = requests.get(url, headers=HDR, verify=False, allow_redirects=True).text
     if content is not None:
         log(__name__, "Multiple tv show seasons found, searching for the right one ...")
         tv_show_seasonurl = find_tv_show_season(content, tvshow, seasons[int(season)])
         if tv_show_seasonurl is not None:
             log(__name__, "Tv show season found in list, getting subs ...")
             url = main_url + tv_show_seasonurl
-            content, response_url = requests.get(url,headers=HDR,verify=False,allow_redirects=True).text
+            content, response_url = requests.get(url, headers=HDR, verify=False, allow_redirects=True).text
             if content is not None:
                 search_string = "s%#02de%#02d" % (int(season), int(episode))
                 return getallsubs(content, languages, filename, search_string)
@@ -283,7 +283,7 @@ def search_tvshow(tvshow, season, episode, languages, filename):
 def search_manual(searchstr, languages, filename):
     search_string = prepare_search_string(searchstr)
     url = main_url + "/subtitles/release?q=" + search_string + '&r=true'
-    content, response_url = requests.get(url,headers=HDR,verify=False,allow_redirects=True).text
+    content, response_url = requests.get(url, headers=HDR, verify=False, allow_redirects=True).text
 
     if content is not None:
         return getallsubs(content, languages, filename)
@@ -356,7 +356,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     #my_urlopener.addheader('Referer', url)
     log(__name__, "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, url, postparams))
     #response = my_urlopener.open(downloadlink, postparams)
-    response = requests.get(downloadlink,verify=False,allow_redirects=True) 
+    response = requests.get(downloadlink, verify=False, allow_redirects=True) 
     local_tmp_file = zip_subs
     try:
         log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))

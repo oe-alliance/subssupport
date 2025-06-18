@@ -50,7 +50,7 @@ debug_pretext = ""
 def prepare_search_string(s):
     s = s.replace("'", "").strip()
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
-    s = s.replace(" :",":").replace(".", " ")
+    s = s.replace(" :", ":").replace(".", " ")
     print(("s_title", s))
     return s
 

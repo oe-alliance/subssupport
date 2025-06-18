@@ -17,7 +17,7 @@ from ..utilities import languageTranslate, log, getFileSize
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 
 
-def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack): #standard input
+def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
     # need to filter titles like <Localized movie name> (<Movie name>)
     br_index = title.find('(')
     if br_index > -1:
@@ -29,7 +29,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     return subtitles_list, session_id, ""  #standard output
 
 
-def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id): #standard input
+def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
 
     subtitle_id = subtitles_list[pos]['ID']
     client = TitulkyClient()
@@ -96,7 +96,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     zip_file = open(zip_subs, 'wb')
     zip_file.write(data)
     zip_file.close()
-    return True, subtitles_list[pos]['language_name'], "zip" #standard output
+    return True, subtitles_list[pos]['language_name'], "zip"  # standard output
 
 
 def lang_titulky2xbmclang(lang):
@@ -195,7 +195,7 @@ class TitulkyClient(object):
             except:
                 log(__name__, 'Exception when parsing subtitle, all I got is  %s' % str(item))
                 continue
-            if item['sync'] == '': # if no sync info is found, just use title instead of None
+            if item['sync'] == '':  # if no sync info is found, just use title instead of None
                 item['filename'] = item['title']
             else:
                 item['filename'] = item['sync']

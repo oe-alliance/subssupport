@@ -117,7 +117,7 @@ def get_subtitles_list_tv(searchstring, tvshow, season, episode, languageshort, 
     return
 
 
-def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack): #standard input
+def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
     languagefound = lang1
     language_info = get_language_info(languagefound)
     language_info1 = language_info['name']
@@ -127,17 +127,17 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     subtitles_list = []
     msg = ""   
 
-    if len(tvshow) == 0 and year: # Movie
+    if len(tvshow) == 0 and year:  # Movie
         searchstring = "%s (%s)" % (title, year)
         print(("searchstring", searchstring))
         get_subtitles_list_movie(searchstring, title, language_info2, language_info1, subtitles_list)
-    elif len(tvshow) > 0 and title == tvshow: # Movie not in Library
+    elif len(tvshow) > 0 and title == tvshow:  # Movie not in Library
         print(len(tvshow))
         #searchstring = "%s (%#02d%#02d)" % (tvshow, int(season), int(episode))
         searchstring = "%s" % (tvshow)
         print(("searchstring", searchstring))
         get_subtitles_list_tv(searchstring, tvshow, season, episode, language_info2, language_info1, subtitles_list)
-    elif len(tvshow) > 0: # TVShow
+    elif len(tvshow) > 0:  # TVShow
         searchstring = "%s S%#02dE%#02d" % (tvshow, int(season), int(episode))
         print(("searchstring", searchstring))
         get_subtitles_list_tv(searchstring, tvshow, season, episode, language_info2, language_info1, subtitles_list)
@@ -146,7 +146,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
         print(("searchstring", searchstring))
         get_subtitles_list_movie(searchstring, title, language_info2, language_info1, subtitles_list)
     #get_subtitles_list(searchstring, title, language_info2, language_info1, subtitles_list)
-    return subtitles_list, "", msg #standard output
+    return subtitles_list, "", msg  # standard output
 
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):

@@ -21,7 +21,7 @@ import string
 import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-warnings.simplefilter('ignore',InsecureRequestWarning)
+warnings.simplefilter('ignore', InsecureRequestWarning)
 
 search_url = "https://my-subs.co/search.php?key="
 main_url = "https://my-subs.co/"
@@ -324,7 +324,7 @@ def search_tvshow(title, season, episode, languages, filename):
 def search_manual(searchstr, languages, filename):
     search_string = prepare_search_string(searchstr)
     url = main_url + "/subtitles/release?q=" + search_string + '&r=true'
-    content, response_url = requests.get(url,headers=HDR,verify=False,allow_redirects=True).text
+    content, response_url = requests.get(url, headers=HDR, verify=False, allow_redirects=True).text
 
     if content is not None:
         return getallsubs(content, languages, filename)

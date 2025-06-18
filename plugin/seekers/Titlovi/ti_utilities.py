@@ -23,8 +23,8 @@ LANGUAGES = (
 	("Macedonian", "35", "mk", "mac", "28", 30229, "Makedosnki"),
 	("Serbian", "36", "sr", "scc", "36", 30237, "Srpski"),
 	("Slovenian", "1", "sl", "slv", "38", 30239, "Slovenski"),
-	("SerbianLatin", "36", "sr", "scc", "100", 30237, "Srpski"), #?
-	("BosnianLatin", "10", "bs", "bos", "3", 30204, "Bosanski")) #?
+	("SerbianLatin", "36", "sr", "scc", "100", 30237, "Srpski"),  # ?
+	("BosnianLatin", "10", "bs", "bos", "3", 30204, "Bosanski"))  # ?
 
 
 
@@ -39,7 +39,7 @@ def get_user_pass():
 		#ZATO, CITAJ KONFIGURACIJU KAO PLAIN TEXT/FILE, PA FILTRIRAJ QUERY. LUDO? DA, ALI...
 		with open("/etc/enigma2/settings") as file:
 			for line in file:
-				parts = line.split("=") # split line into parts
+				parts = line.split("=")  # split line into parts
 				if len(parts) > 1:	 # if at least 2 parts/columns
 					if line.startswith("config.plugins.subtitlesSupport.search.titlovi.password"):
 						_PASSW = parts[1].replace("\n", "").strip()
@@ -84,10 +84,10 @@ class OSDBServer:
 		#VIDI KOJE JEZIKE TREBA TRAZITI I ODMAH IH KONVERTIRAJ U NASKI DA TITLOVI.COM ZNA
 		language_query = ""
 		for i in range(len(lang)):
-			language_query = language_query + "|" + languageTranslate((lang[i]),2,6)
+			language_query = language_query + "|" + languageTranslate((lang[i]), 2, 6)
 
 		if language_query.startswith("|"):
-			language_query = language_query[1:]	#IZBACI PRVI "|"
+			language_query = language_query[1:]  # IZBACI PRVI "|"
 		#-----------------------------------------------------------------------------------
 		#-----------------------------------------------------------------------------------
 		#START LOGIN
@@ -101,7 +101,7 @@ class OSDBServer:
 				user_id = str(resp_json['UserId'])
 				expiration_date = str(resp_json['ExpirationDate'])
 				#-----------------------------------------------------------------------------------
-				search_language = language_query #"Hrvatski|Srpski|Bosanski|Makedonski|Slovenski|Engleski"
+				search_language = language_query  # "Hrvatski|Srpski|Bosanski|Makedonski|Slovenski|Engleski"
 				search_params['lang'] = search_language
 				search_params['query'] = search_string
 				search_params['token'] = token
@@ -135,8 +135,8 @@ class OSDBServer:
 							try:
 								for i in range(len(subtitles)):
 									lang_name = str(result_item['Lang'])
-									lang_name = languageTranslate((lang_name),6,0)		#Hrvatski --> Croatian, etc..
-									flag_image = languageTranslate((lang_name),0,2)			#Croatian ---> hr, etc...
+									lang_name = languageTranslate((lang_name), 6, 0)		#Hrvatski --> Croatian, etc..
+									flag_image = languageTranslate((lang_name), 0, 2)			#Croatian ---> hr, etc...
 							except Exception as e:
 								flag_image = ""
 								lang_name = ""
@@ -155,7 +155,7 @@ class OSDBServer:
 								else:
 									filename = movie.replace(" ", ".") + "." + year + "." + str(filename).replace(" ", ".").replace("['", "").replace("']", "")
 							else:
-								if len(filename) > 1:	#TV?
+								if len(filename) > 1:  # TV?
 									filename = movie.replace(" ", ".") + ".s" + season + "e" + episode + "." + str(filename[0]).replace(" ", ".")
 								else:
 									filename = movie.replace(" ", ".") + ".s" + season + "e" + episode + "." + str(filename).replace(" ", ".").replace("['", "").replace("']", "")

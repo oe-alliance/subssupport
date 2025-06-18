@@ -20,7 +20,7 @@ import string
 import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-warnings.simplefilter('ignore',InsecureRequestWarning)
+warnings.simplefilter('ignore', InsecureRequestWarning)
 
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -187,7 +187,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
                                      'language_name': language_info['name'], 'lang': language_info})
                         i = i + 1
                 else:
-                    subtitles.append({'filename': subtitle_name, 'sync': sync, 'link': link, 'language_name': language_info['name'], 'lang': language_info, 'sub_id':sub_id, 'linkName':linkName, 'year':year})
+                    subtitles.append({'filename': subtitle_name, 'sync': sync, 'link': link, 'language_name': language_info['name'], 'lang': language_info, 'sub_id': sub_id, 'linkName': linkName, 'year': year})
                     i = i + 1
 
         subtitles.sort(key=lambda x: [not x['sync']])
@@ -199,7 +199,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
 def prepare_search_string(s):
     s = s.replace("'", "").strip()
     s = re.sub(r'\(\d\d\d\d\)$', '', s)  # remove year from title
-    s = quote_plus(s).replace("+"," ")
+    s = quote_plus(s).replace("+", " ")
     return s
     
 def search_movie(title, year, languages, filename):
@@ -289,7 +289,7 @@ def search_tvshow(title, season, episode, languages, filename):
 def search_manual(searchstr, languages, filename):
     search_string = prepare_search_string(searchstr)
     url = main_url + "/subtitles/release?q=" + search_string + '&r=true'
-    content, response_url = requests.get(url,headers=HDR,verify=False,allow_redirects=True).text
+    content, response_url = requests.get(url, headers=HDR, verify=False, allow_redirects=True).text
 
     if content is not None:
         return getallsubs(content, languages, filename)
@@ -321,7 +321,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     #print(("sub_id", sub_id))
     #print(("language", language))
     #print(("linkName", linkName))
-    params = {"movie":linkName,"lang":language,"id":sub_id}
+    params = {"movie": linkName, "lang": language, "id": sub_id}
     content = requests.post(__getSub, headers=HDR, data=json.dumps(params), timeout=10).text
     response_json = json.loads(content)
     success = response_json['success']
@@ -340,7 +340,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         filmid = 0
         postparams = {'__EVENTTARGET': 's$lc$bcr$downloadLink', '__EVENTARGUMENT': '', '__VIEWSTATE': viewstate, '__PREVIOUSPAGE': previouspage, 'subtitleId': subtitleid, 'typeId': typeid, 'filmId': filmid}
         log(__name__, "%s Fetching subtitles using url '%s' with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, main_url, postparams))
-        response = requests.get(downloadlink,data=postparams,headers=HDRDL,verify=False,allow_redirects=True) 
+        response = requests.get(downloadlink, data=postparams, headers=HDRDL, verify=False, allow_redirects=True) 
         local_tmp_file = zip_subs
         try:
             log(__name__, "%s Saving subtitles to '%s'" % (debug_pretext, local_tmp_file))

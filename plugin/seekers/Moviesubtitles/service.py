@@ -19,7 +19,7 @@ import calendar
 import difflib
 import re
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-warnings.simplefilter('ignore',InsecureRequestWarning)
+warnings.simplefilter('ignore', InsecureRequestWarning)
 import os
 import os.path
 from six.moves.urllib.request import HTTPCookieProcessor, build_opener, install_opener, Request, urlopen
@@ -55,7 +55,7 @@ HDR = {'User-Agent': get_random_ua(),
       'Referer': 'https://www.moviesubtitles.org/search.php',
       'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
-      'Accept-Encoding':'gzip, deflate, br, zstd'}
+      'Accept-Encoding': 'gzip, deflate, br, zstd'}
       
 s = requests.Session()  
  
@@ -155,7 +155,7 @@ def get_rating(downloads):
     return rating                           
 
 
-def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack): #standard input
+def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):  # standard input
     languagefound = lang1
     language_info = get_language_info(languagefound)
     language_info1 = language_info['name']
@@ -165,17 +165,17 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     subtitles_list = []
     msg = ""   
 
-    if len(tvshow) == 0 and year: # Movie
+    if len(tvshow) == 0 and year:  # Movie
         searchstring = "%s (%s)" % (title, year)
-    elif len(tvshow) > 0 and title == tvshow: # Movie not in Library
+    elif len(tvshow) > 0 and title == tvshow:  # Movie not in Library
         searchstring = "%s (%#02d%#02d)" % (tvshow, int(season), int(episode))
-    elif len(tvshow) > 0: # TVShow
+    elif len(tvshow) > 0:  # TVShow
         searchstring = "%s S%#02dE%#02d" % (tvshow, int(season), int(episode))
     else:
         searchstring = title
     log(__name__, "%s Search string = %s" % (debug_pretext, searchstring))
     get_subtitles_list(title, year, language_info2, language_info1, subtitles_list)
-    return subtitles_list, "", msg #standard output
+    return subtitles_list, "", msg  # standard output
 
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):  # standard input
     language = subtitles_list[pos]["language_name"]
@@ -184,7 +184,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     print(("filename", filename))
     id = subtitles_list[pos]["id"]
     print(("id1", id))
-    id = id.replace("subtitle","download")
+    id = id.replace("subtitle", "download")
     print(("id2", id))
     downloadlink = 'http://www.moviesubtitles.org%s' % (id)
     print(("downloadlink", downloadlink))
@@ -206,7 +206,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         #my_urlopener.addheader('Referer', url)
         log(__name__, "%s Fetching subtitles using url with referer header '%s' and post parameters '%s'" % (debug_pretext, downloadlink, postparams))
         #response = my_urlopener.open(downloadlink, postparams)
-        response = s.get(downloadlink,data=postparams,headers=HDR,verify=False,allow_redirects=True) 
+        response = s.get(downloadlink, data=postparams, headers=HDR, verify=False, allow_redirects=True) 
         print(response.content)
         local_tmp_file = zip_subs
         try:
