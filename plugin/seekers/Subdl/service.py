@@ -152,7 +152,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
 def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id):
     subtitle_id = subtitles_list[pos]["id"]
     language = subtitles_list[pos]["language_name"]
-    download_url = DOWNLOAD_URL  + subtitle_id
+    download_url = DOWNLOAD_URL + subtitle_id
     response = requests.get(download_url, stream=True)
     local_tmp_file = zip_subs
     packed = False

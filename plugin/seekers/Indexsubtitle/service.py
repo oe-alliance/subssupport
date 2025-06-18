@@ -62,7 +62,7 @@ HDRJSON = {
     "priority": "u=1, i",
     "User-Agent": get_random_ua()}
 
-HDR= {'User-Agent': get_random_ua(),
+HDR = {'User-Agent': get_random_ua(),
       'Accept': 'application/json, text/javascript, */*; q=0.01',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
       'X-Requested-With': 'XMLHttpRequest',
@@ -78,7 +78,7 @@ s = requests.Session()
  
 
 main_url = "https://indexsubtitle.cc"
-url2="https://indexsubtitle.cc/subtitlesInfo"
+url2 = "https://indexsubtitle.cc/subtitlesInfo"
 debug_pretext = "indexsubtitle.cc"
 
 
@@ -233,9 +233,9 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     zp = id.replace('/[^\w ]/','').replace('/','_').replace('_subtitle_','[indexsubtitle.cc]_')
     print('zp:', zp)  
     #.replace('_subtitles_','[indexsubtitle.cc]_')
-    check_data='id='+ID+'&lang='+language+'&url='+id+''
+    check_data = 'id=' + ID + '&lang=' + language + '&url=' + id + ''
     print('check_data:', check_data)
-    data=s.post(url2,headers=HDR,data=check_data,verify=False,allow_redirects=True).text
+    data = s.post(url2,headers=HDR,data=check_data,verify=False,allow_redirects=True).text
     print('data:', data)
     
     # regx='download_url":"(.*?)"'
@@ -333,7 +333,7 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
     # Now you can scrape the subtitles from this page
     try:
         print(f"Fetching subtitles for language: {languageshort}")
-        subtitles = re.compile('({"title.+?language":"'+lang+'".+?,{"title)').findall(content)
+        subtitles = re.compile('({"title.+?language":"' + lang + '".+?,{"title)').findall(content)
         ttl = re.compile('ttl = (.+?);').findall(content)[0]
     except Exception as e:
         print(f"Failed to get subtitles: {e}")

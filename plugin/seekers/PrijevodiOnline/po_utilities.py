@@ -18,13 +18,13 @@ LANGUAGES = (
 	# Script Setting Language[4]
 	# localized name id number[5]
 	# Localized Full Language name[6]
-	("Bosnian", "10",	 "bs",	 "bos",	  "3",	  30204, "Bosanski"),
-	("Croatian", "38",	 "hr",	 "hrv",	  "7",	  30208, "Hrvatski"),
-	("English", "2",	 "en",	 "eng",	  "11",	  30212, "Engleski"),
-	("Macedonian", "35",	 "mk",	 "mac",	  "28",	  30229, "Makedosnki"),
-	("Serbian", "36",	 "sr",	 "scc",	  "36",	  30237, "Srpski"),
-	("Slovenian", "1",	 "sl",	 "slv",	  "38",	  30239, "Slovenski"),
-	("SerbianLatin", "36",	 "sr",	 "scc",	  "100",  30237, "SrpskiLatinica")) #?
+	("Bosnian", "10", "bs", "bos", "3", 30204, "Bosanski"),
+	("Croatian", "38", "hr", "hrv", "7", 30208, "Hrvatski"),
+	("English", "2", "en", "eng", "11", 30212, "Engleski"),
+	("Macedonian", "35", "mk", "mac", "28", 30229, "Makedosnki"),
+	("Serbian", "36", "sr", "scc", "36", 30237, "Srpski"),
+	("Slovenian", "1", "sl", "slv", "38", 30239, "Slovenski"),
+	("SerbianLatin", "36", "sr", "scc", "100", 30237, "SrpskiLatinica")) #?
 
 def languageTranslate(lang, lang_from, lang_to):
 	for x in LANGUAGES:

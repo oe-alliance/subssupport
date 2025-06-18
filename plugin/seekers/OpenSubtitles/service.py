@@ -86,7 +86,7 @@ def geturl(url):
     except:
         log(__name__, " Failed to get url:%s" % (url))
         content = None
-    return(content)
+    return (content)
     
 def getSearchTitle(title, year=None): ## new Add
     title = prepare_search_string(title).replace('%26', '&')
