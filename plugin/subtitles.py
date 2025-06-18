@@ -1997,7 +1997,8 @@ class SubsMenu(Screen):
             self.cancel()
         elif mode == 'subsoff':
             self.turnOff = True
-            if self.subfile is not None: self.subfile = None
+            if self.subfile is not None:
+                self.subfile = None
             self.cancel()
 
     def getSearchTitleList(self, sName, sPath):

@@ -160,7 +160,8 @@ class OSDBServer:
 								else:
 									filename = movie.replace(" ", ".") + ".s" + season + "e" + episode + "." + str(filename).replace(" ", ".").replace("['", "").replace("']", "")
 
-							if filename.endswith("."): filename = filename[:-1]
+							if filename.endswith("."):
+								filename = filename[:-1]
 								
 							try:
 								rating = str(result_item['Rating'])

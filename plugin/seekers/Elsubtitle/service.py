@@ -227,17 +227,25 @@ def download_subtitles (subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, 
     regx2='rawurlencode" type="hidden" value="(.*?)"'
     regx3='worktitle" type="hidden" value="(.*?)"'
     regx4='workyear" type="hidden" value="(.*?)"'
-    try:workid=re.findall(regx, data, re.M|re.I)[0]
-    except:pass                                                                                
+    try:
+        workid=re.findall(regx, data, re.M|re.I)[0]
+    except:
+        pass                                                                                
     #print("workid:",workid)
-    try:rawurlencode=re.findall(regx2, data, re.M|re.I)[0]
-    except:pass                                                                                
+    try:
+        rawurlencode=re.findall(regx2, data, re.M|re.I)[0]
+    except:
+        pass                                                                                
     #print("rawurlencode:",rawurlencode)
-    try:worktitle=re.findall(regx3, data, re.M|re.I)[0]
-    except:pass                                                                                
+    try:
+        worktitle=re.findall(regx3, data, re.M|re.I)[0]
+    except:
+        pass                                                                                
     #print("worktitle:",worktitle)
-    try:workyear=re.findall(regx4, data, re.M|re.I)[0]
-    except:pass                                                                                
+    try:
+        workyear=re.findall(regx4, data, re.M|re.I)[0]
+    except:
+        pass                                                                                
     #print("workyear:",workyear)
     check_data2='workid='+workid+'&rawurlencode='+rawurlencode+'&linkback=Back to&linkanother=Download another subtitle file&downloadtext=Download the subtitle file for&worktitle='+worktitle+'&workyear='+workyear+'&sublanguage=""&submit=Download The Subtitle File'
     post_data=requests.post(url2,headers=HDR,data=check_data2,verify=False,allow_redirects=False).text

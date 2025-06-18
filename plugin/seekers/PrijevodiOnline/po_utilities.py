@@ -86,7 +86,8 @@ class OSDBServer:
 					else:
 						block = re.findall('<h3 id="sezona-.*?">Sezona ' + season + '</h3>(.*?)<h3', data)
 					block = ' '.join(block)
-					if block == "": return subtitles_list
+					if block == "":
+						return subtitles_list
 
 					#IZVADI SVE LINKOVE 
 					raw = re.findall('<li class="broj">' + episode + '.</li> <li class="naziv"> <a class="open" rel="(.*?)"', block)
