@@ -325,7 +325,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     language = subtitles_list[pos]["language_name"]
     content = requests.get(url, headers=HDR, verify=False, allow_redirects=True).text
 
-    downloadlink_pattern = '<!--<span><a class="button"\s+href="(.+)">'
+    downloadlink_pattern = r'<!--<span><a class="button"\s+href="(.+)">'
     match = re.compile(downloadlink_pattern).findall(content)
 
     if match:

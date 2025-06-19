@@ -145,7 +145,7 @@ def search_movie(title, year, languages, filename):
                 break  # Stop at first perfect match
 
         if not best_match:
-            print(f"No exact year match found, selecting first result.")
+            print("No exact year match found, selecting first result.")
             best_match = movies[0]  # Fallback to the first result if no exact match
 
         imdb_code = best_match.get("imdb")

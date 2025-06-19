@@ -151,9 +151,9 @@ class TitulkyClient(object):
 
             log(__name__, 'Storing Cookies')
             self.cookies = {}
-            self.cookies['CRC'] = re.search('CRC=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL).group(1)
-            self.cookies['LogonLogin'] = re.search('LogonLogin=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL).group(1)
-            self.cookies['LogonId'] = re.search('LogonId=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL).group(1)
+            self.cookies['CRC'] = re.search(r'CRC=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL).group(1)
+            self.cookies['LogonLogin'] = re.search(r'LogonLogin=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL).group(1)
+            self.cookies['LogonId'] = re.search(r'LogonId=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL).group(1)
 
             return True
 
@@ -242,7 +242,7 @@ class TitulkyClient(object):
             return True
 
     def get_waittime(self, content):
-        for matches in re.finditer('CountDown\((\d+)\)', content, re.IGNORECASE | re.DOTALL):
+        for matches in re.finditer(r'CountDown\((\d+)\)', content, re.IGNORECASE | re.DOTALL):
             return int(matches.group(1))
 
     def get_link(self, content):
@@ -250,7 +250,7 @@ class TitulkyClient(object):
             return str(matches.group(1))
 
     def get_control_image(self, content):
-        for matches in re.finditer('\.\/(captcha\/captcha\.php)', content, re.IGNORECASE | re.DOTALL):
+        for matches in re.finditer(r'\.\/(captcha\/captcha\.php)', content, re.IGNORECASE | re.DOTALL):
             return '/' + str(matches.group(1))
         return None
 
@@ -261,7 +261,7 @@ class TitulkyClient(object):
         req = self.add_cookies_into_header(req)
         response = urlopen(req)
         if response.headers.get('Set-Cookie'):
-            phpsessid = re.search('PHPSESSID=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL)
+            phpsessid = re.search(r'PHPSESSID=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL)
             if phpsessid:
                 log(__name__, "Storing PHPSessionID")
                 self.cookies['PHPSESSID'] = phpsessid.group(1)

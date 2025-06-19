@@ -280,7 +280,7 @@ def search_tvshow(title, season, episode, languages, filename):
                 content = s.post(__getMovie, headers=HDR, data=json.dumps(params), timeout=15).text
                 response_json = json.loads(content)
             except requests.exceptions.Timeout:
-                print(f"Failed again due to timeout.")
+                print("Failed again due to timeout.")
                 return []
 
         if content and response_json.get("success"):

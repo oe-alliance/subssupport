@@ -9,16 +9,16 @@ class MicroDVDParser(BaseParser):
     format = "MicroDVD"
 
     def _removeTags(self, text):
-        return re.sub('\{[^\}]*\}', '', text)
+        return re.sub(r'\{[^\}]*\}', '', text)
 
     #{0}{25}{c:$BBGGRR}Hello!
     def _getColor(self, text, color):
         newColor = color
-        colorMatch = re.search('\{c\:([^\}]+)', text)
+        colorMatch = re.search(r'\{c\:([^\}]+)', text)
         if color:
             if colorMatch:
                 colortext = colorMatch.group(1)
-                colorbgrMatch = re.search("\$([0-9,a-f,A-F]{6})", colortext)
+                colorbgrMatch = re.search(r"\$([0-9,a-f,A-F]{6})", colortext)
                 if colorbgrMatch:
                     colorbgr = colorbgrMatch.group(1)
                     color = newColor = colorbgr[4:6] + colorbgr[2:4] + colorbgr[:2]
@@ -30,7 +30,7 @@ class MicroDVDParser(BaseParser):
         else:
             if colorMatch:
                 colortext = colorMatch.group(1)
-                colorbgrMatch = re.search("\$([0-9,a-f,A-F]{6})", colortext)
+                colorbgrMatch = re.search(r"\$([0-9,a-f,A-F]{6})", colortext)
                 if colorbgrMatch:
                     colorbgr = colorbgrMatch.group(1)
                     color = colorbgr[4:6] + colorbgr[2:4] + colorbgr[:2]
@@ -46,7 +46,7 @@ class MicroDVDParser(BaseParser):
     #{0}{25}{y:i}Hello!
     def _getStyle(self, text, style):
         newStyle = style
-        styleMatch = re.search('\{y\:(?P<style>[ibus])\}', text)
+        styleMatch = re.search(r'\{y\:(?P<style>[ibus])\}', text)
         if style:
             if styleMatch:
                 if styleMatch.group('style') == 'b':
@@ -75,7 +75,7 @@ class MicroDVDParser(BaseParser):
         if fps is None:
             raise ParseError("cannot parse, FPS not provided")
 
-        for m in re.finditer("\{(\d+)\}\{(\d+)\}(.*)", text):
+        for m in re.finditer(r"\{(\d+)\}\{(\d+)\}(.*)", text):
             try:
                 startTime = float(int(m.group(1)) / float(fps)) * 1000
                 endTime = float(int(m.group(2)) / float(fps)) * 1000

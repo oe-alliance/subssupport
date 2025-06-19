@@ -216,7 +216,7 @@ def allLang():
 
 def regex_movie(title):
     # from periscope
-    movie_regexes = ['(?P<movie>.*)[\.|\[|\(| ]{1}(?P<year>(?:(?:19|20)[0-9]{2}))(?P<teams>.*)']
+    movie_regexes = [r'(?P<movie>.*)[\.|\[|\(| ]{1}(?P<year>(?:(?:19|20)[0-9]{2}))(?P<teams>.*)']
     for regex in movie_regexes:
         match = re.search(regex, title, re.IGNORECASE)
         if match:

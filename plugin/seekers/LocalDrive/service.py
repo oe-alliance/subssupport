@@ -96,7 +96,7 @@ def search_subtitles(file_path, title, tvshow, year, season, episode, set_temp, 
     print(title_key)
 
     # Updated regex pattern to match everything before the first 4-digit year
-    filename_pattern = rf"^(.*?)(?=\.\d{{4}}).*\.srt$"  # Capture everything before the first 4 digits (year) and ignore anything after
+    filename_pattern = r"^(.*?)(?=\.\d{4}).*\.srt$"  # Capture everything before the first 4 digits (year) and ignore anything after
 
     print(f"[LocalDriveSeeker][info] using langs {lang1} {lang2} {lang3}")
 

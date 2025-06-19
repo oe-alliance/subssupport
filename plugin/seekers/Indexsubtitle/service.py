@@ -89,7 +89,7 @@ indexsubtitle_languages = {
     'Brazillian Portuguese': 'Portuguese (Brazil)',
     'Serbian': 'SerbianLatin',
     'Ukranian': 'Ukrainian',
-    'Farsi\/Persian': 'Persian'
+    r'Farsi\/Persian': 'Persian'
 }
 
 
@@ -235,7 +235,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     print('ttl:', ttl)
     id = re.sub("/\\d+$", "", id)
     print('id2:', id)
-    zp = id.replace('/[^\w ]/', '').replace('/', '_').replace('_subtitle_', '[indexsubtitle.cc]_')
+    zp = id.replace(r'/[^\w ]/', '').replace('/', '_').replace('_subtitle_', '[indexsubtitle.cc]_')
     print('zp:', zp)
     #.replace('_subtitles_','[indexsubtitle.cc]_')
     check_data = 'id=' + ID + '&lang=' + language + '&url=' + id + ''
@@ -350,7 +350,7 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
         try:
             filename = re.compile('title":"(.+?)"').findall(subtitle)[0]
             filename = filename.strip()
-            subtitle_id = re.compile('.*url":"(.+?)"},{"title').findall(subtitle)[0].replace("\/", "/")
+            subtitle_id = re.compile('.*url":"(.+?)"},{"title').findall(subtitle)[0].replace(r"\/", "/")
             subtitle_id = subtitle_id + "/" + ttl
 
             # Add subtitle information to the list

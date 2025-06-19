@@ -75,7 +75,7 @@ def get_file2(downloadlink):
         req = self.add_cookies_into_header(req)
         response = urlopen(req)
         if response.headers.get('Set-Cookie'):
-            phpsessid = re.search('PHPSESSID=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL)
+            phpsessid = re.search(r'PHPSESSID=(\S+);', response.headers.get('Set-Cookie'), re.IGNORECASE | re.DOTALL)
             if phpsessid:
                 log(__name__, "Storing PHPSessionID")
                 self.cookies['PHPSESSID'] = phpsessid.group(1)
@@ -277,7 +277,7 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
             try:
                 downloads = re.compile('<a href="(.+?)">.+?<span').findall(subtitle)[0]
                 print(downloads)
-                downloads = re.sub("\D", "", downloads)
+                downloads = re.sub(r"\D", "", downloads)
             except:
                 pass
             try:

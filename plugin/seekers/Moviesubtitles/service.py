@@ -288,7 +288,7 @@ def get_subtitles_list(title, year, languageshort, languagelong, subtitles_list)
             # Now sub_url should be the inner link corresponding to the <b> tag.
             sub_id = sub_url
             print("sub_id", sub_id)
-            downloads = re.sub("\D", "", downloads)  # ensure downloads is digits only
+            downloads = re.sub(r"\D", "", downloads)  # ensure downloads is digits only
             try:
                 rating = get_rating(downloads)
                 print("rating", rating)

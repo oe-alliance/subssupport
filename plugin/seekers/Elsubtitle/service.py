@@ -107,7 +107,7 @@ def getSearchTitle(title, searchstring, year=None):  # new Add  .replace("+","-"
         #regx = '.*<a href="(.+?)"><img.+?alt="(.+?)"'
         regx = '<a href="(.+?)" title.+?>(.+?)</a>'
         try:
-            href = re.compile('.*<a href="(.+?)"><img.+?alt="' + title + '"\s+').findall(subtitles)[0]
+            href = re.compile('.*<a href="(.+?)"><img.+?alt="' + title + r'"\s+').findall(subtitles)[0]
             print(("href", href))
             href = 'https://www.elsubtitle.com' + href
             return href
@@ -352,7 +352,7 @@ def get_subtitles_list(searchstring, title, year, languageshort, languagelong, s
             #print(id)
             try:
                 downloads = re.compile('action="(.+?)"').findall(subtitle)[0]
-                downloads = re.sub("\D", "", downloads)
+                downloads = re.sub(r"\D", "", downloads)
             except:
                 pass
             try:
