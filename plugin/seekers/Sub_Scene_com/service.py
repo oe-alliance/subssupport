@@ -51,8 +51,8 @@ seasons = seasons + ["Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteen
 seasons = seasons + ["Twenty-first", "Twenty-second", "Twenty-third", "Twenty-fourth", "Twenty-fifth", "Twenty-sixth",
                      "Twenty-seventh", "Twenty-eighth", "Twenty-ninth"]
 
-movie_season_pattern = ("<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)\((?P<year>\d{4})\)</a>\s+"
-                        "<div class=\"subtle count\">\s*(?P<numsubtitles>\d+\s+subtitles)</div>\s+")
+movie_season_pattern = (r"<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)\((?P<year>\d{4})\)</a>\s+"
+                        r"<div class=\"subtle count\">\s*(?P<numsubtitles>\d+\s+subtitles)</div>\s+")
 
 # Don't remove it we need it here
 subscenebest_languages = {
@@ -138,7 +138,7 @@ def find_tv_show_season(content, tvshow, season):
     possible_matches = []
     all_tvshows = []
 
-    season_pattern = "<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)</a>\s*"
+    season_pattern = r"<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)</a>\s*"
     for matches in re.finditer(season_pattern, content, re.IGNORECASE | re.DOTALL):
         found_title = matches.group('title')
         #found_title = html.unescape(found_title)

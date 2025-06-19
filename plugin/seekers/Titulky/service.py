@@ -38,7 +38,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     if password == '' or username == '':
         log(__name__, 'Credentials to Titulky.com not provided')
     else:
-        if client.login(username, password) == False:
+        if client.login(username, password) is False:
             log(__name__, 'Login to Titulky.com failed. Check your username/password at the addon configuration')
             raise SubtitlesDownloadError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR,
                                           "Login to Titulky.com failed. Check your username/password at the addon configuration")
@@ -47,7 +47,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     log(__name__, 'Get page with subtitle (id=%s)' % (subtitle_id))
     content = client.get_subtitle_page(subtitle_id)
     control_img = client.get_control_image(content)
-    if not control_img == None:
+    if control_img is not None:
         log(__name__, 'Found control image :(, asking user for input')
         # subtitle limit was reached .. we need to ask user to rewrite image code :(
         log(__name__, 'Download control image')
@@ -62,7 +62,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
             log(__name__, 'Solution provided: %s' % solution)
             content = client.get_subtitle_page2(content, solution, subtitle_id)
             control_img2 = client.get_control_image(content)
-            if not control_img2 == None:
+            if control_img2 is not None:
                 log(__name__, 'Invalid control text')
                 raise SubtitlesDownloadError(SubtitlesErrors.CAPTCHA_RETYPE_ERROR, "Invalid control text")
                 #xbmc.executebuiltin("XBMC.Notification(%s,%s,1000,%s)" % (__scriptname__,"Invalid control text",os.path.join(__cwd__,'icon.png')))
@@ -74,7 +74,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
 
     wait_time = client.get_waittime(content)
     cannot_download = client.get_cannot_download_error(content)
-    if not None == cannot_download:
+    if cannot_download is not None:
         log(__name__, 'Subtitles cannot be downloaded, user needs to login')
         raise SubtitlesDownloadError(SubtitlesErrors.NO_CREDENTIALS_ERROR, "Subtitles cannot be downloaded, user needs to login")
         return True, subtitles_list[pos]['language_name'], ""
@@ -159,7 +159,7 @@ class TitulkyClient(object):
 
     def search_subtitles(self, file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3):
         url = self.server_url + '/index.php?' + urlencode({'Fulltext': title, 'FindUser': ''})
-        if not (tvshow == None or tvshow == ''):
+        if not (tvshow is None or tvshow == ''):
             title2 = tvshow + ' ' + get_episode_season(episode, season)
             url = self.server_url + '/index.php?' + urlencode({'Fulltext': title2, 'FindUser': ''})
         req = Request(url)
@@ -180,7 +180,7 @@ class TitulkyClient(object):
             item = {}
             log(__name__, 'New subtitle found')
             try:
-                item['ID'] = re.search('[^<]+<td[^<]+<a href=\"[\w-]+-(?P<data>\d+).htm\"', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
+                item['ID'] = re.search(r'[^<]+<td[^<]+<a href=\"[\w-]+-(?P<data>\d+).htm\"', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
                 item['title'] = re.search('[^<]+<td[^<]+<a[^>]+>(<div[^>]+>)?(?P<data>[^<]+)', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
                 item['sync'] = ''
                 sync_found = re.search('((.+?)</td>)[^>]+>[^<]*<a(.+?)title=\"(?P<data>[^\"]+)', row.group(1), re.IGNORECASE | re.DOTALL)
@@ -189,9 +189,9 @@ class TitulkyClient(object):
                 item['tvshow'] = re.search('((.+?)</td>){2}[^>]+>(?P<data>[^<]+)', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
                 item['year'] = re.search('((.+?)</td>){3}[^>]+>(?P<data>[^<]+)', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
                 item['downloads'] = re.search('((.+?)</td>){4}[^>]+>(?P<data>[^<]+)', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
-                item['lang'] = re.search('((.+?)</td>){5}[^>]+><img alt=\"(?P<data>\w{2})\"', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
+                item['lang'] = re.search(r'((.+?)</td>){5}[^>]+><img alt=\"(?P<data>\w{2})\"', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
                 item['numberOfDiscs'] = re.search('((.+?)</td>){6}[^>]+>(?P<data>[^<]+)', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
-                item['size'] = re.search('((.+?)</td>){7}[^>]+>(?P<data>[\d\.]+)', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
+                item['size'] = re.search(r'((.+?)</td>){7}[^>]+>(?P<data>[\d\.]+)', row.group(1), re.IGNORECASE | re.DOTALL).group('data')
             except:
                 log(__name__, 'Exception when parsing subtitle, all I got is  %s' % str(item))
                 continue

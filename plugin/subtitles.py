@@ -212,7 +212,7 @@ print('[SubsSupport] looking for custom colors in', COLORFILE)
 try:
     with open(COLORFILE, 'r') as f:
         for line in f:
-            color = re.search('^(\w+)\s+([0-9A-Fa-f]{6})$', line)
+            color = re.search(r'^(\w+)\s+([0-9A-Fa-f]{6})$', line)
             if color is not None:
                 alias = color.group(1)
                 hex_color = color.group(2)
@@ -2304,7 +2304,7 @@ class SubFileList(FileList):
         extensions = []
         for parser in PARSERS:
             extensions += list(parser.parsing)
-        FileList.__init__(self, defaultDir, matchingPattern="(?i)^.*\." + '(' + '|'.join(ext[1:] for ext in extensions) + ')', useServiceRef=False)
+        FileList.__init__(self, defaultDir, matchingPattern=r"(?i)^.*\." + '(' + '|'.join(ext[1:] for ext in extensions) + ')', useServiceRef=False)
         self.l.setFont(0, gFont("Regular", 18))
         self.l.setFont(1, gFont("Regular", 27))
         if isFullHD():
@@ -2933,7 +2933,7 @@ class SubsSearchProcess(object):
         def getMessage(data):
             mSize = int(data[:7])
             mPayload = data[7:mSize]
-            if self.mpart == False:
+            if self.mpart is False:
                 mPart = mSize > len(data)
             else:
                 mPart = False
@@ -4737,7 +4737,7 @@ class SubsSearchParamsMenu(Screen, ConfigListScreen):
         Screen.__init__(self, session)
         ConfigListScreen.__init__(self, [], session=session)
         self["config"] = MyConfigList([], session, enabledList)
-        if not self.handleInputHelpers in self["config"].onSelectionChanged:
+        if self.handleInputHelpers not in self["config"].onSelectionChanged:
             self["config"].onSelectionChanged.append(self.handleInputHelpers)
         self.searchParamsHelper = SearchParamsHelper(seeker, searchSettings)
         self.searchSettings = searchSettings

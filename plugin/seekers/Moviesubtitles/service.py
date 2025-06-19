@@ -55,7 +55,6 @@ HDR = {'User-Agent': get_random_ua(),
       'Content-Type': 'application/x-www-form-urlencoded',
       'Host': 'www.moviesubtitles.org',
       'Referer': 'https://www.moviesubtitles.org/search.php',
-      'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip, deflate, br, zstd'}
 

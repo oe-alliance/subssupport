@@ -263,7 +263,7 @@ class CaptchaDialog(VirtualKeyBoard):
             <convert type="ValueToPixmap">LanguageCode</convert>
         </widget>
         <widget name="header" position="10,10" size="500,20" font="Regular;20" transparent="1" noWrap="1" />
-	    <widget position="10,455" size="60,35" name="Green" pixmap="skin_default/buttons/key_green.png" zPosition="3"  alphatest="blend" />
+        <widget position="10,455" size="60,35" name="Green" pixmap="skin_default/buttons/key_green.png" zPosition="3"  alphatest="blend" />
         <eLabel text="Save" zPosition="3" position="50,450" size="120,35" font="Regular;20" transparent="1" backgroundColor="black" halign="center" valign="center" />
         <widget name="captcha" position="10, 50" size ="540,110" alphatest="blend" zPosition="-1" />
         <widget name="text" position="12,165" size="536,46" font="Regular;46" transparent="1" noWrap="1" halign="right" />
@@ -278,10 +278,9 @@ class CaptchaDialog(VirtualKeyBoard):
         self['Green'] = Pixmap()
         self['key_green'] = StaticText(_('Save'))
         self["text"] = self['text']
-        self["myActionMap"] = NumberActionMap(["WizardActions", "InputBoxActions", "ColorActions"],
-        	{
-                "green": self.save
-           	}, -1)
+        self["myActionMap"] = NumberActionMap(["WizardActions", "InputBoxActions", "ColorActions"], {
+            "green": self.save
+        }, -1)
         self.picPath = captcha_file
         self.picLoad = ePicLoad()
         self.picLoad_conn = eConnectCallback(self.picLoad.PictureData, self.decodePicture)
@@ -298,7 +297,7 @@ class CaptchaDialog(VirtualKeyBoard):
 
     def showPic(self, picInfo=""):
         ptr = self.picLoad.getData()
-        if ptr != None:
+        if ptr is not None:
             self["captcha"].instance.setPixmap(ptr.__deref__())
             self["captcha"].show()
 

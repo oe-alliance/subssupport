@@ -23,7 +23,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     log(__name__, 'link: %s' % url)
     language_name = params["language_name"]
 
-    if url != None:
+    if url is not None:
         local_file = open(zip_subs, "w" + "b")
         f = urlopen(url)
         local_file.write(f.read())

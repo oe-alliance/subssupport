@@ -293,14 +293,14 @@ class SubsSeeker(object):
                 except Exception as e:
                     self.log.error('moving "%s" to "%s" - %s' % (
                         os.path.split(subfile)[-2:],
-                        os.path.split(download_path)[-2:]), str(e))
+                        os.path.split(download_path)[-2:], str(e)))
                     return subfile
         try:
             shutil.move(subfile, download_path)
         except Exception as e:
             self.log.error('moving "%s" to "%s" - %s', (
                 os.path.split(subfile)[-2:],
-                os.path.split(download_path)[-2:]), str(e))
+                os.path.split(download_path)[-2:], str(e)))
             return subfile
         return download_path
 

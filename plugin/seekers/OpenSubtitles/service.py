@@ -64,8 +64,8 @@ seasons = seasons + ["Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteen
 seasons = seasons + ["Twenty-first", "Twenty-second", "Twenty-third", "Twenty-fourth", "Twenty-fifth", "Twenty-sixth",
                      "Twenty-seventh", "Twenty-eighth", "Twenty-ninth"]
 
-movie_season_pattern = ("<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)\((?P<year>\d{4})\)</a>\s+"
-                        "<div class=\"subtle count\">\s*(?P<numsubtitles>\d+\s+subtitles)</div>\s+")
+movie_season_pattern = (r"<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)\((?P<year>\d{4})\)</a>\s+"
+                        r"<div class=\"subtle count\">\s*(?P<numsubtitles>\d+\s+subtitles)</div>\s+")
 
 # Don't remove it we need it here
 opensubtitlesorg_languages = {
@@ -340,7 +340,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     #downloadlink_pattern = "<a class=\"button\"  href=\"(?P<match>/download/\d+)"
     #match = re.compile(downloadlink_pattern).findall(content)
     #success = response_json['success']
-    #if (success == True):
+    #if (success is True):
     filename = subtitles_list[pos]["filename"]
     #downloadToken = response_json['sub']['downloadToken']
     downloadlink = url

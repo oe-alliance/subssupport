@@ -75,7 +75,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     # params["hash"] = params['OShash']
     params['match'] = params['sync']
     url = Download(params)
-    if url != None:
+    if url is not None:
         local_file = open(zip_subs, "w" + "b")
         f = urlopen(url)
         local_file.write(f.read())

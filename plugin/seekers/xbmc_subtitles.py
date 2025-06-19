@@ -89,8 +89,8 @@ class XBMCSubtitlesAdapter(BaseSeeker):
         # Name of subtitles file if not packed (or if we unpacked it ourselves)
         # return False, language, subs_file
         compressed, language, filepath = self.module.download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, session_id)
-        if compressed != False:
-            if compressed == True or compressed == "":
+        if compressed is not False:
+            if compressed is True or compressed == "":
                 compressed = "zip"
             else:
                 compressed = filepath

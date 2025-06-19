@@ -51,7 +51,6 @@ HDR = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:85.0) Gecko/20100101 Firef
 HDS = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Firefox/115.0',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
-      'Upgrade-Insecure-Requests': '1',
       'Content-Type': 'application/x-www-form-urlencoded',
       'Host': 'www.elsubtitle.com',
       'Referer': 'https://www.elsubtitle.com',

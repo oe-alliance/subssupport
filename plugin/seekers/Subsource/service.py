@@ -160,7 +160,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
     all_subs = response_json['subs']
     i = 0
     subtitles = []
-    if (success == True):
+    if (success is True):
         for sub in all_subs:
             fullLink = sub['fullLink']
             languagefound = sub.get('lang', None)  # Avoid KeyError
@@ -334,7 +334,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     content = requests.post(__getSub, headers=HDR, data=json.dumps(params), timeout=10).text
     response_json = json.loads(content)
     success = response_json['success']
-    if (success == True):
+    if (success is True):
         fileName = response_json['sub']['fileName']
         downloadToken = response_json['sub']['downloadToken']
         downloadlink = __download + downloadToken

@@ -50,8 +50,8 @@ seasons = seasons + ["Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteen
 seasons = seasons + ["Twenty-first", "Twenty-second", "Twenty-third", "Twenty-fourth", "Twenty-fifth", "Twenty-sixth",
                      "Twenty-seventh", "Twenty-eighth", "Twenty-ninth"]
 
-movie_season_pattern = ("<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)\((?P<year>\d{4})\)</a>\s+"
-                        "<div class=\"subtle count\">\s*(?P<numsubtitles>\d+\s+subtitles)</div>\s+")
+movie_season_pattern = (r"<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)\((?P<year>\d{4})\)</a>\s+"
+                        r"<div class=\"subtle count\">\s*(?P<numsubtitles>\d+\s+subtitles)</div>\s+")
 
 # Don't remove it we need it here
 opensubtitlesmora_languages = {
@@ -159,7 +159,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
     soup1 = soup.find('div', class_="content").h1
     language = soup1.find('span', itemprop="name")
     #more than one sub
-    if language == None:
+    if language is None:
         soup = soup.find('form', method="post").find('table', id="search_results").tbody
         blocks1 = soup.findAll('tr', class_="change even expandable")
         blocks2 = soup.findAll('tr', class_="change odd expandable")
@@ -218,7 +218,7 @@ def getallsubs(content, allowed_languages, filename="", search_string=""):
             subtitles.sort(key=lambda x: [not x['sync']])
             return subtitles
     # one sub only
-    elif language != None:
+    elif language is not None:
         soup3 = soup.find('div', class_="content").h3
         i = 0
         subtitles = []

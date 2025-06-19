@@ -52,7 +52,7 @@ def get_subtitles_list_movie(searchstring, title, languageshort, languagelong, s
     print(json.dumps(json_data, indent=4))
     #print(json.dumps(json_data, indent=4))
     status = json_data["status"]
-    if (status == True):
+    if (status is True):
         try:
             all_subs_data = json_data["subtitles"]
             #print(json.dumps(all_subs_data, indent=4))
@@ -97,7 +97,7 @@ def get_subtitles_list_tv(searchstring, tvshow, season, episode, languageshort, 
     print(json.dumps(json_data, indent=4))
     #print(json.dumps(json_data, indent=4))
     status = json_data["status"]
-    if (status == True):
+    if (status is True):
         try:
             all_subs_data = json_data["subtitles"]
             #print(json.dumps(all_subs_data, indent=4))
