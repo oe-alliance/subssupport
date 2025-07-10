@@ -17,7 +17,6 @@ plugin/seekers/LocalDrive/Makefile
 plugin/seekers/Moviesubtitles/Makefile
 plugin/seekers/MySubs/Makefile
 plugin/seekers/Novalermora/Makefile
-plugin/seekers/OpenSubtitles/Makefile
 plugin/seekers/OpenSubtitles2/Makefile
 plugin/seekers/OpenSubtitlesMora/Makefile
 plugin/seekers/Podnapisi/Makefile

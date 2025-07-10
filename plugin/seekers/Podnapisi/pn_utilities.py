@@ -170,7 +170,7 @@ class PNServer:
                                             'hearing_imp': "n" in self.get_element(subtitle, "flags"),
                                             'hash': item['OShash'],
                                             })
-            self.mergesubtitles()
+            # self.mergesubtitles()
         return self.subtitles_list
 
     def Download(self, params):

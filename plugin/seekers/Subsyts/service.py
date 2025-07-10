@@ -46,6 +46,7 @@ HDT = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
       'Referer': 'https://yifysubtitles.ch/',
       'Connection': 'keep-alive',
       'TE': 'trailers',
+      'Upgrade-Insecure-Requests': '1',
       'Accept-Encoding': 'gzip, deflate, br'}
 
 s = requests.Session()

@@ -227,35 +227,6 @@ class FoursubSeeker(XBMCSubtitlesAdapter):
 
 
 try:
-    from .OpenSubtitles import opensubtitles
-except ImportError as e:
-    opensubtitles = e
-
-
-class OpenSubtitlesSeeker(XBMCSubtitlesAdapter):
-    module = opensubtitles
-    if isinstance(module, Exception):
-        error, module = module, None
-    id = 'opensubtitles'
-    provider_name = 'OpenSubtitles.org'
-    supported_langs = allLang()
-    default_settings = {}
-
-    def _search(self, title, filepath, lang, season, episode, tvshow, year):
-        from xmlrpc.client import ProtocolError
-        tries = 4
-        for i in range(tries):
-            try:
-                return XBMCSubtitlesAdapter._search(self, title, filepath, lang, season, episode, tvshow, year)
-            except ProtocolError as e:
-                self.log.error(e.errcode)
-                if i == (tries - 1):
-                    raise
-                if e.errcode == 503:
-                    sleep(0.5)
-
-
-try:
     from .OpenSubtitlesMora import opensubtitlesmora
 except ImportError as e:
     opensubtitlesmora = e
@@ -287,9 +258,76 @@ class OpenSubtitles2Seeker(XBMCSubtitlesAdapter):
 
     default_settings = {
         'OpenSubtitles_username': {'label': _("USERNAME"), 'type': 'text', 'default': "", 'pos': 0},
-        'OpenSubtitles_password': {'label': _("PASSWORD"), 'type': 'text', 'default': "", 'pos': 1},
+        'OpenSubtitles_password': {'label': _("PASSWORD"), 'type': 'password', 'default': "", 'pos': 1},
         'OpenSubtitles_API_KEY': {'label': _("API_KEY"), 'type': 'text', 'default': '', 'pos': 2}
     }
+
+    def test_credentials(self):
+        """Test OpenSubtitles.com credentials"""
+        from twisted.internet import defer, threads
+        import requests
+        import json
+
+        def _api_login():
+            username = self.settings_provider.getSetting("OpenSubtitles_username")
+            password = self.settings_provider.getSetting("OpenSubtitles_password")
+            api_key = self.settings_provider.getSetting("OpenSubtitles_API_KEY")
+
+            if not username or not password:
+                raise Exception(_("Username and password are required"))
+
+            url = "https://api.opensubtitles.com/api/v1/login"
+            headers = {
+                "Accept": "application/json",
+                "Api-Key": api_key,
+                "User-Agent": "SubsSupport/1.0"
+            }
+            payload = {
+                "username": username,
+                "password": password
+            }
+
+            try:
+                response = requests.post(url, json=payload, headers=headers)
+                response.raise_for_status()
+                return response.json()
+            except Exception as e:
+                raise Exception(_("API error: %s") % str(e))
+
+        deferred = defer.Deferred()
+        d = threads.deferToThread(_api_login)
+        d.addCallback(deferred.callback)
+        d.addErrback(deferred.errback)
+        return deferred
+
+    def show_message(self, session, message, is_error=False):
+        """Universal message display method"""
+        from Screens.MessageBox import MessageBox
+        try:
+            session.open(
+                MessageBox,
+                message,
+                MessageBox.TYPE_ERROR if is_error else MessageBox.TYPE_INFO,
+                timeout=10
+            )
+        except Exception as e:
+            print("Failed to show message:", str(e))
+
+    def _search(self, title, filepath, langs, season, episode, tvshow, year):
+        """Override search to include credential check"""
+        username = self.settings_provider.getSetting("OpenSubtitles_username")
+        password = self.settings_provider.getSetting("OpenSubtitles_password")
+
+        if not username or not password:
+            return {
+                'list': [],
+                'session_id': "",
+                'msg': _("OpenSubtitles.com requires username and password")
+            }
+
+        return super(OpenSubtitles2Seeker, self)._search(
+            title, filepath, langs, season, episode, tvshow, year
+        )
 
 
 try:
@@ -329,8 +367,70 @@ class SubdlSeeker(XBMCSubtitlesAdapter):
         'Subdl_API_KEY': {'label': "API_KEY", 'type': 'text', 'default': '', 'pos': 2}
     }
 
-    movie_search = True
-    tvshow_search = True
+    def test_credentials(self):
+        """Test Subdl.com API key"""
+        from twisted.internet import defer, threads
+        import requests
+
+        def _api_test():
+            api_key = self.settings_provider.getSetting("Subdl_API_KEY")
+
+            if not api_key:
+                raise Exception(_("API key is required"))
+
+            url = "https://api.subdl.com/api/v1/subtitles"
+            params = {
+                "api_key": api_key,
+                "film_name": "Inception",
+                "type": "movie",
+                "languages": "EN"
+            }
+
+            try:
+                response = requests.get(url, params=params)
+                response.raise_for_status()
+                data = response.json()
+
+                if not data.get('status'):
+                    raise Exception(_("API error: %s") % data.get('message', 'Unknown error'))
+
+                return _("Subdl API key is valid and working")
+            except Exception as e:
+                raise Exception(_("API error: %s") % str(e))
+
+        deferred = defer.Deferred()
+        d = threads.deferToThread(_api_test)
+        d.addCallback(deferred.callback)
+        d.addErrback(deferred.errback)
+        return deferred
+
+    def show_message(self, session, message, is_error=False):
+        """Universal message display method"""
+        from Screens.MessageBox import MessageBox
+        try:
+            session.open(
+                MessageBox,
+                message,
+                MessageBox.TYPE_ERROR if is_error else MessageBox.TYPE_INFO,
+                timeout=10
+            )
+        except Exception as e:
+            print("Failed to show message:", str(e))
+
+    def _search(self, title, filepath, langs, season, episode, tvshow, year):
+        """Override search to include API key check"""
+        api_key = self.settings_provider.getSetting("Subdl_API_KEY")
+
+        if not api_key:
+            return {
+                'list': [],
+                'session_id': "",
+                'msg': _("Subdl.com requires an API key")
+            }
+
+        return super(SubdlSeeker, self)._search(
+            title, filepath, langs, season, episode, tvshow, year
+        )
 
 
 try:
