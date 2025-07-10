@@ -34,7 +34,7 @@ try:
     from .seekers.seeker import BaseSeeker
     from .seekers.utilities import languageTranslate, langToCountry, \
         getCompressedFileType, detectSearchParams
-    from .utils import SimpleLogger, toString
+    from .utils import SimpleLogger
 except (ValueError, ImportError):
     from seekers import SubtitlesDownloadError, SubtitlesSearchError, \
         SubtitlesErrors, SubtitlesmoraSeeker, NovalermoraSeeker, ElsubtitleSeeker, SubtitlecatSeeker, OpenSubtitles2Seeker, TitulkyComSeeker, \
@@ -43,7 +43,7 @@ except (ValueError, ImportError):
     from seekers.seeker import BaseSeeker
     from seekers.utilities import languageTranslate, langToCountry, \
         getCompressedFileType, detectSearchParams
-    from utils import SimpleLogger, toString
+    from utils import SimpleLogger
 
 
 SUBTITLES_SEEKERS = []

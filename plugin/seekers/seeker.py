@@ -21,7 +21,7 @@ import sys
 import time
 import traceback
 
-from .utilities import langToCountry, languageTranslate, SimpleLogger, toString
+from .utilities import langToCountry, languageTranslate, SimpleLogger
 
 
 class SubtitlesErrors:
