@@ -74,7 +74,7 @@ from .searchsubs import Messages
 from .seek import SubsSeeker, SubtitlesDownloadError, SubtitlesErrors
 from .seekers.utilities import detectSearchParams, languageTranslate
 from skin import parseColor, parsePosition, parseFont
-from .utils import toString, SimpleLogger, toUnicode
+from .utils import SimpleLogger, toUnicode
 
 from . import _, __author__, __version__, __email__
 
