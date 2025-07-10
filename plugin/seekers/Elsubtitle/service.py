@@ -55,7 +55,6 @@ HDS = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:109.0) Gecko/20100101 Fire
       'Content-Type': 'application/x-www-form-urlencoded',
       'Host': 'www.elsubtitle.com',
       'Referer': 'https://www.elsubtitle.com',
-      'Upgrade-Insecure-Requests': '1',
       'Connection': 'keep-alive',
       'Accept-Encoding': 'gzip'}  # , deflate'}
 
