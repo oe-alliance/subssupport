@@ -2925,7 +2925,7 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
                 
                 for i, actor in enumerate(details['cast'][:4]):
                     if actor.get('profile_url'):
-                        cast_path = os.path.join(cast_folder, f"cast_{i+1}.jpg")
+                        cast_path = os.path.join(cast_folder, f"cast_{i + 1}.jpg")
                         self.downloadImage(actor['profile_url'], cast_path)
             
             print(f"Background image download completed for {title}_{release_year}")
@@ -3079,14 +3079,14 @@ class MovieDetailsScreen(Screen):
         if os.path.exists(cast_folder):
             cast_files = [f for f in os.listdir(cast_folder) if f.endswith('.jpg')]
             for i, cast_file in enumerate(cast_files[:4]):  # Load up to 4 cast images
-                self.loadImage(f"cast{i+1}", os.path.join("cast", cast_file))
+                self.loadImage(f"cast{i + 1}", os.path.join("cast", cast_file))
                 
                 # Set cast name and character if available
                 if i < len(cast):
                     actor = cast[i]
                     actor_name = actor.get('name', 'N/A')
                     character = actor.get('character', 'N/A')
-                    self[f"cast{i+1}_name"].setText(f"{actor_name}\nas {character}")
+                    self[f"cast{i + 1}_name"].setText(f"{actor_name}\nas {character}")
 
     def loadImage(self, widget_name, image_path):
         full_path = os.path.join(self.images_folder, image_path)

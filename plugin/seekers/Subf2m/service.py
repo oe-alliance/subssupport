@@ -31,7 +31,7 @@ warnings.simplefilter('ignore',InsecureRequestWarning)
 from ..user_agents import get_random_ua
 
 
-HDR= {'User-Agent': get_random_ua(),
+HDR = {'User-Agent': get_random_ua(),
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
       'Accept-Language': 'en-US,en;q=0.9,ar-EG;q=0.8,ar;q=0.7',
       'Upgrade-Insecure-Requests': '1',
@@ -71,7 +71,7 @@ def geturl(url):
     except:
         log(__name__, " Failed to get url:%s" % (url))
         content = None
-    return(content)
+    return (content)
     
 def getSearchTitle(title, year=None):
     url = 'https://subf2m.co/subtitles/searchbytitle?query=%s&l=' % quote_plus(title)
