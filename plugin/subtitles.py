@@ -1112,7 +1112,6 @@ class SubsSupport(SubsSupportEmbedded):
 
 ############ Methods triggered by videoEvents when SubsSupport is subclass of Screen ################
 
-
     def __serviceStarted(self):
         print('[SubsSupport] Service Started')
 
@@ -2441,6 +2440,7 @@ class SubsChooserMenuList(MenuList):
         if embeddedAvailable or historySupport or searchSupport:
             self.l.setList(menulist)
 
+
 class TMDBScraperScreen(Screen):
     if isFullHD():
         skin = """
@@ -2904,7 +2904,6 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
                 poster_path = os.path.join(movie_folder, "poster.jpg")
                 self.downloadImage(poster_url, poster_path)
 
-            
             # Download logo
             if details.get('logo_urls'):
                 logo_url = details['logo_urls'][0]
@@ -2958,6 +2957,7 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         
         # Open the details screen
         self.session.open(MovieDetailsScreen, details, images_folder)
+
 
 class MovieDetailsScreen(Screen):
     if isFullHD():
@@ -3097,6 +3097,7 @@ class MovieDetailsScreen(Screen):
                 self[widget_name].instance.setPixmap(pixmap)
             except Exception as e:
                 print(f"Error loading image {full_path}: {e}")
+
 
 class E2SubsSeeker(SubsSeeker):
     def __init__(self, session, searchSettings, debug=False):
@@ -3241,6 +3242,7 @@ class SubsChooser(Screen):
     def webSubsSelection(self, searchTitles=None):
         # Use provided searchTitles or fall back to self.titleList
         actualSearchTitles = searchTitles if searchTitles is not None else self.titleList
+
         def checkDownloadedSubsSelection(downloadedSubtitle=None):
             if downloadedSubtitle:
                 self.close(downloadedSubtitle, False, True)

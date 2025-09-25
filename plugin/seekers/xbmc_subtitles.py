@@ -167,6 +167,7 @@ try:
 except ImportError as e:
     subf2m = e
 
+
 class Subf2mSeeker(XBMCSubtitlesAdapter):
     id = 'subf2m'
     module = subf2m
@@ -175,6 +176,7 @@ class Subf2mSeeker(XBMCSubtitlesAdapter):
     provider_name = 'Subf2m'
     supported_langs = allLang()
     default_settings = {}
+
 
 try:
     from .Sub_Scene_com import sub_scene_com

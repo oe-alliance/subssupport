@@ -99,8 +99,6 @@ class BaseParser(object):
             return u"\u202B" + text + u"\u202C"
         return text
 
-
-
     def getColor(self, text, color=None):
         color, newColor = self._getColor(text, color)
         return color or 'default', newColor or 'default'

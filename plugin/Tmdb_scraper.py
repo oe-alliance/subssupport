@@ -17,8 +17,10 @@ user_agents = [
     "Mozilla/5.0 (iPhone; CPU iPhone OS 15_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Mobile/15E148 Safari/604.1"
 ]
 
+
 def get_random_ua():
     return random.choice(user_agents)
+
 
 headers = {
     'User-Agent': get_random_ua(),
@@ -27,6 +29,7 @@ headers = {
     'Referer': 'https://www.themoviedb.org',
     'Connection': 'keep-alive',
 }
+
 
 def extract_title_from_card(card):
     """Extract the main title from a movie card, handling different HTML structures"""
@@ -70,12 +73,14 @@ def extract_title_from_card(card):
     
     return "Unknown Title"
 
+
 def extract_alternative_title(card):
     """Extract alternative title if present"""
     alt_title_span = card.find('span', class_='title')
     if alt_title_span:
         return alt_title_span.get_text(strip=True)
     return None
+
 
 def extract_poster_url(card):
     """Extract poster URL and try to get higher resolution"""
@@ -90,6 +95,7 @@ def extract_poster_url(card):
         return poster_url
     return None
 
+
 def extract_tmdb_id(card):
     """Extract TMDB ID from the card"""
     a_tag = card.find('a', class_='result')
@@ -100,6 +106,7 @@ def extract_tmdb_id(card):
         if match:
             return match.group(1)
     return None
+
 
 def scrape_tmdb_movies(movie_title):
     """Scrape TMDB for movies matching the search title"""
@@ -167,6 +174,7 @@ def scrape_tmdb_movies(movie_title):
     
     return movies_data
 
+
 def scrape_movie_logos(movie_url):
     """Scrape logo images from the movie's logos page"""
     logos_url = movie_url + "/images/logos"
@@ -201,6 +209,7 @@ def scrape_movie_logos(movie_url):
     except Exception as e:
         print(f"Error scraping logos: {e}")
         return []
+
 
 def scrape_movie_backdrops(movie_url):
     """Scrape backdrop images from the movie's backdrops page"""
@@ -237,6 +246,7 @@ def scrape_movie_backdrops(movie_url):
         print(f"Error scraping backdrops: {e}")
         return []
 
+
 def scrape_movie_posters(movie_url):
     """Scrape additional poster images from the movie's posters page"""
     posters_url = movie_url + "/images/posters"
@@ -271,6 +281,7 @@ def scrape_movie_posters(movie_url):
     except Exception as e:
         print(f"Error scraping posters: {e}")
         return []
+
 
 def scrape_movie_trailers(movie_url):
     """Scrape trailer videos from the movie's videos page"""
@@ -332,6 +343,7 @@ def scrape_movie_trailers(movie_url):
     except Exception as e:
         print(f"Error scraping trailers: {e}")
         return []
+
 
 def scrape_movie_cast(movie_url):
     """Scrape cast information from the movie's cast page"""
@@ -395,6 +407,7 @@ def scrape_movie_cast(movie_url):
     except Exception as e:
         print(f"Error scraping cast: {e}")
         return []
+
 
 def scrape_movie_details(movie_url):
     """Scrape detailed information from a specific movie page"""
@@ -493,6 +506,7 @@ def scrape_movie_details(movie_url):
     except Exception as e:
         print(f"Error scraping movie details: {e}")
         return None
+
 
 def main():
     title = input("Please enter movie name: ")
@@ -621,6 +635,7 @@ def main():
         print(f"Error making request: {e}")
     except Exception as e:
         print(f"An error occurred: {e}")
+
 
 if __name__ == "__main__":
     main()

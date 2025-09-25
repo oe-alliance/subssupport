@@ -62,6 +62,7 @@ subf2m_languages = {
     'Farsi/Persian': 'Persian'
 }
 
+
 def geturl(url):
     log(__name__, " Getting url: %s" % (url))
     try:
@@ -73,6 +74,7 @@ def geturl(url):
         content = None
     return (content)
     
+
 def getSearchTitle(title, year=None):
     url = 'https://subf2m.co/subtitles/searchbytitle?query=%s&l=' % quote_plus(title)
     data = requests.get(url, headers=HDR, verify=False, allow_redirects=True).content
@@ -114,6 +116,7 @@ def getSearchTitle(title, year=None):
     
     # If no match found, return the search URL
     return url
+
 
 def find_movie(content, title, year):
     soup = BeautifulSoup(content, 'html.parser')
@@ -199,6 +202,7 @@ def find_tv_show_season(content, tvshow, season):
             return link
     
     return None                                                                    
+
 
 def getallsubs(content, allowed_languages, filename="", search_string=""):
     soup = BeautifulSoup(content.text, 'html.parser')
@@ -307,6 +311,7 @@ def prepare_search_string(s):
     s = re.sub(r'\(\d\d\d\d\)$', '', s)
     s = quote_plus(s)
     return s
+
 
 def search_movie(title, year, languages, filename):
     try:
