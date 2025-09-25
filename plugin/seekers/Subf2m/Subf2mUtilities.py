@@ -72,7 +72,7 @@ LANGUAGES = (
     ("Chinese (Traditional)", "17", "zh", "chi", "100", 30207),
     ("Chinese (Simplified)", "17", "zh", "chi", "100", 30207))
 
-opensubtitlesmora_languages = {
+subf2m_languages = {
     'Chinese BG code': 'Chinese',
     'Brazillian Portuguese': 'Portuguese (Brazil)',
     'Serbian': 'SerbianLatin',
@@ -82,8 +82,8 @@ opensubtitlesmora_languages = {
 
 
 def get_language_info(language):
-    if language in opensubtitlesmora_languages:
-        language = opensubtitlesmora_languages[language]
+    if language in subf2m_languages:
+        language = subf2m_languages[language]
 
     for lang in LANGUAGES:
         if lang[0] == language:
@@ -94,9 +94,9 @@ def log(module, msg):
     _log(module, msg.encode('utf-8'))
 
 
-def geturl(url, headers=None, params=None):
+def geturl(url1, headers=None, params=None):
     try:
-        res = ses.get(url, headers=headers, verify=False, timeout=5)
+        res = ses.get(url1, headers=headers, verify=False, timeout=5)
         print('res.status_code', res.status_code)
         if res.status_code == 200:
             return six.ensure_str(res.content)
