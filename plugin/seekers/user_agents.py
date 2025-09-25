@@ -52,6 +52,8 @@ USER_AGENTS = [
 ]
 
 # Function to get a random User-Agent string
+
+
 def get_random_ua():
     import random
     return random.choice(USER_AGENTS)
