@@ -18,12 +18,11 @@ plugin/seekers/Moviesubtitles/Makefile
 plugin/seekers/MySubs/Makefile
 plugin/seekers/Novalermora/Makefile
 plugin/seekers/OpenSubtitles2/Makefile
-plugin/seekers/OpenSubtitlesMora/Makefile
 plugin/seekers/Podnapisi/Makefile
 plugin/seekers/PrijevodiOnline/Makefile
 plugin/seekers/Sub_Scene_com/Makefile
 plugin/seekers/Subdl/Makefile
-plugin/seekers/Subscenebest/Makefile
+plugin/seekers/Subf2m/Makefile
 plugin/seekers/Subsource/Makefile
 plugin/seekers/Subsyts/Makefile
 plugin/seekers/Subtitlecat/Makefile
