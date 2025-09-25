@@ -15,14 +15,14 @@ class SubRipParser(BaseParser):
         # First, split by lines to handle multi-line content within tags
         lines = text.split('\n')
         cleaned_lines = []
-        
+
         for line in lines:
             # Remove HTML tags from each line
             line = re.sub('<[^>]*>', '', line)
             # Remove SSA/ASS positioning tags like {\an8}
             line = re.sub(r'\{.*?\}', '', line)
             cleaned_lines.append(line)
-        
+
         # Join back with newlines to preserve the multi-line structure
         return '\n'.join(cleaned_lines)
 
@@ -102,10 +102,10 @@ class SubRipParser(BaseParser):
         subs = []
         idx = 0
         srtText = srtText.replace('\r\n', '\n').strip() + "\n\n"
-        
+
         # Improved regex to handle multi-line subtitles with various formats
         pattern = r'(\d+)\s*\n\s*(\d+):(\d+):(\d+),(\d+)\s*-->\s*(\d+):(\d+):(\d+),(\d+)\s*\n(.*?)(?=\n\n|\n\d+\s*\n|\Z)'
-        
+
         for s in re.finditer(pattern, srtText, re.DOTALL | re.MULTILINE):
             try:
                 idx += 1
@@ -113,13 +113,13 @@ class SubRipParser(BaseParser):
                 start_time = int((shour * 3600 + smin * 60 + ssec) * 1000 + smsec)
                 ehour, emin, esec, emsec = int(s.group(6)), int(s.group(7)), int(s.group(8)), int(s.group(9))
                 end_time = int((ehour * 3600 + emin * 60 + esec) * 1000 + emsec)
-                
+
                 # Get the subtitle text and preserve line breaks
                 sub_text = s.group(10).strip()
                 subs.append(self.createSub(sub_text, start_time, end_time))
             except Exception as e:
                 raise ParseError(str(e) + ', subtitle_index: %d' % idx)
-        
+
         return subs
 
     def italicStart(self, text):

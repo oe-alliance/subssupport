@@ -52,7 +52,7 @@ class BaseParser(object):
             rows = []
             style = newStyle = 'regular'
             color = newColor = 'default'
-            
+
             # Split text by lines but preserve formatting for each line
             lines = text.split('\n')
             for line in lines:

@@ -42,7 +42,7 @@ def extract_title_from_card(card):
         title = h2_tag.get_text(strip=True)
         if title:
             return title
-    
+
     # Method 2: Try to find the title in the a tag with class 'result'
     a_tag = card.find('a', class_='result')
     if a_tag:
@@ -52,12 +52,12 @@ def extract_title_from_card(card):
         title = a_tag.get_text(strip=True)
         if title:
             return title
-    
+
     # Method 3: Try to extract from img alt text
     img_tag = card.find('img', class_='poster')
     if img_tag and img_tag.has_attr('alt'):
         return img_tag['alt']
-    
+
     # Method 4: Try to extract from URL
     a_tag = card.find('a', class_='result')
     if a_tag and a_tag.has_attr('href'):
@@ -70,7 +70,7 @@ def extract_title_from_card(card):
                 title_part = title_part.split('-', 1)[1]
             # Replace hyphens with spaces and capitalize
             return title_part.replace('-', ' ').title()
-    
+
     return "Unknown Title"
 
 
@@ -113,99 +113,99 @@ def scrape_tmdb_movies(movie_title):
     # Prepare the search query
     title = movie_title.replace(' ', '+').lower()
     url = f"https://www.themoviedb.org/search?query={title}"
-    
+
     # Make the request
     response = requests.get(url, headers=headers, verify=False, timeout=10)
     response.raise_for_status()
-    
+
     # Parse the HTML
     soup = BeautifulSoup(response.text, 'html.parser')
-    
+
     # Find all movie cards
     movie_cards = soup.find_all('div', class_='card')
-    
+
     movies_data = []
-    
+
     for card in movie_cards:
         # Extract movie data
         movie = {}
-        
+
         # Extract title
         movie['title'] = extract_title_from_card(card)
-        
+
         # Extract alternative title
         alt_title = extract_alternative_title(card)
         if alt_title:
             movie['alternative_title'] = alt_title
-        
+
         # Extract URL
         a_tag = card.find('a', class_='result')
         if a_tag and a_tag.has_attr('href'):
             movie['url'] = "https://www.themoviedb.org" + a_tag['href']
-        
+
         # Extract release date
         release_date = card.find('span', class_='release_date')
         if release_date:
             movie['release_date'] = release_date.get_text(strip=True)
-        
+
         # Extract overview
         overview = card.find('div', class_='overview')
         if overview and overview.find('p'):
             movie['overview'] = overview.find('p').get_text(strip=True)
-        
+
         # Extract poster URL
         poster_url = extract_poster_url(card)
         if poster_url:
             movie['poster_url'] = poster_url
-        
+
         # Extract media type and adult content
         if a_tag and a_tag.has_attr('data-media-type'):
             movie['media_type'] = a_tag['data-media-type']
-        
+
         if a_tag and a_tag.has_attr('data-media-adult'):
             movie['adult_content'] = a_tag['data-media-adult'] == 'true'
-        
+
         # Extract TMDB ID
         tmdb_id = extract_tmdb_id(card)
         if tmdb_id:
             movie['tmdb_id'] = tmdb_id
-        
+
         movies_data.append(movie)
-    
+
     return movies_data
 
 
 def scrape_movie_logos(movie_url):
     """Scrape logo images from the movie's logos page"""
     logos_url = movie_url + "/images/logos"
-    
+
     try:
         # Add a small delay to avoid overwhelming the server
         time.sleep(0.5)
-        
+
         # Make the request
         response = requests.get(logos_url, headers=headers, verify=False, timeout=10)
         response.raise_for_status()
-        
+
         # Parse the HTML
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         # Find the section with logos
         logos_section = soup.find('section', class_='panel user_images')
         if not logos_section:
             return []
-        
+
         # Find all logo images
         logo_images = []
         logo_elements = logos_section.select('img[src*="w500"]')
-        
+
         for logo_element in logo_elements:
             if logo_element.has_attr('src'):
                 logo_url = logo_element['src']
                 logo_images.append(logo_url)
-        
+
         return logo_images
-        
+
     except Exception as e:
         print(f"Error scraping logos: {e}")
         return []
@@ -214,34 +214,34 @@ def scrape_movie_logos(movie_url):
 def scrape_movie_backdrops(movie_url):
     """Scrape backdrop images from the movie's backdrops page"""
     backdrops_url = movie_url + "/images/backdrops"
-    
+
     try:
         # Add a small delay to avoid overwhelming the server
         time.sleep(0.5)
-        
+
         # Make the request
         response = requests.get(backdrops_url, headers=headers, verify=False, timeout=10)
         response.raise_for_status()
-        
+
         # Parse the HTML
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         # Find the section with backdrops
         backdrops_section = soup.find('section', class_='panel user_images')
         if not backdrops_section:
             return []
-        
+
         # Find all backdrop images with w500_and_h282_face size
         backdrop_images = []
         backdrop_elements = backdrops_section.select('img[src*="w500_and_h282_face"]')
-        
+
         for backdrop_element in backdrop_elements:
             if backdrop_element.has_attr('src'):
                 backdrop_url = backdrop_element['src']
                 backdrop_images.append(backdrop_url)
-        
+
         return backdrop_images
-        
+
     except Exception as e:
         print(f"Error scraping backdrops: {e}")
         return []
@@ -250,34 +250,34 @@ def scrape_movie_backdrops(movie_url):
 def scrape_movie_posters(movie_url):
     """Scrape additional poster images from the movie's posters page"""
     posters_url = movie_url + "/images/posters"
-    
+
     try:
         # Add a small delay to avoid overwhelming the server
         time.sleep(0.5)
-        
+
         # Make the request
         response = requests.get(posters_url, headers=headers, verify=False, timeout=10)
         response.raise_for_status()
-        
+
         # Parse the HTML
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         # Find the section with posters
         posters_section = soup.find('section', class_='panel user_images')
         if not posters_section:
             return []
-        
+
         # Find all poster images with w220_and_h330_face size
         poster_images = []
         poster_elements = posters_section.select('img[src*="w220_and_h330_face"]')
-        
+
         for poster_element in poster_elements:
             if poster_element.has_attr('src'):
                 poster_url = poster_element['src']
                 poster_images.append(poster_url)
-        
+
         return poster_images
-        
+
     except Exception as e:
         print(f"Error scraping posters: {e}")
         return []
@@ -286,60 +286,60 @@ def scrape_movie_posters(movie_url):
 def scrape_movie_trailers(movie_url):
     """Scrape trailer videos from the movie's videos page"""
     trailers_url = movie_url + "/videos?active_nav_item=Trailers"
-    
+
     try:
         # Add a small delay to avoid overwhelming the server
         time.sleep(0.5)
-        
+
         # Make the request
         response = requests.get(trailers_url, headers=headers, verify=False, timeout=10)
         response.raise_for_status()
-        
+
         # Parse the HTML
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         # Find the section with trailers
         trailers_section = soup.find('section', class_='panel video')
         if not trailers_section:
             return []
-        
+
         # Find all trailer elements
         trailers = []
         trailer_elements = trailers_section.find_all('div', class_='video card default')
-        
+
         for trailer_element in trailer_elements:
             trailer = {}
-            
+
             # Extract YouTube video ID
             play_button = trailer_element.find('a', class_='play_trailer')
             if play_button and play_button.has_attr('data-id'):
                 trailer['youtube_id'] = play_button['data-id']
                 trailer['youtube_url'] = f"https://www.youtube.com/watch?v={play_button['data-id']}"
-            
+
             # Extract trailer title
             title_element = trailer_element.find('h2')
             if title_element:
                 trailer['title'] = title_element.get_text(strip=True)
-            
+
             # Extract trailer duration and date
             sub_element = trailer_element.find('h3', class_='sub')
             if sub_element:
                 trailer['details'] = sub_element.get_text(strip=True)
-            
+
             # Extract site (usually YouTube)
             if play_button and play_button.has_attr('data-site'):
                 trailer['site'] = play_button['data-site']
-            
+
             # Extract channel/publisher info
             channel_element = trailer_element.find('h4')
             if channel_element:
                 trailer['channel'] = channel_element.get_text(strip=True)
-            
+
             if trailer:
                 trailers.append(trailer)
-        
+
         return trailers
-        
+
     except Exception as e:
         print(f"Error scraping trailers: {e}")
         return []
@@ -348,31 +348,31 @@ def scrape_movie_trailers(movie_url):
 def scrape_movie_cast(movie_url):
     """Scrape cast information from the movie's cast page"""
     cast_url = movie_url + "/cast"
-    
+
     try:
         # Add a small delay to avoid overwhelming the server
         time.sleep(0.5)
-        
+
         # Make the request
         response = requests.get(cast_url, headers=headers, verify=False, timeout=10)
         response.raise_for_status()
-        
+
         # Parse the HTML
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         # Find the section with cast
         cast_section = soup.find('section', class_='panel pad')
         if not cast_section:
             print("No cast section found")
             return []
-        
+
         # Find all cast members
         cast = []
         cast_elements = cast_section.find_all('li', attrs={'data-order': True})
-        
+
         for i, cast_element in enumerate(cast_elements[:6]):  # Limit to first 6 cast members
             actor = {}
-            
+
             # Extract actor name - look for the <a> tag inside the <p> tag
             info_div = cast_element.find('div', class_='info')
             if info_div:
@@ -381,12 +381,12 @@ def scrape_movie_cast(movie_url):
                     a_tag = p_tag.find('a')
                     if a_tag:
                         actor['name'] = a_tag.get_text(strip=True)
-            
+
             # Extract character name
             character_element = cast_element.find('p', class_='character')
             if character_element:
                 actor['character'] = character_element.get_text(strip=True)
-            
+
             # Extract profile image URL and replace size with w132_and_h132_face
             profile_img = cast_element.find('img', class_='profile')
             if profile_img and profile_img.has_attr('src'):
@@ -395,15 +395,15 @@ def scrape_movie_cast(movie_url):
                 if 'w66_and_h66_face' in profile_url:
                     profile_url = profile_url.replace('w66_and_h66_face', 'w132_and_h132_face')
                 actor['profile_url'] = profile_url
-            
+
             # Only add if we have at least a name
             if actor.get('name'):
                 cast.append(actor)
             else:
                 print(f"No name found for cast member {i}")
-        
+
         return cast
-        
+
     except Exception as e:
         print(f"Error scraping cast: {e}")
         return []
@@ -415,38 +415,38 @@ def scrape_movie_details(movie_url):
         # Make the request
         response = requests.get(movie_url, headers=headers, verify=False, timeout=10)
         response.raise_for_status()
-        
+
         # Parse the HTML
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         # Extract detailed information
         details = {}
-        
+
         # Title
         title_element = soup.find('h2', class_='title')
         if title_element:
             details['title'] = title_element.get_text(strip=True)
-        
+
         # Tagline
         tagline_element = soup.find('h3', class_='tagline')
         if tagline_element:
             details['tagline'] = tagline_element.get_text(strip=True)
-        
+
         # Overview
         overview_element = soup.find('div', class_='overview')
         if overview_element:
             details['overview'] = overview_element.find('p').get_text(strip=True) if overview_element.find('p') else overview_element.get_text(strip=True)
-        
+
         # Release date
         release_date_element = soup.find('span', class_='release')
         if release_date_element:
             details['release_date'] = release_date_element.get_text(strip=True)
-        
+
         # Runtime
         runtime_element = soup.find('span', class_='runtime')
         if runtime_element:
             details['runtime'] = runtime_element.get_text(strip=True)
-        
+
         # Genres
         genres = []
         genres_elements = soup.find('span', class_='genres')
@@ -454,43 +454,43 @@ def scrape_movie_details(movie_url):
             for genre in genres_elements.find_all('a'):
                 genres.append(genre.get_text(strip=True))
             details['genres'] = genres
-        
+
         # Rating
         rating_element = soup.find('div', class_='user_score_chart')
         if rating_element and rating_element.has_attr('data-percent'):
             details['rating'] = rating_element['data-percent']
-        
+
         # Poster image (w220_and_h330_face version)
         poster_element = soup.find('img', class_='poster')
         if poster_element and poster_element.has_attr('src'):
             poster_url = poster_element['src']
             details['poster_url'] = poster_url
-        
+
         # Scrape logos
         logos = scrape_movie_logos(movie_url)
         if logos:
             details['logo_urls'] = logos
-        
+
         # Scrape backdrops
         backdrops = scrape_movie_backdrops(movie_url)
         if backdrops:
             details['backdrop_urls'] = backdrops
-        
+
         # Scrape additional posters
         posters = scrape_movie_posters(movie_url)
         if posters:
             details['additional_poster_urls'] = posters
-        
+
         # Scrape trailers
         trailers = scrape_movie_trailers(movie_url)
         if trailers:
             details['trailers'] = trailers
-        
+
         # Scrape cast (first 6 members)
         cast = scrape_movie_cast(movie_url)
         if cast:
             details['cast'] = cast
-        
+
         # Director
         director_elements = soup.select('ol.people li.profile')
         for director_element in director_elements:
@@ -500,9 +500,9 @@ def scrape_movie_details(movie_url):
                 if name_element:
                     details['director'] = name_element.find('a').get_text(strip=True) if name_element.find('a') else name_element.get_text(strip=True)
                 break
-        
+
         return details
-        
+
     except Exception as e:
         print(f"Error scraping movie details: {e}")
         return None
@@ -510,22 +510,22 @@ def scrape_movie_details(movie_url):
 
 def main():
     title = input("Please enter movie name: ")
-    
+
     try:
         movies = scrape_tmdb_movies(title)
-        
+
         if not movies:
             print("No movies found!")
             return
-        
+
         print(f"\nFound {len(movies)} movies:\n")
-        
+
         for i, movie in enumerate(movies, 1):
             print(f"{i}. {movie.get('title', 'N/A')} ({movie.get('release_date', 'N/A')})")
-        
+
         # Ask user to select a movie for detailed scraping
         selection = input("\nEnter the number of the movie you want to scrape details for (or 'all' for all movies): ")
-        
+
         if selection.lower() == 'all':
             # Scrape details for all movies
             detailed_movies = []
@@ -539,24 +539,24 @@ def main():
                             for actor in details['cast']:
                                 if 'profile_url' in actor and 'w66_and_h66_face' in actor['profile_url']:
                                     actor['profile_url'] = actor['profile_url'].replace('w66_and_h66_face', 'w132_and_h132_face')
-                        
+
                         # Merge basic and detailed info
                         merged_info = {**movie, **details}
                         detailed_movies.append(merged_info)
-            
+
             # Save all detailed results
             filename = f"tmdb_{title.replace(' ', '_')}_detailed_results.json"
             with open(filename, 'w', encoding='utf-8') as f:
                 json.dump(detailed_movies, f, indent=2, ensure_ascii=False)
             print(f"All detailed results saved to {filename}")
-            
+
         else:
             try:
                 selection_idx = int(selection) - 1
                 if 0 <= selection_idx < len(movies):
                     selected_movie = movies[selection_idx]
                     print(f"\nScraping details for: {selected_movie.get('title', 'N/A')}")
-                    
+
                     if 'url' in selected_movie:
                         details = scrape_movie_details(selected_movie['url'])
                         if details:
@@ -565,10 +565,10 @@ def main():
                                 for actor in details['cast']:
                                     if 'profile_url' in actor and 'w66_and_h66_face' in actor['profile_url']:
                                         actor['profile_url'] = actor['profile_url'].replace('w66_and_h66_face', 'w132_and_h132_face')
-                            
+
                             # Merge basic and detailed info
                             merged_info = {**selected_movie, **details}
-                            
+
                             # Create filename with title and year
                             year = ""
                             if 'release_date' in merged_info:
@@ -576,9 +576,9 @@ def main():
                                 year_match = re.search(r'\d{4}', merged_info['release_date'])
                                 if year_match:
                                     year = f"_{year_match.group()}"
-                            
+
                             filename = f"tmdb_{merged_info.get('title', 'unknown').replace(' ', '_')}{year}_details.json"
-                            
+
                             # Display the detailed information
                             print("\nDetailed Movie Information:")
                             print("=" * 50)
@@ -615,7 +615,7 @@ def main():
                                     print(f"{key.replace('_', ' ').title()}: {', '.join(value)}")
                                 else:
                                     print(f"{key.replace('_', ' ').title()}: {value}")
-                            
+
                             # Ask if user wants to save the detailed information
                             save = input("\nDo you want to save the detailed results to a JSON file? (y/n): ")
                             if save.lower() == 'y':
@@ -630,7 +630,7 @@ def main():
                     print("Invalid selection.")
             except ValueError:
                 print("Please enter a valid number or 'all'.")
-            
+
     except requests.RequestException as e:
         print(f"Error making request: {e}")
     except Exception as e:

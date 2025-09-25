@@ -2506,7 +2506,7 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         self.settings = settings
         self.movies = []
         self.currentSearch = eventList[0] if eventList else ""
-        
+
         # Access the TMDB path directly from the main config
         from Components.config import config
         TMDBbackup_path = config.plugins.subtitlesSupport.settingsTMDBDataPath.value
@@ -2514,19 +2514,19 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         self.imagesPath = os.path.join(TMDBbackup_path, "images")
         self.tmpPosterPath = "/var/volatile/tmp/subssupport_tmdb/"
         self.backgroundTasksRunning = False
-        
+
         # Create directories if they don't exist
         for path in [self.detailsPath, self.imagesPath, self.tmpPosterPath]:
             if not os.path.exists(path):
                 os.makedirs(path)
-        
+
         self["list"] = List([])
         self["key_red"] = Label(_("Close"))
         self["key_green"] = Label(_("Select"))
         self["key_yellow"] = Label(_("Details"))
         self["key_blue"] = Label(_("Download Images"))
         self["error_message"] = Label("")
-        self["error_message"].hide()        
+        self["error_message"].hide()
         self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
         {
             "ok": self.selectMovie,
@@ -2536,9 +2536,9 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
             "yellow": self.showDetails,
             "blue": self.downloadImages,
         })
-        
+
         self.onLayoutFinish.append(self.startSearch)
-        
+
         # Add a timer to prevent flickering
         self.posterUpdateTimer = eTimer()
         self.posterUpdateTimer.callback.append(self.updateMovieListDelayed)
@@ -2553,15 +2553,15 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         try:
             # Clear existing posters before new search
             self.clearPosters()
-            
+
             self.movies = scrape_tmdb_movies(self.currentSearch)
             self.updateMovieList()
-            
+
             if not self.movies:
                 # Instead of opening a MessageBox, show the error in the label
                 self["error_message"].setText(_("No results found for: %s") % self.currentSearch)
                 self["error_message"].show()
-                
+
         except Exception as e:
             # Instead of opening a MessageBox, show the error in the label
             error_msg = _("Error searching TMDB: %s") % str(e)
@@ -2575,7 +2575,7 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         for idx, movie in enumerate(self.movies):
             title = movie.get('title', 'Unknown Title')
             release_date = movie.get('release_date', '')
-            
+
             # Format the date if available
             if release_date:
                 try:
@@ -2585,12 +2585,12 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
                     formatted_date = release_date
             else:
                 formatted_date = 'Unknown Date'
-            
+
             # Get overview if available
             overview = movie.get('overview', '')
             if overview and len(overview) > 100:
                 overview = overview[:100] + "..."
-            
+
             # Load poster image
             poster_path = os.path.join(self.tmpPosterPath, f"poster_{idx}.jpg")
             poster_pixmap = None
@@ -2600,12 +2600,12 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
                     poster_pixmap = LoadPixmap(poster_path)
                 except:
                     poster_pixmap = None
-            
+
             # Create list entry
             listItems.append((poster_pixmap, title, formatted_date, overview))
-        
+
         self["list"].setList(listItems)
-        
+
         # Download all posters in background
         if self.movies:
             threading.Thread(target=self.downloadAllPosters).start()
@@ -2614,7 +2614,7 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         """Update the movie list with a delay to prevent flickering"""
         if self.posterUpdateQueue:
             idx = self.posterUpdateQueue.pop(0)
-            
+
             # Update just the specific item in the list
             current_list = self["list"].list
             if idx < len(current_list):
@@ -2630,7 +2630,7 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
                         self["list"].updateList(current_list)
                     except:
                         pass
-            
+
             # Continue with next item if queue not empty
             if self.posterUpdateQueue:
                 self.posterUpdateTimer.start(200, True)  # 200ms delay
@@ -2657,21 +2657,21 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
                 try:
                     filename = f"poster_{idx}.jpg"
                     filepath = os.path.join(self.tmpPosterPath, filename)
-                    
+
                     # Download the poster (overwrite if exists)
                     response = requests.get(poster_url, stream=True, verify=False, timeout=10)
                     if response.status_code == 200:
                         with open(filepath, 'wb') as out_file:
                             shutil.copyfileobj(response.raw, out_file)
-                    
+
                     # Add to update queue
                     self.posterUpdateQueue.append(idx)
-                    
+
                     # Start the timer if not running
                     if not self.posterUpdateTimerRunning:
                         self.posterUpdateTimerRunning = True
                         self.posterUpdateTimer.start(200, True)
-                        
+
                 except Exception as e:
                     print(f"Error downloading poster {idx}: {e}")
 
@@ -2683,14 +2683,14 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
             year_match = re.search(r'(\d{4})', release_date)
             if year_match:
                 return year_match.group(1)
-        
+
         # Try to get year from the search result
         release_date_orig = movie.get('release_date', '')
         if release_date_orig:
             year_match_orig = re.search(r'(\d{4})', release_date_orig)
             if year_match_orig:
                 return year_match_orig.group(1)
-                
+
         return 'unknown_year'
 
     def selectMovie(self):
@@ -2698,30 +2698,30 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
             idx = self["list"].getCurrentIndex()
             if 0 <= idx < len(self.movies):
                 selected_movie = self.movies[idx]
-                
+
                 # Get year for filename
                 year = self.get_movie_year(selected_movie)
-                
+
                 # Check if we already have a JSON file for this movie
                 title = selected_movie.get('title', 'unknown').replace(' ', '_').replace('/', '_')
                 filename = f"tmdb_{title}_{year}_details.json"
                 filepath = os.path.join(self.detailsPath, filename)
-                
+
                 # Start background tasks and wait for them to complete
                 self.startBackgroundTasks(selected_movie, filepath, title, year)
-                
+
                 # Wait for background tasks to complete before proceeding
                 self.waitForBackgroundTasks()
-                
+
                 # Use the movie title and year for subtitle search
                 movie_title = selected_movie.get('title', '')
                 release_year = year if year != 'unknown_year' else ''
-                
+
                 if movie_title and release_year:
                     search_title = f"{movie_title} {release_year}"
                 else:
                     search_title = movie_title
-                    
+
                 if search_title:
                     # Close the screen and return the search title
                     self.close(search_title)
@@ -2732,10 +2732,10 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         """Wait for background tasks to complete with a timeout"""
         timeout = 10  # seconds
         start_time = time.time()
-        
+
         while self.backgroundTasksRunning and (time.time() - start_time) < timeout:
             time.sleep(0.1)  # Short sleep to avoid busy waiting
-        
+
         if self.backgroundTasksRunning:
             print("Warning: Background tasks timed out")
 
@@ -2743,34 +2743,34 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         """Start background tasks for scraping details and downloading images"""
         # Check if details and images already exist
         details_exist = os.path.exists(filepath)
-        
+
         # Check if images folder exists
         images_folder = os.path.join(self.imagesPath, f"{title}_{year}")
         images_exist = os.path.exists(images_folder) and any(
-            fname.endswith('.jpg') or fname.endswith('.png') 
+            fname.endswith('.jpg') or fname.endswith('.png')
             for fname in os.listdir(images_folder)
         )
-        
+
         # Only show message if we're actually going to do work
         if not details_exist or not images_exist:
-            self.session.open(MessageBox, _("Starting background tasks for details scraping and image download..."), 
+            self.session.open(MessageBox, _("Starting background tasks for details scraping and image download..."),
                              MessageBox.TYPE_INFO, timeout=3)
-        
+
         self.backgroundTasksRunning = True
-        
+
         # Start background thread for details scraping and image download
-        threading.Thread(target=self.backgroundTasksThread, 
+        threading.Thread(target=self.backgroundTasksThread,
                         args=(selected_movie, filepath, title, year, details_exist, images_exist)).start()
-    
+
     def backgroundTasksThread(self, selected_movie, filepath, title, year, details_exist, images_exist):
         """Background thread for scraping details and downloading images"""
         try:
             # Set flag indicating tasks are running
             self.backgroundTasksRunning = True
-            
+
             # Your existing code here...
             details = None
-            
+
             # Only scrape details if they don't exist
             if not details_exist:
                 # Fetch details and save to JSON file
@@ -2778,7 +2778,7 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
                 if details:
                     # Merge basic and detailed info
                     merged_info = {**selected_movie, **details}
-                    
+
                     # Save to JSON file
                     with open(filepath, 'w', encoding='utf-8') as f:
                         json.dump(merged_info, f, indent=2, ensure_ascii=False)
@@ -2789,22 +2789,22 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
                 # Load existing details
                 with open(filepath, 'r', encoding='utf-8') as f:
                     details = json.load(f)
-            
+
             # Download images if they don't exist
             if not images_exist and details:
                 # Extract year from details
                 release_year = self.get_movie_year(details)
                 if release_year == 'unknown_year':
                     release_year = year
-                
+
                 if release_year != 'unknown_year':
                     self.downloadImagesBackground(details, title, release_year)
-            
+
         except Exception as e:
             print(f"Error in background tasks: {e}")
             import traceback
             traceback.print_exc()
-        
+
         finally:
             # Clear flag when tasks are complete
             self.backgroundTasksRunning = False
@@ -2814,15 +2814,15 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
             idx = self["list"].getCurrentIndex()
             if 0 <= idx < len(self.movies):
                 selected_movie = self.movies[idx]
-                
+
                 # Get year for filename
                 year = self.get_movie_year(selected_movie)
-                
+
                 # Check if we already have a JSON file for this movie
                 title = selected_movie.get('title', 'unknown').replace(' ', '_').replace('/', '_')
                 filename = f"tmdb_{title}_{year}_details.json"
                 filepath = os.path.join(self.detailsPath, filename)
-                
+
                 if os.path.exists(filepath):
                     # Load from existing JSON file
                     try:
@@ -2853,24 +2853,24 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
             idx = self["list"].getCurrentIndex()
             if 0 <= idx < len(self.movies):
                 selected_movie = self.movies[idx]
-                
+
                 # Get year for filename
                 year = self.get_movie_year(selected_movie)
-                
+
                 # Check if we already have a JSON file for this movie
                 title = selected_movie.get('title', 'unknown').replace(' ', '_').replace('/', '_')
                 filename = f"tmdb_{title}_{year}_details.json"
                 filepath = os.path.join(self.detailsPath, filename)
-                
+
                 if os.path.exists(filepath):
                     # Load from existing JSON file
                     try:
                         with open(filepath, 'r', encoding='utf-8') as f:
                             details = json.load(f)
-                        
+
                         # Extract year using our method
                         release_year = self.get_movie_year(details)
-                        
+
                         if release_year != 'unknown_year':
                             # Start image download in background
                             self.session.open(MessageBox, _("Downloading images in background..."), MessageBox.TYPE_INFO, timeout=3)
@@ -2887,18 +2887,18 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         try:
             # Use the instance's imagesPath
             images_dir = self.imagesPath
-            
+
             # Create folder for this movie
             folder_name = f"{title}_{release_year}"
             movie_folder = os.path.join(images_dir, folder_name)
             if not os.path.exists(movie_folder):
                 os.makedirs(movie_folder)
-            
+
             # Download poster
             if details.get('additional_poster_urls'):
                 poster_url = details['additional_poster_urls'][0]
                 poster_path = os.path.join(movie_folder, "poster.jpg")
-                self.downloadImage(poster_url, poster_path)            
+                self.downloadImage(poster_url, poster_path)
             elif details.get('poster_url'):
                 poster_url = details['poster_url']
                 poster_path = os.path.join(movie_folder, "poster.jpg")
@@ -2909,26 +2909,26 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
                 logo_url = details['logo_urls'][0]
                 logo_path = os.path.join(movie_folder, "logo.png")
                 self.downloadImage(logo_url, logo_path)
-            
+
             # Download backdrop
             if details.get('backdrop_urls'):
                 backdrop_url = details['backdrop_urls'][0]
                 backdrop_path = os.path.join(movie_folder, "backdrop.jpg")
                 self.downloadImage(backdrop_url, backdrop_path)
-            
+
             # Download cast images (limit to 4 to save time)
             if details.get('cast'):
                 cast_folder = os.path.join(movie_folder, "cast")
                 if not os.path.exists(cast_folder):
                     os.makedirs(cast_folder)
-                
+
                 for i, actor in enumerate(details['cast'][:4]):
                     if actor.get('profile_url'):
                         cast_path = os.path.join(cast_folder, f"cast_{i + 1}.jpg")
                         self.downloadImage(actor['profile_url'], cast_path)
-            
+
             print(f"Background image download completed for {title}_{release_year}")
-            
+
         except Exception as e:
             print(f"Error downloading images in background: {e}")
             import traceback
@@ -2949,12 +2949,12 @@ MultiContentEntryText(pos = (120, 90), size = (850, 50), font = 2, flags = RT_HA
         release_year = self.get_movie_year(details)
         if release_year == 'unknown_year':
             release_year = details.get('release_date', '').split('-')[0] if details.get('release_date') else 'unknown'
-        
+
         # Create folder name
         title = details.get('title', 'unknown').replace(' ', '_').replace('/', '_')
         folder_name = f"{title}_{release_year}"
         images_folder = os.path.join(self.imagesPath, folder_name)
-        
+
         # Open the details screen
         self.session.open(MovieDetailsScreen, details, images_folder)
 
@@ -3042,45 +3042,45 @@ class MovieDetailsScreen(Screen):
     def loadData(self):
         # Set text information
         self["title"].setText(self.details.get('title', 'N/A'))
-        
+
         # Tagline
         tagline = self.details.get('tagline', '')
         self["tagline"].setText(tagline if tagline else _("No tagline available"))
-        
+
         # Rating
         rating = self.details.get('rating', 'N/A')
         self["rating"].setText(_("Rating: ") + str(rating))
-        
+
         # Runtime
         runtime = self.details.get('runtime', 'N/A')
         self["runtime"].setText(_("Runtime: ") + (f"{runtime} min" if runtime != 'N/A' else runtime))
-        
+
         # Adult content
         adult = self.details.get('adult', False)
         self["adult"].setText(_("Adult Content: ") + (_("Yes") if adult else _("No")))
-        
+
         # Genres
         genres = self.details.get('genres', [])
         genres_text = ", ".join(genres) if genres else _("No genres available")
         self["genres"].setText(_("Genres: ") + genres_text)
-        
+
         # Overview
         overview = self.details.get('overview', 'N/A')
         self["overview"].setText(overview)
-        
+
         # Load images
         self.loadImage("poster", "poster.jpg")
         self.loadImage("logo", "logo.png")
-        
+
         # Load cast images and names
         cast = self.details.get('cast', [])
         cast_folder = os.path.join(self.images_folder, "cast")
-        
+
         if os.path.exists(cast_folder):
             cast_files = [f for f in os.listdir(cast_folder) if f.endswith('.jpg')]
             for i, cast_file in enumerate(cast_files[:4]):  # Load up to 4 cast images
                 self.loadImage(f"cast{i + 1}", os.path.join("cast", cast_file))
-                
+
                 # Set cast name and character if available
                 if i < len(cast):
                     actor = cast[i]
@@ -3225,12 +3225,12 @@ class SubsChooser(Screen):
         from .subtitles import initSubsSettings
         settings = initSubsSettings().search
         eventList = self.titleList if self.titleList else []
-        
+
         # If no title list, try to use the video name as fallback
         if not eventList and self.videoPath:
             videoName = os.path.splitext(os.path.basename(self.videoPath))[0]
             eventList.append(videoName)
-        
+
         # Open TMDB scraper with the event list
         self.session.openWithCallback(self.tmdbScraperCallback, TMDBScraperScreen, eventList, settings)
 
@@ -4476,7 +4476,7 @@ class SubsSearch(Screen):
         searchTitles = searchTitles or [""]
         TMDBbackup_path = config.plugins.subtitlesSupport.settingsTMDBDataPath.value
         self.detailsPath = os.path.join(TMDBbackup_path, "details")
-        self.imagesPath = os.path.join(TMDBbackup_path, "images")        
+        self.imagesPath = os.path.join(TMDBbackup_path, "images")
         self.searchParamsHelper = SearchParamsHelper(seeker, searchSettings)
         self.seeker = seeker
         self.searchExpression = searchTitles[0]
@@ -4496,7 +4496,7 @@ class SubsSearch(Screen):
         self.posterRefreshTimer = eTimer()
         self.posterRefreshTimer.callback.append(self.refreshPosterPeriodically)
         self.posterRefreshCount = 0
-        self.maxPosterRefreshAttempts = 5  # Try for 15 seconds (5 attempts × 3 seconds)        
+        self.maxPosterRefreshAttempts = 5  # Try for 15 seconds (5 attempts × 3 seconds)
         self.__downloadedSubtitles = []
         self.__downloading = False
         self.__searching = False
@@ -5097,34 +5097,34 @@ class SubsSearch(Screen):
         self.posterTimer = eTimer()
         self.posterTimer.callback.append(self.updatePoster)
         self.posterTimer.start(1000, True)  # 1 second delay
-        
+
     def updatePoster(self):
         """Update the movie poster based on search title and year"""
         try:
             title = self.searchTitle.value
             year = str(self.searchYear.value) if self.searchYear.value else ""
-            
+
             print(f"[SubsSearch] Looking for poster for: {title} ({year})")
-            
+
             if title:
                 # Try multiple folder name variations
                 possible_folders = self.generatePossibleFolderNames(title, year)
-                
+
                 images_dir = self.imagesPath
-                
+
                 # Check if images directory exists
                 if not os.path.exists(images_dir):
                     print(f"[SubsSearch] Images directory does not exist: {images_dir}")
                     self.showDefaultPoster()
                     return
-                
+
                 # Look for matching folders
                 matching_folder = self.findMatchingFolder(images_dir, possible_folders)
-                
+
                 if matching_folder:
                     poster_path = os.path.join(images_dir, matching_folder, "poster.jpg")
                     print(f"[SubsSearch] Trying poster path: {poster_path}")
-                    
+
                     if os.path.exists(poster_path):
                         from Tools.LoadPixmap import LoadPixmap
                         try:
@@ -5133,7 +5133,7 @@ class SubsSearch(Screen):
                                 self["poster"].instance.setPixmap(pixmap)
                                 self["poster"].show()
                                 print(f"[SubsSearch] Poster loaded successfully: {poster_path}")
-                                
+
                                 # Stop the refresh timer since we found the poster
                                 self.posterRefreshTimer.stop()
                                 self.posterRefreshCount = 0
@@ -5149,11 +5149,11 @@ class SubsSearch(Screen):
                     # List available folders for debugging
                     available_folders = [f for f in os.listdir(images_dir) if os.path.isdir(os.path.join(images_dir, f))]
                     print(f"[SubsSearch] Available folders: {available_folders}")
-            
+
             # If no poster found, show default poster and start refresh timer
             self.showDefaultPoster()
             self.startPosterRefreshTimer()
-                
+
         except Exception as e:
             print(f"[SubsSearch] Error in updatePoster: {e}")
             import traceback
@@ -5165,32 +5165,32 @@ class SubsSearch(Screen):
         """Generate all possible folder name variations"""
         # Remove any year from the title if present
         clean_title = re.sub(r'\s*\(\d{4}\)$', '', title).strip()
-        
+
         # Format title for folder name (replace special characters)
         formatted_title = clean_title.replace(' ', '_').replace(':', '_').replace('/', '_').replace('\\', '_').replace('?', '_').replace('*', '_')
-        
+
         possible_folders = []
-        
+
         # Try different combinations with and without year
         if year:
             # With year
             possible_folders.append(f"{formatted_title}_{year}")
             possible_folders.append(f"{clean_title.replace(' ', '_')}_{year}")
-            
+
             # Try with original title formatting (with colons)
             if ':' in clean_title:
                 possible_folders.append(f"{clean_title.replace(' ', '_')}_{year}")
-        
+
         # Without year
         possible_folders.append(formatted_title)
         possible_folders.append(clean_title.replace(' ', '_'))
-        
+
         # Try with original title formatting (with colons)
         if ':' in clean_title:
             possible_folders.append(clean_title.replace(' ', '_'))
-        
+
         return possible_folders
-    
+
     def findMatchingFolder(self, images_dir, possible_folders):
         """Find a matching folder from the list of possible names"""
         # First try exact matches
@@ -5198,7 +5198,7 @@ class SubsSearch(Screen):
             folder_path = os.path.join(images_dir, folder)
             if os.path.isdir(folder_path) and folder in possible_folders:
                 return folder
-        
+
         # Then try partial matches (starts with)
         for folder in os.listdir(images_dir):
             folder_path = os.path.join(images_dir, folder)
@@ -5206,14 +5206,14 @@ class SubsSearch(Screen):
                 for possible_folder in possible_folders:
                     if folder.startswith(possible_folder):
                         return folder
-        
+
         # Finally try case-insensitive matches
         possible_folders_lower = [f.lower() for f in possible_folders]
         for folder in os.listdir(images_dir):
             folder_path = os.path.join(images_dir, folder)
             if os.path.isdir(folder_path) and folder.lower() in possible_folders_lower:
                 return folder
-        
+
         return None
 
     def startPosterRefreshTimer(self):
@@ -5224,12 +5224,12 @@ class SubsSearch(Screen):
             print(f"[SubsSearch] Poster refresh scheduled (attempt {self.posterRefreshCount}/{self.maxPosterRefreshAttempts})")
         else:
             print("[SubsSearch] Max poster refresh attempts reached")
-    
+
     def refreshPosterPeriodically(self):
         """Periodically check if the poster has been downloaded"""
         print("[SubsSearch] Refreshing poster check...")
         self.updatePoster()
-    
+
     def showDefaultPoster(self):
         """Show default poster when no specific poster is found"""
         try:
@@ -5237,7 +5237,7 @@ class SubsSearch(Screen):
             # Fallback to a simple default if the specified one doesn't exist
             if not os.path.exists(default_poster):
                 default_poster = "/usr/share/enigma2/skin_default/no_cover.png"
-            
+
             if os.path.exists(default_poster):
                 from Tools.LoadPixmap import LoadPixmap
                 self["poster"].instance.setPixmap(LoadPixmap(default_poster))
@@ -5255,15 +5255,15 @@ class SubsSearch(Screen):
             if callback:
                 self.updateSearchInfoList()
                 self.updateBottomMenu()
-                
+
                 # Reset refresh counter and update poster
                 self.posterRefreshCount = 0
                 self.updatePoster()
-                
+
                 if not self.searchSettings.manualSearch.value:
                     self.searchSubs()
         self.session.openWithCallback(updateSearchParamsCB, SubsSearchParamsMenu, self.seeker, self.searchSettings, self.searchTitles, False)
-    
+
     def close(self, result=None):
         """Override close method to stop the refresh timer"""
         self.posterRefreshTimer.stop()
