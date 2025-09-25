@@ -27,7 +27,7 @@ import time
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from six.moves import html_parser
-warnings.simplefilter('ignore',InsecureRequestWarning)
+warnings.simplefilter('ignore', InsecureRequestWarning)
 from ..user_agents import get_random_ua
 
 
@@ -38,7 +38,7 @@ HDR = {'User-Agent': get_random_ua(),
       'Content-Type': 'application/x-www-form-urlencoded',
       'Referer': 'https://subf2m.co',
       'Connection': 'keep-alive',
-      'Accept-Encoding':'gzip, deflate'}
+      'Accept-Encoding': 'gzip, deflate'}
       
      
 main_url = "https://subf2m.co"
@@ -364,7 +364,7 @@ def search_tvshow(tvshow, season, episode, languages, filename):
 def search_manual(searchstr, languages, filename):
     search_string = prepare_search_string(searchstr)
     url = main_url + "/subtitles/release?q=" + search_string + '&r=true'
-    content, response_url = requests.get(url,headers=HDR,verify=False,allow_redirects=True).text
+    content, response_url = requests.get(url, headers=HDR, verify=False, allow_redirects=True).text
 
     if content is not None:
         return getallsubs(content, languages, filename)
