@@ -44,8 +44,8 @@ seasons = [
 ]
 
 movie_season_pattern = (
-    "<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)\((?P<year>\d{4})\)</a>\s+"
-    "<div class=\"subtle count\">\s*(?P<numsubtitles>\d+\s+subtitles)</div>\s+"
+    r"<a href=\"(?P<link>/subscene/[^\"]*)\">(?P<title>[^<]+)\((?P<year>\d{4})\)</a>\s+"
+    r"<div class=\"subtle count\">\s*(?P<numsubtitles>\d+\s+subtitles)</div>\s+"
 )
 
 # Language mappings

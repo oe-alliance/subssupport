@@ -1,4 +1,4 @@
-from re
+import re
 
 
 class ParseError(Exception):
