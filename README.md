@@ -25,6 +25,11 @@ subssupport is enigma2 plugin which provides improved subtitles support for seve
 | OpenSubtitles.com | movies, tv | free API key, username/password optional (more downloads) |
 | Subdl | movies, tv | free API key |
 | Subsource | movies, tv | free API key (profile page) |
+| Wyzie Subs | movies, tv | free API key |
+| OpenSubtitles.org | movies, tv | login optional, without VIP downloads come from the website (daily limit) |
+| OpenSubtitles (Stremio) | movies, tv | - |
+| Gestdown (Addic7ed) | tv | - |
+| JustSubtitles | movies (en, ar, de, it, id, ja, ko) | - |
 | Titlovi | movies, tv (bs, hr, en, mk, sr, sl) | titlovi.com account |
 | Titulky.com | movies, tv (cs, sk) | login optional, a captcha after the daily limit |
 | Prijevodi-Online | movies, tv (bs, hr, sr, mk, en) | - |

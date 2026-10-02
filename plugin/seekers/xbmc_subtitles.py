@@ -149,6 +149,24 @@ class YtssubsSeeker(XBMCSubtitlesAdapter):
 
 
 try:
+    from .Justsubtitles import justsubtitles
+except ImportError as e:
+    justsubtitles = e
+
+
+class JustsubtitlesSeeker(XBMCSubtitlesAdapter):
+    id = 'justsubtitles'
+    module = justsubtitles
+    if isinstance(module, Exception):
+        error, module = module, None
+    provider_name = 'JustSubtitles'
+    supported_langs = ['en', 'ar', 'de', 'it', 'id', 'ja', 'ko']
+    default_settings = {}
+    movie_search = True
+    tvshow_search = False
+
+
+try:
     from .LocalDrive import localdrive
 except ImportError as e:
     localdrive = e
@@ -249,6 +267,77 @@ class SubdlSeeker(XBMCSubtitlesAdapter):
     supported_langs = allLang()
     default_settings = {'Subdl_API_KEY': {'label': _("API key"), 'type': 'text', 'default': '', 'pos': 0}}
     required_settings = ('Subdl_API_KEY',)
+
+
+try:
+    from .Wyzie import wyzie
+except ImportError as e:
+    wyzie = e
+
+
+class WyzieSeeker(XBMCSubtitlesAdapter):
+    module = wyzie
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'wyzie'
+    provider_name = 'Wyzie Subs'
+    supported_langs = allLang()
+    default_settings = {'Wyzie_API_KEY': {'label': _("API key"), 'type': 'text', 'default': '', 'pos': 0}}
+    required_settings = ('Wyzie_API_KEY',)
+
+
+try:
+    from .OpenSubtitlesOrg import opensubtitlesorg
+except ImportError as e:
+    opensubtitlesorg = e
+
+
+class OpenSubtitlesOrgSeeker(XBMCSubtitlesAdapter):
+    module = opensubtitlesorg
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'opensubtitles.org'
+    provider_name = 'OpenSubtitles.org'
+    supported_langs = allLang()
+    default_settings = {
+        'OpenSubtitlesOrg_username': {'label': _("Username"), 'type': 'text', 'default': "", 'pos': 0},
+        'OpenSubtitlesOrg_password': {'label': _("Password"), 'type': 'password', 'default': "", 'pos': 1}
+    }
+
+
+try:
+    from .StremioOS import stremioos
+except ImportError as e:
+    stremioos = e
+
+
+class StremioOSSeeker(XBMCSubtitlesAdapter):
+    module = stremioos
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'opensubtitles.stremio'
+    provider_name = 'OpenSubtitles (Stremio)'
+    supported_langs = allLang()
+    default_settings = {}
+
+
+try:
+    from .Gestdown import gestdown
+except ImportError as e:
+    gestdown = e
+
+
+class GestdownSeeker(XBMCSubtitlesAdapter):
+    module = gestdown
+    if isinstance(module, Exception):
+        error, module = module, None
+    id = 'gestdown'
+    provider_name = 'Gestdown (Addic7ed)'
+    supported_langs = ['en', 'fr', 'de', 'es', 'it', 'pt', 'pt-br', 'nl', 'pl', 'ro', 'el', 'hu', 'cs', 'sk', 'sv', 'da', 'no',
+                       'fi', 'tr', 'ru', 'uk', 'bg', 'hr', 'sr', 'sl', 'bs', 'mk', 'ar', 'he', 'fa', 'ca', 'zh', 'ja', 'ko', 'id', 'ms', 'vi', 'th']
+    default_settings = {}
+    movie_search = False
+    tvshow_search = True
 
 
 try:
