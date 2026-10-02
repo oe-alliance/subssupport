@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SubsSupport _ enigma2-plugin by mx3L\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-19 19:52+0300\n"
+"POT-Creation-Date: 2026-10-02 20:47+0200\n"
 "PO-Revision-Date: 2018-04-20 17:46+0200\n"
 "Last-Translator: peter <sct2003@abv.bg>\n"
 "Language-Team: Bulgarian <>\n"
@@ -15,609 +15,948 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: compat.py:211 subtitles.py:2306
-msgid "List of storage devices"
-msgstr "Устройства за съхранение"
-
-#: compat.py:213 subtitles.py:2308
-msgid "Parent directory"
-msgstr "Родителска директория"
-
-#: compat.py:232 subtitles.py:2327
-msgid "nothing connected"
-msgstr "нищо не е свързано"
-
-#: e2_utils.py:116
-msgid "Language selection"
-msgstr "Избор на език"
-
-#: e2_utils.py:245
-msgid "Type text of picture"
-msgstr "Въведете текста от картинката"
-
-#: e2_utils.py:387
-msgid "unpack error: cannot get subname"
-msgstr "грешка при разархивиране: не може да се извлече името на субтитрите"
-
-#: e2_utils.py:403
-msgid "unpack error: cannot open archive"
-msgstr "грешка при разархивиране: не може да се отвори архива"
-
-#: e2_utils.py:515 subtitles.py:4715
-msgid "Save"
-msgstr "Запис"
-
-#: e2_utils.py:516 subtitles.py:4716
-msgid "Cancel"
-msgstr "Отказ"
-
-#: e2_utils.py:517 subtitles.py:4717
-msgid "Reset Defaults"
-msgstr "Стандартни"
-
-#: plugin.py:77 subtitles.py:2205
-msgid "General settings"
-msgstr "Глобални настройки"
-
-#: plugin.py:78
-msgid "External subtitles settings"
-msgstr "Външни субтитри"
-
-#: plugin.py:79 subtitles.py:2189
-msgid "Embedded subtitles settings"
-msgstr "Вградени субтитри"
-
-#: plugin.py:80
-msgid "Search settings"
-msgstr "Настройки при търсене"
-
-#: plugin.py:81 subtitlesdvb.py:33
-msgid "DVB player settings"
-msgstr "Плейър на субтитри"
-
-#: plugin.py:92 plugin.py:142 plugin.py:145
-msgid "SubsSupport settings"
-msgstr "SubsSupport настройки"
-
-#: plugin.py:124
-msgid ""
-"You have OpenPli-based image, please change embedded subtitles settings in "
-"Settings / System / Subtitles settings"
-msgstr ""
-"Използвате OpenPLi базиран имидж, сменете настройките от Настройки / "
-"Система / Настройки на Субтитрите"
-
-#: plugin.py:142
-msgid "Change subssupport settings"
-msgstr "Промяна на настройките"
-
-#: plugin.py:143 plugin.py:146
-msgid "SubsSupport downloader"
-msgstr ""
-
-#: plugin.py:143
-msgid "Download subtitles for your videos"
-msgstr "Сваляне на субтитри за вашите видео файлове"
-
-#: plugin.py:144 plugin.py:147
-msgid "SubsSupport DVB player"
-msgstr ""
-
-#: plugin.py:144
-msgid "watch DVB broadcast with subtitles"
-msgstr "гледане на DVB предавания със субтитри"
-
-#: seek.py:328
 #, python-format
-msgid "unsupported archive %s"
-msgstr "неподдържан архив %s"
+msgid ""
+"%s\n"
+"as %s"
+msgstr ""
 
-#: seekers/xbmc_subtitles.py:123 seekers/xbmc_subtitles.py:301
-#: seekers/xbmc_subtitles.py:397
-msgid "Username"
-msgstr "Потребителско име"
+#, python-format
+msgid "%s requires: %s"
+msgstr ""
 
-#: seekers/xbmc_subtitles.py:124 seekers/xbmc_subtitles.py:302
-#: seekers/xbmc_subtitles.py:398
-msgid "Password"
-msgstr "Парола"
+msgid "API key"
+msgstr ""
 
-#: seekers/xbmc_subtitles.py:303
-msgid "Send and search movie hashes"
-msgstr "Изпращане и търсене на филми по хеш"
+msgid "API key OK (no username/password set, downloads are limited)"
+msgstr ""
 
-#: subtitles.py:197
-msgid "top"
-msgstr "отгоре"
+msgid "ASS file"
+msgstr ""
 
-#: subtitles.py:199
-msgid "bottom"
-msgstr "отдолу"
+msgid "Add subtitle's language to filename"
+msgstr "Добавяне езика към името на файла"
 
-#: subtitles.py:204
-msgid "red"
-msgstr "червен"
+msgid "Adult Content: "
+msgstr ""
 
-#: subtitles.py:205
-msgid "grey"
-msgstr "сив"
+msgid "Albanian"
+msgstr ""
 
-#: subtitles.py:206
-msgid "green"
-msgstr "зелен"
-
-#: subtitles.py:207
-msgid "purple"
-msgstr "лилав"
-
-#: subtitles.py:208
-msgid "yellow"
-msgstr "жълт"
-
-#: subtitles.py:209
-msgid "white"
-msgstr "бял"
-
-#: subtitles.py:210
-msgid "blue"
-msgstr "син"
-
-#: subtitles.py:211
-msgid "black"
-msgstr "черен"
-
-#: subtitles.py:226
-msgid "opaque"
-msgstr "непрозрачен"
-
-#: subtitles.py:228
-msgid "transparent"
-msgstr "прозрачен"
-
-#: subtitles.py:252
-msgid "offset"
-msgstr "отстояние"
-
-#: subtitles.py:252
-msgid "border"
-msgstr "контур"
-
-#: subtitles.py:259
-msgid "dynamic"
-msgstr "динамичен"
-
-#: subtitles.py:259
-msgid "static"
-msgstr "статичен"
-
-#: subtitles.py:297
-msgid "List"
-msgstr "Списък"
-
-#: subtitles.py:297
-msgid "List + File"
-msgstr "Списък + Файл"
-
-#: subtitles.py:306 subtitles.py:307 subtitles.py:324 subtitles.py:3634
-#: subtitles.py:3644 subtitles.py:3649
 msgid "All"
 msgstr "Всички"
 
-#: subtitles.py:309 subtitles.py:4044
-msgid "Language"
-msgstr "Език"
+msgid "Always ask before overwriting existing subtitles"
+msgstr "Питане преди презапис"
 
-#: subtitles.py:309 subtitles.py:2662 subtitles.py:4046 subtitles.py:4173
-#: subtitles.py:5025
-msgid "Provider"
-msgstr "Сайт"
-
-#: subtitles.py:310 subtitles.py:311
-msgid "Default"
-msgstr "Стандартни"
-
-#: subtitles.py:310 subtitles.py:311 subtitles.py:3691 subtitles.py:4045
-msgid "Release"
-msgstr "Релийз"
-
-#: subtitles.py:310 subtitles.py:3693
-msgid "Video filename"
-msgstr "Като филма"
-
-#: subtitles.py:312 subtitles.py:3694 subtitles.py:3696
-msgid "User defined"
-msgstr "Избран от потребителя"
-
-#: subtitles.py:312 subtitles.py:3698
-msgid "Next to video"
-msgstr "При филма"
-
-#: subtitles.py:320
-msgid "TV show"
-msgstr "Сериал"
-
-#: subtitles.py:320
-msgid "Movie"
-msgstr "Филм"
-
-#: subtitles.py:401
-msgid "jump to next subtitle"
-msgstr "следваща реплика"
-
-#: subtitles.py:402
-msgid "jump to previous subtitle"
-msgstr "предишна реплика"
-
-#: subtitles.py:403
-msgid "increase subtitles delay"
-msgstr "увеличаване на закъснението"
-
-#: subtitles.py:404
-msgid "decrease subtitles delay"
-msgstr "намаляване на закъснението"
-
-#: subtitles.py:408
-msgid "reset subtitles delay/fps"
-msgstr "нулиране на закъснението/FPS"
-
-#: subtitles.py:409 subtitlesdvb.py:152
-msgid "change subtitles fps"
-msgstr "промяна на FPS"
-
-#: subtitles.py:413
-msgid "displays this menu"
-msgstr "показва това меню"
-
-#: subtitles.py:414
-msgid "exit"
-msgstr "изход"
-
-#: subtitles.py:441 subtitles.py:444 subtitles.py:446 subtitlesdvb.py:133
-#: subtitlesdvb.py:268 subtitlesdvb.py:273 subtitlesdvb.py:275
-#: subtitlesdvb.py:277 subtitlesdvb.py:281 subtitlesdvb.py:283
-#: subtitlesdvb.py:285
-msgid "Subtitles FPS"
-msgstr "FPS"
-
-#: subtitles.py:441 subtitles.py:2912 subtitlesdvb.py:268 subtitlesdvb.py:295
-msgid "unknown"
-msgstr "неизвестен"
-
-#: subtitles.py:444 subtitlesdvb.py:273 subtitlesdvb.py:275
-#: subtitlesdvb.py:277 subtitlesdvb.py:281
-msgid "original"
-msgstr "оригинален"
-
-#: subtitles.py:452 subtitles.py:454 subtitles.py:457 subtitles.py:459
-msgid "Subtitles Delay"
-msgstr "Закъснение"
-
-#: subtitles.py:504
-msgid "change external subtitles status"
-msgstr "промяна статуса на външните субтитри"
-
-#: subtitles.py:532 subtitles.py:534
-msgid "No external subtitles are loaded"
-msgstr "Не са заредени външни субтитри"
-
-#: subtitles.py:766
-msgid "show subtitles menu"
-msgstr "показва меню на субтитрите"
-
-#: subtitles.py:1066 subtitlesdvb.py:61
-msgid "Cannot load subtitles. Invalid path"
-msgstr "Не могат да се заредят субтитрите. Невалиден път"
-
-#: subtitles.py:1070 subtitlesdvb.py:63
-msgid "Cannot decode subtitles. Try another encoding group"
-msgstr ""
-"Субтитрите не могат да се декодират. Опитайте с друга група за кодиране"
-
-#: subtitles.py:1074 subtitlesdvb.py:65
-msgid "Cannot parse subtitles. Not supported subtitles format"
-msgstr "Субтитрите не могат да се обработят. Неподдържан формат"
-
-#: subtitles.py:1078 subtitlesdvb.py:67
-msgid "Cannot parse subtitles. Invalid subtitles format"
-msgstr "Субтитрите не могат да се обработят. Невалиден формат"
-
-#: subtitles.py:1855
-msgid "Currently choosed subtitles"
-msgstr "Избрани субтитри"
-
-#: subtitles.py:1884
-msgid "Embedded Subtitles"
-msgstr "Вградени Субтитри"
-
-#: subtitles.py:1895 subtitles.py:1898
-msgid "Encoding:"
-msgstr "Кодиране:"
-
-#: subtitles.py:1898
-msgid "cannot decode"
-msgstr "не могат да се декодират"
-
-#: subtitles.py:1900
-msgid "None"
-msgstr "Нито един"
-
-#: subtitles.py:1905 subtitles.py:2878
-msgid "Choose subtitles"
-msgstr "Изберете субтитри"
-
-#: subtitles.py:1907
-msgid "Search subtitles"
-msgstr "Търсене на субтитри"
-
-#: subtitles.py:1910
-msgid "Change encoding"
-msgstr "Промяна на енкодинга"
-
-#: subtitles.py:1911
-msgid "Subtitles settings"
-msgstr "Настройки на субтитрите"
-
-#: subtitles.py:1913 subtitles.py:1915
-msgid "Subtitles settings (embedded)"
-msgstr "Настройки на субтитрите (вградени)"
-
-#: subtitles.py:1917
-msgid "Turn off subtitles"
-msgstr "Изключване на субтитрите"
-
-#: subtitles.py:1991 subtitles.py:2545
-msgid "Some subtitles providers are not working"
-msgstr "Някои сайтове не работят"
-
-#: subtitles.py:1992 subtitles.py:2546
-msgid "For more details please check search settings"
-msgstr "За повече детайли вижте параметрите при търсене"
-
-#: subtitles.py:1994 subtitles.py:2548
-msgid "Do you want to show this message again?"
-msgstr "Показване на това съобщение отново?"
-
-#: subtitles.py:2041 subtitles.py:2178
-msgid "Font type (Regular)"
-msgstr "Шрифт (Обикновен)"
-
-#: subtitles.py:2042
-msgid "Font color (Regular)"
-msgstr "Цвят на шрифта (Обикновен)"
-
-#: subtitles.py:2043
-msgid "Font transparency (Regular)"
-msgstr "Прозрачност на шрифта (Обикновен)"
-
-#: subtitles.py:2044 subtitles.py:2179
-msgid "Font type (Italic)"
-msgstr "Шрифт (Наклонен)"
-
-#: subtitles.py:2045
-msgid "Font color (Italic"
-msgstr "Цвят на шрифта (Наклонен)"
-
-#: subtitles.py:2046
-msgid "Font transparency (Italic)"
-msgstr "Прозрачност на шрифта (Наклонен)"
-
-#: subtitles.py:2047 subtitles.py:2180
-msgid "Font type (Bold)"
-msgstr "Шрифт (Удебелен)"
-
-#: subtitles.py:2048
-msgid "Font color (Bold)"
-msgstr "Цвят на шрифта (Удебелен)"
-
-#: subtitles.py:2049
-msgid "Font transparency (Bold)"
-msgstr "Прозрачност на шрифта (Удебелен)"
-
-#: subtitles.py:2050 subtitles.py:2181
-msgid "Font size"
-msgstr "Размер на шрифта"
-
-#: subtitles.py:2051 subtitles.py:2182
-msgid "Position"
-msgstr "Позиция"
-
-#: subtitles.py:2052
-msgid "Shadow"
-msgstr "Сянка"
-
-#: subtitles.py:2054
-msgid "Shadow type"
-msgstr "Вид на сянката"
-
-#: subtitles.py:2056 subtitles.py:2184
-msgid "Shadow X-offset"
-msgstr "Хоризонтално отстояние на сянката"
-
-#: subtitles.py:2057 subtitles.py:2185
-msgid "Shadow Y-offset"
-msgstr "Вертикално отстояние на сянката"
-
-#: subtitles.py:2059
-msgid "Shadow size"
-msgstr "Размер на сянката"
-
-#: subtitles.py:2060
-msgid "Shadow color"
-msgstr "Цвят на сянката"
-
-#: subtitles.py:2061
-msgid "Background"
-msgstr "Фон"
-
-#: subtitles.py:2063
-msgid "Background type"
-msgstr "Вид на фона"
-
-#: subtitles.py:2065
-msgid "Background X-offset"
-msgstr "Хоризонтално отстояние на фона"
-
-#: subtitles.py:2066
-msgid "Background Y-offset"
-msgstr "Вертикално отстояние на фона"
-
-#: subtitles.py:2067
-msgid "Background color"
-msgstr "Цвят на фона"
-
-#: subtitles.py:2068
-msgid "Background transparency"
-msgstr "Прозрачност на фона"
-
-#: subtitles.py:2072
-msgid "External Subtitles settings"
-msgstr "Външни субтитри"
-
-#: subtitles.py:2106
-msgid "Subtitles setting"
-msgstr "Настройки на субтитрите"
-
-#: subtitles.py:2112 subtitles.py:2210
-msgid "Pause video on opening subtitles menu"
-msgstr "Пауза на филма при отваряне менюто за субтитри"
-
-#: subtitles.py:2115 subtitles.py:2211
-msgid "Encoding"
-msgstr "Кодиране"
-
-#: subtitles.py:2116
-msgid "Show expert settings"
-msgstr "Показване на разширени настройки"
-
-#: subtitles.py:2119
-msgid "Hide delay"
+msgid "Anonymous login OK (no username/password set), downloads come from the website and are limited"
 msgstr ""
 
-#: subtitles.py:2120
-msgid "Sync delay"
+msgid "Append language to filename"
+msgstr "Добавяне езика към името на файла"
+
+msgid "Apply now"
 msgstr ""
 
-#: subtitles.py:2121
-msgid "Player delay"
-msgstr "Закъснение"
-
-#: subtitles.py:2122
-msgid "Refresh delay"
-msgstr "Забавяне на опресняването"
-
-#: subtitles.py:2123
-msgid "PTS check delay"
+msgid "Arabic"
 msgstr ""
 
-#: subtitles.py:2183
-msgid "Color"
-msgstr "Цвят"
+msgid "Armenian"
+msgstr ""
 
-#: subtitles.py:2353
-msgid "Choose from embedded subtitles"
-msgstr "Избор от вградени субтитри"
+msgid "Ask"
+msgstr ""
 
-#: subtitles.py:2358
-msgid "Choose from downloaded subtitles"
-msgstr "Избор от свалени субтитри"
-
-#: subtitles.py:2363
-msgid "Choose from web subtitles"
-msgstr "Избор на субтитри от Интернет"
-
-#: subtitles.py:2428
-msgid "Subtitles will be downloaded in"
-msgstr "Субтитрите ще се свалят в"
-
-#: subtitles.py:2428
-msgid "seconds"
-msgstr "секунди"
-
-#: subtitles.py:2504
-msgid "Choose Subtitles"
-msgstr "Избор на субтитри"
-
-#: subtitles.py:2661
-msgid "Name"
-msgstr "Име"
-
-#: subtitles.py:2663
-msgid "Download date"
-msgstr "Дата на сваляне"
-
-#: subtitles.py:2666
-msgid "Remove (file)"
-msgstr "Изтриване (файл)"
-
-#: subtitles.py:2667 subtitles.py:4053 subtitles.py:4216
-msgid "Settings"
-msgstr "Настройки"
-
-#: subtitles.py:2703
-msgid "Downloaded Subtitles"
-msgstr "Свалени Субтитри"
-
-#: subtitles.py:2732
-msgid "Entries count:"
-msgstr "Субтитри:"
-
-#: subtitles.py:2736
-msgid "Remove Entry (List+File)"
-msgstr "Изтриване"
-
-#: subtitles.py:2738
-msgid "Remove Entry (List)"
-msgstr "Изтриване"
-
-#: subtitles.py:2748
-msgid "There was an error while removing subtitle, please check log"
-msgstr "Грешка при изтриване, проверете в лога"
-
-#: subtitles.py:2766 subtitles.py:2773
-msgid "Subtitle"
-msgstr "Субтитри"
-
-#: subtitles.py:2766
-msgid "will be removed from file system"
-msgstr "ще бъдат изтрити напълно"
-
-#: subtitles.py:2767 subtitles.py:2774
-msgid "Do you want to proceed?"
-msgstr "Да продължа ли?"
-
-#: subtitles.py:2773
-msgid "will be removed from list"
-msgstr "ще бъдат премахнати от списъка"
-
-#: subtitles.py:2811
-msgid "Downloaded Subtitles - Settings"
-msgstr "Свалени субтитри"
-
-#: subtitles.py:2816
-msgid "Max history entries"
-msgstr "Максимален брой субтитри"
-
-#: subtitles.py:2817
-msgid "Remove action"
-msgstr "При изтриване"
-
-#: subtitles.py:2818
 msgid "Ask on remove action"
 msgstr "Питане при премахване"
 
-#: subtitles.py:2824
-msgid "Select Directory"
-msgstr "Изберете папка"
-
-#: subtitles.py:3032
-msgid ""
-"There are more subtitles in unpacked archive\n"
-" please select which one do you want to use"
+msgid "Auto detect"
 msgstr ""
-"Имa няколко файла в архива\n"
-"изберете кой да се използва"
 
-#: subtitles.py:3036
+msgid "Auto sync to current event"
+msgstr "Автоматично синхронизиране"
+
+msgid "Automatic"
+msgstr ""
+
+msgid "Aymara"
+msgstr ""
+
+msgid "BLUE: Change subtitles FPS"
+msgstr ""
+
+msgid "Background"
+msgstr "Фон"
+
+msgid "Background X-offset"
+msgstr "Хоризонтално отстояние на фона"
+
+msgid "Background Y-offset"
+msgstr "Вертикално отстояние на фона"
+
+msgid "Background color"
+msgstr "Цвят на фона"
+
+msgid "Background height"
+msgstr ""
+
+msgid "Background transparency"
+msgstr "Прозрачност на фона"
+
+msgid "Background type"
+msgstr "Вид на фона"
+
+msgid "Bengali"
+msgstr ""
+
+msgid "Best match"
+msgstr ""
+
+msgid "Bosnian"
+msgstr ""
+
+msgid "Bulgarian"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Отказ"
+
+msgid "Cannot decode subtitles. Try another encoding group"
+msgstr "Субтитрите не могат да се декодират. Опитайте с друга група за кодиране"
+
+msgid "Cannot determine year for image folder."
+msgstr ""
+
+msgid "Cannot load subtitles. Invalid path"
+msgstr "Не могат да се заредят субтитрите. Невалиден път"
+
+msgid "Cannot parse subtitles. Invalid subtitles format"
+msgstr "Субтитрите не могат да се обработят. Невалиден формат"
+
+msgid "Cannot parse subtitles. Not supported subtitles format"
+msgstr "Субтитрите не могат да се обработят. Неподдържан формат"
+
+msgid "Cannot save download history, for details look in log"
+msgstr "Не може да се запише историята на изтеглянията, за подробности погледнете в лога"
+
+msgid "Captcha was not entered"
+msgstr ""
+
+msgid "Catalan"
+msgstr ""
+
+msgid "Central and Eastern Europe"
+msgstr ""
+
+msgid "Change encoding"
+msgstr "Промяна на енкодинга"
+
+msgid "Change subssupport settings"
+msgstr "Промяна на настройките"
+
+msgid "Check search parameters before subtitles search"
+msgstr "Проверка на параметрите преди търсене"
+
+msgid "Chinese"
+msgstr ""
+
+msgid "Choose Subtitles"
+msgstr "Избор на субтитри"
+
+msgid "Choose from downloaded subtitles"
+msgstr "Избор от свалени субтитри"
+
+msgid "Choose from embedded subtitles"
+msgstr "Избор от вградени субтитри"
+
+msgid "Choose from web subtitles"
+msgstr "Избор на субтитри от Интернет"
+
+msgid "Choose subtitles"
+msgstr "Изберете субтитри"
+
+msgid "Close"
+msgstr ""
+
+msgid "Color"
+msgstr "Цвят"
+
+msgid "Controls:"
+msgstr ""
+
+msgid "Could not determine search title."
+msgstr ""
+
+msgid "Could not retrieve details for this movie."
+msgstr ""
+
+msgid "Croatian"
+msgstr ""
+
+msgid "Currently choosed subtitles"
+msgstr "Избрани субтитри"
+
+msgid "Czech"
+msgstr ""
+
+msgid "DVB player settings"
+msgstr "Плейър на субтитри"
+
+msgid "Danish"
+msgstr ""
+
+msgid "Default"
+msgstr "Стандартни"
+
+msgid "Details"
+msgstr ""
+
+msgid "Do you want to proceed?"
+msgstr "Да продължа ли?"
+
+msgid "Do you want to show this message again?"
+msgstr "Показване на това съобщение отново?"
+
+msgid "Download (more...)"
+msgstr "Сваляне (още...)"
+
+msgid "Download (next to video)"
+msgstr "Сваляне (при филма)"
+
+msgid "Download (user defined)"
+msgstr "Сваляне (избрана папка)"
+
+msgid "Download Images"
+msgstr ""
+
+msgid "Download and Load (more...)"
+msgstr "Сваляне и Пускане (още...)"
+
+msgid "Download and Load (next to video)"
+msgstr "Сваляне и Пускане (при филма)"
+
+msgid "Download and Load (user defined) "
+msgstr "Сваляне и Пускане (избрана папка)"
+
+msgid "Download best subtitles on playback start"
+msgstr ""
+
+msgid "Download date"
+msgstr "Дата на сваляне"
+
+msgid "Download options"
+msgstr "Настройки при сваляне"
+
+msgid "Download subtitles for your videos"
+msgstr "Сваляне на субтитри за вашите видео файлове"
+
+msgid "Downloaded Subtitles"
+msgstr "Свалени Субтитри"
+
+msgid "Downloaded Subtitles - Settings"
+msgstr "Свалени субтитри"
+
+msgid "Downloading images in background..."
+msgstr ""
+
+msgid "Duration"
+msgstr "Продължителност"
+
+msgid "Dutch"
+msgstr ""
+
+msgid "EXIT: Exit (confirm)"
+msgstr ""
+
+msgid "Edit Filename"
+msgstr "Име на файла"
+
+msgid "Edit download path"
+msgstr "Папка за сваляне"
+
+msgid "Embedded Subtitles"
+msgstr "Вградени Субтитри"
+
+msgid "Embedded subtitles settings"
+msgstr "Вградени субтитри"
+
+msgid "Enable title suggestions"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Encoding"
+msgstr "Кодиране"
+
+msgid "Encoding:"
+msgstr "Кодиране:"
+
+msgid "English"
+msgstr ""
+
+msgid "Entries count:"
+msgstr "Субтитри:"
+
+msgid "Episode"
+msgstr "Епизод"
+
+#, python-format
+msgid "Error loading details: %s"
+msgstr ""
+
+#, python-format
+msgid "Error retrieving details: %s"
+msgstr ""
+
+#, python-format
+msgid "Error searching TMDB: %s"
+msgstr ""
+
+msgid "Esperanto"
+msgstr ""
+
+msgid "Estonian"
+msgstr ""
+
+msgid "Event Duration"
+msgstr "Продължителност"
+
+msgid "Event Name"
+msgstr "Заглавие"
+
+msgid "Event Time"
+msgstr "Текущо време"
+
+msgid "Exit SubsSupport DVB player?"
+msgstr ""
+
+msgid "External Subtitles settings"
+msgstr "Външни субтитри"
+
+msgid "External settings not provided!"
+msgstr ""
+
+msgid "External subtitles settings"
+msgstr "Външни субтитри"
+
+msgid "External subtitles style (live)"
+msgstr ""
+
+msgid "Filename"
+msgstr "Име на файла"
+
+msgid "Filename cannot be empty!"
+msgstr "Името на файла не може да бъде празно!"
+
+msgid "Finnish"
+msgstr ""
+
+msgid "Font color (Bold)"
+msgstr "Цвят на шрифта (Удебелен)"
+
+msgid "Font color (Italic"
+msgstr "Цвят на шрифта (Наклонен)"
+
+msgid "Font color (Regular)"
+msgstr "Цвят на шрифта (Обикновен)"
+
+msgid "Font size"
+msgstr "Размер на шрифта"
+
+msgid "Font transparency (Bold)"
+msgstr "Прозрачност на шрифта (Удебелен)"
+
+msgid "Font transparency (Italic)"
+msgstr "Прозрачност на шрифта (Наклонен)"
+
+msgid "Font transparency (Regular)"
+msgstr "Прозрачност на шрифта (Обикновен)"
+
+msgid "Font type (Bold)"
+msgstr "Шрифт (Удебелен)"
+
+msgid "Font type (Italic)"
+msgstr "Шрифт (Наклонен)"
+
+msgid "Font type (Regular)"
+msgstr "Шрифт (Обикновен)"
+
+msgid "For more details please check search settings"
+msgstr "За повече детайли вижте параметрите при търсене"
+
+msgid "French"
+msgstr ""
+
+msgid "Galician"
+msgstr ""
+
+msgid "General settings"
+msgstr "Глобални настройки"
+
+msgid "Genres: "
+msgstr ""
+
+msgid "Georgian"
+msgstr ""
+
+msgid "German"
+msgstr ""
+
+msgid "Gestdown: too many requests, try again in a minute"
+msgstr ""
+
+msgid "Greek"
+msgstr ""
+
+msgid "Hebrew"
+msgstr ""
+
+msgid "Hide delay"
+msgstr ""
+
+msgid "Hindi"
+msgstr ""
+
+msgid "History"
+msgstr "История"
+
+msgid "Hungarian"
+msgstr ""
+
+msgid "IMDb"
+msgstr ""
+
+msgid "INFO: Show this help"
+msgstr ""
+
+msgid "Icelandic"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Invalid captcha text"
+msgstr ""
+
+msgid "Italian"
+msgstr ""
+
+msgid "Japanese"
+msgstr ""
+
+msgid "Kazakh"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
+
+msgid "LEFT: Previous subtitle"
+msgstr ""
+
+msgid "Language"
+msgstr "Език"
+
+msgid "Language selection"
+msgstr "Избор на език"
+
+msgid "Latvian"
+msgstr ""
+
+msgid "Line by line"
+msgstr ""
+
+msgid "List"
+msgstr "Списък"
+
+msgid "List + File"
+msgstr "Списък + Файл"
+
+msgid "Lithuanian"
+msgstr ""
+
+msgid "Load subtitles after download"
+msgstr "Плейване на субтитрите след сваляне"
+
+msgid "Load/Save download history directory"
+msgstr "Папка за съхранение на историята"
+
+#, python-format
+msgid "Login OK (%s)"
+msgstr ""
+
+#, python-format
+msgid "Login OK, downloads left today: %s/%s"
+msgstr ""
+
+msgid "Luxembourgish"
+msgstr ""
+
+msgid "MENU: Show subtitle style settings"
+msgstr ""
+
+msgid "Macedonian"
+msgstr ""
+
+msgid "Malay"
+msgstr ""
+
+msgid "Manual search"
+msgstr "Ръчно търсене"
+
+msgid "Max history entries"
+msgstr "Максимален брой субтитри"
+
+msgid "Minimum match for automatic download"
+msgstr ""
+
+msgid "Movie"
+msgstr "Филм"
+
+msgid "Movie Details"
+msgstr ""
+
+msgid "NEXT (long): Manual +minutes jump"
+msgstr ""
+
+msgid "NEXT/FF (short): +1 minute"
+msgstr ""
+
+msgid "Name"
+msgstr "Име"
+
+msgid "Next source title"
+msgstr ""
+
+msgid "Next to video"
+msgstr "При филма"
+
+msgid "No"
+msgstr ""
+
+msgid "No URL available for this movie."
+msgstr ""
+
+msgid "No details available for this movie. Please view details first."
+msgstr ""
+
+msgid "No external subtitles are loaded"
+msgstr "Не са заредени външни субтитри"
+
+msgid "No genres available"
+msgstr ""
+
+#, python-format
+msgid "No results found for: %s"
+msgstr ""
+
+msgid "No subtitles found :("
+msgstr "Няма намерени субтитри :("
+
+msgid "No tagline available"
+msgstr ""
+
+msgid "No."
+msgstr ""
+
+msgid "None"
+msgstr "Нито един"
+
+msgid "Norwegian"
+msgstr ""
+
+msgid "OK: Show/Hide status panel"
+msgstr ""
+
+msgid "Occitan"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "OpenSubtitles"
+msgstr ""
+
+msgid "OpenSubtitles API key for suggestions"
+msgstr ""
+
+msgid "OpenSubtitles.com API key rejected"
+msgstr ""
+
+msgid "OpenSubtitles.com login failed"
+msgstr ""
+
+msgid "OpenSubtitles.com requires an API key"
+msgstr ""
+
+#, python-format
+msgid "OpenSubtitles.org %s failed: %s"
+msgstr ""
+
+msgid "OpenSubtitles.org archive contains no subtitle file"
+msgstr ""
+
+msgid "OpenSubtitles.org download limit reached, try again tomorrow"
+msgstr ""
+
+msgid "OpenSubtitles.org login failed"
+msgstr ""
+
+msgid "OpenSubtitles.org only delivers this subtitle to VIP members"
+msgstr ""
+
+msgid "OpenSubtitles.org website download limit reached (captcha), try again later or use a VIP account"
+msgstr ""
+
+msgid "OpenSubtitles.org: too many requests, try again later"
+msgstr ""
+
+#, python-format
+msgid "Override ratio for %s fps (standard is 1.0000)"
+msgstr ""
+
+msgid "PGS file"
+msgstr ""
+
+msgid "PREV (long): Manual -minutes jump"
+msgstr ""
+
+msgid "PREV/REWIND (short): -1 minute"
+msgstr ""
+
+msgid "PTS check delay"
+msgstr ""
+
+msgid "Password"
+msgstr "Парола"
+
+msgid "Path"
+msgstr "Път"
+
+msgid "Path doesn't exist!"
+msgstr "Зададения път не съществува!"
+
+msgid "Pause video on opening subtitles menu"
+msgstr "Пауза на филма при отваряне менюто за субтитри"
+
+msgid "Persian"
+msgstr ""
+
+msgid "Player delay"
+msgstr "Закъснение"
+
+msgid "Polish"
+msgstr ""
+
+msgid "Portuguese"
+msgstr ""
+
+msgid "Portuguese (Brazilian)"
+msgstr ""
+
+msgid "PortugueseBrazil"
+msgstr ""
+
+msgid "Position"
+msgstr "Позиция"
+
+msgid "Preferred Movie provider"
+msgstr "Предпочитан сайт за филми"
+
+msgid "Preferred TV show provider"
+msgstr "Предпочитан сайт за сериали"
+
+msgid "Preferred languages"
+msgstr "Предпочитан език"
+
+msgid "Preferred subtitles language"
+msgstr "Предпочитан език за субтитрите"
+
+msgid "Press OK to Stop"
+msgstr "ОК за спиране"
+
+msgid "Press OK to select subtitle line"
+msgstr ""
+
+msgid "Press RED to open subtitle picker - Press OK to hide/unhide - Press MENU to open subtitle style settings - Press INFO to open help screen"
+msgstr ""
+
+msgid "Prijevodi-Online did not return a subtitle file"
+msgstr ""
+
+msgid "Provider"
+msgstr "Сайт"
+
+msgid "Provider name"
+msgstr "Име на сайта"
+
+msgid "RED: Open subtitle picker"
+msgstr ""
+
+msgid "RIGHT: Next subtitle"
+msgstr ""
+
+msgid "Rating: "
+msgstr ""
+
+msgid "Refresh delay"
+msgstr "Забавяне на опресняването"
+
+msgid "Release"
+msgstr "Релийз"
+
+msgid "Remove (file)"
+msgstr "Изтриване (файл)"
+
+msgid "Remove Entry (List)"
+msgstr "Изтриване"
+
+msgid "Remove Entry (List+File)"
+msgstr "Изтриване"
+
+msgid "Remove action"
+msgstr "При изтриване"
+
+msgid "Reset"
+msgstr "Стандартни"
+
+msgid "Reset Defaults"
+msgstr "Стандартни"
+
+msgid "Romanian"
+msgstr ""
+
+msgid "Runtime: "
+msgstr ""
+
+msgid "Russia"
+msgstr ""
+
+msgid "Russian"
+msgstr ""
+
+msgid "S"
+msgstr ""
+
+msgid "SRT file"
+msgstr ""
+
+msgid "SSA file"
+msgstr ""
+
+msgid "Save"
+msgstr "Запис"
+
+msgid "Save as"
+msgstr "Запис като"
+
+msgid "Save downloaded subtitles to history"
+msgstr "Помни историята на свалянията"
+
+msgid "Save subtitles as"
+msgstr "Запазване субтитрите като"
+
+msgid "Save subtitles as (fallback)"
+msgstr "Запазване субтитрите като (алтернативно)"
+
+msgid "Save subtitles to"
+msgstr "Запис на субтитрите в"
+
+msgid "Save to"
+msgstr "Запис в"
+
+msgid "Search"
+msgstr "Търсене"
+
+msgid "Search Path"
+msgstr ""
+
+msgid "Search on TMDB"
+msgstr ""
+
+msgid "Search settings"
+msgstr "Настройки при търсене"
+
+msgid "Search subtitles"
+msgstr "Търсене на субтитри"
+
+msgid "Searching TMDB..."
+msgstr ""
+
+msgid "Season"
+msgstr "Сезон"
+
+msgid "Select"
+msgstr ""
+
+msgid "Select current subtitle line"
+msgstr ""
+
+msgid "Serbian"
+msgstr ""
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Settings TMDB data Path"
+msgstr ""
+
+msgid "Shadow"
+msgstr "Сянка"
+
+msgid "Shadow X-offset"
+msgstr "Хоризонтално отстояние на сянката"
+
+msgid "Shadow Y-offset"
+msgstr "Вертикално отстояние на сянката"
+
+msgid "Shadow color"
+msgstr "Цвят на сянката"
+
+msgid "Shadow size"
+msgstr "Размер на сянката"
+
+msgid "Shadow type"
+msgstr "Вид на сянката"
+
+msgid "Show expert settings"
+msgstr "Показване на разширени настройки"
+
+msgid "Slovak"
+msgstr ""
+
+msgid "Slovenian"
+msgstr ""
+
+msgid "Some subtitles providers are not working"
+msgstr "Някои сайтове не работят"
+
+msgid ""
+"Sorry!\n"
+"tmdb is not installed on your image"
+msgstr ""
+
+msgid "Sort subtitles list by"
+msgstr "Подреждане по"
+
+msgid "Source title"
+msgstr "Заглавие"
+
+msgid "Source title not provided"
+msgstr "Няма заглавие"
+
+msgid "Spanish"
+msgstr ""
+
+msgid "Starting background tasks for details scraping and image download..."
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "SubDL API key OK"
+msgstr ""
+
+msgid "SubDL API key rejected"
+msgstr ""
+
+msgid "SubDL download failed"
+msgstr ""
+
+msgid "SubDL requires an API key"
+msgstr ""
+
+#, python-format
+msgid "SubDL: %s"
+msgstr ""
+
+msgid "SubDL: timeout"
+msgstr ""
+
+#, python-format
+msgid "SubDL: unexpected answer (HTTP %d)"
+msgstr ""
+
+msgid "SubSource API key OK"
+msgstr ""
+
+msgid "SubSource API key rejected"
+msgstr ""
+
+msgid "SubSource requires an API key"
+msgstr ""
+
+msgid "SubsSupport DVB player"
+msgstr ""
+
+msgid "SubsSupport downloader"
+msgstr ""
+
+msgid "SubsSupport settings"
+msgstr "SubsSupport настройки"
+
+msgid "Subtitle"
+msgstr "Субтитри"
+
+msgid "Subtitle translation mode"
+msgstr ""
+
+msgid "Subtitles Delay"
+msgstr "Закъснение"
+
+msgid "Subtitles FPS"
+msgstr "FPS"
+
+msgid "Subtitles Position"
+msgstr "Позиция"
+
+msgid "Subtitles Time"
+msgstr "Позиция на субтитрите"
+
+msgid "Subtitles download path"
+msgstr "Папка за сваляне"
+
+#, python-format
+msgid ""
+"Subtitles found for this video:\n"
+"%s\n"
+"\n"
+"Download and load them?"
+msgstr ""
+
+msgid "Subtitles late: decrease ratio. Subtitles rush: increase ratio"
+msgstr ""
+
+#, python-format
+msgid ""
+"Subtitles loaded:\n"
+"%s"
+msgstr ""
+
+msgid "Subtitles provider timeout"
+msgstr "Време за изчакване на отговор от сайта"
+
+msgid "Subtitles search"
+msgstr "Търсене на субтитри"
+
+msgid "Subtitles search settings"
+msgstr "Настройки при търсене"
+
+msgid "Subtitles setting"
+msgstr "Настройки на субтитрите"
+
+msgid "Subtitles settings"
+msgstr "Настройки на субтитрите"
+
+msgid "Subtitles settings (embedded)"
+msgstr "Настройки на субтитрите (вградени)"
+
+msgid "Subtitles temp path"
+msgstr "Временна папка"
+
+msgid "Subtitles will be downloaded in"
+msgstr "Субтитрите ще се свалят в"
+
 msgid ""
 "Subtitles with this name already exist\n"
 "Do you want to overwrite them"
@@ -625,119 +964,112 @@ msgstr ""
 "Субтитри с това име вече съществуват\n"
 "Да се презапишат ли?"
 
-#: subtitles.py:3385
 msgid "Suggestions"
 msgstr "Предложения"
 
-#: subtitles.py:3385
-msgid "press green"
-msgstr "зелен бутон"
-
-#: subtitles.py:3392 subtitles.py:4052 subtitles.py:4215
-msgid "History"
-msgstr "История"
-
-#: subtitles.py:3392
-msgid "press red"
-msgstr "червен бутон"
-
-#: subtitles.py:3710 subtitles.py:3739
-msgid "Save to"
-msgstr "Запис в"
-
-#: subtitles.py:3711 subtitles.py:3740
-msgid "Save as"
-msgstr "Запис като"
-
-#: subtitles.py:3712 subtitles.py:3742
-msgid "Append language to filename"
-msgstr "Добавяне езика към името на файла"
-
-#: subtitles.py:3720
-msgid "Filename"
-msgstr "Име на файла"
-
-#: subtitles.py:3721
-msgid "Path"
-msgstr "Път"
-
-#: subtitles.py:3722
-msgid "Reset"
-msgstr "Стандартни"
-
-#: subtitles.py:3746
-msgid "Download options"
-msgstr "Настройки при сваляне"
-
-#: subtitles.py:3783
-msgid "Edit Filename"
-msgstr "Име на файла"
-
-#: subtitles.py:3791
-msgid "Edit download path"
-msgstr "Папка за сваляне"
-
-#: subtitles.py:3796
-msgid "Filename cannot be empty!"
-msgstr "Името на файла не може да бъде празно!"
-
-#: subtitles.py:3800
-msgid "Path doesn't exist!"
-msgstr "Зададения път не съществува!"
-
-#: subtitles.py:4047
-msgid "S"
+msgid "Suggestions provider"
 msgstr ""
 
-#: subtitles.py:4050 subtitles.py:4213
-msgid "Update"
-msgstr "Редакция"
+msgid "Supported languages"
+msgstr "Поддържани езици"
 
-#: subtitles.py:4051 subtitles.py:4214
-msgid "Search"
-msgstr "Търсене"
+msgid "Swedish"
+msgstr ""
 
-#: subtitles.py:4146
-msgid "Subtitles search"
-msgstr "Търсене на субтитри"
+msgid "Switch List"
+msgstr "Промяна на списъка"
 
-#: subtitles.py:4165
-msgid "yes"
-msgstr "да"
+msgid "Sync delay"
+msgstr ""
 
-#: subtitles.py:4165
-msgid "no"
-msgstr "не"
+msgid "TMDB Scraper"
+msgstr ""
 
-#: subtitles.py:4166 subtitles.py:5018
+msgid "TV show"
+msgstr "Сериал"
+
+msgid "Tamil"
+msgstr ""
+
+msgid "Telugu"
+msgstr ""
+
+msgid "Test login"
+msgstr ""
+
+msgid "Thai"
+msgstr ""
+
+msgid ""
+"There are more subtitles in unpacked archive\n"
+" please select which one do you want to use"
+msgstr ""
+"Имa няколко файла в архива\n"
+"изберете кой да се използва"
+
+msgid "There was an error while removing subtitle, please check log"
+msgstr "Грешка при изтриване, проверете в лога"
+
+msgid "Time"
+msgstr "Време"
+
 msgid "Title"
 msgstr "Заглавие"
 
-#: subtitles.py:4167 subtitles.py:5019
+msgid "Titlovi.com login failed, check username/password"
+msgstr ""
+
+msgid "Titulky.com daily limit reached, captcha required"
+msgstr ""
+
+msgid "Titulky.com download link not found"
+msgstr ""
+
+msgid "Titulky.com refused the download, login required"
+msgstr ""
+
+msgid "Translate from"
+msgstr ""
+
+msgid "Translate to"
+msgstr ""
+
+msgid "Try to correct FPS drift with FPS ratio"
+msgstr ""
+
+msgid "Try update(simplify) search expression and try again.."
+msgstr "Опитайте с опростяване параметрите за търсене"
+
+msgid "Turkish"
+msgstr ""
+
+msgid "Turn off subtitles"
+msgstr "Изключване на субтитрите"
+
 msgid "Type"
 msgstr "Тип"
 
-#: subtitles.py:4169 subtitles.py:5021
-msgid "Year"
-msgstr "Година"
+msgid "Type text of picture"
+msgstr "Въведете текста от картинката"
 
-#: subtitles.py:4171 subtitles.py:5023
-msgid "Season"
-msgstr "Сезон"
+msgid "UP/DOWN: Restart current subtitle"
+msgstr ""
 
-#: subtitles.py:4172 subtitles.py:5024
-msgid "Episode"
-msgstr "Епизод"
+msgid "Ukrainian"
+msgstr ""
 
-#: subtitles.py:4174
-msgid "Preferred languages"
-msgstr "Предпочитан език"
+msgid "Unknown Date"
+msgstr ""
 
-#: subtitles.py:4175 subtitles.py:5026
-msgid "Use File path"
-msgstr "При филма"
+msgid "Unknown Title"
+msgstr ""
 
-#: subtitles.py:4281
+msgid "Update"
+msgstr "Редакция"
+
+msgid "Update Search params"
+msgstr "Промяна параметрите при търсене"
+
 msgid ""
 "Update search parameters if not correct\n"
 " and press green button for search"
@@ -745,286 +1077,389 @@ msgstr ""
 "Променете параметрите ако са грешни\n"
 "и натиснете зеления бутон за търсене"
 
-#: subtitles.py:4290 subtitles.py:4322
-msgid "loading subtitles list"
-msgstr "зареждане списъка със субтитри"
-
-#: subtitles.py:4291 subtitles.py:4323
-msgid "subtitles found"
-msgstr "намерени субтитри"
-
-#: subtitles.py:4292 subtitles.py:4324
-msgid "Press OK to Stop"
-msgstr "ОК за спиране"
-
-#: subtitles.py:4356
-msgid "No subtitles found :("
-msgstr "Няма намерени субтитри :("
-
-#: subtitles.py:4357
-msgid "Try update(simplify) search expression and try again.."
-msgstr "Опитайте с опростяване параметрите за търсене"
-
-#: subtitles.py:4398
-msgid "downloading subtitles..."
-msgstr "сваляне..."
-
-#: subtitles.py:4433
-msgid "Cannot save download history, for details look in log"
+msgid "Urdu"
 msgstr ""
-"Не може да се запише историята на изтеглянията, за подробности погледнете в "
-"лога"
 
-#: subtitles.py:4452
-msgid "captcha doesn't match, try again..."
-msgstr "captcha не съвпада, опитайте отново..."
+msgid "Use File path"
+msgstr "При филма"
 
-#: subtitles.py:4454
-msgid "invalid credentials provided, correct them and try again"
-msgstr "въведени са невалидни данни - поправете ги"
+msgid "User defined"
+msgstr "Избран от потребителя"
 
-#: subtitles.py:4456
-msgid "no credentials provided, set them and try again"
-msgstr "не са въведени данни - въведете ги"
+msgid "Username"
+msgstr "Потребителско име"
 
-#: subtitles.py:4480
-msgid "Download (user defined)"
-msgstr "Сваляне (избрана папка)"
+msgid "VIP member"
+msgstr ""
 
-#: subtitles.py:4481
-msgid "Download (next to video)"
-msgstr "Сваляне (при филма)"
+msgid "VOB file"
+msgstr ""
 
-#: subtitles.py:4482
-msgid "Download (more...)"
-msgstr "Сваляне (още...)"
+msgid "Video filename"
+msgstr "Като филма"
 
-#: subtitles.py:4485
-msgid "Download and Load (user defined) "
-msgstr "Сваляне и Пускане (избрана папка)"
+msgid "Vietnamese"
+msgstr ""
 
-#: subtitles.py:4486
-msgid "Download and Load (next to video)"
-msgstr "Сваляне и Пускане (при филма)"
+msgid "Western Europe"
+msgstr ""
 
-#: subtitles.py:4487
-msgid "Download and Load (more...)"
-msgstr "Сваляне и Пускане (още...)"
+msgid "Wyzie API key OK"
+msgstr ""
 
-#: subtitles.py:4609 subtitles.py:4610 subtitles.py:4611
-msgid "Preferred subtitles language"
-msgstr "Предпочитан език за субтитрите"
+msgid "Wyzie API key OK, but the daily request limit is reached"
+msgstr ""
 
-#: subtitles.py:4612
-msgid "Preferred Movie provider"
-msgstr "Предпочитан сайт за филми"
+msgid "Wyzie API key rejected"
+msgstr ""
 
-#: subtitles.py:4613
-msgid "Preferred TV show provider"
-msgstr "Предпочитан сайт за сериали"
+msgid "Wyzie requires an API key"
+msgstr ""
 
-#: subtitles.py:4614
-msgid "Manual search"
-msgstr "Ръчно търсене"
+#, python-format
+msgid "Wyzie: %s"
+msgstr ""
 
-#: subtitles.py:4615
-msgid "Subtitles provider timeout"
-msgstr "Време за изчакване на отговор от сайта"
+#, python-format
+msgid "Wyzie: HTTP %d"
+msgstr ""
 
-#: subtitles.py:4616
-msgid "Check search parameters before subtitles search"
-msgstr "Проверка на параметрите преди търсене"
+msgid "Wyzie: timeout"
+msgstr ""
 
-#: subtitles.py:4617
-msgid "Sort subtitles list by"
-msgstr "Подреждане по"
+msgid "YELLOW: Sync subtitle to current event"
+msgstr ""
 
-#: subtitles.py:4618
-msgid "Save subtitles as"
-msgstr "Запазване субтитрите като"
+msgid "Year"
+msgstr "Година"
 
-#: subtitles.py:4619
-msgid "Save subtitles as (fallback)"
-msgstr "Запазване субтитрите като (алтернативно)"
+msgid "Yes"
+msgstr ""
 
-#: subtitles.py:4620
-msgid "Add subtitle's language to filename"
-msgstr "Добавяне езика към името на файла"
+msgid "amber"
+msgstr ""
 
-#: subtitles.py:4621
-msgid "Save subtitles to"
-msgstr "Запис на субтитрите в"
+msgid "apply now"
+msgstr ""
 
-#: subtitles.py:4622
-msgid "Subtitles download path"
-msgstr "Папка за сваляне"
+msgid "beige"
+msgstr ""
 
-#: subtitles.py:4623
-msgid "Subtitles temp path"
-msgstr "Временна папка"
+msgid "black"
+msgstr "черен"
 
-#: subtitles.py:4624
-msgid "Always ask before overwriting existing subtitles"
-msgstr "Питане преди презапис"
+msgid "blue"
+msgstr "син"
 
-#: subtitles.py:4625
-msgid "Load subtitles after download"
-msgstr "Плейване на субтитрите след сваляне"
+msgid "border"
+msgstr "контур"
 
-#: subtitles.py:4627
-msgid "Save downloaded subtitles to history"
-msgstr "Помни историята на свалянията"
+msgid "bottom"
+msgstr "отдолу"
 
-#: subtitles.py:4629
-msgid "Load/Save download history directory"
-msgstr "Папка за съхранение на историята"
+msgid "brown"
+msgstr ""
 
-#: subtitles.py:4712
-msgid "Provider name"
-msgstr "Име на сайта"
+msgid "cancel"
+msgstr ""
 
-#: subtitles.py:4713
-msgid "Supported languages"
-msgstr "Поддържани езици"
+msgid "cannot decode"
+msgstr "не могат да се декодират"
 
-#: subtitles.py:4714
-msgid "State"
-msgstr "Статус"
-
-#: subtitles.py:4718
-msgid "Switch List"
-msgstr "Промяна на списъка"
-
-#: subtitles.py:4739
-msgid "Subtitles search settings"
-msgstr "Настройки при търсене"
-
-#: subtitles.py:4750
-msgid "error"
-msgstr "грешка"
-
-#: subtitles.py:4753
-msgid "enabled"
-msgstr "разрешен"
-
-#: subtitles.py:4756
-msgid "disabled"
-msgstr "забранен"
-
-#: subtitles.py:4878
-msgid "missing"
-msgstr "липсва"
-
-#: subtitles.py:4878
-msgid "library"
-msgstr "библиотека"
-
-#: subtitles.py:4951
-msgid "Source title not provided"
-msgstr "Няма заглавие"
-
-#: subtitles.py:4953 subtitles.py:5043
-msgid "Source title"
-msgstr "Заглавие"
-
-#: subtitles.py:5014
-msgid "Update Search params"
-msgstr "Промяна параметрите при търсене"
-
-#: subtitles.py:5184
-msgid "settings"
-msgstr "настройки"
-
-#: subtitlesdvb.py:37
-msgid "Auto sync to current event"
-msgstr "Автоматично синхронизиране"
-
-#: subtitlesdvb.py:131 subtitlesdvb.py:248
-msgid "Subtitles Position"
-msgstr "Позиция"
-
-#: subtitlesdvb.py:132 subtitlesdvb.py:262
-msgid "Subtitles Time"
-msgstr "Позиция на субтитрите"
-
-#: subtitlesdvb.py:134
-msgid "Event Name"
-msgstr "Заглавие"
-
-#: subtitlesdvb.py:135 subtitlesdvb.py:301
-msgid "Event Time"
-msgstr "Текущо време"
-
-#: subtitlesdvb.py:136 subtitlesdvb.py:314
-msgid "Event Duration"
-msgstr "Продължителност"
-
-#: subtitlesdvb.py:139
-msgid "close plugin"
-msgstr "затваряне"
-
-#: subtitlesdvb.py:140
-msgid "show/hide subtitles status"
-msgstr "показване/скриване на статуса"
-
-#: subtitlesdvb.py:141
-msgid "play/pause subtitles playback"
-msgstr "плей/пауза на субтитрите"
-
-#: subtitlesdvb.py:142
-msgid "pause subtitles playback"
-msgstr "пауза на субтитрите"
-
-#: subtitlesdvb.py:143
-msgid "resumes subtitles playback"
-msgstr "Плейване на субтитрите"
-
-#: subtitlesdvb.py:144
-msgid "restarts current subtitle"
-msgstr "рестартиране на субтитрите"
-
-#: subtitlesdvb.py:145
-msgid "skip to next subtitle"
-msgstr "към следващата реплика"
-
-#: subtitlesdvb.py:146
-msgid "skip to next subtitle (minute jump)"
-msgstr "прескачне напред (през минута)"
-
-#: subtitlesdvb.py:147
-msgid "skip to next subtitle by setting time in minutes"
-msgstr "прескачане напред (задаване на време)"
-
-#: subtitlesdvb.py:148
-msgid "skip to previous subtitle"
-msgstr "към предишната реплика"
-
-#: subtitlesdvb.py:149
-msgid "skip to previous subtitle (minute jump)"
-msgstr "прескачне назад (през минута)"
-
-#: subtitlesdvb.py:150
-msgid "skip previous subtitle by setting time in minutes"
-msgstr "прескачане назад (задаване на  време)"
-
-#: subtitlesdvb.py:151
-msgid "skip subtitle to current event position"
-msgstr "сихронизиране с предаването"
-
-#: subtitlesdvb.py:299
-msgid "Time"
-msgstr "Време"
-
-#: subtitlesdvb.py:312
-msgid "Duration"
-msgstr "Продължителност"
-
-#: subtitlesdvb.py:351
 msgid "cannot sync to event, event is not available"
 msgstr "не може да се синхронизира, няма данни за предаването"
 
-#~ msgid "Press OK to confirm"
-#~ msgstr "ОК за потвърждение"
+msgid "captcha doesn't match, try again..."
+msgstr "captcha не съвпада, опитайте отново..."
 
-#~ msgid "Search parameters"
-#~ msgstr "Параметри при търсене"
+msgid "change external subtitles status"
+msgstr "промяна статуса на външните субтитри"
+
+msgid "change subtitles fps"
+msgstr "промяна на FPS"
+
+msgid "cream"
+msgstr ""
+
+msgid "dark grey"
+msgstr ""
+
+msgid "decrease subtitles delay"
+msgstr "намаляване на закъснението"
+
+msgid "deep sky blue"
+msgstr ""
+
+msgid "disabled"
+msgstr "забранен"
+
+msgid "displays this menu"
+msgstr "показва това меню"
+
+msgid "dodger blue"
+msgstr ""
+
+#, python-format
+msgid "download error occurred, for details see %s"
+msgstr ""
+
+msgid "downloading subtitles..."
+msgstr "сваляне..."
+
+msgid "dynamic"
+msgstr "динамичен"
+
+msgid "embedded"
+msgstr ""
+
+msgid "enabled"
+msgstr "разрешен"
+
+msgid "error"
+msgstr "грешка"
+
+msgid "exit"
+msgstr "изход"
+
+msgid "exit (confirm)"
+msgstr ""
+
+msgid "fixed"
+msgstr ""
+
+msgid "gold"
+msgstr ""
+
+msgid "green"
+msgstr "зелен"
+
+msgid "grey"
+msgstr "сив"
+
+msgid "increase subtitles delay"
+msgstr "увеличаване на закъснението"
+
+#, python-format
+msgid "indexsubtitle.cc: no download token for %s"
+msgstr ""
+
+msgid "invalid credentials provided, correct them and try again"
+msgstr "въведени са невалидни данни - поправете ги"
+
+msgid "ivory"
+msgstr ""
+
+msgid "jump to next subtitle"
+msgstr "следваща реплика"
+
+msgid "jump to previous subtitle"
+msgstr "предишна реплика"
+
+msgid "justsubtitles: movie page script not found"
+msgstr ""
+
+msgid "justsubtitles: server action id not found"
+msgstr ""
+
+msgid "library"
+msgstr "библиотека"
+
+msgid "light blue"
+msgstr ""
+
+msgid "light green"
+msgstr ""
+
+msgid "light yellow"
+msgstr ""
+
+msgid "loading subtitles list"
+msgstr "зареждане списъка със субтитри"
+
+msgid "login"
+msgstr ""
+
+msgid "magenta"
+msgstr ""
+
+#, python-format
+msgid "match %d%%"
+msgstr ""
+
+msgid "mint"
+msgstr ""
+
+msgid "missing"
+msgstr "липсва"
+
+#, python-format
+msgid "my-subs.co: no download link on %s"
+msgstr ""
+
+msgid "no"
+msgstr "не"
+
+#, python-format
+msgid "no %s subtitle on %s"
+msgstr ""
+
+msgid "no VIP, downloads come from the website and are limited"
+msgstr ""
+
+msgid "no answer"
+msgstr ""
+
+msgid "no credentials provided, set them and try again"
+msgstr "не са въведени данни - въведете ги"
+
+#, python-format
+msgid "no subtitle in %s"
+msgstr ""
+
+msgid "offset"
+msgstr "отстояние"
+
+msgid "opaque"
+msgstr "непрозрачен"
+
+msgid "open subtitle picker"
+msgstr ""
+
+msgid "orange"
+msgstr ""
+
+msgid "original"
+msgstr "оригинален"
+
+msgid "pause subtitles playback"
+msgstr "пауза на субтитрите"
+
+msgid "pink"
+msgstr ""
+
+msgid "play/pause subtitles playback"
+msgstr "плей/пауза на субтитрите"
+
+msgid "press green"
+msgstr "зелен бутон"
+
+msgid "press red"
+msgstr "червен бутон"
+
+msgid "purple"
+msgstr "лилав"
+
+msgid "red"
+msgstr "червен"
+
+msgid "reset subtitles delay/fps"
+msgstr "нулиране на закъснението/FPS"
+
+msgid "restarts current subtitle"
+msgstr "рестартиране на субтитрите"
+
+msgid "resumes subtitles playback"
+msgstr "Плейване на субтитрите"
+
+msgid "save"
+msgstr ""
+
+msgid "search"
+msgstr ""
+
+msgid "seconds"
+msgstr "секунди"
+
+msgid "settings"
+msgstr "настройки"
+
+msgid "show help"
+msgstr ""
+
+msgid "show subtitle style settings"
+msgstr ""
+
+msgid "show subtitles menu"
+msgstr "показва меню на субтитрите"
+
+msgid "show/hide subtitles status"
+msgstr "показване/скриване на статуса"
+
+msgid "silver"
+msgstr ""
+
+msgid "skip previous subtitle by setting time in minutes"
+msgstr "прескачане назад (задаване на  време)"
+
+msgid "skip subtitle to current event position"
+msgstr "сихронизиране с предаването"
+
+msgid "skip to next subtitle"
+msgstr "към следващата реплика"
+
+msgid "skip to next subtitle (minute jump)"
+msgstr "прескачне напред (през минута)"
+
+msgid "skip to next subtitle by setting time in minutes"
+msgstr "прескачане напред (задаване на време)"
+
+msgid "skip to previous subtitle"
+msgstr "към предишната реплика"
+
+msgid "skip to previous subtitle (minute jump)"
+msgstr "прескачне назад (през минута)"
+
+msgid "sky blue"
+msgstr ""
+
+msgid "spring green"
+msgstr ""
+
+msgid "static"
+msgstr "статичен"
+
+msgid "subtitles found"
+msgstr "намерени субтитри"
+
+msgid "synced"
+msgstr ""
+
+msgid "teletext"
+msgstr ""
+
+msgid "top"
+msgstr "отгоре"
+
+msgid "transparent"
+msgstr "прозрачен"
+
+msgid "unknown"
+msgstr "неизвестен"
+
+msgid "unknown error"
+msgstr ""
+
+msgid "violet"
+msgstr ""
+
+msgid "watch DVB broadcast with subtitles"
+msgstr "гледане на DVB предавания със субтитри"
+
+msgid "white"
+msgstr "бял"
+
+msgid "will be removed from file system"
+msgstr "ще бъдат изтрити напълно"
+
+msgid "will be removed from list"
+msgstr "ще бъдат премахнати от списъка"
+
+msgid "yellow"
+msgstr "жълт"
+
+msgid "yes"
+msgstr "да"
+
+#, python-format
+msgid "yifysubtitles: no download link on %s"
+msgstr ""

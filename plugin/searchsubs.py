@@ -3,8 +3,6 @@ Created on Aug 2, 2014
 
 @author: marko
 '''
-from __future__ import absolute_import
-from __future__ import print_function
 
 import sys
 import json
@@ -53,13 +51,13 @@ def updateCB(*args):
     send(Messages.MESSAGE_UPDATE_CALLBACK, args)
 
 
-def chooseFileCB(*args):
-    send(Messages.MESSAGE_CHOOSE_FILE_CALLBACK, args)
+def chooseFileCB(subFiles):
+    send(Messages.MESSAGE_CHOOSE_FILE_CALLBACK, subFiles)
     return recieve()
 
 
-def overwriteFileCB(*args):
-    send(Messages.MESSAGE_OVERWRITE_CALLBACK, args)
+def overwriteFileCB(subFile):
+    send(Messages.MESSAGE_OVERWRITE_CALLBACK, subFile)
     return recieve()
 
 
@@ -110,13 +108,22 @@ def downloadSubtitles(seeker, options):
         options.get("settings"))
 
 
+def masked(value):
+    """copy of the options without credentials (api keys, logins) for the log"""
+    if isinstance(value, dict):
+        return {k: '***' if v and any(s in str(k).lower() for s in ('key', 'pass', 'user', 'token')) else masked(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [masked(v) for v in value]
+    return value
+
+
 def main():
     global stdout
     stdout = sys.stdout
     sys.stdout = open('/tmp/subssupport.log', 'w')
     sys.stderr = sys.stdout
     options = recieve()
-    print('recieved options: %r' % options)
+    print('recieved options: %r' % masked(options))
     try:
         from .seek import SubsSeeker
     except (ValueError, ImportError):

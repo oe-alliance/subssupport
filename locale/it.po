@@ -1,20 +1,46 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: SubsSupport _ enigma2-plugin by mx3L\n"
-"POT-Creation-Date: 2018-05-30 10:41+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-02 20:47+0200\n"
 "PO-Revision-Date: 2018-05-30 11:50+0200\n"
+"Last-Translator: Massimo Bambi <maxbambi@libero.it>\n"
 "Language-Team: thawtes <thawtes@gmail.com>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Massimo Bambi <maxbambi@libero.it>\n"
-"Language: it\n"
+
+#, python-format
+msgid ""
+"%s\n"
+"as %s"
+msgstr ""
+
+#, python-format
+msgid "%s requires: %s"
+msgstr ""
+
+msgid "API key"
+msgstr ""
+
+msgid "API key OK (no username/password set, downloads are limited)"
+msgstr ""
+
+msgid "ASS file"
+msgstr ""
 
 msgid "Add subtitle's language to filename"
 msgstr "Aggiungi la lingua dei sottotitoli al nome file"
+
+msgid "Adult Content: "
+msgstr ""
+
+msgid "Albanian"
+msgstr ""
 
 msgid "All"
 msgstr "Tutti"
@@ -22,26 +48,44 @@ msgstr "Tutti"
 msgid "Always ask before overwriting existing subtitles"
 msgstr "Chiedi sempre prima di sovrascrivere i sottotitoli esistenti"
 
+msgid "Anonymous login OK (no username/password set), downloads come from the website and are limited"
+msgstr ""
+
 msgid "Append language to filename"
 msgstr "Aggiungi lingua al nome file"
+
+msgid "Apply now"
+msgstr ""
+
+msgid "Arabic"
+msgstr ""
+
+msgid "Armenian"
+msgstr ""
+
+msgid "Ask"
+msgstr ""
 
 msgid "Ask on remove action"
 msgstr "Chiedi all'eliminazione"
 
+msgid "Auto detect"
+msgstr ""
+
 msgid "Auto sync to current event"
 msgstr "Sincronizzazione automatica al programma attuale"
 
+msgid "Automatic"
+msgstr ""
+
+msgid "Aymara"
+msgstr ""
+
+msgid "BLUE: Change subtitles FPS"
+msgstr ""
+
 msgid "Background"
 msgstr "Sfondo"
-
-msgid "Background color"
-msgstr "Colore sfondo"
-
-msgid "Background transparency"
-msgstr "Trasparenza dello sfondo"
-
-msgid "Background type"
-msgstr "Tipo di sfondo"
 
 msgid "Background X-offset"
 msgstr "Offset orizzontale dello sfondo"
@@ -49,63 +93,74 @@ msgstr "Offset orizzontale dello sfondo"
 msgid "Background Y-offset"
 msgstr "Offset verticale dello sfondo"
 
-msgid "black"
-msgstr "nero"
+msgid "Background color"
+msgstr "Colore sfondo"
 
-msgid "blue"
-msgstr "blu"
+msgid "Background height"
+msgstr ""
 
-msgid "border"
-msgstr "bordo"
+msgid "Background transparency"
+msgstr "Trasparenza dello sfondo"
 
-msgid "bottom"
-msgstr "basso"
+msgid "Background type"
+msgstr "Tipo di sfondo"
+
+msgid "Bengali"
+msgstr ""
+
+msgid "Best match"
+msgstr ""
+
+msgid "Bosnian"
+msgstr ""
+
+msgid "Bulgarian"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annulla"
 
-msgid "cannot decode"
-msgstr "impossibile decodificare"
-
 msgid "Cannot decode subtitles. Try another encoding group"
+msgstr "Impossibile decodificare i sottotitoli. Prova un altro gruppo di codifica"
+
+msgid "Cannot determine year for image folder."
 msgstr ""
-"Impossibile decodificare i sottotitoli. Prova un altro gruppo di codifica"
 
 msgid "Cannot load subtitles. Invalid path"
 msgstr "Impossibile caricare i sottotitoli. Percorso non valido"
 
 msgid "Cannot parse subtitles. Invalid subtitles format"
-msgstr ""
-"Impossibile interpretare i sottotitoli. Formato sottotitoli non valido"
+msgstr "Impossibile interpretare i sottotitoli. Formato sottotitoli non valido"
 
 msgid "Cannot parse subtitles. Not supported subtitles format"
-msgstr ""
-"Impossibile interpretare i sottotitoli. Formato sottotitoli non supportato"
+msgstr "Impossibile interpretare i sottotitoli. Formato sottotitoli non supportato"
 
 msgid "Cannot save download history, for details look in log"
+msgstr "Impossibile salvare la cronologia dei download, per i dettagli leggi il log"
+
+msgid "Captcha was not entered"
 msgstr ""
-"Impossibile salvare la cronologia dei download, per i dettagli leggi il log"
 
-msgid "cannot sync to event, event is not available"
-msgstr "Impossibile sincronizzarsi al programma, perché non è disponibile"
+msgid "Catalan"
+msgstr ""
 
-msgid "captcha doesn't match, try again..."
-msgstr "Il captcha non coincide, riprova..."
+msgid "Central and Eastern Europe"
+msgstr ""
 
 msgid "Change encoding"
 msgstr "Cambia codifica"
 
-msgid "change external subtitles status"
-msgstr "cambia lo stato dei sottotitoli esterni"
-
 msgid "Change subssupport settings"
 msgstr "Cambia le impostazioni di SubsSupport"
 
-msgid "change subtitles fps"
-msgstr "Cambia la frequenza dei sottotitoli"
-
 msgid "Check search parameters before subtitles search"
 msgstr "Controlla i parametri prima della ricerca dei sottotitoli"
+
+msgid "Chinese"
+msgstr ""
+
+msgid "Choose Subtitles"
+msgstr "Scegli Sottotitoli"
 
 msgid "Choose from downloaded subtitles"
 msgstr "Scegli fra i sottotitoli scaricati"
@@ -116,32 +171,44 @@ msgstr "Scegli fra i sottotitoli inclusi nel file"
 msgid "Choose from web subtitles"
 msgstr "Scegli fra i sottotitoli in rete"
 
-msgid "Choose Subtitles"
-msgstr "Scegli Sottotitoli"
-
 msgid "Choose subtitles"
 msgstr "Scegli sottotitoli"
 
-msgid "close plugin"
-msgstr "chiudi il plugin"
+msgid "Close"
+msgstr ""
 
 msgid "Color"
 msgstr "Colore"
 
+msgid "Controls:"
+msgstr ""
+
+msgid "Could not determine search title."
+msgstr ""
+
+msgid "Could not retrieve details for this movie."
+msgstr ""
+
+msgid "Croatian"
+msgstr ""
+
 msgid "Currently choosed subtitles"
 msgstr "Sottotitoli attualmente scelti"
 
-msgid "decrease subtitles delay"
-msgstr "Diminuisci il ritardo per sottotitoli"
+msgid "Czech"
+msgstr ""
+
+msgid "DVB player settings"
+msgstr "Impostazioni player DVB"
+
+msgid "Danish"
+msgstr ""
 
 msgid "Default"
 msgstr "Predefinito"
 
-msgid "disabled"
-msgstr "Disabilitato"
-
-msgid "displays this menu"
-msgstr "Mostra questo menu"
+msgid "Details"
+msgstr ""
 
 msgid "Do you want to proceed?"
 msgstr "Vuoi procedere?"
@@ -158,6 +225,9 @@ msgstr "Download (vicino al video)"
 msgid "Download (user defined)"
 msgstr "Download (definito dall'utente)"
 
+msgid "Download Images"
+msgstr ""
+
 msgid "Download and Load (more...)"
 msgstr "Download e Caricamento (ancora...)"
 
@@ -166,6 +236,9 @@ msgstr "Download e Caricamento (vicino al video)"
 
 msgid "Download and Load (user defined) "
 msgstr "Download e Caricamento (definito dall'utente)"
+
+msgid "Download best subtitles on playback start"
+msgstr ""
 
 msgid "Download date"
 msgstr "Data di download"
@@ -182,23 +255,23 @@ msgstr "Sottotitoli scaricati"
 msgid "Downloaded Subtitles - Settings"
 msgstr "Impostazioni sottotitoli - Impostazioni"
 
-msgid "downloading subtitles..."
-msgstr "Download in corso dei sottotitoli..."
+msgid "Downloading images in background..."
+msgstr ""
 
 msgid "Duration"
 msgstr "Durata"
 
-msgid "DVB player settings"
-msgstr "Impostazioni player DVB"
+msgid "Dutch"
+msgstr ""
 
-msgid "dynamic"
-msgstr "dinamico"
-
-msgid "Edit download path"
-msgstr "Modifica la cartella di download"
+msgid "EXIT: Exit (confirm)"
+msgstr ""
 
 msgid "Edit Filename"
 msgstr "Modifica  il nome file"
+
+msgid "Edit download path"
+msgstr "Modifica la cartella di download"
 
 msgid "Embedded Subtitles"
 msgstr "Sottotitoli inclusi"
@@ -206,8 +279,11 @@ msgstr "Sottotitoli inclusi"
 msgid "Embedded subtitles settings"
 msgstr "Impostazioni sottotitoli inclusi"
 
-msgid "enabled"
-msgstr "abilitato"
+msgid "Enable title suggestions"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
 
 msgid "Encoding"
 msgstr "Codifica"
@@ -215,14 +291,32 @@ msgstr "Codifica"
 msgid "Encoding:"
 msgstr "Codifica:"
 
+msgid "English"
+msgstr ""
+
 msgid "Entries count:"
 msgstr "Conteggio delle voci:"
 
 msgid "Episode"
 msgstr "Episodio"
 
-msgid "error"
-msgstr "errore"
+#, python-format
+msgid "Error loading details: %s"
+msgstr ""
+
+#, python-format
+msgid "Error retrieving details: %s"
+msgstr ""
+
+#, python-format
+msgid "Error searching TMDB: %s"
+msgstr ""
+
+msgid "Esperanto"
+msgstr ""
+
+msgid "Estonian"
+msgstr ""
 
 msgid "Event Duration"
 msgstr "Durata del programma"
@@ -233,17 +327,29 @@ msgstr "Nome del programma"
 msgid "Event Time"
 msgstr "Orario del programma"
 
-msgid "exit"
-msgstr "Esci"
+msgid "Exit SubsSupport DVB player?"
+msgstr ""
 
 msgid "External Subtitles settings"
 msgstr "Impostazioni per sottotitoli esterni"
+
+msgid "External settings not provided!"
+msgstr ""
+
+msgid "External subtitles settings"
+msgstr ""
+
+msgid "External subtitles style (live)"
+msgstr ""
 
 msgid "Filename"
 msgstr "Nome file"
 
 msgid "Filename cannot be empty!"
 msgstr "Il nome di file non può essere vuoto !"
+
+msgid "Finnish"
+msgstr ""
 
 msgid "Font color (Bold)"
 msgstr "Colore del testo (Grassetto)"
@@ -278,32 +384,74 @@ msgstr "Tipo di carattere (Normale)"
 msgid "For more details please check search settings"
 msgstr "Per maggiori dettagli, controlla le impostazioni di ricerca"
 
+msgid "French"
+msgstr ""
+
+msgid "Galician"
+msgstr ""
+
 msgid "General settings"
 msgstr "Impostazioni globali"
 
-msgid "green"
-msgstr "verde"
+msgid "Genres: "
+msgstr ""
 
-msgid "grey"
-msgstr "grigio"
+msgid "Georgian"
+msgstr ""
+
+msgid "German"
+msgstr ""
+
+msgid "Gestdown: too many requests, try again in a minute"
+msgstr ""
+
+msgid "Greek"
+msgstr ""
+
+msgid "Hebrew"
+msgstr ""
 
 msgid "Hide delay"
 msgstr "Nascodi il ritardo"
 
+msgid "Hindi"
+msgstr ""
+
 msgid "History"
 msgstr "Cronologia"
 
-msgid "increase subtitles delay"
-msgstr "Aumenta il ritardo per sottotitoli"
+msgid "Hungarian"
+msgstr ""
 
-msgid "invalid credentials provided, correct them and try again"
-msgstr "Credenziali fornite non valide, correggile e prova ancora"
+msgid "IMDb"
+msgstr ""
 
-msgid "jump to next subtitle"
-msgstr "salta al sottotitolo successivo"
+msgid "INFO: Show this help"
+msgstr ""
 
-msgid "jump to previous subtitle"
-msgstr "salta al sottotitolo precedente"
+msgid "Icelandic"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Invalid captcha text"
+msgstr ""
+
+msgid "Italian"
+msgstr ""
+
+msgid "Japanese"
+msgstr ""
+
+msgid "Kazakh"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
+
+msgid "LEFT: Previous subtitle"
+msgstr ""
 
 msgid "Language"
 msgstr "Lingua"
@@ -311,8 +459,11 @@ msgstr "Lingua"
 msgid "Language selection"
 msgstr "Selezione lingua"
 
-msgid "library"
-msgstr "libreria"
+msgid "Latvian"
+msgstr ""
+
+msgid "Line by line"
+msgstr ""
 
 msgid "List"
 msgstr "Elenco"
@@ -320,8 +471,8 @@ msgstr "Elenco"
 msgid "List + File"
 msgstr "Elenco + File"
 
-msgid "List of storage devices"
-msgstr "Elenco supporti memorizzazione"
+msgid "Lithuanian"
+msgstr ""
 
 msgid "Load subtitles after download"
 msgstr "Carica i sottotitoli dopo il download"
@@ -329,8 +480,25 @@ msgstr "Carica i sottotitoli dopo il download"
 msgid "Load/Save download history directory"
 msgstr "Carica/Salva la cartella con la cronologia dei download"
 
-msgid "loading subtitles list"
-msgstr "caricamento elenco dei sottotitoli"
+#, python-format
+msgid "Login OK (%s)"
+msgstr ""
+
+#, python-format
+msgid "Login OK, downloads left today: %s/%s"
+msgstr ""
+
+msgid "Luxembourgish"
+msgstr ""
+
+msgid "MENU: Show subtitle style settings"
+msgstr ""
+
+msgid "Macedonian"
+msgstr ""
+
+msgid "Malay"
+msgstr ""
 
 msgid "Manual search"
 msgstr "Ricerca manuale"
@@ -338,47 +506,125 @@ msgstr "Ricerca manuale"
 msgid "Max history entries"
 msgstr "Massimo numero di voci nella cronologia "
 
-msgid "missing"
-msgstr "mancante"
+msgid "Minimum match for automatic download"
+msgstr ""
 
 msgid "Movie"
 msgstr "Film"
 
+msgid "Movie Details"
+msgstr ""
+
+msgid "NEXT (long): Manual +minutes jump"
+msgstr ""
+
+msgid "NEXT/FF (short): +1 minute"
+msgstr ""
+
 msgid "Name"
 msgstr "Nome"
+
+msgid "Next source title"
+msgstr ""
 
 msgid "Next to video"
 msgstr "Passa al video"
 
-msgid "no"
-msgstr "no"
+msgid "No"
+msgstr ""
 
-msgid "no credentials provided, set them and try again"
-msgstr "non sono state fornite credenziali, impostale e riprova"
+msgid "No URL available for this movie."
+msgstr ""
+
+msgid "No details available for this movie. Please view details first."
+msgstr ""
 
 msgid "No external subtitles are loaded"
 msgstr "Non sono stati caricati sottotitoli esterni"
 
+msgid "No genres available"
+msgstr ""
+
+#, python-format
+msgid "No results found for: %s"
+msgstr ""
+
 msgid "No subtitles found :("
 msgstr "Sottotitoli non trovati :("
+
+msgid "No tagline available"
+msgstr ""
+
+msgid "No."
+msgstr ""
 
 msgid "None"
 msgstr "Nessuno"
 
-msgid "nothing connected"
-msgstr "non collegato"
+msgid "Norwegian"
+msgstr ""
 
-msgid "offset"
-msgstr "offset"
+msgid "OK: Show/Hide status panel"
+msgstr ""
 
-msgid "opaque"
-msgstr "opaco"
+msgid "Occitan"
+msgstr ""
 
-msgid "original"
-msgstr "originale"
+msgid "Off"
+msgstr ""
 
-msgid "Parent directory"
-msgstr "Directory padre"
+msgid "OpenSubtitles"
+msgstr ""
+
+msgid "OpenSubtitles API key for suggestions"
+msgstr ""
+
+msgid "OpenSubtitles.com API key rejected"
+msgstr ""
+
+msgid "OpenSubtitles.com login failed"
+msgstr ""
+
+msgid "OpenSubtitles.com requires an API key"
+msgstr ""
+
+#, python-format
+msgid "OpenSubtitles.org %s failed: %s"
+msgstr ""
+
+msgid "OpenSubtitles.org archive contains no subtitle file"
+msgstr ""
+
+msgid "OpenSubtitles.org download limit reached, try again tomorrow"
+msgstr ""
+
+msgid "OpenSubtitles.org login failed"
+msgstr ""
+
+msgid "OpenSubtitles.org only delivers this subtitle to VIP members"
+msgstr ""
+
+msgid "OpenSubtitles.org website download limit reached (captcha), try again later or use a VIP account"
+msgstr ""
+
+msgid "OpenSubtitles.org: too many requests, try again later"
+msgstr ""
+
+#, python-format
+msgid "Override ratio for %s fps (standard is 1.0000)"
+msgstr ""
+
+msgid "PGS file"
+msgstr ""
+
+msgid "PREV (long): Manual -minutes jump"
+msgstr ""
+
+msgid "PREV/REWIND (short): -1 minute"
+msgstr ""
+
+msgid "PTS check delay"
+msgstr "Ritardo controllo PTS"
 
 msgid "Password"
 msgstr "Password"
@@ -389,44 +635,53 @@ msgstr "Percorso"
 msgid "Path doesn't exist!"
 msgstr "La cartella non esiste!"
 
-msgid "pause subtitles playback"
-msgstr "Metti in pausa  la riproduzione dei sottotitoli"
-
 msgid "Pause video on opening subtitles menu"
 msgstr "Metti in pausa il video durante la visualizzazione del menu"
 
-msgid "play/pause subtitles playback"
-msgstr "Pausa/continua la riproduzione dei sottotitoli"
+msgid "Persian"
+msgstr ""
 
 msgid "Player delay"
 msgstr "Ritardo del player"
 
+msgid "Polish"
+msgstr ""
+
+msgid "Portuguese"
+msgstr ""
+
+msgid "Portuguese (Brazilian)"
+msgstr ""
+
+msgid "PortugueseBrazil"
+msgstr ""
+
 msgid "Position"
 msgstr "Posizione"
-
-msgid "Preferred languages"
-msgstr "Lingue preferite"
 
 msgid "Preferred Movie provider"
 msgstr "Provider preferito di film "
 
-msgid "Preferred subtitles language"
-msgstr " Lingua preferita per i sottotitoli"
-
 msgid "Preferred TV show provider"
 msgstr "Provider preferito per spettacoli TV"
 
-msgid "press green"
-msgstr "premi il tasto verde"
+msgid "Preferred languages"
+msgstr "Lingue preferite"
 
-msgid "Press OK to confirm"
-msgstr "Premi 'Ok' per confermare"
+msgid "Preferred subtitles language"
+msgstr " Lingua preferita per i sottotitoli"
 
 msgid "Press OK to Stop"
 msgstr "Premi 'Ok' per fermare"
 
-msgid "press red"
-msgstr "premi il tasto rosso"
+msgid "Press OK to select subtitle line"
+msgstr ""
+
+msgid "Press RED to open subtitle picker - Press OK to hide/unhide - Press MENU to open subtitle style settings - Press INFO to open help screen"
+msgstr ""
+
+msgid "Prijevodi-Online did not return a subtitle file"
+msgstr ""
 
 msgid "Provider"
 msgstr "Provider"
@@ -434,14 +689,14 @@ msgstr "Provider"
 msgid "Provider name"
 msgstr "Nome provider"
 
-msgid "PTS check delay"
-msgstr "Ritardo controllo PTS"
+msgid "RED: Open subtitle picker"
+msgstr ""
 
-msgid "purple"
-msgstr "viola"
+msgid "RIGHT: Next subtitle"
+msgstr ""
 
-msgid "red"
-msgstr "rosso"
+msgid "Rating: "
+msgstr ""
 
 msgid "Refresh delay"
 msgstr "Ritardo di aggiornamento"
@@ -452,14 +707,14 @@ msgstr "Rilascio"
 msgid "Remove (file)"
 msgstr "Elimina (file)"
 
-msgid "Remove action"
-msgstr "Elimina azione"
-
 msgid "Remove Entry (List)"
 msgstr "Elimina voce (Elenco)"
 
 msgid "Remove Entry (List+File)"
 msgstr "Elimina voce (Elenco + File)"
+
+msgid "Remove action"
+msgstr "Elimina azione"
 
 msgid "Reset"
 msgstr "Reset"
@@ -468,17 +723,26 @@ msgstr "Reset"
 msgid "Reset Defaults"
 msgstr "Predefiniti"
 
-msgid "reset subtitles delay/fps"
-msgstr "ripristina ritardo/frequenza dei sottotitoli"
+msgid "Romanian"
+msgstr ""
 
-msgid "restarts current subtitle"
-msgstr "riavvia i sottotitoli attuali"
+msgid "Runtime: "
+msgstr ""
 
-msgid "resumes subtitles playback"
-msgstr "riprendi la riproduzione dei sottotitoli"
+msgid "Russia"
+msgstr ""
+
+msgid "Russian"
+msgstr ""
 
 msgid "S"
 msgstr "S"
+
+msgid "SRT file"
+msgstr ""
+
+msgid "SSA file"
+msgstr ""
 
 msgid "Save"
 msgstr "Salva"
@@ -504,8 +768,11 @@ msgstr "Salvare in"
 msgid "Search"
 msgstr "Ricerca"
 
-msgid "Search parameters"
-msgstr "Parametri di ricerca"
+msgid "Search Path"
+msgstr ""
+
+msgid "Search on TMDB"
+msgstr ""
 
 msgid "Search settings"
 msgstr "Impostazioni di ricerca"
@@ -513,26 +780,35 @@ msgstr "Impostazioni di ricerca"
 msgid "Search subtitles"
 msgstr "Ricerca sottotitoli"
 
+msgid "Searching TMDB..."
+msgstr ""
+
 msgid "Season"
 msgstr "Stagione"
 
-msgid "seconds"
-msgstr "secondi"
+msgid "Select"
+msgstr ""
 
-msgid "Select Directory"
-msgstr "Seleziona la cartella"
+msgid "Select current subtitle line"
+msgstr ""
 
-msgid "Send and search movie hashes"
-msgstr "Invia e ricerca hash dei filmati"
+msgid "Serbian"
+msgstr ""
 
 msgid "Settings"
 msgstr "Impostazioni"
 
-msgid "settings"
-msgstr "impostazioni"
+msgid "Settings TMDB data Path"
+msgstr ""
 
 msgid "Shadow"
 msgstr "Ombreggiatura"
+
+msgid "Shadow X-offset"
+msgstr "Offset orizzontale  dell'ombra"
+
+msgid "Shadow Y-offset"
+msgstr "Offset verticale dell'ombra"
 
 msgid "Shadow color"
 msgstr "Colore dell'ombra"
@@ -543,44 +819,22 @@ msgstr "Dimensione dell'ombra"
 msgid "Shadow type"
 msgstr "Tipo di ombreggiatura"
 
-msgid "Shadow X-offset"
-msgstr "Offset orizzontale  dell'ombra"
-
-msgid "Shadow Y-offset"
-msgstr "Offset verticale dell'ombra"
-
 msgid "Show expert settings"
 msgstr "Mostra le impostazioni da esperto"
 
-msgid "show subtitles menu"
-msgstr "Mostra il menu dei sottotitoli"
+msgid "Slovak"
+msgstr ""
 
-msgid "show/hide subtitles status"
-msgstr "Mostra/nascondi lo stato dei sottotitoli"
-
-msgid "skip previous subtitle by setting time in minutes"
-msgstr "salta il sottotitolo precedente impostando il tempo in minuti"
-
-msgid "skip subtitle to current event position"
-msgstr "salta il sottotitolo alla posizione attuale del programma"
-
-msgid "skip to next subtitle"
-msgstr "Passa al sottotitolo successivo"
-
-msgid "skip to next subtitle (minute jump)"
-msgstr "Passa al sottotitolo successivo (salto in minuti)"
-
-msgid "skip to next subtitle by setting time in minutes"
-msgstr "salta il sottotitolo successivo impostando il tempo in minuti"
-
-msgid "skip to previous subtitle"
-msgstr "Passa al sottotitolo precedente"
-
-msgid "skip to previous subtitle (minute jump)"
-msgstr "Passa al sottotitolo precedente (salto in minuti)"
+msgid "Slovenian"
+msgstr ""
 
 msgid "Some subtitles providers are not working"
 msgstr "Alcuni provider di sottotitoli non stanno funzionando"
+
+msgid ""
+"Sorry!\n"
+"tmdb is not installed on your image"
+msgstr ""
 
 msgid "Sort subtitles list by"
 msgstr "Ordina l'elenco dei sottotitoli"
@@ -593,17 +847,52 @@ msgstr "Titolo della sorgente"
 msgid "Source title not provided"
 msgstr "Titolo della sorgente non fornito"
 
-msgid "State"
-msgstr "Stato"
+msgid "Spanish"
+msgstr ""
 
-msgid "static"
-msgstr "statico"
+msgid "Starting background tasks for details scraping and image download..."
+msgstr ""
 
-msgid "SubsSupport downloader"
-msgstr "Downloader SubsSupport"
+msgid "Status"
+msgstr ""
+
+msgid "SubDL API key OK"
+msgstr ""
+
+msgid "SubDL API key rejected"
+msgstr ""
+
+msgid "SubDL download failed"
+msgstr ""
+
+msgid "SubDL requires an API key"
+msgstr ""
+
+#, python-format
+msgid "SubDL: %s"
+msgstr ""
+
+msgid "SubDL: timeout"
+msgstr ""
+
+#, python-format
+msgid "SubDL: unexpected answer (HTTP %d)"
+msgstr ""
+
+msgid "SubSource API key OK"
+msgstr ""
+
+msgid "SubSource API key rejected"
+msgstr ""
+
+msgid "SubSource requires an API key"
+msgstr ""
 
 msgid "SubsSupport DVB player"
 msgstr "Player DVB SubsSupport"
+
+msgid "SubsSupport downloader"
+msgstr "Downloader SubsSupport"
 
 msgid "SubsSupport settings"
 msgstr "Impostazioni SubsSupport"
@@ -611,20 +900,40 @@ msgstr "Impostazioni SubsSupport"
 msgid "Subtitle"
 msgstr "Sottotitolo"
 
+msgid "Subtitle translation mode"
+msgstr ""
+
 msgid "Subtitles Delay"
 msgstr "Ritardo sottotitoli"
-
-msgid "Subtitles download path"
-msgstr "Percorso download sottotitoli"
-
-msgid "subtitles found"
-msgstr "sottotitoli trovati"
 
 msgid "Subtitles FPS"
 msgstr "Frequenza in fps per i sottotitoli"
 
 msgid "Subtitles Position"
 msgstr "Posizione dei sottotitoli"
+
+msgid "Subtitles Time"
+msgstr "Tempo dei sottotitoli"
+
+msgid "Subtitles download path"
+msgstr "Percorso download sottotitoli"
+
+#, python-format
+msgid ""
+"Subtitles found for this video:\n"
+"%s\n"
+"\n"
+"Download and load them?"
+msgstr ""
+
+msgid "Subtitles late: decrease ratio. Subtitles rush: increase ratio"
+msgstr ""
+
+#, python-format
+msgid ""
+"Subtitles loaded:\n"
+"%s"
+msgstr ""
 
 msgid "Subtitles provider timeout"
 msgstr "Timeout del provider dei sottotitoli"
@@ -647,9 +956,6 @@ msgstr "Impostazioni sottotitoli (inclusi)"
 msgid "Subtitles temp path"
 msgstr "Cartella temporanea sottotitoli"
 
-msgid "Subtitles Time"
-msgstr "Tempo dei sottotitoli"
-
 msgid "Subtitles will be downloaded in"
 msgstr "I sottotitoli saranno scaricati in "
 
@@ -663,14 +969,38 @@ msgstr ""
 msgid "Suggestions"
 msgstr "Suggerimenti"
 
+msgid "Suggestions provider"
+msgstr ""
+
 msgid "Supported languages"
 msgstr "Lingue supportate"
+
+msgid "Swedish"
+msgstr ""
 
 msgid "Switch List"
 msgstr "Cambia elenco"
 
 msgid "Sync delay"
 msgstr "Ritardo di sincronizzazione"
+
+msgid "TMDB Scraper"
+msgstr ""
+
+msgid "TV show"
+msgstr "Spettacolo TV"
+
+msgid "Tamil"
+msgstr ""
+
+msgid "Telugu"
+msgstr ""
+
+msgid "Test login"
+msgstr ""
+
+msgid "Thai"
+msgstr ""
 
 msgid ""
 "There are more subtitles in unpacked archive\n"
@@ -680,9 +1010,7 @@ msgstr ""
 "Per favore, seleziona quale vuoi usare"
 
 msgid "There was an error while removing subtitle, please check log"
-msgstr ""
-"C'è stato un errore nell'eliminazione dei sottotitoli, per favore "
-"controlla il log"
+msgstr "C'è stato un errore nell'eliminazione dei sottotitoli, per favore controlla il log"
 
 msgid "Time"
 msgstr "Ora"
@@ -690,22 +1018,35 @@ msgstr "Ora"
 msgid "Title"
 msgstr "Titolo"
 
-msgid "top"
-msgstr "sopra"
+msgid "Titlovi.com login failed, check username/password"
+msgstr ""
 
-msgid "transparent"
-msgstr "trasparente"
+msgid "Titulky.com daily limit reached, captcha required"
+msgstr ""
+
+msgid "Titulky.com download link not found"
+msgstr ""
+
+msgid "Titulky.com refused the download, login required"
+msgstr ""
+
+msgid "Translate from"
+msgstr ""
+
+msgid "Translate to"
+msgstr ""
+
+msgid "Try to correct FPS drift with FPS ratio"
+msgstr ""
 
 msgid "Try update(simplify) search expression and try again.."
+msgstr "Prova ad aggiornare o semplificare l'espressione di ricerca e prova ancora..."
+
+msgid "Turkish"
 msgstr ""
-"Prova ad aggiornare o semplificare l'espressione di ricerca e prova "
-"ancora..."
 
 msgid "Turn off subtitles"
 msgstr "Disattiva i sottotitoli"
-
-msgid "TV show"
-msgstr "Spettacolo TV"
 
 msgid "Type"
 msgstr "Tipo"
@@ -713,17 +1054,23 @@ msgstr "Tipo"
 msgid "Type text of picture"
 msgstr "Tipo testo dell'immagine"
 
-msgid "unknown"
-msgstr "sconosciuto"
+msgid "UP/DOWN: Restart current subtitle"
+msgstr ""
 
-msgid "unpack error: cannot get subname"
-msgstr "errore di estrazione dal pacchetto: sottonome non ottenuto"
+msgid "Ukrainian"
+msgstr ""
 
-msgid "unpack error: cannot open archive"
-msgstr "errore di estrazione dal pacchetto: non si può aprire l'archivio"
+msgid "Unknown Date"
+msgstr ""
+
+msgid "Unknown Title"
+msgstr ""
 
 msgid "Update"
 msgstr "Aggiorna"
+
+msgid "Update Search params"
+msgstr "Aggiorna i parametri di ricerca"
 
 msgid ""
 "Update search parameters if not correct\n"
@@ -732,8 +1079,8 @@ msgstr ""
 "Aggiorna i parametri di ricerca se non corretti\n"
 "e premi il tasto verde per la ricerca"
 
-msgid "Update Search params"
-msgstr "Aggiorna i parametri di ricerca"
+msgid "Urdu"
+msgstr ""
 
 msgid "Use File path"
 msgstr "Usa la cartella file..."
@@ -744,8 +1091,358 @@ msgstr "Definito dall'utente"
 msgid "Username"
 msgstr "Nome utente"
 
+msgid "VIP member"
+msgstr ""
+
+msgid "VOB file"
+msgstr ""
+
 msgid "Video filename"
 msgstr "Nome file video"
+
+msgid "Vietnamese"
+msgstr ""
+
+msgid "Western Europe"
+msgstr ""
+
+msgid "Wyzie API key OK"
+msgstr ""
+
+msgid "Wyzie API key OK, but the daily request limit is reached"
+msgstr ""
+
+msgid "Wyzie API key rejected"
+msgstr ""
+
+msgid "Wyzie requires an API key"
+msgstr ""
+
+#, python-format
+msgid "Wyzie: %s"
+msgstr ""
+
+#, python-format
+msgid "Wyzie: HTTP %d"
+msgstr ""
+
+msgid "Wyzie: timeout"
+msgstr ""
+
+msgid "YELLOW: Sync subtitle to current event"
+msgstr ""
+
+msgid "Year"
+msgstr "Anno"
+
+msgid "Yes"
+msgstr ""
+
+msgid "amber"
+msgstr ""
+
+msgid "apply now"
+msgstr ""
+
+msgid "beige"
+msgstr ""
+
+msgid "black"
+msgstr "nero"
+
+msgid "blue"
+msgstr "blu"
+
+msgid "border"
+msgstr "bordo"
+
+msgid "bottom"
+msgstr "basso"
+
+msgid "brown"
+msgstr ""
+
+msgid "cancel"
+msgstr ""
+
+msgid "cannot decode"
+msgstr "impossibile decodificare"
+
+msgid "cannot sync to event, event is not available"
+msgstr "Impossibile sincronizzarsi al programma, perché non è disponibile"
+
+msgid "captcha doesn't match, try again..."
+msgstr "Il captcha non coincide, riprova..."
+
+msgid "change external subtitles status"
+msgstr "cambia lo stato dei sottotitoli esterni"
+
+msgid "change subtitles fps"
+msgstr "Cambia la frequenza dei sottotitoli"
+
+msgid "cream"
+msgstr ""
+
+msgid "dark grey"
+msgstr ""
+
+msgid "decrease subtitles delay"
+msgstr "Diminuisci il ritardo per sottotitoli"
+
+msgid "deep sky blue"
+msgstr ""
+
+msgid "disabled"
+msgstr "Disabilitato"
+
+msgid "displays this menu"
+msgstr "Mostra questo menu"
+
+msgid "dodger blue"
+msgstr ""
+
+#, python-format
+msgid "download error occurred, for details see %s"
+msgstr ""
+
+msgid "downloading subtitles..."
+msgstr "Download in corso dei sottotitoli..."
+
+msgid "dynamic"
+msgstr "dinamico"
+
+msgid "embedded"
+msgstr ""
+
+msgid "enabled"
+msgstr "abilitato"
+
+msgid "error"
+msgstr "errore"
+
+msgid "exit"
+msgstr "Esci"
+
+msgid "exit (confirm)"
+msgstr ""
+
+msgid "fixed"
+msgstr ""
+
+msgid "gold"
+msgstr ""
+
+msgid "green"
+msgstr "verde"
+
+msgid "grey"
+msgstr "grigio"
+
+msgid "increase subtitles delay"
+msgstr "Aumenta il ritardo per sottotitoli"
+
+#, python-format
+msgid "indexsubtitle.cc: no download token for %s"
+msgstr ""
+
+msgid "invalid credentials provided, correct them and try again"
+msgstr "Credenziali fornite non valide, correggile e prova ancora"
+
+msgid "ivory"
+msgstr ""
+
+msgid "jump to next subtitle"
+msgstr "salta al sottotitolo successivo"
+
+msgid "jump to previous subtitle"
+msgstr "salta al sottotitolo precedente"
+
+msgid "justsubtitles: movie page script not found"
+msgstr ""
+
+msgid "justsubtitles: server action id not found"
+msgstr ""
+
+msgid "library"
+msgstr "libreria"
+
+msgid "light blue"
+msgstr ""
+
+msgid "light green"
+msgstr ""
+
+msgid "light yellow"
+msgstr ""
+
+msgid "loading subtitles list"
+msgstr "caricamento elenco dei sottotitoli"
+
+msgid "login"
+msgstr ""
+
+msgid "magenta"
+msgstr ""
+
+#, python-format
+msgid "match %d%%"
+msgstr ""
+
+msgid "mint"
+msgstr ""
+
+msgid "missing"
+msgstr "mancante"
+
+#, python-format
+msgid "my-subs.co: no download link on %s"
+msgstr ""
+
+msgid "no"
+msgstr "no"
+
+#, python-format
+msgid "no %s subtitle on %s"
+msgstr ""
+
+msgid "no VIP, downloads come from the website and are limited"
+msgstr ""
+
+msgid "no answer"
+msgstr ""
+
+msgid "no credentials provided, set them and try again"
+msgstr "non sono state fornite credenziali, impostale e riprova"
+
+#, python-format
+msgid "no subtitle in %s"
+msgstr ""
+
+msgid "offset"
+msgstr "offset"
+
+msgid "opaque"
+msgstr "opaco"
+
+msgid "open subtitle picker"
+msgstr ""
+
+msgid "orange"
+msgstr ""
+
+msgid "original"
+msgstr "originale"
+
+msgid "pause subtitles playback"
+msgstr "Metti in pausa  la riproduzione dei sottotitoli"
+
+msgid "pink"
+msgstr ""
+
+msgid "play/pause subtitles playback"
+msgstr "Pausa/continua la riproduzione dei sottotitoli"
+
+msgid "press green"
+msgstr "premi il tasto verde"
+
+msgid "press red"
+msgstr "premi il tasto rosso"
+
+msgid "purple"
+msgstr "viola"
+
+msgid "red"
+msgstr "rosso"
+
+msgid "reset subtitles delay/fps"
+msgstr "ripristina ritardo/frequenza dei sottotitoli"
+
+msgid "restarts current subtitle"
+msgstr "riavvia i sottotitoli attuali"
+
+msgid "resumes subtitles playback"
+msgstr "riprendi la riproduzione dei sottotitoli"
+
+msgid "save"
+msgstr ""
+
+msgid "search"
+msgstr ""
+
+msgid "seconds"
+msgstr "secondi"
+
+msgid "settings"
+msgstr "impostazioni"
+
+msgid "show help"
+msgstr ""
+
+msgid "show subtitle style settings"
+msgstr ""
+
+msgid "show subtitles menu"
+msgstr "Mostra il menu dei sottotitoli"
+
+msgid "show/hide subtitles status"
+msgstr "Mostra/nascondi lo stato dei sottotitoli"
+
+msgid "silver"
+msgstr ""
+
+msgid "skip previous subtitle by setting time in minutes"
+msgstr "salta il sottotitolo precedente impostando il tempo in minuti"
+
+msgid "skip subtitle to current event position"
+msgstr "salta il sottotitolo alla posizione attuale del programma"
+
+msgid "skip to next subtitle"
+msgstr "Passa al sottotitolo successivo"
+
+msgid "skip to next subtitle (minute jump)"
+msgstr "Passa al sottotitolo successivo (salto in minuti)"
+
+msgid "skip to next subtitle by setting time in minutes"
+msgstr "salta il sottotitolo successivo impostando il tempo in minuti"
+
+msgid "skip to previous subtitle"
+msgstr "Passa al sottotitolo precedente"
+
+msgid "skip to previous subtitle (minute jump)"
+msgstr "Passa al sottotitolo precedente (salto in minuti)"
+
+msgid "sky blue"
+msgstr ""
+
+msgid "spring green"
+msgstr ""
+
+msgid "static"
+msgstr "statico"
+
+msgid "subtitles found"
+msgstr "sottotitoli trovati"
+
+msgid "synced"
+msgstr ""
+
+msgid "teletext"
+msgstr ""
+
+msgid "top"
+msgstr "sopra"
+
+msgid "transparent"
+msgstr "trasparente"
+
+msgid "unknown"
+msgstr "sconosciuto"
+
+msgid "unknown error"
+msgstr ""
+
+msgid "violet"
+msgstr ""
 
 msgid "watch DVB broadcast with subtitles"
 msgstr "Mostra le trasmissioni DVB con i sottotitoli"
@@ -759,18 +1456,12 @@ msgstr "sarà eliminato dal file system"
 msgid "will be removed from list"
 msgstr "sarà eliminato dall'elenco"
 
-msgid "Year"
-msgstr "Anno"
-
 msgid "yellow"
 msgstr "giallo"
 
 msgid "yes"
 msgstr "sì"
 
-msgid ""
-"You have OpenPli-based image, please change embedded subtitles settings in "
-"Settings / System / Subtitles settings"
+#, python-format
+msgid "yifysubtitles: no download link on %s"
 msgstr ""
-"Hai un'immagine basata su OpenPli, cambia i sottotitoli inclusi nel menu "
-"Configurazione/Audio/Configurazione sottotitoli"

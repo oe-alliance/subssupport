@@ -2,675 +2,1003 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SubsSupport _ enigma2-plugin by mx3L\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-18 08:15+0100\n"
+"POT-Creation-Date: 2026-10-02 20:47+0200\n"
 "PO-Revision-Date: 2016-11-19 17:45+0000\n"
 "Last-Translator: nunigaia\n"
 "Language-Team: BH Team <none>\n"
+"Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: subtitles.py:4434
+#, python-format
+msgid ""
+"%s\n"
+"as %s"
+msgstr ""
+
+#, python-format
+msgid "%s requires: %s"
+msgstr ""
+
+msgid "API key"
+msgstr ""
+
+msgid "API key OK (no username/password set, downloads are limited)"
+msgstr ""
+
+msgid "ASS file"
+msgstr ""
+
 msgid "Add subtitle's language to filename"
 msgstr "Adicionar idioma ao nome das legendas"
 
-#: subtitles.py:307 subtitles.py:308 subtitles.py:325 subtitles.py:3549
-#: subtitles.py:3559 subtitles.py:3564
+msgid "Adult Content: "
+msgstr ""
+
+msgid "Albanian"
+msgstr ""
+
 msgid "All"
 msgstr "Todos"
 
-#: subtitles.py:4438
 msgid "Always ask before overwriting existing subtitles"
 msgstr "Perguntar antes de sobrescrever as legendas existentes"
 
-#: subtitles.py:3609 subtitles.py:3639
+msgid "Anonymous login OK (no username/password set), downloads come from the website and are limited"
+msgstr ""
+
 msgid "Append language to filename"
 msgstr "Adicionar idioma ao nome do ficheiro"
 
-#: subtitles.py:2736
-msgid "Ask on remove action"
-msgstr "Perguntar ao remover ação"
-
-#: subtitlesdvb.py:38
-msgid "Auto sync to current event"
-msgstr "Auto Sincronizar evento atual"
-
-#: subtitles.py:2026
-msgid "Background"
-msgstr "Fundo"
-
-msgid "Central and Eastern Europe"
-msgstr "Europa de Leste e Central"
-
-msgid "Western Europe"
-msgstr "Europa Ocidental"
+msgid "Apply now"
+msgstr ""
 
 msgid "Arabic"
 msgstr "Árabe"
 
-msgid "Turkish"
-msgstr "Turco"
+msgid "Armenian"
+msgstr ""
 
-msgid "Russia"
-msgstr "Russo"
+msgid "Ask"
+msgstr ""
 
-msgid "Greek"
-msgstr "Grego"
+msgid "Ask on remove action"
+msgstr "Perguntar ao remover ação"
 
-#: subtitles.py:2030
+msgid "Auto detect"
+msgstr ""
+
+msgid "Auto sync to current event"
+msgstr "Auto Sincronizar evento atual"
+
+msgid "Automatic"
+msgstr ""
+
+msgid "Aymara"
+msgstr ""
+
+msgid "BLUE: Change subtitles FPS"
+msgstr ""
+
+msgid "Background"
+msgstr "Fundo"
+
 msgid "Background X-offset"
 msgstr "Fundo Deslocamento Horizontal"
 
-#: subtitles.py:2031
 msgid "Background Y-offset"
 msgstr "Fundo Deslocamento Vertical"
 
-#: subtitles.py:2032
 msgid "Background color"
 msgstr "Cor do Fundo"
 
-#: subtitles.py:2033
+msgid "Background height"
+msgstr ""
+
 msgid "Background transparency"
 msgstr "Transparência do fundo"
 
-#: subtitles.py:2028
 msgid "Background type"
 msgstr "Tipo de fundo"
 
-#: e2_utils.py:496 subtitles.py:2722 subtitles.py:4495
+msgid "Bengali"
+msgstr ""
+
+msgid "Best match"
+msgstr ""
+
+msgid "Bosnian"
+msgstr ""
+
+msgid "Bulgarian"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: subtitles.py:1053 subtitlesdvb.py:64
 msgid "Cannot decode subtitles. Try another encoding group"
 msgstr "Não pode descodificar legendas. Tente outro método de codificação"
 
-#: subtitles.py:1049 subtitlesdvb.py:62
+msgid "Cannot determine year for image folder."
+msgstr ""
+
 msgid "Cannot load subtitles. Invalid path"
 msgstr "Impossível carregar legendas. Caminho inválido"
 
-#: subtitles.py:1061 subtitlesdvb.py:68
 msgid "Cannot parse subtitles. Invalid subtitles format"
 msgstr "Não é possível analisar legendas. Formato de legendas  inválido"
 
-#: subtitles.py:1057 subtitlesdvb.py:66
 msgid "Cannot parse subtitles. Not supported subtitles format"
 msgstr "Não é possível analisar legendas. Formato de legendas não suportado"
 
-#: subtitles.py:1875
+msgid "Cannot save download history, for details look in log"
+msgstr ""
+
+msgid "Captcha was not entered"
+msgstr ""
+
+msgid "Catalan"
+msgstr ""
+
+msgid "Central and Eastern Europe"
+msgstr ""
+
 msgid "Change encoding"
 msgstr "Muda codificação"
 
-#: plugin.py:100
 msgid "Change subssupport settings"
 msgstr "Alterar as configurações do subssupport"
 
-#: subtitles.py:4430
 msgid "Check search parameters before subtitles search"
 msgstr "Verifique os parâmetros antes da procura de legendas"
 
-#: subtitles.py:2433
+msgid "Chinese"
+msgstr ""
+
 msgid "Choose Subtitles"
 msgstr "Escolha de legendas"
 
-#: subtitles.py:2309
 msgid "Choose from downloaded subtitles"
 msgstr "Escolha das legendas descarregadas"
 
-#: subtitles.py:2304
 msgid "Choose from embedded subtitles"
 msgstr "Escolha de legendas embutidas"
 
-#: subtitles.py:2314
 msgid "Choose from web subtitles"
 msgstr "Escolha de legendas da web"
 
-#: subtitles.py:1870 subtitles.py:2797
 msgid "Choose subtitles"
 msgstr "Escolha de legendas"
 
-#: subtitles.py:2148
+msgid "Close"
+msgstr ""
+
 msgid "Color"
 msgstr "Cor"
 
-#: subtitles.py:1820
+msgid "Controls:"
+msgstr ""
+
+msgid "Could not determine search title."
+msgstr ""
+
+msgid "Could not retrieve details for this movie."
+msgstr ""
+
+msgid "Croatian"
+msgstr ""
+
 msgid "Currently choosed subtitles"
 msgstr "Legendas atualmente escolhidas"
 
-#: plugin.py:49 subtitlesdvb.py:34
+msgid "Czech"
+msgstr ""
+
 msgid "DVB player settings"
 msgstr "Configurações do reprodutor DVB"
 
-#: subtitles.py:311 subtitles.py:312
+msgid "Danish"
+msgstr ""
+
 msgid "Default"
 msgstr "Padrão"
 
-#: subtitles.py:2658 subtitles.py:2665
+msgid "Details"
+msgstr ""
+
 msgid "Do you want to proceed?"
 msgstr "Pretende continuar?"
 
-#: subtitles.py:1959 subtitles.py:2478
 msgid "Do you want to show this message again?"
 msgstr "Quer que esta mensagem seja exibida novamente?"
 
-#: subtitles.py:4296
 msgid "Download (more...)"
 msgstr "Descarregar (mais...)"
 
-#: subtitles.py:4295
 msgid "Download (next to video)"
 msgstr "Descarga (junto do vídeo)"
 
-#: subtitles.py:4294
 msgid "Download (user defined)"
 msgstr "Descarga (definido pelo utilizador)"
 
-#: subtitles.py:4301
+msgid "Download Images"
+msgstr ""
+
 msgid "Download and Load (more...)"
 msgstr "Descarregar/Carregar (mais...)"
 
-#: subtitles.py:4300
 msgid "Download and Load (next to video)"
 msgstr "Descarregar/Carregar (junto do vídeo)"
 
-#: subtitles.py:4299
 msgid "Download and Load (user defined) "
 msgstr "Descarregar/Carregar (definido pelo utilizador)"
 
-#: subtitles.py:2554
+msgid "Download best subtitles on playback start"
+msgstr ""
+
 msgid "Download date"
 msgstr "Data de descarga"
 
-#: subtitles.py:3643
 msgid "Download options"
 msgstr "Opções de descarga"
 
-#: plugin.py:101 plugin.py:102
 msgid "Download subtitles for your videos"
 msgstr "Descarga de legendas para os seus vídeos"
 
-#: subtitles.py:2594
 msgid "Downloaded Subtitles"
 msgstr "Legendas descarregadas"
 
 msgid "Downloaded Subtitles - Settings"
 msgstr "Definição das legendas descarregadas"
 
-#: subtitlesdvb.py:304
+msgid "Downloading images in background..."
+msgstr ""
+
 msgid "Duration"
 msgstr "Duração"
 
-#: subtitles.py:3680
+msgid "Dutch"
+msgstr ""
+
+msgid "EXIT: Exit (confirm)"
+msgstr ""
+
 msgid "Edit Filename"
 msgstr "Editar nome do ficheiro"
 
-#: subtitles.py:3688
 msgid "Edit download path"
 msgstr "Editar pasta de descarga"
 
-#: subtitles.py:1849
 msgid "Embedded Subtitles"
 msgstr "Legendas embutidas"
 
-#: plugin.py:47 subtitles.py:2154
 msgid "Embedded subtitles settings"
 msgstr "Definições das Legendas embutidas"
 
-#: subtitles.py:2080 subtitles.py:2176
+msgid "Enable title suggestions"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
 msgid "Encoding"
 msgstr "Codificação"
 
-#: subtitles.py:1860 subtitles.py:1863
 msgid "Encoding:"
 msgstr "Codificação:"
 
-#: subtitles.py:2623
+msgid "English"
+msgstr ""
+
 msgid "Entries count:"
 msgstr "Contador de entradas:"
 
-#: subtitles.py:3988 subtitles.py:4771
 msgid "Episode"
 msgstr "Episódio"
 
-#: subtitlesdvb.py:128 subtitlesdvb.py:306
+#, python-format
+msgid "Error loading details: %s"
+msgstr ""
+
+#, python-format
+msgid "Error retrieving details: %s"
+msgstr ""
+
+#, python-format
+msgid "Error searching TMDB: %s"
+msgstr ""
+
+msgid "Esperanto"
+msgstr ""
+
+msgid "Estonian"
+msgstr ""
+
 msgid "Event Duration"
 msgstr "Duração do evento"
 
-#: subtitlesdvb.py:126
 msgid "Event Name"
 msgstr "Nome do evento"
 
-#: subtitlesdvb.py:127 subtitlesdvb.py:293
 msgid "Event Time"
 msgstr "Tempo do evento"
 
-#: subtitles.py:2037
+msgid "Exit SubsSupport DVB player?"
+msgstr ""
+
 msgid "External Subtitles settings"
 msgstr "Definições das Legendas externas"
 
-#: plugin.py:46
+msgid "External settings not provided!"
+msgstr ""
+
 msgid "External subtitles settings"
 msgstr "Definições das legendas externas"
 
-#: subtitles.py:3617
+msgid "External subtitles style (live)"
+msgstr ""
+
 msgid "Filename"
 msgstr "Nome do ficheiro"
 
-#: subtitles.py:3693
 msgid "Filename cannot be empty!"
 msgstr "O nome do ficheiro deve ser preenchido!"
 
-#: subtitles.py:2013
+msgid "Finnish"
+msgstr ""
+
 msgid "Font color (Bold)"
 msgstr "Cor da Fonte ( negrito )"
 
-#: subtitles.py:2010
 msgid "Font color (Italic"
 msgstr "Cor da Fonte ( itálico )"
 
-#: subtitles.py:2007
 msgid "Font color (Regular)"
 msgstr "Cor da Fonte ( regular )"
 
-#: subtitles.py:2015 subtitles.py:2146
 msgid "Font size"
 msgstr "Tamanho da Letra (fonte)"
 
-#: subtitles.py:2014
 msgid "Font transparency (Bold)"
 msgstr "Transparência da fonte ( negrito )"
 
-#: subtitles.py:2011
 msgid "Font transparency (Italic)"
 msgstr "Transparência da fonte ( itálico )"
 
-#: subtitles.py:2008
 msgid "Font transparency (Regular)"
 msgstr "Transparência da fonte ( regular )"
 
-#: subtitles.py:2012 subtitles.py:2145
 msgid "Font type (Bold)"
 msgstr "Tipo de fonte ( negrito )"
 
-#: subtitles.py:2009 subtitles.py:2144
 msgid "Font type (Italic)"
 msgstr "Tipo de fonte ( itálico )"
 
-#: subtitles.py:2006 subtitles.py:2143
 msgid "Font type (Regular)"
 msgstr "Tipo de fonte ( regular )"
 
-#: subtitles.py:1957 subtitles.py:2476
 msgid "For more details please check search settings"
 msgstr "Para mais detalhes, por favor defina o modo de procura"
 
-#: subtitles.py:2170
+msgid "French"
+msgstr ""
+
+msgid "Galician"
+msgstr ""
+
 msgid "General settings"
 msgstr "Definições gerais"
 
-#: subtitles.py:2084
+msgid "Genres: "
+msgstr ""
+
+msgid "Georgian"
+msgstr ""
+
+msgid "German"
+msgstr ""
+
+msgid "Gestdown: too many requests, try again in a minute"
+msgstr ""
+
+msgid "Greek"
+msgstr "Grego"
+
+msgid "Hebrew"
+msgstr ""
+
 msgid "Hide delay"
 msgstr "Esconder o atraso"
 
-#: subtitles.py:3340 subtitles.py:3882 subtitles.py:4031
+msgid "Hindi"
+msgstr ""
+
 msgid "History"
 msgstr "Histórico"
 
-#: subtitles.py:310 subtitles.py:3874
+msgid "Hungarian"
+msgstr ""
+
+msgid "IMDb"
+msgstr ""
+
+msgid "INFO: Show this help"
+msgstr ""
+
+msgid "Icelandic"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Invalid captcha text"
+msgstr ""
+
+msgid "Italian"
+msgstr ""
+
+msgid "Japanese"
+msgstr ""
+
+msgid "Kazakh"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
+
+msgid "LEFT: Previous subtitle"
+msgstr ""
+
 msgid "Language"
 msgstr "Idioma"
 
-#: e2_utils.py:112
 msgid "Language selection"
 msgstr "Selecção do Idioma"
 
-#: subtitles.py:298
+msgid "Latvian"
+msgstr ""
+
+msgid "Line by line"
+msgstr ""
+
 msgid "List"
 msgstr "Lista"
 
-#: subtitles.py:298
 msgid "List + File"
 msgstr "Lista + Arquivo"
 
-#: compat.py:200 subtitles.py:2257
-msgid "List of storage devices"
-msgstr "Lista de dispositivos de armazenamento"
+msgid "Lithuanian"
+msgstr ""
 
-#: subtitles.py:4439
 msgid "Load subtitles after download"
 msgstr "Carregar as legendas após descarga"
 
-#: subtitles.py:4443
 msgid "Load/Save download history directory"
 msgstr "Pasta do histórico de descarga"
 
-#: subtitles.py:4428
+#, python-format
+msgid "Login OK (%s)"
+msgstr ""
+
+#, python-format
+msgid "Login OK, downloads left today: %s/%s"
+msgstr ""
+
+msgid "Luxembourgish"
+msgstr ""
+
+msgid "MENU: Show subtitle style settings"
+msgstr ""
+
+msgid "Macedonian"
+msgstr ""
+
+msgid "Malay"
+msgstr ""
+
 msgid "Manual search"
 msgstr "Procura manual"
 
-#: subtitles.py:2734
 msgid "Max history entries"
 msgstr "Entradas no histórico ( Máximo )"
 
-#: subtitles.py:321
+msgid "Minimum match for automatic download"
+msgstr ""
+
 msgid "Movie"
 msgstr "Filme"
 
-#: subtitles.py:2552
+msgid "Movie Details"
+msgstr ""
+
+msgid "NEXT (long): Manual +minutes jump"
+msgstr ""
+
+msgid "NEXT/FF (short): +1 minute"
+msgstr ""
+
 msgid "Name"
 msgstr "Nome"
 
-#: subtitles.py:313 subtitles.py:3595
+msgid "Next source title"
+msgstr ""
+
 msgid "Next to video"
 msgstr "Junto do vídeo"
 
-#: subtitles.py:519 subtitles.py:521
+msgid "No"
+msgstr ""
+
+msgid "No URL available for this movie."
+msgstr ""
+
+msgid "No details available for this movie. Please view details first."
+msgstr ""
+
 msgid "No external subtitles are loaded"
 msgstr "Legendas externas não carregadas"
 
-#: subtitles.py:4172
+msgid "No genres available"
+msgstr ""
+
+#, python-format
+msgid "No results found for: %s"
+msgstr ""
+
 msgid "No subtitles found :("
 msgstr "Não existem legendas :("
 
-#: subtitles.py:1865
+msgid "No tagline available"
+msgstr ""
+
+msgid "No."
+msgstr ""
+
 msgid "None"
 msgstr "Nenhum"
 
-#: subtitles.py:2088
+msgid "Norwegian"
+msgstr ""
+
+msgid "OK: Show/Hide status panel"
+msgstr ""
+
+msgid "Occitan"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "OpenSubtitles"
+msgstr ""
+
+msgid "OpenSubtitles API key for suggestions"
+msgstr ""
+
+msgid "OpenSubtitles.com API key rejected"
+msgstr ""
+
+msgid "OpenSubtitles.com login failed"
+msgstr ""
+
+msgid "OpenSubtitles.com requires an API key"
+msgstr ""
+
+#, python-format
+msgid "OpenSubtitles.org %s failed: %s"
+msgstr ""
+
+msgid "OpenSubtitles.org archive contains no subtitle file"
+msgstr ""
+
+msgid "OpenSubtitles.org download limit reached, try again tomorrow"
+msgstr ""
+
+msgid "OpenSubtitles.org login failed"
+msgstr ""
+
+msgid "OpenSubtitles.org only delivers this subtitle to VIP members"
+msgstr ""
+
+msgid "OpenSubtitles.org website download limit reached (captcha), try again later or use a VIP account"
+msgstr ""
+
+msgid "OpenSubtitles.org: too many requests, try again later"
+msgstr ""
+
+#, python-format
+msgid "Override ratio for %s fps (standard is 1.0000)"
+msgstr ""
+
+msgid "PGS file"
+msgstr ""
+
+msgid "PREV (long): Manual -minutes jump"
+msgstr ""
+
+msgid "PREV/REWIND (short): -1 minute"
+msgstr ""
+
 msgid "PTS check delay"
 msgstr "PTS verificar atraso"
 
-#: compat.py:202 subtitles.py:2259
-msgid "Parent directory"
-msgstr "Pasta Principal"
+msgid "Password"
+msgstr ""
 
-#: subtitles.py:3618
 msgid "Path"
 msgstr "Percurso"
 
-#: subtitles.py:3697
 msgid "Path doesn't exist!"
 msgstr "Percurso não existente!"
 
-#: subtitles.py:2077 subtitles.py:2175
 msgid "Pause video on opening subtitles menu"
 msgstr "Parar vídeo ao abrir o Menu de legendas"
 
-#: subtitles.py:2086
+msgid "Persian"
+msgstr ""
+
 msgid "Player delay"
 msgstr "Atraso de reprodução"
 
-#: subtitles.py:2016 subtitles.py:2147
+msgid "Polish"
+msgstr ""
+
+msgid "Portuguese"
+msgstr ""
+
+msgid "Portuguese (Brazilian)"
+msgstr ""
+
+msgid "PortugueseBrazil"
+msgstr ""
+
 msgid "Position"
 msgstr "Posição"
 
-#: subtitles.py:4426
 msgid "Preferred Movie provider"
 msgstr "Servidor de filmes preferido "
 
-#: subtitles.py:4427
 msgid "Preferred TV show provider"
 msgstr ""
 "Servidor de Programas de TV\n"
 " preferido "
 
-#: subtitles.py:3990
 msgid "Preferred languages"
 msgstr "Idiomas preferidos"
 
-#: subtitles.py:4423 subtitles.py:4424 subtitles.py:4425
 msgid "Preferred subtitles language"
 msgstr "Idioma preferido nas legendas"
 
-#: subtitles.py:4108 subtitles.py:4140
 msgid "Press OK to Stop"
 msgstr "Prima OK para Parar"
 
-#: subtitles.py:4716
-msgid "Press OK to confirm"
-msgstr "Prima OK para confirmar"
+msgid "Press OK to select subtitle line"
+msgstr ""
 
-#: subtitles.py:310 subtitles.py:2553 subtitles.py:3876 subtitles.py:3989
-#: subtitles.py:4772
+msgid "Press RED to open subtitle picker - Press OK to hide/unhide - Press MENU to open subtitle style settings - Press INFO to open help screen"
+msgstr ""
+
+msgid "Prijevodi-Online did not return a subtitle file"
+msgstr ""
+
 msgid "Provider"
 msgstr "Servidor"
 
-#: subtitles.py:4491
 msgid "Provider name"
 msgstr "Servidor"
 
-#: subtitles.py:2087
+msgid "RED: Open subtitle picker"
+msgstr ""
+
+msgid "RIGHT: Next subtitle"
+msgstr ""
+
+msgid "Rating: "
+msgstr ""
+
 msgid "Refresh delay"
 msgstr "Refrescamento "
 
-#: subtitles.py:311 subtitles.py:312 subtitles.py:3588 subtitles.py:3875
 msgid "Release"
 msgstr "Versão"
 
-#: subtitles.py:2557
 msgid "Remove (file)"
 msgstr "Remover ( arquivo )"
 
-#: subtitles.py:2629
 msgid "Remove Entry (List)"
 msgstr "Remover Entrada"
 
-#: subtitles.py:2627
 msgid "Remove Entry (List+File)"
 msgstr "Remover Entrada ( Lista+Ficheiro )"
 
-#: subtitles.py:2735
 msgid "Remove action"
 msgstr "Remover ação"
 
-#: subtitles.py:3619
 msgid "Reset"
 msgstr "Redefinir"
 
-#: e2_utils.py:497 subtitles.py:2723 subtitles.py:4496
 msgid "Reset Defaults"
 msgstr "Repor predefinições"
 
-#: subtitles.py:3877
+msgid "Romanian"
+msgstr ""
+
+msgid "Runtime: "
+msgstr ""
+
+msgid "Russia"
+msgstr ""
+
+msgid "Russian"
+msgstr ""
+
 msgid "S"
 msgstr "S"
 
-#: e2_utils.py:495 subtitles.py:2721 subtitles.py:4494
+msgid "SRT file"
+msgstr ""
+
+msgid "SSA file"
+msgstr ""
+
 msgid "Save"
 msgstr "Guardar"
 
-#: subtitles.py:3608 subtitles.py:3637
 msgid "Save as"
 msgstr "Guardar como"
 
-#: subtitles.py:4441
 msgid "Save downloaded subtitles to history"
 msgstr "Guardar a descarga de legendas no histórico"
 
-#: subtitles.py:4432
 msgid "Save subtitles as"
 msgstr "Guardar legendas como"
 
-#: subtitles.py:4433
 msgid "Save subtitles as (fallback)"
 msgstr "Guardar legendas como ( recuo )"
 
-#: subtitles.py:4435
 msgid "Save subtitles to"
 msgstr "Guardar legendas em"
 
-#: subtitles.py:3607 subtitles.py:3636
 msgid "Save to"
 msgstr "Guardar em"
 
-#: subtitles.py:3881 subtitles.py:4030
 msgid "Search"
 msgstr "Procura"
 
-#: subtitles.py:4715
-msgid "Search parameters"
-msgstr "Parâmetros de procura"
+msgid "Search Path"
+msgstr ""
 
-#: plugin.py:48
+msgid "Search on TMDB"
+msgstr ""
+
 msgid "Search settings"
 msgstr "Definições de procura"
 
-#: subtitles.py:1872
 msgid "Search subtitles"
 msgstr "Procura de legendas"
 
-#: subtitles.py:3987 subtitles.py:4770
+msgid "Searching TMDB..."
+msgstr ""
+
 msgid "Season"
 msgstr "Temporada"
 
-#: subtitles.py:2747
-msgid "Select Directory"
-msgstr "Selecionar a pasta"
+msgid "Select"
+msgstr ""
 
-#: subtitles.py:2558 subtitles.py:3883 subtitles.py:4032
+msgid "Select current subtitle line"
+msgstr ""
+
+msgid "Serbian"
+msgstr ""
+
 msgid "Settings"
 msgstr "Definições"
 
-#: subtitles.py:2017
+msgid "Settings TMDB data Path"
+msgstr ""
+
 msgid "Shadow"
 msgstr "Sombra"
 
-#: subtitles.py:2021 subtitles.py:2149
 msgid "Shadow X-offset"
 msgstr "Sombra Deslocamento Horizontal"
 
-#: subtitles.py:2022 subtitles.py:2150
 msgid "Shadow Y-offset"
 msgstr "Sombra Deslocamento Vertical"
 
-#: subtitles.py:2025
 msgid "Shadow color"
 msgstr "Cor da Sombra"
 
-#: subtitles.py:2024
 msgid "Shadow size"
 msgstr "Tamanho de sombra"
 
-#: subtitles.py:2019
 msgid "Shadow type"
 msgstr "Tipo de Sombra"
 
-#: subtitles.py:2081
 msgid "Show expert settings"
 msgstr "Mostrar definições: Especialistas"
 
-#: subtitles.py:1956 subtitles.py:2475
+msgid "Slovak"
+msgstr ""
+
+msgid "Slovenian"
+msgstr ""
+
 msgid "Some subtitles providers are not working"
 msgstr "Alguns forncedores de legendas não funcionam"
 
-#: subtitles.py:4431
+msgid ""
+"Sorry!\n"
+"tmdb is not installed on your image"
+msgstr ""
+
 msgid "Sort subtitles list by"
 msgstr "Ordenar lista de legendas por"
 
-#: subtitles.py:4713 subtitles.py:4790
 msgid "Source title"
 msgstr "Fonte das legendas"
 
-#: subtitles.py:4711
 msgid "Source title not provided"
 msgstr "Fonte da legenda não fornecida"
 
-#: subtitles.py:4493
-msgid "State"
-msgstr "Estado"
+msgid "Spanish"
+msgstr ""
 
-#: plugin.py:103 plugin.py:104
+msgid "Starting background tasks for details scraping and image download..."
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "SubDL API key OK"
+msgstr ""
+
+msgid "SubDL API key rejected"
+msgstr ""
+
+msgid "SubDL download failed"
+msgstr ""
+
+msgid "SubDL requires an API key"
+msgstr ""
+
+#, python-format
+msgid "SubDL: %s"
+msgstr ""
+
+msgid "SubDL: timeout"
+msgstr ""
+
+#, python-format
+msgid "SubDL: unexpected answer (HTTP %d)"
+msgstr ""
+
+msgid "SubSource API key OK"
+msgstr ""
+
+msgid "SubSource API key rejected"
+msgstr ""
+
+msgid "SubSource requires an API key"
+msgstr ""
+
 msgid "SubsSupport DVB player"
 msgstr "SubsSupport Reprodutor DVB"
 
-#: plugin.py:101 plugin.py:102
 msgid "SubsSupport downloader"
 msgstr "SubsSupport Descarga"
 
-#: plugin.py:61 plugin.py:100
 msgid "SubsSupport settings"
 msgstr "Subssupport - Configuração"
 
-#: subtitles.py:2657 subtitles.py:2664
 msgid "Subtitle"
 msgstr "Legenda"
 
-#: subtitles.py:439 subtitles.py:441 subtitles.py:444 subtitles.py:446
+msgid "Subtitle translation mode"
+msgstr ""
+
 msgid "Subtitles Delay"
 msgstr "Atraso nas Legendas"
 
-#: subtitles.py:428 subtitles.py:431 subtitles.py:433 subtitlesdvb.py:125
-#: subtitlesdvb.py:260 subtitlesdvb.py:265 subtitlesdvb.py:267
-#: subtitlesdvb.py:269 subtitlesdvb.py:273 subtitlesdvb.py:275
-#: subtitlesdvb.py:277
 msgid "Subtitles FPS"
 msgstr "Legendas FPS"
 
-#: subtitlesdvb.py:123 subtitlesdvb.py:240
 msgid "Subtitles Position"
 msgstr "Posição das legendas"
 
-#: subtitlesdvb.py:124 subtitlesdvb.py:254
 msgid "Subtitles Time"
 msgstr "Tempo das legendas"
 
-#: subtitles.py:4436
 msgid "Subtitles download path"
 msgstr "Legendas pasta de descarga"
 
-#: subtitles.py:4429
+#, python-format
+msgid ""
+"Subtitles found for this video:\n"
+"%s\n"
+"\n"
+"Download and load them?"
+msgstr ""
+
+msgid "Subtitles late: decrease ratio. Subtitles rush: increase ratio"
+msgstr ""
+
+#, python-format
+msgid ""
+"Subtitles loaded:\n"
+"%s"
+msgstr ""
+
 msgid "Subtitles provider timeout"
 msgstr "Tempo limite fornecedor de legendas"
 
-#: subtitles.py:3962
 msgid "Subtitles search"
 msgstr "Procura de legendas"
 
-#: subtitles.py:4518
 msgid "Subtitles search settings"
 msgstr "Procura de legendas - Definições"
 
-#: subtitles.py:2071
 msgid "Subtitles setting"
 msgstr "Definição de legendas"
 
-#: subtitles.py:1876
 msgid "Subtitles settings"
 msgstr "Definições de legendas"
 
-#: subtitles.py:1878 subtitles.py:1880
 msgid "Subtitles settings (embedded)"
 msgstr "Definições de legendas ( embutidas )"
 
-#: subtitles.py:4437
 msgid "Subtitles temp path"
 msgstr "Caminho de legendas temporário"
 
-#: subtitles.py:2379
 msgid "Subtitles will be downloaded in"
 msgstr "Legendas serão descarregadas em "
 
-#: subtitles.py:2951 subtitles.py:3336
+msgid ""
+"Subtitles with this name already exist\n"
+"Do you want to overwrite them"
+msgstr ""
+
 msgid "Suggestions"
 msgstr "Sugestões"
 
-#: subtitles.py:4492
+msgid "Suggestions provider"
+msgstr ""
+
 msgid "Supported languages"
 msgstr "Idiomas suportados"
 
-#: subtitles.py:2085
+msgid "Swedish"
+msgstr ""
+
+msgid "Switch List"
+msgstr "Mudar para lista"
+
 msgid "Sync delay"
 msgstr "Atraso de sincronização"
 
-#: subtitles.py:321
+msgid "TMDB Scraper"
+msgstr ""
+
 msgid "TV show"
 msgstr "Programa de TV"
 
-#: subtitles.py:2947
+msgid "Tamil"
+msgstr ""
+
+msgid "Telugu"
+msgstr ""
+
+msgid "Test login"
+msgstr ""
+
+msgid "Thai"
+msgstr ""
+
 msgid ""
 "There are more subtitles in unpacked archive\n"
 " please select which one do you want to use"
@@ -678,45 +1006,71 @@ msgstr ""
 "Há mais legendas no arquivo descompatado\n"
 "  por favor selecione qual delas você deseja usar"
 
-#: subtitles.py:2639
 msgid "There was an error while removing subtitle, please check log"
 msgstr ""
 "Ocorreu um erro durante a remoção da legenda, por favor,\n"
 " verifique o registo"
 
-#: subtitlesdvb.py:291
 msgid "Time"
 msgstr "Hora"
 
-#: subtitles.py:3982 subtitles.py:4765
 msgid "Title"
 msgstr "Título"
 
-#: subtitles.py:4173
+msgid "Titlovi.com login failed, check username/password"
+msgstr ""
+
+msgid "Titulky.com daily limit reached, captcha required"
+msgstr ""
+
+msgid "Titulky.com download link not found"
+msgstr ""
+
+msgid "Titulky.com refused the download, login required"
+msgstr ""
+
+msgid "Translate from"
+msgstr ""
+
+msgid "Translate to"
+msgstr ""
+
+msgid "Try to correct FPS drift with FPS ratio"
+msgstr ""
+
 msgid "Try update(simplify) search expression and try again.."
 msgstr "Tente atualizar ( simplificar ) a expressão de procura e tente de novo.."
 
-#: subtitles.py:1882
+msgid "Turkish"
+msgstr "Turco"
+
 msgid "Turn off subtitles"
 msgstr "Desligar legendas"
 
-#: subtitles.py:3983 subtitles.py:4766
 msgid "Type"
 msgstr "Tipo"
 
-#: e2_utils.py:241
 msgid "Type text of picture"
 msgstr "Tipo teste de imagem"
 
-#: subtitles.py:3880 subtitles.py:4029
+msgid "UP/DOWN: Restart current subtitle"
+msgstr ""
+
+msgid "Ukrainian"
+msgstr ""
+
+msgid "Unknown Date"
+msgstr ""
+
+msgid "Unknown Title"
+msgstr ""
+
 msgid "Update"
 msgstr "Atualizar"
 
-#: subtitles.py:4761
 msgid "Update Search params"
 msgstr "Atualizar parâmetros de procura"
 
-#: subtitles.py:4097
 msgid ""
 "Update search parameters if not correct\n"
 " and press green button for search"
@@ -724,304 +1078,389 @@ msgstr ""
 "Atualize os parâmetros de procura se incorretos\n"
 "e prima a tecla VERDE para procurar"
 
-#: subtitles.py:3991 subtitles.py:4773
+msgid "Urdu"
+msgstr ""
+
 msgid "Use File path"
 msgstr "Usar percurso"
 
-msgid "Switch List"
-msgstr "Mudar para lista"
-
-#: subtitles.py:313 subtitles.py:3591 subtitles.py:3593
 msgid "User defined"
 msgstr "Definições do utilizador"
 
-#: subtitles.py:311 subtitles.py:3590
+msgid "Username"
+msgstr ""
+
+msgid "VIP member"
+msgstr ""
+
+msgid "VOB file"
+msgstr ""
+
 msgid "Video filename"
 msgstr "Vídeo - nome do ficheiro"
 
-#: subtitles.py:3985 subtitles.py:4768
+msgid "Vietnamese"
+msgstr ""
+
+msgid "Western Europe"
+msgstr ""
+
+msgid "Wyzie API key OK"
+msgstr ""
+
+msgid "Wyzie API key OK, but the daily request limit is reached"
+msgstr ""
+
+msgid "Wyzie API key rejected"
+msgstr ""
+
+msgid "Wyzie requires an API key"
+msgstr ""
+
+#, python-format
+msgid "Wyzie: %s"
+msgstr ""
+
+#, python-format
+msgid "Wyzie: HTTP %d"
+msgstr ""
+
+msgid "Wyzie: timeout"
+msgstr ""
+
+msgid "YELLOW: Sync subtitle to current event"
+msgstr ""
+
 msgid "Year"
 msgstr "Ano"
 
-#: plugin.py:92
-msgid "You have OpenPli-based image, please change embedded subtitles settings in Settings / System / Subtitles settings"
+msgid "Yes"
 msgstr ""
-"Você está usar uma imagem baseada em OpenPli, por favor:\n"
-"\n"
-"--> alterar as configurações de legendas embutidas em:\n"
-"\n"
-"> Configurações \n"
-"\n"
-"> Sistema \n"
-"\n"
-"> Configurações de Legendas"
 
-#: subtitles.py:212
+msgid "amber"
+msgstr ""
+
+msgid "apply now"
+msgstr ""
+
+msgid "beige"
+msgstr ""
+
 msgid "black"
 msgstr "preto"
 
-#: subtitles.py:211
 msgid "blue"
 msgstr "azul"
 
-#: subtitles.py:253
 msgid "border"
 msgstr "orla"
 
-#: subtitles.py:200
 msgid "bottom"
 msgstr "fundo"
 
-#: subtitles.py:1863
+msgid "brown"
+msgstr ""
+
+msgid "cancel"
+msgstr ""
+
 msgid "cannot decode"
 msgstr "descodificação impossível"
 
-#: subtitlesdvb.py:343
 msgid "cannot sync to event, event is not available"
 msgstr "Não pode sincronizar o evento, evento não está disponível"
 
-#: subtitles.py:4266
 msgid "captcha doesn't match, try again..."
 msgstr "captcha não corresponde, tente de novo ..."
 
-#: subtitles.py:491
 msgid "change external subtitles status"
 msgstr "mudar o estado de legendas externas"
 
-#: subtitles.py:396 subtitlesdvb.py:144
 msgid "change subtitles fps"
 msgstr "Mudar o FPS das legendas"
 
-#: subtitlesdvb.py:131
-msgid "close plugin"
-msgstr "Fechar o Subssupport"
+msgid "cream"
+msgstr ""
 
-#: subtitles.py:391
+msgid "dark grey"
+msgstr ""
+
 msgid "decrease subtitles delay"
 msgstr "atrasar a reprodução das legendas"
 
-#: subtitles.py:4535
+msgid "deep sky blue"
+msgstr ""
+
 msgid "disabled"
 msgstr "desativar"
 
-#: subtitles.py:400
 msgid "displays this menu"
 msgstr "mostrar este menu"
 
-#: subtitles.py:4214
+msgid "dodger blue"
+msgstr ""
+
+#, python-format
+msgid "download error occurred, for details see %s"
+msgstr ""
+
 msgid "downloading subtitles..."
 msgstr "a transferir legendas ..."
 
-#: subtitles.py:260
 msgid "dynamic"
 msgstr "dinâmico"
 
-#: subtitles.py:4532
+msgid "embedded"
+msgstr ""
+
 msgid "enabled"
 msgstr "ativado"
 
-#: subtitles.py:4529
 msgid "error"
 msgstr "Erro"
 
-#: subtitles.py:401
 msgid "exit"
 msgstr "sair"
 
-#: subtitles.py:207
+msgid "exit (confirm)"
+msgstr ""
+
+msgid "fixed"
+msgstr ""
+
+msgid "gold"
+msgstr ""
+
 msgid "green"
 msgstr "verde"
 
-#: subtitles.py:206
 msgid "grey"
 msgstr "cinzento"
 
-#: subtitles.py:390
 msgid "increase subtitles delay"
 msgstr "avançar a reprodução das legendas"
 
-#: subtitles.py:4268
+#, python-format
+msgid "indexsubtitle.cc: no download token for %s"
+msgstr ""
+
 msgid "invalid credentials provided, correct them and try again"
 msgstr "credenciais fornecidas inválidas, corrija-as e tente de novo"
 
-#: subtitles.py:388
+msgid "ivory"
+msgstr ""
+
 msgid "jump to next subtitle"
 msgstr "saltar para a próxima legenda"
 
-#: subtitles.py:389
 msgid "jump to previous subtitle"
 msgstr "saltar para a legenda anterior"
 
-#: subtitles.py:4657
+msgid "justsubtitles: movie page script not found"
+msgstr ""
+
+msgid "justsubtitles: server action id not found"
+msgstr ""
+
 msgid "library"
 msgstr "libraria"
 
-#: subtitles.py:4106 subtitles.py:4138
+msgid "light blue"
+msgstr ""
+
+msgid "light green"
+msgstr ""
+
+msgid "light yellow"
+msgstr ""
+
 msgid "loading subtitles list"
 msgstr "Carregar lista das legendas"
 
-#: subtitles.py:4657
+msgid "login"
+msgstr ""
+
+msgid "magenta"
+msgstr ""
+
+#, python-format
+msgid "match %d%%"
+msgstr ""
+
+msgid "mint"
+msgstr ""
+
 msgid "missing"
 msgstr "Em Falta"
 
-#: subtitles.py:3981
+#, python-format
+msgid "my-subs.co: no download link on %s"
+msgstr ""
+
 msgid "no"
 msgstr "não"
 
-#: subtitles.py:4270
+#, python-format
+msgid "no %s subtitle on %s"
+msgstr ""
+
+msgid "no VIP, downloads come from the website and are limited"
+msgstr ""
+
+msgid "no answer"
+msgstr ""
+
 msgid "no credentials provided, set them and try again"
 msgstr "credenciais não fornecidas, defina-as e tente de novo"
 
-#: compat.py:221 subtitles.py:2278
-msgid "nothing connected"
-msgstr "nada conetado"
+#, python-format
+msgid "no subtitle in %s"
+msgstr ""
 
-#: subtitles.py:253
 msgid "offset"
 msgstr "deslocamento"
 
-#: subtitles.py:227
 msgid "opaque"
 msgstr "opaco"
 
-#: subtitles.py:431 subtitlesdvb.py:265 subtitlesdvb.py:267 subtitlesdvb.py:269
-#: subtitlesdvb.py:273
+msgid "open subtitle picker"
+msgstr ""
+
+msgid "orange"
+msgstr ""
+
 msgid "original"
 msgstr "original"
 
-#: subtitlesdvb.py:134
 msgid "pause subtitles playback"
 msgstr "parar a reprodução de legendas"
 
-#: subtitlesdvb.py:133
+msgid "pink"
+msgstr ""
+
 msgid "play/pause subtitles playback"
 msgstr "reproduzir/parar a reprodução de legendas"
 
-#: subtitles.py:3336
 msgid "press green"
 msgstr "prima a tecla VERDE"
 
-#: subtitles.py:3340
 msgid "press red"
 msgstr "prima a tecla VERMELHA"
 
-#: subtitles.py:208
 msgid "purple"
 msgstr "púrpura"
 
-#: subtitles.py:205
 msgid "red"
 msgstr "vermelho"
 
-#: subtitles.py:395
 msgid "reset subtitles delay/fps"
 msgstr "redefinir legendas atraso / fps"
 
-#: subtitlesdvb.py:136
 msgid "restarts current subtitle"
 msgstr "reinicia a legenda atual"
 
-#: subtitlesdvb.py:135
 msgid "resumes subtitles playback"
 msgstr "retoma a reprodução de legendas"
 
-#: subtitles.py:2379
+msgid "save"
+msgstr ""
+
+msgid "search"
+msgstr ""
+
 msgid "seconds"
 msgstr "segundos"
 
-#: subtitles.py:4931
 msgid "settings"
 msgstr "definições"
 
-#: subtitles.py:752
+msgid "show help"
+msgstr ""
+
+msgid "show subtitle style settings"
+msgstr ""
+
 msgid "show subtitles menu"
 msgstr "mostrar menu de legendas"
 
-#: subtitlesdvb.py:132
 msgid "show/hide subtitles status"
 msgstr "Mostra/esconde o estado das legendas"
 
-#: subtitlesdvb.py:142
+msgid "silver"
+msgstr ""
+
 msgid "skip previous subtitle by setting time in minutes"
 msgstr "ignorar a legenda anterior, ao definir o tempo em minutos"
 
-#: subtitlesdvb.py:143
 msgid "skip subtitle to current event position"
 msgstr "saltar na legenda para a posição atual do evento"
 
-#: subtitlesdvb.py:137
 msgid "skip to next subtitle"
 msgstr "saltar para a próxima legenda"
 
-#: subtitlesdvb.py:138
 msgid "skip to next subtitle (minute jump)"
 msgstr "saltar para a próxima legenda (salto em minutos )"
 
-#: subtitlesdvb.py:139
 msgid "skip to next subtitle by setting time in minutes"
 msgstr "saltar para a legenda seguinte, ao definir o tempo em minutos"
 
-#: subtitlesdvb.py:140
 msgid "skip to previous subtitle"
 msgstr "saltar para a legenda anterior"
 
-#: subtitlesdvb.py:141
 msgid "skip to previous subtitle (minute jump)"
 msgstr "saltar para a legenda anterior ( salto em minutos )"
 
-#: subtitles.py:260
+msgid "sky blue"
+msgstr ""
+
+msgid "spring green"
+msgstr ""
+
 msgid "static"
 msgstr "estático"
 
-#: subtitles.py:4107 subtitles.py:4139
 msgid "subtitles found"
 msgstr "legendas encontradas"
 
-#: subtitles.py:198
+msgid "synced"
+msgstr ""
+
+msgid "teletext"
+msgstr ""
+
 msgid "top"
 msgstr "topo"
 
-#: subtitles.py:229
 msgid "transparent"
 msgstr "transparente"
 
-#: subtitles.py:428 subtitles.py:2831 subtitlesdvb.py:260 subtitlesdvb.py:287
 msgid "unknown"
 msgstr "desconhecido"
 
-#: e2_utils.py:378
-msgid "unpack error: cannot get subname"
-msgstr "erro ao descompatar: impossível obter subnome"
+msgid "unknown error"
+msgstr ""
 
-#: e2_utils.py:394
-msgid "unpack error: cannot open archive"
-msgstr "erro ao descompatar: impossível abrir ficheiro"
+msgid "violet"
+msgstr ""
 
-#: seek.py:328
-#, python-format
-msgid "unsupported archive %s"
-msgstr "arquivo não suportado %s"
-
-#: plugin.py:103 plugin.py:104
 msgid "watch DVB broadcast with subtitles"
 msgstr "assista a transmissões DVB com legendas"
 
-#: subtitles.py:210
 msgid "white"
 msgstr "branco"
 
-#: subtitles.py:2657
 msgid "will be removed from file system"
 msgstr "serão removidos do sistema de arquivos"
 
-#: subtitles.py:2664
 msgid "will be removed from list"
 msgstr "serão removidos da lista"
 
-#: subtitles.py:209
 msgid "yellow"
 msgstr "amarelo"
 
-#: subtitles.py:3981
 msgid "yes"
 msgstr "sim"
+
+#, python-format
+msgid "yifysubtitles: no download link on %s"
+msgstr ""

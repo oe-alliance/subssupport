@@ -1,0 +1,60 @@
+name: Update translation templates
+
+# Manual run (Actions tab -> "Update translation templates" -> Run workflow):
+# regenerates locale/SubsSupport.pot and runs msgmerge over every language via
+# locale/updateallpo.sh, then - only if a string actually changed - opens (or
+# updates) ONE pull request with the result. Nothing is pushed to master
+# directly and nothing is translated: new source strings land as untranslated
+# msgid entries and fall back to English at runtime until someone translates them.
+#
+# Needs "Allow GitHub Actions to create and approve pull requests" in the
+# repository settings (Settings -> Actions -> General).
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: translation-templates
+  cancel-in-progress: true
+
+jobs:
+  update-pot:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install gettext
+        run: |
+          sudo apt-get -q update
+          sudo apt-get install -y gettext gawk
+
+      - name: Regenerate .pot / .po
+        run: |
+          cd locale
+          bash updateallpo.sh
+
+      - name: Open or update the translation-templates PR
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
+        with:
+          add-paths: |
+            locale/*.po
+            locale/*.pot
+          branch: chore/translation-templates
+          base: master
+          delete-branch: true
+          commit-message: "translation templates: regenerate .pot / .po"
+          title: "translation templates: regenerate .pot / .po"
+          body: |
+            Automated `xgettext` + `msgmerge` run via `locale/updateallpo.sh`.
+
+            * mechanical extraction only - **no strings were translated**
+            * new source strings appear as `msgstr ""` and fall back to English
+              at runtime until someone translates them
+            * no fuzzy (guessed) translations
+
+            Merge to pick up new / changed `_()` strings. The actual
+            translations are still added in separate commits.

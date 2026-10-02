@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 import re
 
 from .baseparser import BaseParser, ParseError, HEX_COLORS
@@ -6,7 +5,7 @@ from .baseparser import BaseParser, ParseError, HEX_COLORS
 
 class SubRipParser(BaseParser):
     format = "SubRip"
-    parsing = ('.srt',)
+    parsing = ('.srt', '.sub')  # some providers ship SubRip as .sub, MicroDVD/SubViewer are tried next
 
     def _parse(self, text, fps):
         return self._srt_to_dict(text)
@@ -21,40 +20,24 @@ class SubRipParser(BaseParser):
             line = re.sub('<[^>]*>', '', line)
             # Remove SSA/ASS positioning tags like {\an8}
             line = re.sub(r'\{.*?\}', '', line)
+            line = re.sub(r'[\x00-\x08\x0b-\x1f\x7f]', '', line.replace('\t', ' ')).strip()
             cleaned_lines.append(line)
 
-        # Join back with newlines to preserve the multi-line structure
-        return '\n'.join(cleaned_lines)
+        # Join back with newlines to preserve the multi-line structure, without empty lines
+        return '\n'.join(filter(None, cleaned_lines))
 
     def _getColor(self, text, color):
-        newColor = color
-        if color:
-            if color != 'default':
-                if text.find('</font>') != -1 or text.find('</Font>') != -1:
-                    newColor = 'default'
-            else:
-                colorMatch = re.search('<[Ff]ont [Cc]olor=(.+?)>', text, re.DOTALL)
-                colorText = colorMatch and colorMatch.group(1)
-                colorText = colorText and colorText.replace("'", "").replace('"', '')
-                if text.find('</font>') != -1 or text.find('</Font>') != -1:
-                    newColor = 'default'
-                else:
-                    newColor = color
-        else:
-            color = 'default'
-            colorMatch = re.search('<[Ff]ont [Cc]olor=(.+?)>', text, re.DOTALL)
-            colorText = colorMatch and colorMatch.group(1) or color
-            colorText = colorText.replace("'", "").replace('"', '')
-
-        if colorText:
-            hexColor = re.search(r"(\#[0-9,a-f,A-F]{6})", colorText)
+        # color: still open <font> colour of the previous row (row parsing)
+        color = color or 'default'
+        colorMatch = re.search('<[Ff]ont [Cc]olor=(.+?)>', text, re.DOTALL)
+        if colorMatch:
+            colorText = colorMatch.group(1).replace("'", "").replace('"', '').strip()
+            hexColor = re.search(r"#([0-9a-fA-F]{6})", colorText)
             if hexColor:
-                color = hexColor.group(1)[1:]
-            else:
-                try:
-                    color = HEX_COLORS[colorText.lower()][1:]
-                except KeyError:
-                    pass
+                color = hexColor.group(1)
+            elif colorText.lower() in HEX_COLORS:
+                color = HEX_COLORS[colorText.lower()][1:]
+        newColor = 'default' if '</font>' in text.lower() else color
         return color, newColor
 
     def _getStyle(self, text, style):
@@ -100,25 +83,23 @@ class SubRipParser(BaseParser):
 
     def _srt_to_dict(self, srtText):
         subs = []
-        idx = 0
-        srtText = srtText.replace('\r\n', '\n').strip() + "\n\n"
-
-        # Improved regex to handle multi-line subtitles with various formats
-        pattern = r'(\d+)\s*\n\s*(\d+):(\d+):(\d+),(\d+)\s*-->\s*(\d+):(\d+):(\d+),(\d+)\s*\n(.*?)(?=\n\n|\n\d+\s*\n|\Z)'
-
-        for s in re.finditer(pattern, srtText, re.DOTALL | re.MULTILINE):
+        srtText = srtText.replace('\r\n', '\n').strip() + "\n"
+        # the text of a cue runs up to the next timing line, without the number line in front of it
+        timings = list(re.finditer(r'^[ \t]*(\d+):(\d+):(\d+),(\d+)[ \t]*-->[ \t]*(\d+):(\d+):(\d+),(\d+)[^\n]*$', srtText, re.MULTILINE))
+        for idx, s in enumerate(timings):
             try:
-                idx += 1
-                shour, smin, ssec, smsec = int(s.group(2)), int(s.group(3)), int(s.group(4)), int(s.group(5))
+                shour, smin, ssec, smsec = int(s.group(1)), int(s.group(2)), int(s.group(3)), int(s.group(4))
                 start_time = int((shour * 3600 + smin * 60 + ssec) * 1000 + smsec)
-                ehour, emin, esec, emsec = int(s.group(6)), int(s.group(7)), int(s.group(8)), int(s.group(9))
+                ehour, emin, esec, emsec = int(s.group(5)), int(s.group(6)), int(s.group(7)), int(s.group(8))
                 end_time = int((ehour * 3600 + emin * 60 + esec) * 1000 + emsec)
-
-                # Get the subtitle text and preserve line breaks
-                sub_text = s.group(10).strip()
-                subs.append(self.createSub(sub_text, start_time, end_time))
+                lines = srtText[s.end():timings[idx + 1].start() if idx + 1 < len(timings) else len(srtText)].strip('\n').split('\n')
+                if idx + 1 < len(timings) and lines[-1].strip().isdigit():
+                    lines.pop()
+                sub_text = '\n'.join(lines).strip()
+                if sub_text:  # empty cue
+                    subs.append(self.createSub(sub_text, start_time, end_time))
             except Exception as e:
-                raise ParseError(str(e) + ', subtitle_index: %d' % idx)
+                raise ParseError(str(e) + ', subtitle_index: %d' % (idx + 1))
 
         return subs
 

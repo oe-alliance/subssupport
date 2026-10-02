@@ -1,4 +1,7 @@
-AC_INIT([enigma2-plugin-extensions-subssupport], [1.7.0], [mx3ldev@gmail.com])
+dnl the version is only set in plugin/__init__.py
+AC_INIT([enigma2-plugin-extensions-subssupport],
+	m4_esyscmd_s([sed -n 's/^__version__ = "\([^"]*\)".*/\1/p' plugin/__init__.py]),
+	[mx3ldev@gmail.com])
 
 AM_INIT_AUTOMAKE
 AC_PROG_CC
@@ -10,26 +13,26 @@ AC_CONFIG_FILES([
 Makefile
 plugin/Makefile
 plugin/seekers/Makefile
-plugin/seekers/Elsubtitle/Makefile
-plugin/seekers/Foursub/Makefile
 plugin/seekers/Indexsubtitle/Makefile
 plugin/seekers/LocalDrive/Makefile
 plugin/seekers/Moviesubtitles/Makefile
 plugin/seekers/MySubs/Makefile
-plugin/seekers/Novalermora/Makefile
 plugin/seekers/OpenSubtitles2/Makefile
-plugin/seekers/Podnapisi/Makefile
 plugin/seekers/PrijevodiOnline/Makefile
 plugin/seekers/Sub_Scene_com/Makefile
 plugin/seekers/Subdl/Makefile
 plugin/seekers/Subf2m/Makefile
 plugin/seekers/Subsource/Makefile
-plugin/seekers/Subsyts/Makefile
 plugin/seekers/Subtitlecat/Makefile
 plugin/seekers/Subtitlesmora/Makefile
 plugin/seekers/Titlovi/Makefile
 plugin/seekers/Titulky/Makefile
 plugin/seekers/Ytssubs/Makefile
+plugin/seekers/Justsubtitles/Makefile
+plugin/seekers/Wyzie/Makefile
+plugin/seekers/OpenSubtitlesOrg/Makefile
+plugin/seekers/StremioOS/Makefile
+plugin/seekers/Gestdown/Makefile
 plugin/parsers/Makefile
 plugin/img/Makefile
 plugin/img/countries/Makefile
