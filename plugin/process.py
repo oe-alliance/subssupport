@@ -78,11 +78,12 @@ class SubsLoader(object):
 
         return decoded_text, encoding
 
-    def load(self, subfile, current_encoding=None, fps=None):
+    def load(self, subfile, current_encoding=None, fps=None, preferred_encoding=None):
         filename = os.path.basename(subfile)
         self.log.info("<%s> loading ...", filename)
         while True:
-            decoded_text, encoding = self._process_path(subfile, current_encoding)
+            decoded_text, encoding = self._process_path(subfile, current_encoding, preferred_encoding)
+            preferred_encoding = None
             try:
                 sublist = self._parse(decoded_text, os.path.splitext(subfile)[1], fps)
             except NoSubtitlesParseError:
@@ -96,7 +97,7 @@ class SubsLoader(object):
             self.log.info("<%s> successfully loaded", filename)
             return sublist, encoding
 
-    def _process_path(self, subfile, current_encoding=None):
+    def _process_path(self, subfile, current_encoding=None, preferred_encoding=None):
         filename = os.path.basename(subfile)
         size = getFileSize(subfile)
         if size and size > SUBTITLES_FILE_MAX_SIZE:
@@ -108,8 +109,8 @@ class SubsLoader(object):
             self.log.error("<%s> %s", filename, str(e))
             raise LoadError(subfile)
         try:
-            decoded_text, encoding = decode(text, self._encodings, current_encoding)
-        except Exception as e:
+            decoded_text, encoding = decode(text, self._encodings, current_encoding, preferred=preferred_encoding)
+        except Exception:
             self.log.error("<%s> %s", filename, "cannot decode")
             raise DecodeError(subfile)
         return decoded_text, encoding

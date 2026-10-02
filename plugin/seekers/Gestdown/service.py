@@ -5,6 +5,7 @@ from urllib.parse import quote
 
 import requests
 
+from .. import _
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..user_agents import get_api_user_agent
 from ..utilities import downloadRating, languageTranslate, log, normalizeTitle, saveSubtitle, stripYear, wantedLanguages, yearMatch
@@ -22,7 +23,7 @@ settings_provider = None
 def _get(path, timeout=API_TIMEOUT):
     response = requests.get(API_URL + path, headers={"User-Agent": get_api_user_agent()}, timeout=timeout)
     if response.status_code == 429:
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, "Gestdown: too many requests, try again in a minute")
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("Gestdown: too many requests, try again in a minute"))
     return response
 
 

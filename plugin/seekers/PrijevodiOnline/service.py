@@ -2,6 +2,7 @@
 """Prijevodi-Online.org seeker (public JSON API of the 2026 site, no login)."""
 import re
 
+from .. import _
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..utilities import createSession, log, matchTitle, saveSubtitle, wantedLanguages
 
@@ -97,5 +98,5 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                                      'Prijevodi-Online: this subtitle needs a logged-in account with tokens (HTTP %d)' % r.status_code)
     r.raise_for_status()
     if r.content.lstrip()[:1] == b'{':  # json error
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, 'Prijevodi-Online did not return a subtitle file')
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("Prijevodi-Online did not return a subtitle file"))
     return False, params['language_name'], saveSubtitle(tmp_sub_dir, 'prijevodionline_%s' % params['ID'], r.content)

@@ -12,6 +12,7 @@ import zipfile
 
 import requests
 
+from .. import _
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..user_agents import get_api_user_agent, get_random_ua
 from ..utilities import downloadRating, hashFile, imdbLookup, languageTranslate, log, matchTitle, normalizeTitle, saveSubtitle, stripYear, \
@@ -54,12 +55,12 @@ def _check(result, what):
     if status.startswith("200"):
         return result
     if status.startswith("401"):
-        raise SubtitlesDownloadError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, "OpenSubtitles.org login failed")
+        raise SubtitlesDownloadError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, _("OpenSubtitles.org login failed"))
     if status.startswith("407"):
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, "OpenSubtitles.org download limit reached, try again tomorrow")
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("OpenSubtitles.org download limit reached, try again tomorrow"))
     if status.startswith("429"):
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, "OpenSubtitles.org: too many requests, try again later")
-    raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, "OpenSubtitles.org %s failed: %s" % (what, status or "no answer"))
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("OpenSubtitles.org: too many requests, try again later"))
+    raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("OpenSubtitles.org %s failed: %s") % (what, status or _("no answer")))
 
 
 def _credentials():
@@ -74,7 +75,7 @@ def login(force=False):
     cached = _token.get(username)
     if not force and cached and time.time() - cached[2] < TOKEN_LIFETIME:
         return cached[:2]
-    result = _check(_call("LogIn", username, password, "en", get_api_user_agent()), "login")
+    result = _check(_call("LogIn", username, password, "en", get_api_user_agent()), _("login"))
     data = result.get("data") or {}
     vip = "vip" in str(data.get("UserRank", "")).lower() if isinstance(data, dict) else False
     _token[username] = (result["token"], vip, time.time())
@@ -85,8 +86,8 @@ def test_credentials():
     username = _credentials()[0]
     vip = login(force=True)[1]
     if not username:
-        return "Anonymous login OK (no username/password set), downloads come from the website and are limited"
-    return "Login OK (%s)" % ("VIP member" if vip else "no VIP, downloads come from the website and are limited")
+        return _("Anonymous login OK (no username/password set), downloads come from the website and are limited")
+    return _("Login OK (%s)") % (_("VIP member") if vip else _("no VIP, downloads come from the website and are limited"))
 
 
 def _lang_ids(codes):
@@ -135,7 +136,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     if str(result.get("status", "")).startswith(("401", "406")):  # expired token, no session
         token = login(force=True)[0]
         result = _call("SearchSubtitles", token, criteria)
-    result = _check(result, "search")
+    result = _check(result, _("search"))
 
     wanted_name = normalizeTitle(name)
     items = [item for item in result.get("data") or [] if isinstance(item, dict)]
@@ -178,11 +179,11 @@ def _from_website(subtitle):
     response = requests.get(WEB_DOWNLOAD_URL % subtitle["subtitle_id"], headers=headers, timeout=DOWNLOAD_TIMEOUT)
     response.raise_for_status()
     if response.content[:2] != b"PK":  # html page with a captcha or the daily limit
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, "OpenSubtitles.org website download limit reached (captcha), try again later or use a VIP account")
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("OpenSubtitles.org website download limit reached (captcha), try again later or use a VIP account"))
     with zipfile.ZipFile(io.BytesIO(response.content)) as archive:
         names = [n for n in archive.namelist() if n.lower().endswith(SUB_EXTENSIONS)]
         if not names:
-            raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, "OpenSubtitles.org archive contains no subtitle file")
+            raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("OpenSubtitles.org archive contains no subtitle file"))
         name = next((n for n in names if os.path.basename(n) == subtitle["filename"]), names[0])
         return os.path.basename(name), archive.read(name)
 
@@ -203,5 +204,5 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     if not content:
         filename, content = _from_website(subtitle)
     if VIP_STUB in content[:300]:
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, "OpenSubtitles.org only delivers this subtitle to VIP members")
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("OpenSubtitles.org only delivers this subtitle to VIP members"))
     return False, subtitle["language_name"], saveSubtitle(tmp_sub_dir, filename, content)

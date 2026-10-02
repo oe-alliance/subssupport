@@ -16,8 +16,9 @@
 #
 #################################################################################
 
+import difflib
 import os
-from re import split, sub
+from re import match, search, split, sub
 import shutil
 import socket
 import threading
@@ -25,7 +26,7 @@ import traceback
 import zipfile
 
 try:
-    from .seekers import SubtitlesDownloadError, SubtitlesSearchError, \
+    from .seekers import _, SubtitlesDownloadError, SubtitlesSearchError, \
         SubtitlesErrors, SubtitlesmoraSeeker, SubtitlecatSeeker, OpenSubtitles2Seeker, TitulkyComSeeker, \
         Subf2mSeeker, LocalDriveSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Sub_Scene_comSeeker, SubdlSeeker, \
         TitloviSeeker, PrijevodiOnlineSeeker, MySubsSeeker, SubsourceSeeker, YtssubsSeeker, JustsubtitlesSeeker, WyzieSeeker, \
@@ -35,7 +36,7 @@ try:
         getCompressedFileType, detectSearchParams
     from .utils import SimpleLogger
 except (ValueError, ImportError):  # searchsubs.py runs seek.py as a top-level module in its own process
-    from seekers import SubtitlesDownloadError, SubtitlesSearchError, \
+    from seekers import _, SubtitlesDownloadError, SubtitlesSearchError, \
         SubtitlesErrors, SubtitlesmoraSeeker, SubtitlecatSeeker, OpenSubtitles2Seeker, TitulkyComSeeker, \
         Subf2mSeeker, LocalDriveSeeker, IndexsubtitleSeeker, MoviesubtitlesSeeker, Sub_Scene_comSeeker, SubdlSeeker, \
         TitloviSeeker, PrijevodiOnlineSeeker, MySubsSeeker, SubsourceSeeker, YtssubsSeeker, JustsubtitlesSeeker, WyzieSeeker, \
@@ -85,8 +86,117 @@ class ErrorSeeker(BaseSeeker):
         pass
 
 
+# release name tokens, compared between the subtitle release and the played file
+RANK_FEATURES = (
+    # name, weight, {token: value}
+    ('resolution', 8, {'2160p': '2160', '4k': '2160', 'uhd': '2160', '1080p': '1080', '1080i': '1080', '720p': '720', '576p': '576', '480p': '480'}),
+    ('source', 15, {'web': 'web', 'webdl': 'web', 'webrip': 'web', 'amzn': 'web', 'nf': 'web', 'dsnp': 'web', 'hmax': 'web', 'atvp': 'web',
+                    'bluray': 'bluray', 'bdrip': 'bluray', 'brrip': 'bluray', 'bdremux': 'bluray', 'remux': 'bluray', 'hddvd': 'bluray',
+                    'hdtv': 'hdtv', 'pdtv': 'hdtv', 'dsr': 'hdtv', 'dvdrip': 'dvd', 'dvd': 'dvd', 'dvdscr': 'dvd', 'dvd5': 'dvd', 'dvd9': 'dvd',
+                    'hdrip': 'hdrip', 'cam': 'cam', 'hdcam': 'cam', 'ts': 'cam', 'telesync': 'cam', 'hdts': 'cam'}),
+    ('codec', 5, {'x264': '264', 'h264': '264', 'avc': '264', 'x265': '265', 'h265': '265', 'hevc': '265', 'xvid': 'xvid', 'divx': 'xvid', 'av1': 'av1'}),
+    ('edition', 5, {'extended': 'extended', 'unrated': 'unrated', 'uncut': 'unrated', 'directors': 'directors', 'dc': 'directors',
+                    'remastered': 'remastered', 'imax': 'imax', 'theatrical': 'theatrical', 'proper': 'proper', 'repack': 'proper'}),
+)
+RANK_NOGROUP = {'dl', 'rip', 'web', 'x264', 'x265', 'h264', 'h265', 'hevc', 'ac3', 'dts', 'aac', 'sub', 'subs', 'eng', 'srt', 'hi', 'sdh', 'forced', 'cc'}
+# feature tokens which are words of titles too (DC League of Super-Pets, Uncut Gems, Charlotte's Web)
+RANK_AMBIGUOUS = {'web', 'nf', 'amzn', 'dc', 'uncut', 'extended', 'unrated', 'directors', 'remastered', 'imax', 'theatrical', 'proper', 'repack',
+                  'ts', 'cam', 'dvd', 'remux', 'dsr', 'avc', '4k', 'uhd'}
+RANK_EPISODE = r'^s(\d{1,2})((?:e\d{1,3})+)$|^(\d{1,2})x(\d{2,3})$'  # S05E10, S05E10E11, 5x10
+RANK_HARD = r'^(19|20)\d\d$|^s\d{1,2}(e\d{1,3})*$|^\d{1,2}x\d{2,3}$|^\d{3,4}[pi]$'  # year, episode, season, resolution
+
+
+def releaseInfo(name):
+    """name -> (tokens, features dict), features: group, episode, season, year and RANK_FEATURES"""
+    name = name.replace('\\', '/').lower()
+    # file path -> file name, "release1 / release2" stays one name
+    name = os.path.basename(name) if name.startswith('/') or '://' in name else name.replace('/', ' ')
+    root, ext = os.path.splitext(name)
+    if ext[1:] in ('srt', 'sub', 'ass', 'ssa', 'vtt', 'txt', 'zip', 'rar', 'mkv', 'mp4', 'avi', 'ts', 'm2ts', 'mov', 'wmv', 'webm', 'mpg', 'mpeg', 'iso'):
+        name = root
+    name = sub(r'\[[^\]]*\]', ' ', name)  # [YTS.MX] tags
+    name = sub(r'([hx])\.(26[45])', r'\1\2', name.replace('web-dl', 'webdl').replace("director's", 'directors'))
+    tokens = [t for t in split(r'[^0-9a-z]+', name) if t]
+    hard = [idx for idx, t in enumerate(tokens) if idx > 0 and match(RANK_HARD, t)]
+    info = {'title': []}
+    titleEnd = len(tokens)
+    for idx, t in enumerate(tokens):
+        episode = match(RANK_EPISODE, t)
+        found = False
+        if episode and episode.group(1):
+            episodes = tuple(int(e) for e in split('e', episode.group(2))[1:])
+            info.setdefault('episode', (int(episode.group(1)), episodes[0]))
+            if len(episodes) > 1:
+                info.setdefault('episodes', episodes)
+            found = True
+        elif episode:
+            info.setdefault('episode', (int(episode.group(3)), int(episode.group(4))))
+            found = True
+        elif match(r'^s\d{1,2}$', t):
+            if idx + 1 < len(tokens) and match(r'^e\d{1,3}$', tokens[idx + 1]):  # S02 E03
+                info.setdefault('episode', (int(t[1:]), int(tokens[idx + 1][1:])))
+            else:  # season pack
+                info.setdefault('season', int(t[1:]))
+            found = True
+        elif t == 'season' and idx > 0 and idx + 1 < len(tokens) and tokens[idx + 1].isdigit():
+            info.setdefault('season', int(tokens[idx + 1]))
+            found = True
+        elif match(r'^(19|20)\d\d$', t) and idx > 0:
+            info['year'] = found = t
+        for feature, _weight, values in RANK_FEATURES:
+            # an ambiguous word in the title part is a feature only when nothing like a year follows
+            if t in values and (idx > titleEnd or t not in RANK_AMBIGUOUS or idx > 0 and not [h for h in hard if h > idx]):
+                info.setdefault(feature, values[t])
+                found = True
+        if found and titleEnd == len(tokens):
+            titleEnd = idx
+        if idx < titleEnd:
+            info['title'].append(t)
+    info['title'] = ' '.join(info['title'])
+    # -GROUP, -GROUP.en, -GROUP-HI after the title and the release tokens
+    group = search(r'-([0-9a-z]+)(?:[. _-][a-z]{2,7})*\s*$', name)
+    group = group and group.group(1)
+    if group and group not in RANK_NOGROUP and not match(RANK_HARD + r'|^e\d{1,3}$', group) and \
+            not any(group in values for _feature, _weight, values in RANK_FEATURES) and group in tokens[titleEnd + 1:]:
+        info['group'] = group
+    return tokens, info
+
+
+def rankRelease(release, reference):
+    """Similarity of a subtitle release name to the played file name, 0-100"""
+    if not release or not reference:
+        return 0
+    rtokens, rinfo = releaseInfo(release)
+    vtokens, vinfo = releaseInfo(reference)
+    # matching tokens: +weight, different: -weight, unknown: 0 -> 0..1
+    points, total = 0, 0
+    for feature, weight in [('group', 20), ('year', 7)] + [(f[0], f[1]) for f in RANK_FEATURES]:
+        total += weight
+        if feature in rinfo and feature in vinfo:
+            points += weight if rinfo[feature] == vinfo[feature] else -weight
+    score = 30 * difflib.SequenceMatcher(None, ' '.join(rtokens), ' '.join(vtokens)).ratio()
+    score += 70 * (points + total) / (2.0 * total)
+    # another title or episode never fits
+    if rinfo['title'] and vinfo['title']:
+        score *= 0.3 + 0.7 * difflib.SequenceMatcher(None, rinfo['title'], vinfo['title']).ratio()
+    rseason = rinfo['episode'][0] if 'episode' in rinfo else rinfo.get('season')
+    vseason = vinfo['episode'][0] if 'episode' in vinfo else vinfo.get('season')
+    if 'episode' in rinfo and 'episode' in vinfo:
+        repisodes = rinfo.get('episodes', rinfo['episode'][1:])
+        vepisodes = vinfo.get('episodes', vinfo['episode'][1:])
+        if rseason != vseason or not set(repisodes) & set(vepisodes):
+            score = min(score, 10)
+    elif rseason is not None and vseason is not None and rseason != vseason:
+        score = min(score, 10)
+    elif 'season' in rinfo and 'episode' in vinfo:  # season pack, the archive may not have this episode
+        score -= 8
+    if 'machine translated' in release.lower():  # Subtitlecat
+        score -= 15
+    return int(max(0, min(100, round(score))))
+
+
 class SubsSeeker(object):
-    SUBTILES_EXTENSIONS = ['.srt', '.sub', '.ass', '.ssa']
+    SUBTILES_EXTENSIONS = ['.srt', '.sub', '.ass', '.ssa', '.vtt']
 
     def __init__(self, download_path, tmp_path, captcha_cb, delay_cb, message_cb, settings=None, settings_provider_cls=None, settings_provider_args=None, debug=False, providers=None):
         self.log = SimpleLogger(self.__class__.__name__, log_level=debug and SimpleLogger.LOG_DEBUG or SimpleLogger.LOG_INFO)
@@ -97,7 +207,7 @@ class SubsSeeker(object):
         for seeker in providers:
             provider_id = seeker.id
             default_settings = seeker.default_settings
-            default_settings['enabled'] = {'type': 'yesno', 'default': True, 'label': 'Enabled', 'pos': -1}
+            default_settings['enabled'] = {'type': 'yesno', 'default': True, 'label': _('Enabled'), 'pos': -1}
             if settings_provider_cls is not None:
                 settings = None
                 settings_provider = settings_provider_cls(provider_id, default_settings, settings_provider_args)
@@ -184,7 +294,23 @@ class SubsSeeker(object):
             subtitles_list = [x for x in subtitles_list if languageTranslate(x['language_name'], 0, 2) in langs]
         return subtitles_list
 
-    def sortSubtitlesList(self, subtitles_list, langs=None, sort_langs=False, sort_rank=False, sort_sync=False, sort_provider=False):
+    def rankSubtitlesList(self, subtitles_list, reference):
+        """sets 'rank' (0-100) of every subtitle, similarity of its release name to reference"""
+        for s in subtitles_list:
+            s['rank'] = rankRelease(s.get('filename') or '', reference)
+        return subtitles_list
+
+    def getBestSubtitles(self, subtitles_list, langs, reference, min_rank=0):
+        """candidates for an automatic download: hash/sync matches in language order,
+        then the best ranked ones (>= min_rank) in language order"""
+        langs = [lang for idx, lang in enumerate(langs) if lang and lang not in langs[:idx]]
+        ranked = sorted(self.rankSubtitlesList(subtitles_list, reference), key=lambda x: x['rank'], reverse=True)
+        langsOf = [(languageTranslate(s['language_name'], 0, 2), s) for s in ranked]
+        synced = [s for lang in langs for slang, s in langsOf if slang == lang and s.get('sync')]
+        best = [s for lang in langs for slang, s in langsOf if slang == lang and not s.get('sync') and s['rank'] >= min_rank]
+        return synced + best
+
+    def sortSubtitlesList(self, subtitles_list, langs=None, sort_langs=False, sort_rank=False, sort_sync=False, sort_provider=False, reference=None):
         def sortLangs(x):
             for idx, lang in enumerate(langs):
                 if languageTranslate(x['language_name'], 0, 2) == lang:
@@ -195,7 +321,10 @@ class SubsSeeker(object):
         if sort_provider:
             return sorted(subtitles_list, key=lambda x: x['provider'])
         if sort_rank:
-            return subtitles_list
+            # hash/sync matches first, then the best release name match
+            if reference:
+                self.rankSubtitlesList(subtitles_list, reference)
+            return sorted(subtitles_list, key=lambda x: (bool(x.get('sync')), x.get('rank', 0)), reverse=True)
         if sort_sync:
             return sorted(subtitles_list, key=lambda x: x['sync'], reverse=True)
         return subtitles_list

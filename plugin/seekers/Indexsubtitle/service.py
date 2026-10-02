@@ -3,6 +3,7 @@ import json
 import re
 import time
 
+from .. import _
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..utilities import createSession, episodeFilters, langCode, log, matchTitle, normalizeTitle, releaseKind, \
     saveSubtitle, splitYear, wantedLanguages
@@ -81,7 +82,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
                    headers={'X-Requested-With': 'XMLHttpRequest', 'Referer': sub['page']}, timeout=SEARCH_TIMEOUT)
     token = info.json().get('token')
     if not token:
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, 'indexsubtitle.cc: no download token for %s' % url)
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("indexsubtitle.cc: no download token for %s") % url)
     # same as the site's javascript: url.replace(/[^\w ]/, '').replace(/\//g, '_')
     zp = re.sub(r'[^\w ]', '', url, count=1).replace('/', '_')
     link = '%s/d/%s/%s/%s/%s.zip' % (MAIN_URL, sub_id, sub['ttl'], token, zp)

@@ -4,6 +4,7 @@ import re
 
 import requests
 
+from .. import _
 from ..seeker import BaseSubtitlesError, SubtitlesErrors
 from ..user_agents import get_api_user_agent
 from ..utilities import downloadRating, imdbLookup, languageTranslate, log, saveSubtitle, wantedLanguages
@@ -19,29 +20,29 @@ def _get(url, params=None, timeout=API_TIMEOUT):
     """requests.get() with the key, errors never show it (it is part of the url)"""
     key = settings_provider.getSetting("Wyzie_API_KEY").strip()
     if not key:
-        raise BaseSubtitlesError(SubtitlesErrors.NO_CREDENTIALS_ERROR, "Wyzie requires an API key")
+        raise BaseSubtitlesError(SubtitlesErrors.NO_CREDENTIALS_ERROR, _("Wyzie requires an API key"))
     try:
         response = requests.get(url, params=dict(params or {}, key=key), headers={"User-Agent": get_api_user_agent()}, timeout=timeout)
     except requests.Timeout:
-        raise BaseSubtitlesError(SubtitlesErrors.TIMEOUT_ERROR, "Wyzie: timeout") from None
+        raise BaseSubtitlesError(SubtitlesErrors.TIMEOUT_ERROR, _("Wyzie: timeout")) from None
     except requests.RequestException as e:
-        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, "Wyzie: %s" % str(e).replace(key, "***")) from None
+        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, _("Wyzie: %s") % str(e).replace(key, "***")) from None
     if response.status_code in (401, 403):
-        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, "Wyzie API key rejected")
+        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, _("Wyzie API key rejected"))
     return response
 
 
 def _check(response):
     if response.status_code >= 400:  # raise_for_status() would show the url with the key
-        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, "Wyzie: HTTP %d" % response.status_code)
+        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, _("Wyzie: HTTP %d") % response.status_code)
 
 
 def test_credentials():
     response = _get(API_URL + "/search", {"id": "tt0133093", "language": "en"})
     if response.status_code == 429:
-        return "Wyzie API key OK, but the daily request limit is reached"
+        return _("Wyzie API key OK, but the daily request limit is reached")
     _check(response)
-    return "Wyzie API key OK"
+    return _("Wyzie API key OK")
 
 
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):

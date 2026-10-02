@@ -3,6 +3,7 @@ from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 
+from .. import _
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..utilities import createSession, imdbLookup, langCode, log, matchTitle, saveSubtitle, splitYear, wantedLanguages
 
@@ -58,7 +59,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     page.raise_for_status()
     button = BeautifulSoup(page.text, 'html.parser').select_one('a.download-subtitle[href]')
     if not button:
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, 'yifysubtitles: no download link on %s' % sub['link'])
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("yifysubtitles: no download link on %s") % sub['link'])
     link = urljoin(MAIN_URL, button['href'])
     log(__name__, "downloading %s" % link)
     r = session.get(link, headers={'Referer': sub['link']}, timeout=DOWNLOAD_TIMEOUT)

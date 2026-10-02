@@ -11,6 +11,7 @@ import re
 import time
 from urllib.parse import urljoin
 
+from .. import _
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..utilities import createSession, log, normalizeTitle, saveSubtitle, wantedLanguages, yearMatch
 
@@ -121,7 +122,7 @@ def _login():
 
 def _solve_captcha(subtitle_id, tmp_sub_dir):
     if not callable(captcha_cb):
-        raise SubtitlesDownloadError(SubtitlesErrors.CAPTCHA_RETYPE_ERROR, 'Titulky.com daily limit reached, captcha required')
+        raise SubtitlesDownloadError(SubtitlesErrors.CAPTCHA_RETYPE_ERROR, _("Titulky.com daily limit reached, captcha required"))
     log(__name__, 'daily limit reached, asking user for captcha')
     img = session.get(SERVER_URL + 'captcha/captcha.php', timeout=SEARCH_TIMEOUT)
     img.raise_for_status()
@@ -130,12 +131,12 @@ def _solve_captcha(subtitle_id, tmp_sub_dir):
         f.write(img.content)
     solution = captcha_cb(img_path)
     if not solution:
-        raise SubtitlesDownloadError(SubtitlesErrors.CAPTCHA_RETYPE_ERROR, 'Captcha was not entered')
+        raise SubtitlesDownloadError(SubtitlesErrors.CAPTCHA_RETYPE_ERROR, _("Captcha was not entered"))
     r = session.post(SERVER_URL + 'idown.php', data={'downkod': solution, 'securedown': '2', 'zip': 'z', 'T': '',
                                                     'titulky': subtitle_id, 'histstamp': ''}, timeout=SEARCH_TIMEOUT)
     r.raise_for_status()
     if 'captcha/captcha.php' in r.text:
-        raise SubtitlesDownloadError(SubtitlesErrors.CAPTCHA_RETYPE_ERROR, 'Invalid captcha text')
+        raise SubtitlesDownloadError(SubtitlesErrors.CAPTCHA_RETYPE_ERROR, _("Invalid captcha text"))
     return r.text
 
 
@@ -150,10 +151,10 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     if 'captcha/captcha.php' in content:
         content = _solve_captcha(subtitle_id, tmp_sub_dir)
     if 'CHYBA' in content:
-        raise SubtitlesDownloadError(SubtitlesErrors.NO_CREDENTIALS_ERROR, 'Titulky.com refused the download, login required')
+        raise SubtitlesDownloadError(SubtitlesErrors.NO_CREDENTIALS_ERROR, _("Titulky.com refused the download, login required"))
     link = re.search(r'id="downlink"\s+href="([^"]+)"', content) or re.search(r'href="([^"]+)"[^>]*id="downlink"', content)
     if not link:
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, 'Titulky.com download link not found')
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("Titulky.com download link not found"))
     wait = re.search(r'CountDown\((\d+)\)', content)
     wait = int(wait.group(1)) if wait else 0
     if wait:

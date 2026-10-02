@@ -1,4 +1,7 @@
-AC_INIT([enigma2-plugin-extensions-subssupport], [1.7.0], [mx3ldev@gmail.com])
+dnl the version is only set in plugin/__init__.py
+AC_INIT([enigma2-plugin-extensions-subssupport],
+	m4_esyscmd_s([sed -n 's/^__version__ = "\([^"]*\)".*/\1/p' plugin/__init__.py]),
+	[mx3ldev@gmail.com])
 
 AM_INIT_AUTOMAKE
 AC_PROG_CC

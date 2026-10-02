@@ -5,6 +5,7 @@ import json
 import os
 import re
 
+from .. import _
 from ..seeker import BaseSubtitlesError, SubtitlesErrors
 from ..utilities import createSession, log, matchTitle, normalizeTitle, saveSubtitle, stripYear, wantedLanguages
 
@@ -37,14 +38,14 @@ def get_action_id(tmdb_id):
     page.raise_for_status()
     chunk = re.search(r'/_next/static/chunks/app/movie/[^"\']+\.js', page.text)
     if not chunk:
-        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, 'justsubtitles: movie page script not found')
+        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, _("justsubtitles: movie page script not found"))
     chunk = chunk.group(0)
     if chunk not in _action_ids:
         js = session.get(MAIN_URL + chunk, timeout=TIMEOUT)
         js.raise_for_status()
         m = re.search(r'createServerReference\)\("([0-9a-f]+)"', js.text)
         if not m:
-            raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, 'justsubtitles: server action id not found')
+            raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, _("justsubtitles: server action id not found"))
         _action_ids[chunk] = m.group(1)
     return _action_ids[chunk]
 

@@ -1,7 +1,8 @@
 msgid ""
-msgstr "Project-Id-Version: \n"
+msgstr ""
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-18 08:15+0100\n"
+"POT-Creation-Date: 2026-10-02 20:47+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: rimas\n"
 "Language-Team: \n"
@@ -12,999 +13,1449 @@ msgstr "Project-Id-Version: \n"
 "X-Generator: Poedit 1.8.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: subtitles.py:4434
+#, python-format
+msgid ""
+"%s\n"
+"as %s"
+msgstr ""
+
+#, python-format
+msgid "%s requires: %s"
+msgstr ""
+
+msgid "API key"
+msgstr ""
+
+msgid "API key OK (no username/password set, downloads are limited)"
+msgstr ""
+
+msgid "ASS file"
+msgstr ""
+
 msgid "Add subtitle's language to filename"
 msgstr "Lisa subtiitri keel failinimesse"
 
-#: subtitles.py:307 subtitles.py:308 subtitles.py:325 subtitles.py:3549
-#: subtitles.py:3559 subtitles.py:3564
+msgid "Adult Content: "
+msgstr ""
+
+msgid "Albanian"
+msgstr ""
+
 msgid "All"
 msgstr "Kõik"
 
-#: subtitles.py:4438
 msgid "Always ask before overwriting existing subtitles"
 msgstr "Küsi alati enne olemasolevate subtiitrite ülekirjutamist"
 
-#: subtitles.py:3609 subtitles.py:3639
+msgid "Anonymous login OK (no username/password set), downloads come from the website and are limited"
+msgstr ""
+
 msgid "Append language to filename"
 msgstr "Lisa keel failinimesse"
 
-#: subtitles.py:2736
-msgid "Ask on remove action"
-msgstr "Küsi eemaldamisel"
-
-#: subtitlesdvb.py:38
-msgid "Auto sync to current event"
-msgstr "Automaatne sünkroonimine käesoleva saatega"
-
-#: subtitles.py:2026
-msgid "Background"
-msgstr "Taust"
-
-msgid "Central and Eastern Europe"
-msgstr "Kesk- ja Ida-Euroopa"
-
-msgid "Western Europe"
-msgstr "Lääne-Euroopa"
+msgid "Apply now"
+msgstr ""
 
 msgid "Arabic"
 msgstr "Araabia"
 
-msgid "Turkish"
-msgstr "Türgi"
+msgid "Armenian"
+msgstr ""
 
-msgid "Russia"
-msgstr "Vene"
+msgid "Ask"
+msgstr ""
 
-msgid "Greek"
-msgstr "Kreeka"
+msgid "Ask on remove action"
+msgstr "Küsi eemaldamisel"
 
-#: subtitles.py:2030
+msgid "Auto detect"
+msgstr ""
+
+msgid "Auto sync to current event"
+msgstr "Automaatne sünkroonimine käesoleva saatega"
+
+msgid "Automatic"
+msgstr ""
+
+msgid "Aymara"
+msgstr ""
+
+msgid "BLUE: Change subtitles FPS"
+msgstr ""
+
+msgid "Background"
+msgstr "Taust"
+
 msgid "Background X-offset"
 msgstr "Tausta horisontaalne nihe"
 
-#: subtitles.py:2031
 msgid "Background Y-offset"
 msgstr "Tausta vertikaalne nihe"
 
-#: subtitles.py:2032
 msgid "Background color"
 msgstr "Tausta värv"
 
-#: subtitles.py:2033
+msgid "Background height"
+msgstr ""
+
 msgid "Background transparency"
 msgstr "Tausta läbipaistvus"
 
-#: subtitles.py:2028
 msgid "Background type"
 msgstr "Tausta tüüp"
 
-#: e2_utils.py:496 subtitles.py:2722 subtitles.py:4495
+msgid "Bengali"
+msgstr ""
+
+msgid "Best match"
+msgstr ""
+
+msgid "Bosnian"
+msgstr ""
+
+msgid "Bulgarian"
+msgstr ""
+
 msgid "Cancel"
 msgstr "Tühista"
 
-#: subtitles.py:1053 subtitlesdvb.py:64
 msgid "Cannot decode subtitles. Try another encoding group"
 msgstr "Subtiitrite avamine nurjus. Proovi teist tähemärgistikku"
 
-#: subtitles.py:1049 subtitlesdvb.py:62
+msgid "Cannot determine year for image folder."
+msgstr ""
+
 msgid "Cannot load subtitles. Invalid path"
 msgstr "Subtiitrite laadimine nurjus. Kehtetu asukoht"
 
-#: subtitles.py:1061 subtitlesdvb.py:68
 msgid "Cannot parse subtitles. Invalid subtitles format"
 msgstr "Subtiitrite laadimine nurjus. Vigane vorming"
 
-#: subtitles.py:1057 subtitlesdvb.py:66
 msgid "Cannot parse subtitles. Not supported subtitles format"
 msgstr "Subtiitrite lugemine nurjus. Toetuseta subtiitrite vorming"
 
-#: subtitles.py:1875
+msgid "Cannot save download history, for details look in log"
+msgstr ""
+
+msgid "Captcha was not entered"
+msgstr ""
+
+msgid "Catalan"
+msgstr ""
+
+msgid "Central and Eastern Europe"
+msgstr ""
+
 msgid "Change encoding"
 msgstr "Muuda tähemärgistik"
 
-#: plugin.py:100
 msgid "Change subssupport settings"
 msgstr "Muuda subssupport seadistusi"
 
-#: subtitles.py:4430
 msgid "Check search parameters before subtitles search"
 msgstr "Kontrolli enne otsingut otsisõna"
 
-#: subtitles.py:2433
+msgid "Chinese"
+msgstr ""
+
 msgid "Choose Subtitles"
 msgstr "Vali subtiitrid"
 
-#: subtitles.py:2309
 msgid "Choose from downloaded subtitles"
 msgstr "Vali tõmmatud subtiitritest"
 
-#: subtitles.py:2304
 msgid "Choose from embedded subtitles"
 msgstr "Vali põimitud subtiitritest"
 
-#: subtitles.py:2314
 msgid "Choose from web subtitles"
 msgstr "Vali veebi subtiitritest"
 
-#: subtitles.py:1870 subtitles.py:2797
 msgid "Choose subtitles"
 msgstr "Vali subtiitrid"
 
-#: subtitles.py:2148
+msgid "Close"
+msgstr ""
+
 msgid "Color"
 msgstr "Värv"
 
-#: subtitles.py:1820
+msgid "Controls:"
+msgstr ""
+
+msgid "Could not determine search title."
+msgstr ""
+
+msgid "Could not retrieve details for this movie."
+msgstr ""
+
+msgid "Croatian"
+msgstr ""
+
 msgid "Currently choosed subtitles"
 msgstr "Hetkel valitud subtiitrid"
 
-#: plugin.py:49 subtitlesdvb.py:34
+msgid "Czech"
+msgstr ""
+
 msgid "DVB player settings"
 msgstr "DVB esituse seaded"
 
-#: subtitles.py:311 subtitles.py:312
+msgid "Danish"
+msgstr ""
+
 msgid "Default"
 msgstr "Vaikimisi"
 
-#: subtitles.py:2658 subtitles.py:2665
+msgid "Details"
+msgstr ""
+
 msgid "Do you want to proceed?"
 msgstr "Kas jätkad"
 
-#: subtitles.py:1959 subtitles.py:2478
 msgid "Do you want to show this message again?"
 msgstr "Kas tahad seda teadet veel näha?"
 
-#: subtitles.py:4296
 msgid "Download (more...)"
 msgstr "Tõmba (veel...)"
 
-#: subtitles.py:4295
 msgid "Download (next to video)"
 msgstr "Tõmba (filmiga ühine kataloog)"
 
-#: subtitles.py:4294
 msgid "Download (user defined)"
 msgstr "Tõmba (kasutaja määratud)"
 
-#: subtitles.py:4301
+msgid "Download Images"
+msgstr ""
+
 msgid "Download and Load (more...)"
 msgstr "Tõmba ja laadi (veel...)"
 
-#: subtitles.py:4300
 msgid "Download and Load (next to video)"
 msgstr "Tõmba ja laadi (filmiga ühine kataloog)"
 
-#: subtitles.py:4299
 msgid "Download and Load (user defined) "
 msgstr "Tõmba ja laadi (kasutaja määratud)"
 
-#: subtitles.py:2554
+msgid "Download best subtitles on playback start"
+msgstr ""
+
 msgid "Download date"
 msgstr "Tõmbamise kuupäev"
 
-#: subtitles.py:3643
 msgid "Download options"
 msgstr "Tõmbamise valikud"
 
-#: plugin.py:101 plugin.py:102
 msgid "Download subtitles for your videos"
 msgstr "Hangi filmidele subtiitreid"
 
-#: subtitles.py:2594
 msgid "Downloaded Subtitles"
 msgstr "Tõmba subtiitreid"
 
 msgid "Downloaded Subtitles - Settings"
 msgstr "Subtiitrite hankimine - Seadistus"
 
-#: subtitlesdvb.py:304
+msgid "Downloading images in background..."
+msgstr ""
+
 msgid "Duration"
 msgstr "Kestus"
 
-#: subtitles.py:3680
+msgid "Dutch"
+msgstr ""
+
+msgid "EXIT: Exit (confirm)"
+msgstr ""
+
 msgid "Edit Filename"
 msgstr "Muuda failinime"
 
-#: subtitles.py:3688
 msgid "Edit download path"
 msgstr "Muuda tõmbamise asukohta"
 
-#: subtitles.py:1849
 msgid "Embedded Subtitles"
 msgstr "Põimitud subtiitrid"
 
-#: plugin.py:47 subtitles.py:2154
 msgid "Embedded subtitles settings"
 msgstr "Põimitud subtiitrite seaded"
 
-#: subtitles.py:2080 subtitles.py:2176
+msgid "Enable title suggestions"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
 msgid "Encoding"
 msgstr "Tähemärgistik"
 
-#: subtitles.py:1860 subtitles.py:1863
 msgid "Encoding:"
 msgstr "Tähemärgistik:"
 
-#: subtitles.py:2623
+msgid "English"
+msgstr ""
+
 msgid "Entries count:"
 msgstr "Kirjete arv:"
 
-#: subtitles.py:3988 subtitles.py:4771
 msgid "Episode"
 msgstr "Episood"
 
-#: subtitlesdvb.py:128 subtitlesdvb.py:306
+#, python-format
+msgid "Error loading details: %s"
+msgstr ""
+
+#, python-format
+msgid "Error retrieving details: %s"
+msgstr ""
+
+#, python-format
+msgid "Error searching TMDB: %s"
+msgstr ""
+
+msgid "Esperanto"
+msgstr ""
+
+msgid "Estonian"
+msgstr ""
+
 msgid "Event Duration"
 msgstr "Saate kestus"
 
-#: subtitlesdvb.py:126
 msgid "Event Name"
 msgstr "Saate nimi"
 
-#: subtitlesdvb.py:127 subtitlesdvb.py:293
 msgid "Event Time"
 msgstr "Saate aeg"
 
-#: subtitles.py:2037
+msgid "Exit SubsSupport DVB player?"
+msgstr ""
+
 msgid "External Subtitles settings"
 msgstr "Väliste subtiitrite seadistus"
 
-#: plugin.py:46
+msgid "External settings not provided!"
+msgstr ""
+
 msgid "External subtitles settings"
 msgstr "Väliste subtiitrite seaded"
 
-#: subtitles.py:3617
+msgid "External subtitles style (live)"
+msgstr ""
+
 msgid "Filename"
 msgstr "Failinimi"
 
-#: subtitles.py:3693
 msgid "Filename cannot be empty!"
 msgstr "Tühi failinimi ei ole lubatud."
 
-#: subtitles.py:2013
+msgid "Finnish"
+msgstr ""
+
 msgid "Font color (Bold)"
 msgstr "Teksti värv (Rasvane)"
 
-#: subtitles.py:2010
 msgid "Font color (Italic"
 msgstr "Teksti värv (Kaldkiri)"
 
-#: subtitles.py:2007
 msgid "Font color (Regular)"
 msgstr "Teksti värv (Tavakiri)"
 
-#: subtitles.py:2015 subtitles.py:2146
 msgid "Font size"
 msgstr "Tähesuurus"
 
-#: subtitles.py:2014
 msgid "Font transparency (Bold)"
 msgstr "Teksti läbipaistvus (Rasvane)"
 
-#: subtitles.py:2011
 msgid "Font transparency (Italic)"
 msgstr "Teksti läbipaistvus (Kaldkiri)"
 
-#: subtitles.py:2008
 msgid "Font transparency (Regular)"
 msgstr "Teksti läbipaistvus (Tavakiri)"
 
-#: subtitles.py:2012 subtitles.py:2145
 msgid "Font type (Bold)"
 msgstr "Kirjatüüp (Rasvane)"
 
-#: subtitles.py:2009 subtitles.py:2144
 msgid "Font type (Italic)"
 msgstr "Kirjatüüp (Kaldkiri)"
 
-#: subtitles.py:2006 subtitles.py:2143
 msgid "Font type (Regular)"
 msgstr "Kirjatüüp (Tavakiri)"
 
-#: subtitles.py:1957 subtitles.py:2476
 msgid "For more details please check search settings"
 msgstr "Rohkem üksikasju leiab otsingu seadistustes"
 
-#: subtitles.py:2170
+msgid "French"
+msgstr ""
+
+msgid "Galician"
+msgstr ""
+
 msgid "General settings"
 msgstr "Üldseaded"
 
-#: subtitles.py:2084
+msgid "Genres: "
+msgstr ""
+
+msgid "Georgian"
+msgstr ""
+
+msgid "German"
+msgstr ""
+
+msgid "Gestdown: too many requests, try again in a minute"
+msgstr ""
+
+msgid "Greek"
+msgstr "Kreeka"
+
+msgid "Hebrew"
+msgstr ""
+
 msgid "Hide delay"
 msgstr "Varjamise viiteaeg"
 
-#: subtitles.py:3340 subtitles.py:3882 subtitles.py:4031
+msgid "Hindi"
+msgstr ""
+
 msgid "History"
 msgstr "Ajalugu"
 
-#: subtitles.py:310 subtitles.py:3874
+msgid "Hungarian"
+msgstr ""
+
+msgid "IMDb"
+msgstr ""
+
+msgid "INFO: Show this help"
+msgstr ""
+
+msgid "Icelandic"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
+msgid "Invalid captcha text"
+msgstr ""
+
+msgid "Italian"
+msgstr ""
+
+msgid "Japanese"
+msgstr ""
+
+msgid "Kazakh"
+msgstr ""
+
+msgid "Korean"
+msgstr ""
+
+msgid "LEFT: Previous subtitle"
+msgstr ""
+
 msgid "Language"
 msgstr "Keel"
 
-#: e2_utils.py:112
 msgid "Language selection"
 msgstr "Keele valik"
 
-#: subtitles.py:298
+msgid "Latvian"
+msgstr ""
+
+msgid "Line by line"
+msgstr ""
+
 msgid "List"
 msgstr "Nimekiri"
 
-#: subtitles.py:298
 msgid "List + File"
 msgstr "Nimekiri + fail"
 
-#: compat.py:200 subtitles.py:2257
-msgid "List of storage devices"
-msgstr "Andmekandjate loetelu"
+msgid "Lithuanian"
+msgstr ""
 
-#: subtitles.py:4439
 msgid "Load subtitles after download"
 msgstr "Pärast tõmbamist laadi subtiitrid"
 
-#: subtitles.py:4443
 msgid "Load/Save download history directory"
 msgstr "Otsinguajaloo kataloog"
 
-#: subtitles.py:4428
+#, python-format
+msgid "Login OK (%s)"
+msgstr ""
+
+#, python-format
+msgid "Login OK, downloads left today: %s/%s"
+msgstr ""
+
+msgid "Luxembourgish"
+msgstr ""
+
+msgid "MENU: Show subtitle style settings"
+msgstr ""
+
+msgid "Macedonian"
+msgstr ""
+
+msgid "Malay"
+msgstr ""
+
 msgid "Manual search"
 msgstr "Käsiotsing"
 
-#: subtitles.py:2734
 msgid "Max history entries"
 msgstr "Suurim ajalookirjete arv"
 
-#: subtitles.py:321
+msgid "Minimum match for automatic download"
+msgstr ""
+
 msgid "Movie"
 msgstr "Film"
 
-#: subtitles.py:2552
+msgid "Movie Details"
+msgstr ""
+
+msgid "NEXT (long): Manual +minutes jump"
+msgstr ""
+
+msgid "NEXT/FF (short): +1 minute"
+msgstr ""
+
 msgid "Name"
 msgstr "Nimi"
 
-#: subtitles.py:313 subtitles.py:3595
+msgid "Next source title"
+msgstr ""
+
 msgid "Next to video"
 msgstr "Filmiga ühine kataloog"
 
-#: subtitles.py:519 subtitles.py:521
+msgid "No"
+msgstr ""
+
+msgid "No URL available for this movie."
+msgstr ""
+
+msgid "No details available for this movie. Please view details first."
+msgstr ""
+
 msgid "No external subtitles are loaded"
 msgstr "Väliseid subtiitreid ei ole laaditud"
 
-#: subtitles.py:4172
+msgid "No genres available"
+msgstr ""
+
+#, python-format
+msgid "No results found for: %s"
+msgstr ""
+
 msgid "No subtitles found :("
 msgstr "Subtiitreid ei leitud"
 
-#: subtitles.py:1865
+msgid "No tagline available"
+msgstr ""
+
+msgid "No."
+msgstr ""
+
 msgid "None"
 msgstr "Pole"
 
-#: subtitles.py:2088
+msgid "Norwegian"
+msgstr ""
+
+msgid "OK: Show/Hide status panel"
+msgstr ""
+
+msgid "Occitan"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "OpenSubtitles"
+msgstr ""
+
+msgid "OpenSubtitles API key for suggestions"
+msgstr ""
+
+msgid "OpenSubtitles.com API key rejected"
+msgstr ""
+
+msgid "OpenSubtitles.com login failed"
+msgstr ""
+
+msgid "OpenSubtitles.com requires an API key"
+msgstr ""
+
+#, python-format
+msgid "OpenSubtitles.org %s failed: %s"
+msgstr ""
+
+msgid "OpenSubtitles.org archive contains no subtitle file"
+msgstr ""
+
+msgid "OpenSubtitles.org download limit reached, try again tomorrow"
+msgstr ""
+
+msgid "OpenSubtitles.org login failed"
+msgstr ""
+
+msgid "OpenSubtitles.org only delivers this subtitle to VIP members"
+msgstr ""
+
+msgid "OpenSubtitles.org website download limit reached (captcha), try again later or use a VIP account"
+msgstr ""
+
+msgid "OpenSubtitles.org: too many requests, try again later"
+msgstr ""
+
+#, python-format
+msgid "Override ratio for %s fps (standard is 1.0000)"
+msgstr ""
+
+msgid "PGS file"
+msgstr ""
+
+msgid "PREV (long): Manual -minutes jump"
+msgstr ""
+
+msgid "PREV/REWIND (short): -1 minute"
+msgstr ""
+
 msgid "PTS check delay"
 msgstr "Ajanihke kontrolli viiteaeg"
 
-#: compat.py:202 subtitles.py:2259
-msgid "Parent directory"
-msgstr "Ülemkataloog"
+msgid "Password"
+msgstr ""
 
-#: subtitles.py:3618
 msgid "Path"
 msgstr "Asukoht"
 
-#: subtitles.py:3697
 msgid "Path doesn't exist!"
 msgstr "Asukoht puudub!"
 
-#: subtitles.py:2077 subtitles.py:2175
 msgid "Pause video on opening subtitles menu"
 msgstr "Peata teaasesitus subtiitrite menüü avamisel"
 
-#: subtitles.py:2086
+msgid "Persian"
+msgstr ""
+
 msgid "Player delay"
 msgstr "Pleieri viiteaeg"
 
-#: subtitles.py:2016 subtitles.py:2147
+msgid "Polish"
+msgstr ""
+
+msgid "Portuguese"
+msgstr ""
+
+msgid "Portuguese (Brazilian)"
+msgstr ""
+
+msgid "PortugueseBrazil"
+msgstr ""
+
 msgid "Position"
 msgstr "Asukoht"
 
-#: subtitles.py:4426
 msgid "Preferred Movie provider"
 msgstr "eelistatud pakkuja filmidele"
 
-#: subtitles.py:4427
 msgid "Preferred TV show provider"
 msgstr "eelistatud pakkuja seriaalidele"
 
-#: subtitles.py:3990
 msgid "Preferred languages"
 msgstr "Eelistatud keeled"
 
-#: subtitles.py:4423 subtitles.py:4424 subtitles.py:4425
 msgid "Preferred subtitles language"
 msgstr "Eelistatud keel subtiitritele"
 
-#: subtitles.py:4108 subtitles.py:4140
 msgid "Press OK to Stop"
 msgstr "Peatamiseks vajuta OK"
 
-#: subtitles.py:4716
-msgid "Press OK to confirm"
-msgstr "Kinnitamiseks vajuta OK"
+msgid "Press OK to select subtitle line"
+msgstr ""
 
-#: subtitles.py:310 subtitles.py:2553 subtitles.py:3876 subtitles.py:3989
-#: subtitles.py:4772
+msgid "Press RED to open subtitle picker - Press OK to hide/unhide - Press MENU to open subtitle style settings - Press INFO to open help screen"
+msgstr ""
+
+msgid "Prijevodi-Online did not return a subtitle file"
+msgstr ""
+
 msgid "Provider"
 msgstr "Levitaja"
 
-#: subtitles.py:4491
 msgid "Provider name"
 msgstr "Levitaja nimi"
 
-#: subtitles.py:2087
+msgid "RED: Open subtitle picker"
+msgstr ""
+
+msgid "RIGHT: Next subtitle"
+msgstr ""
+
+msgid "Rating: "
+msgstr ""
+
 msgid "Refresh delay"
 msgstr "Värskendamise viiteaeg"
 
-#: subtitles.py:311 subtitles.py:312 subtitles.py:3588 subtitles.py:3875
 msgid "Release"
 msgstr "Väljalase"
 
-#: subtitles.py:2557
 msgid "Remove (file)"
 msgstr "Eemalda (fail)"
 
-#: subtitles.py:2629
 msgid "Remove Entry (List)"
 msgstr "Eemalda kirje (nimekiri)"
 
-#: subtitles.py:2627
 msgid "Remove Entry (List+File)"
 msgstr "Eemalda kirje (nimekiri+fail)"
 
-#: subtitles.py:2735
 msgid "Remove action"
 msgstr "Tegevus eemaldamisel"
 
-#: subtitles.py:3619
 msgid "Reset"
 msgstr "Lähtesta"
 
-#: e2_utils.py:497 subtitles.py:2723 subtitles.py:4496
 msgid "Reset Defaults"
 msgstr "Taasta vaikeväärtused"
 
-#: subtitles.py:3877
+msgid "Romanian"
+msgstr ""
+
+msgid "Runtime: "
+msgstr ""
+
+msgid "Russia"
+msgstr ""
+
+msgid "Russian"
+msgstr ""
+
 msgid "S"
 msgstr ""
 
-#: e2_utils.py:495 subtitles.py:2721 subtitles.py:4494
+msgid "SRT file"
+msgstr ""
+
+msgid "SSA file"
+msgstr ""
+
 msgid "Save"
 msgstr "Salvesta"
 
-#: subtitles.py:3608 subtitles.py:3637
 msgid "Save as"
 msgstr "Salvesta kui"
 
-#: subtitles.py:4441
 msgid "Save downloaded subtitles to history"
 msgstr "Salvesta allalaetud subtiitrid ajalukku"
 
-#: subtitles.py:4432
 msgid "Save subtitles as"
 msgstr "Salvesta subtiitrid kui"
 
-#: subtitles.py:4433
 msgid "Save subtitles as (fallback)"
 msgstr "Salvesta subtiitrid kui (varuvariant)"
 
-#: subtitles.py:4435
 msgid "Save subtitles to"
 msgstr "Salvesta subtiitrid asukohta"
 
-#: subtitles.py:3607 subtitles.py:3636
 msgid "Save to"
 msgstr "Salvesta asukohta"
 
-#: subtitles.py:3881 subtitles.py:4030
 msgid "Search"
 msgstr "Otsing"
 
-#: subtitles.py:4715
-msgid "Search parameters"
-msgstr "Otsisõnad"
+msgid "Search Path"
+msgstr ""
 
-#: plugin.py:48
+msgid "Search on TMDB"
+msgstr ""
+
 msgid "Search settings"
 msgstr "Otsingu seadistus"
 
-#: subtitles.py:1872
 msgid "Search subtitles"
 msgstr "Otsi subtiitreid"
 
-#: subtitles.py:3987 subtitles.py:4770
+msgid "Searching TMDB..."
+msgstr ""
+
 msgid "Season"
 msgstr "Hooaeg"
 
-#: subtitles.py:2747
-msgid "Select Directory"
-msgstr "Vali kataloog"
+msgid "Select"
+msgstr ""
 
-#: subtitles.py:2558 subtitles.py:3883 subtitles.py:4032
+msgid "Select current subtitle line"
+msgstr ""
+
+msgid "Serbian"
+msgstr ""
+
 msgid "Settings"
 msgstr "Seaded"
 
-#: subtitles.py:2017
+msgid "Settings TMDB data Path"
+msgstr ""
+
 msgid "Shadow"
 msgstr "Vari"
 
-#: subtitles.py:2021 subtitles.py:2149
 msgid "Shadow X-offset"
 msgstr "Varju horisontaalne nihe"
 
-#: subtitles.py:2022 subtitles.py:2150
 msgid "Shadow Y-offset"
 msgstr "Varju vertikaalne nihe"
 
-#: subtitles.py:2025
 msgid "Shadow color"
 msgstr "Varju värv"
 
-#: subtitles.py:2024
 msgid "Shadow size"
 msgstr "varju suurus"
 
-#: subtitles.py:2019
 msgid "Shadow type"
 msgstr "Varju tüüp"
 
-#: subtitles.py:2081
 msgid "Show expert settings"
 msgstr "Näita täpsemaid sätteid"
 
-#: subtitles.py:1956 subtitles.py:2475
+msgid "Slovak"
+msgstr ""
+
+msgid "Slovenian"
+msgstr ""
+
 msgid "Some subtitles providers are not working"
 msgstr "Mõned subtiitrite pakkujad ei tööta"
 
-#: subtitles.py:4431
+msgid ""
+"Sorry!\n"
+"tmdb is not installed on your image"
+msgstr ""
+
 msgid "Sort subtitles list by"
 msgstr "Järjestuse aluseks"
 
-#: subtitles.py:4713 subtitles.py:4790
 msgid "Source title"
 msgstr "Allika nimi"
 
-#: subtitles.py:4711
 msgid "Source title not provided"
 msgstr "Allika nimi andmata"
 
-#: subtitles.py:4493
-msgid "State"
-msgstr "Olek"
+msgid "Spanish"
+msgstr ""
 
-#: plugin.py:103 plugin.py:104
+msgid "Starting background tasks for details scraping and image download..."
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "SubDL API key OK"
+msgstr ""
+
+msgid "SubDL API key rejected"
+msgstr ""
+
+msgid "SubDL download failed"
+msgstr ""
+
+msgid "SubDL requires an API key"
+msgstr ""
+
+#, python-format
+msgid "SubDL: %s"
+msgstr ""
+
+msgid "SubDL: timeout"
+msgstr ""
+
+#, python-format
+msgid "SubDL: unexpected answer (HTTP %d)"
+msgstr ""
+
+msgid "SubSource API key OK"
+msgstr ""
+
+msgid "SubSource API key rejected"
+msgstr ""
+
+msgid "SubSource requires an API key"
+msgstr ""
+
 msgid "SubsSupport DVB player"
 msgstr "SubsSupport subtiitrid"
 
-#: plugin.py:101 plugin.py:102
 msgid "SubsSupport downloader"
 msgstr "Subtiitrite hankimine"
 
-#: plugin.py:61 plugin.py:100
 msgid "SubsSupport settings"
 msgstr "SubsSupport seaded"
 
-#: subtitles.py:2657 subtitles.py:2664
 msgid "Subtitle"
 msgstr "Subtiitrid"
 
-#: subtitles.py:439 subtitles.py:441 subtitles.py:444 subtitles.py:446
+msgid "Subtitle translation mode"
+msgstr ""
+
 msgid "Subtitles Delay"
 msgstr "Subtiitrite viiteaeg"
 
-#: subtitles.py:428 subtitles.py:431 subtitles.py:433 subtitlesdvb.py:125
-#: subtitlesdvb.py:260 subtitlesdvb.py:265 subtitlesdvb.py:267
-#: subtitlesdvb.py:269 subtitlesdvb.py:273 subtitlesdvb.py:275
-#: subtitlesdvb.py:277
 msgid "Subtitles FPS"
 msgstr "Subtiitrite kaadrisagedus"
 
-#: subtitlesdvb.py:123 subtitlesdvb.py:240
 msgid "Subtitles Position"
 msgstr "Subtiitrite asukoht"
 
-#: subtitlesdvb.py:124 subtitlesdvb.py:254
 msgid "Subtitles Time"
 msgstr "Subtiitrite aeg"
 
-#: subtitles.py:4436
 msgid "Subtitles download path"
 msgstr "Subtiitrite allalaadimise asukoht"
 
-#: subtitles.py:4429
+#, python-format
+msgid ""
+"Subtitles found for this video:\n"
+"%s\n"
+"\n"
+"Download and load them?"
+msgstr ""
+
+msgid "Subtitles late: decrease ratio. Subtitles rush: increase ratio"
+msgstr ""
+
+#, python-format
+msgid ""
+"Subtitles loaded:\n"
+"%s"
+msgstr ""
+
 msgid "Subtitles provider timeout"
 msgstr "Subtiitrite levitaja aegumine"
 
-#: subtitles.py:3962
 msgid "Subtitles search"
 msgstr "Subtiitrite otsing"
 
-#: subtitles.py:4518
 msgid "Subtitles search settings"
 msgstr "Subtiitrite otsingu seadistus"
 
-#: subtitles.py:2071
 msgid "Subtitles setting"
 msgstr "Subtiitrite seadistus"
 
-#: subtitles.py:1876
 msgid "Subtitles settings"
 msgstr "Subtiitrite seaded"
 
-#: subtitles.py:1878 subtitles.py:1880
 msgid "Subtitles settings (embedded)"
 msgstr "Põimitud subtiitrite seaded"
 
-#: subtitles.py:4437
 msgid "Subtitles temp path"
 msgstr "Subtiitrite ajutine kataloog"
 
-#: subtitles.py:2379
 msgid "Subtitles will be downloaded in"
 msgstr "Subtiitrid tõmmatakse asukohta"
 
-#: subtitles.py:2951 subtitles.py:3336
+msgid ""
+"Subtitles with this name already exist\n"
+"Do you want to overwrite them"
+msgstr ""
+
 msgid "Suggestions"
 msgstr "Soovitused"
 
-#: subtitles.py:4492
+msgid "Suggestions provider"
+msgstr ""
+
 msgid "Supported languages"
 msgstr "Toetatud keeled"
 
-#: subtitles.py:2085
-msgid "Sync delay"
-msgstr "Sünkroonimise viiteaeg"
-
-#: subtitles.py:321
-msgid "TV show"
-msgstr "Seriaal"
-
-#: subtitles.py:2947
-msgid "There are more subtitles in unpacked archive\n"
-" please select which one do you want to use"
-msgstr "Arhiivis on mitu subtiitrit.\n"
-"Vali see, mida soovid kasutada"
-
-#: subtitles.py:2639
-msgid "There was an error while removing subtitle, please check log"
-msgstr "Subtiitrite eemaldamisel toimus viga. Vaata logi."
-
-#: subtitlesdvb.py:291
-msgid "Time"
-msgstr "Aeg"
-
-#: subtitles.py:3982 subtitles.py:4765
-msgid "Title"
-msgstr "Nimi"
-
-#: subtitles.py:4173
-msgid "Try update(simplify) search expression and try again.."
-msgstr "Ürita muuta (lihtsustada) otsisõna ja proovi uuesti"
-
-#: subtitles.py:1882
-msgid "Turn off subtitles"
-msgstr "Lülita subtiitrid välja"
-
-#: subtitles.py:3983 subtitles.py:4766
-msgid "Type"
-msgstr "Tüüp"
-
-#: e2_utils.py:241
-msgid "Type text of picture"
-msgstr "Trüki tekst pildilt"
-
-#: subtitles.py:3880 subtitles.py:4029
-msgid "Update"
-msgstr "Uuenda"
-
-#: subtitles.py:4761
-msgid "Update Search params"
-msgstr "Uuenda otsisõnu"
-
-#: subtitles.py:4097
-msgid "Update search parameters if not correct\n"
-" and press green button for search"
-msgstr "Muuda vajadusel otsisõna\n"
-" ja vajuta rohelist nuppu"
-
-#: subtitles.py:3991 subtitles.py:4773
-msgid "Use File path"
-msgstr "Kasuta faili asukohta"
+msgid "Swedish"
+msgstr ""
 
 msgid "Switch List"
 msgstr "Nimekirja vahetus"
 
-#: subtitles.py:313 subtitles.py:3591 subtitles.py:3593
+msgid "Sync delay"
+msgstr "Sünkroonimise viiteaeg"
+
+msgid "TMDB Scraper"
+msgstr ""
+
+msgid "TV show"
+msgstr "Seriaal"
+
+msgid "Tamil"
+msgstr ""
+
+msgid "Telugu"
+msgstr ""
+
+msgid "Test login"
+msgstr ""
+
+msgid "Thai"
+msgstr ""
+
+msgid ""
+"There are more subtitles in unpacked archive\n"
+" please select which one do you want to use"
+msgstr ""
+"Arhiivis on mitu subtiitrit.\n"
+"Vali see, mida soovid kasutada"
+
+msgid "There was an error while removing subtitle, please check log"
+msgstr "Subtiitrite eemaldamisel toimus viga. Vaata logi."
+
+msgid "Time"
+msgstr "Aeg"
+
+msgid "Title"
+msgstr "Nimi"
+
+msgid "Titlovi.com login failed, check username/password"
+msgstr ""
+
+msgid "Titulky.com daily limit reached, captcha required"
+msgstr ""
+
+msgid "Titulky.com download link not found"
+msgstr ""
+
+msgid "Titulky.com refused the download, login required"
+msgstr ""
+
+msgid "Translate from"
+msgstr ""
+
+msgid "Translate to"
+msgstr ""
+
+msgid "Try to correct FPS drift with FPS ratio"
+msgstr ""
+
+msgid "Try update(simplify) search expression and try again.."
+msgstr "Ürita muuta (lihtsustada) otsisõna ja proovi uuesti"
+
+msgid "Turkish"
+msgstr "Türgi"
+
+msgid "Turn off subtitles"
+msgstr "Lülita subtiitrid välja"
+
+msgid "Type"
+msgstr "Tüüp"
+
+msgid "Type text of picture"
+msgstr "Trüki tekst pildilt"
+
+msgid "UP/DOWN: Restart current subtitle"
+msgstr ""
+
+msgid "Ukrainian"
+msgstr ""
+
+msgid "Unknown Date"
+msgstr ""
+
+msgid "Unknown Title"
+msgstr ""
+
+msgid "Update"
+msgstr "Uuenda"
+
+msgid "Update Search params"
+msgstr "Uuenda otsisõnu"
+
+msgid ""
+"Update search parameters if not correct\n"
+" and press green button for search"
+msgstr ""
+"Muuda vajadusel otsisõna\n"
+" ja vajuta rohelist nuppu"
+
+msgid "Urdu"
+msgstr ""
+
+msgid "Use File path"
+msgstr "Kasuta faili asukohta"
+
 msgid "User defined"
 msgstr "Kasutaja määratud"
 
-#: subtitles.py:311 subtitles.py:3590
+msgid "Username"
+msgstr ""
+
+msgid "VIP member"
+msgstr ""
+
+msgid "VOB file"
+msgstr ""
+
 msgid "Video filename"
 msgstr "Video failinimi"
 
-#: subtitles.py:3985 subtitles.py:4768
+msgid "Vietnamese"
+msgstr ""
+
+msgid "Western Europe"
+msgstr ""
+
+msgid "Wyzie API key OK"
+msgstr ""
+
+msgid "Wyzie API key OK, but the daily request limit is reached"
+msgstr ""
+
+msgid "Wyzie API key rejected"
+msgstr ""
+
+msgid "Wyzie requires an API key"
+msgstr ""
+
+#, python-format
+msgid "Wyzie: %s"
+msgstr ""
+
+#, python-format
+msgid "Wyzie: HTTP %d"
+msgstr ""
+
+msgid "Wyzie: timeout"
+msgstr ""
+
+msgid "YELLOW: Sync subtitle to current event"
+msgstr ""
+
 msgid "Year"
 msgstr "Aasta"
 
-#: plugin.py:92
-msgid "You have OpenPli-based image, please change embedded subtitles settings in "
-"Settings / System / Subtitles settings"
-msgstr "Kasutad OpenPLi-põhist tarkvara. Põimitud subtiitrite seadistusi muuda: "
-"Menu>Seadistamine>Süsteem>Subtiitrite seaded"
+msgid "Yes"
+msgstr ""
 
-#: subtitles.py:212
+msgid "amber"
+msgstr ""
+
+msgid "apply now"
+msgstr ""
+
+msgid "beige"
+msgstr ""
+
 msgid "black"
 msgstr "must"
 
-#: subtitles.py:211
 msgid "blue"
 msgstr "sinine"
 
-#: subtitles.py:253
 msgid "border"
 msgstr "kontuur"
 
-#: subtitles.py:200
 msgid "bottom"
 msgstr "all"
 
-#: subtitles.py:1863
+msgid "brown"
+msgstr ""
+
+msgid "cancel"
+msgstr ""
+
 msgid "cannot decode"
 msgstr "ei suuda avade"
 
-#: subtitlesdvb.py:343
 msgid "cannot sync to event, event is not available"
 msgstr "saatega sünkimine ei õnnestu, saade ei ole saadaval"
 
-#: subtitles.py:4266
 msgid "captcha doesn't match, try again..."
 msgstr "kood ei klapi, proovi uuesti"
 
-#: subtitles.py:491
 msgid "change external subtitles status"
 msgstr "muuda väliste subtiitrite olekut"
 
-#: subtitles.py:396 subtitlesdvb.py:144
 msgid "change subtitles fps"
 msgstr "muuda subtiitrite kaadrisagedust"
 
-#: subtitlesdvb.py:131
-msgid "close plugin"
-msgstr "sulge plugin"
+msgid "cream"
+msgstr ""
 
-#: subtitles.py:391
+msgid "dark grey"
+msgstr ""
+
 msgid "decrease subtitles delay"
 msgstr "vähenda subtiitrite viiteaega"
 
-#: subtitles.py:4535
+msgid "deep sky blue"
+msgstr ""
+
 msgid "disabled"
 msgstr "keelatud"
 
-#: subtitles.py:400
 msgid "displays this menu"
 msgstr "kuvatakse see menüü"
 
-#: subtitles.py:4214
+msgid "dodger blue"
+msgstr ""
+
+#, python-format
+msgid "download error occurred, for details see %s"
+msgstr ""
+
 msgid "downloading subtitles..."
 msgstr "subtiitrite tõmbamine"
 
-#: subtitles.py:260
 msgid "dynamic"
 msgstr "dünaamiline"
 
-#: subtitles.py:4532
+msgid "embedded"
+msgstr ""
+
 msgid "enabled"
 msgstr "lubatud"
 
-#: subtitles.py:4529
 msgid "error"
 msgstr "viga"
 
-#: subtitles.py:401
 msgid "exit"
 msgstr "välju"
 
-#: subtitles.py:207
+msgid "exit (confirm)"
+msgstr ""
+
+msgid "fixed"
+msgstr ""
+
+msgid "gold"
+msgstr ""
+
 msgid "green"
 msgstr "roheline"
 
-#: subtitles.py:206
 msgid "grey"
 msgstr "hall"
 
-#: subtitles.py:390
 msgid "increase subtitles delay"
 msgstr "suurenda subtiitrite viiteaega"
 
-#: subtitles.py:4268
+#, python-format
+msgid "indexsubtitle.cc: no download token for %s"
+msgstr ""
+
 msgid "invalid credentials provided, correct them and try again"
 msgstr "rekvisiidid olid valed, paranda ja proovi uuesti"
 
-#: subtitles.py:388
+msgid "ivory"
+msgstr ""
+
 msgid "jump to next subtitle"
 msgstr "hüpe järgmisele reale"
 
-#: subtitles.py:389
 msgid "jump to previous subtitle"
 msgstr "hüpe eelmisele reale"
 
-#: subtitles.py:4657
+msgid "justsubtitles: movie page script not found"
+msgstr ""
+
+msgid "justsubtitles: server action id not found"
+msgstr ""
+
 msgid "library"
 msgstr "teek"
 
-#: subtitles.py:4106 subtitles.py:4138
+msgid "light blue"
+msgstr ""
+
+msgid "light green"
+msgstr ""
+
+msgid "light yellow"
+msgstr ""
+
 msgid "loading subtitles list"
 msgstr "subtiitrite nimekirja laadimine"
 
-#: subtitles.py:4657
+msgid "login"
+msgstr ""
+
+msgid "magenta"
+msgstr ""
+
+#, python-format
+msgid "match %d%%"
+msgstr ""
+
+msgid "mint"
+msgstr ""
+
 msgid "missing"
 msgstr "puudub "
 
-#: subtitles.py:3981
+#, python-format
+msgid "my-subs.co: no download link on %s"
+msgstr ""
+
 msgid "no"
 msgstr "ei"
 
-#: subtitles.py:4270
+#, python-format
+msgid "no %s subtitle on %s"
+msgstr ""
+
+msgid "no VIP, downloads come from the website and are limited"
+msgstr ""
+
+msgid "no answer"
+msgstr ""
+
 msgid "no credentials provided, set them and try again"
 msgstr "rekvisiidid puuduvad, sisesta ja proovi uuesti"
 
-#: compat.py:221 subtitles.py:2278
-msgid "nothing connected"
-msgstr "pole ühendatud"
+#, python-format
+msgid "no subtitle in %s"
+msgstr ""
 
-#: subtitles.py:253
 msgid "offset"
 msgstr "nihe"
 
-#: subtitles.py:227
 msgid "opaque"
 msgstr "läbipaistmatu"
 
-#: subtitles.py:431 subtitlesdvb.py:265 subtitlesdvb.py:267 subtitlesdvb.py:269
-#: subtitlesdvb.py:273
+msgid "open subtitle picker"
+msgstr ""
+
+msgid "orange"
+msgstr ""
+
 msgid "original"
 msgstr "algne"
 
-#: subtitlesdvb.py:134
 msgid "pause subtitles playback"
 msgstr "peata subtiitrite esitus"
 
-#: subtitlesdvb.py:133
+msgid "pink"
+msgstr ""
+
 msgid "play/pause subtitles playback"
 msgstr "peata/taasta subtiitrite esitus"
 
-#: subtitles.py:3336
 msgid "press green"
 msgstr "vajuta rohelist"
 
-#: subtitles.py:3340
 msgid "press red"
 msgstr "vajuta punast"
 
-#: subtitles.py:208
 msgid "purple"
 msgstr "purpur"
 
-#: subtitles.py:205
 msgid "red"
 msgstr "punane"
 
-#: subtitles.py:395
 msgid "reset subtitles delay/fps"
 msgstr "lähtesta subtiitrite viiteaeg/kaadrisagedus"
 
-#: subtitlesdvb.py:136
 msgid "restarts current subtitle"
 msgstr "taaskäivitab aktiivse subtiitri"
 
-#: subtitlesdvb.py:135
 msgid "resumes subtitles playback"
 msgstr "jätkab subtiitrite esitust"
 
-#: subtitles.py:2379
+msgid "save"
+msgstr ""
+
+msgid "search"
+msgstr ""
+
 msgid "seconds"
 msgstr "sekundit"
 
-#: subtitles.py:4931
 msgid "settings"
 msgstr "seaded"
 
-#: subtitles.py:752
+msgid "show help"
+msgstr ""
+
+msgid "show subtitle style settings"
+msgstr ""
+
 msgid "show subtitles menu"
 msgstr "näita subtiitrite menüüd"
 
-#: subtitlesdvb.py:132
 msgid "show/hide subtitles status"
 msgstr "näita/peida subtiitrite olek"
 
-#: subtitlesdvb.py:142
+msgid "silver"
+msgstr ""
+
 msgid "skip previous subtitle by setting time in minutes"
 msgstr "hüpe subtiitri reale määrates aja minutites"
 
-#: subtitlesdvb.py:143
 msgid "skip subtitle to current event position"
 msgstr "subtiitrite hüpe saate aktiivsele asukohale"
 
-#: subtitlesdvb.py:137
 msgid "skip to next subtitle"
 msgstr "hüpe edasi"
 
-#: subtitlesdvb.py:138
 msgid "skip to next subtitle (minute jump)"
 msgstr "hüpe edasi (1 minut)"
 
-#: subtitlesdvb.py:139
 msgid "skip to next subtitle by setting time in minutes"
 msgstr "hüpe subtiitri reale määrates aja minutites"
 
-#: subtitlesdvb.py:140
 msgid "skip to previous subtitle"
 msgstr "hüpe tagasi"
 
-#: subtitlesdvb.py:141
 msgid "skip to previous subtitle (minute jump)"
 msgstr "hüpe tagasi (1 minut)"
 
-#: subtitles.py:260
+msgid "sky blue"
+msgstr ""
+
+msgid "spring green"
+msgstr ""
+
 msgid "static"
 msgstr "staatiline"
 
-#: subtitles.py:4107 subtitles.py:4139
 msgid "subtitles found"
 msgstr "subtiitrit leitud"
 
-#: subtitles.py:198
+msgid "synced"
+msgstr ""
+
+msgid "teletext"
+msgstr ""
+
 msgid "top"
 msgstr "ülal"
 
-#: subtitles.py:229
 msgid "transparent"
 msgstr "läbipaistev"
 
-#: subtitles.py:428 subtitles.py:2831 subtitlesdvb.py:260 subtitlesdvb.py:287
 msgid "unknown"
 msgstr "tundmatu"
 
-#: e2_utils.py:378
-msgid "unpack error: cannot get subname"
-msgstr "viga lahtipakkimisel: nime hankimine nurjus"
+msgid "unknown error"
+msgstr ""
 
-#: e2_utils.py:394
-msgid "unpack error: cannot open archive"
-msgstr "viga lahtipakkimisel: arhiivi avamine nurjus"
+msgid "violet"
+msgstr ""
 
-#: seek.py:328
-#, python-format
-msgid "unsupported archive %s"
-msgstr "arhiiv %s pole toetatud"
-
-#: plugin.py:103 plugin.py:104
 msgid "watch DVB broadcast with subtitles"
 msgstr "Subtiitrid telesaadetele ja filmidele"
 
-#: subtitles.py:210
 msgid "white"
 msgstr "valge"
 
-#: subtitles.py:2657
 msgid "will be removed from file system"
 msgstr "eemaldatakse süsteemist"
 
-#: subtitles.py:2664
 msgid "will be removed from list"
 msgstr "eemaldatakse nimekirjast"
 
-#: subtitles.py:209
 msgid "yellow"
 msgstr "kollane"
 
-#: subtitles.py:3981
 msgid "yes"
 msgstr "jah"
+
+#, python-format
+msgid "yifysubtitles: no download link on %s"
+msgstr ""

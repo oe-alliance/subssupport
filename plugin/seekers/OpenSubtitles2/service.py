@@ -4,6 +4,7 @@ import os
 
 import requests
 
+from .. import _
 from ..seeker import BaseSubtitlesError, SubtitlesDownloadError, SubtitlesErrors
 from ..user_agents import get_api_user_agent
 from ..utilities import downloadRating, hashFile, languageTranslate, log, saveSubtitle, wantedLanguages
@@ -22,7 +23,7 @@ _token = {}  # (api_key, username) -> (token, api_url)
 def _api_key():
     key = settings_provider.getSetting("OpenSubtitles_API_KEY").strip()
     if not key:
-        raise BaseSubtitlesError(SubtitlesErrors.NO_CREDENTIALS_ERROR, "OpenSubtitles.com requires an API key")
+        raise BaseSubtitlesError(SubtitlesErrors.NO_CREDENTIALS_ERROR, _("OpenSubtitles.com requires an API key"))
     return key
 
 
@@ -45,7 +46,7 @@ def login(force=False):
         return _token[cache_key]
     response = requests.post(API_URL + "/login", json={"username": username, "password": password}, headers=_headers(api_key), timeout=API_TIMEOUT)
     if response.status_code in (400, 401, 403):
-        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, "OpenSubtitles.com login failed")
+        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, _("OpenSubtitles.com login failed"))
     response.raise_for_status()
     data = response.json()
     base_url = data.get("base_url")  # VIP accounts get their own api host
@@ -59,12 +60,12 @@ def test_credentials():
     url = api_url + "/infos/user" if token else API_URL + "/infos/formats"
     response = requests.get(url, headers=_headers(_api_key(), token), timeout=API_TIMEOUT)
     if response.status_code in (401, 403):
-        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, "OpenSubtitles.com API key rejected")
+        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, _("OpenSubtitles.com API key rejected"))
     response.raise_for_status()
     if not token:
-        return "API key OK (no username/password set, downloads are limited)"
+        return _("API key OK (no username/password set, downloads are limited)")
     data = response.json().get("data", {})
-    return "Login OK, downloads left today: %s/%s" % (data.get("remaining_downloads", "?"), data.get("allowed_downloads", "?"))
+    return _("Login OK, downloads left today: %s/%s") % (data.get("remaining_downloads", "?"), data.get("allowed_downloads", "?"))
 
 
 def _lang_name(code):
@@ -100,7 +101,7 @@ def search_subtitles(file_original_path, title, tvshow, year, season, episode, s
     log(__name__, "search params: %s" % params)
     response = requests.get(API_URL + "/subtitles", params=params, headers=_headers(api_key), timeout=API_TIMEOUT)
     if response.status_code in (401, 403):
-        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, "OpenSubtitles.com API key rejected")
+        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, _("OpenSubtitles.com API key rejected"))
     response.raise_for_status()
 
     subtitles_list = []

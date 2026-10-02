@@ -5,7 +5,7 @@ import re
 
 from ..utilities import langCode, languageTranslate, log, releaseYearMatch, saveSubtitle, wantedLanguages
 
-SUBTITLE_EXTENSIONS = (".srt", ".sub", ".ass", ".ssa")
+SUBTITLE_EXTENSIONS = (".srt", ".sub", ".ass", ".ssa", ".vtt")
 MAX_DEPTH = 3
 # tags between language and extension: movie.en.hi.srt, movie.en.forced.srt
 TAGS = ("hi", "sdh", "cc", "forced", "default")

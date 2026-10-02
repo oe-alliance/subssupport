@@ -5,6 +5,7 @@ from urllib.parse import quote_plus
 
 import requests
 
+from .. import _
 from ..seeker import BaseSubtitlesError, SubtitlesErrors
 from ..user_agents import get_api_user_agent, get_random_ua
 from ..utilities import languageTranslate, log, saveSubtitle, stripYear, wantedLanguages
@@ -23,7 +24,7 @@ settings_provider = None
 def _api_key():
     key = settings_provider.getSetting("Subdl_API_KEY").strip()
     if not key:
-        raise BaseSubtitlesError(SubtitlesErrors.NO_CREDENTIALS_ERROR, "SubDL requires an API key")
+        raise BaseSubtitlesError(SubtitlesErrors.NO_CREDENTIALS_ERROR, _("SubDL requires an API key"))
     return key
 
 
@@ -32,9 +33,9 @@ def _get(url, api_key, **kwargs):
     try:
         return requests.get(url, **kwargs)
     except requests.Timeout:
-        raise BaseSubtitlesError(SubtitlesErrors.TIMEOUT_ERROR, "SubDL: timeout") from None
+        raise BaseSubtitlesError(SubtitlesErrors.TIMEOUT_ERROR, _("SubDL: timeout")) from None
     except requests.RequestException as e:
-        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, "SubDL: %s" % str(e).replace(quote_plus(api_key), "***").replace(api_key, "***")) from None
+        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, _("SubDL: %s") % str(e).replace(quote_plus(api_key), "***").replace(api_key, "***")) from None
 
 
 def _lang_name(item):
@@ -49,13 +50,13 @@ def _search(params):
     params = dict(params, api_key=api_key, subs_per_page=30)
     response = _get(SEARCH_URL, api_key, params=params, headers={"User-Agent": get_api_user_agent()}, timeout=API_TIMEOUT)
     if response.status_code in (401, 403):
-        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, "SubDL API key rejected")
+        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, _("SubDL API key rejected"))
     try:
         data = response.json()
     except ValueError:
         data = None
     if not isinstance(data, dict) or response.status_code >= 500:
-        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, "SubDL: unexpected answer (HTTP %d)" % response.status_code)
+        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, _("SubDL: unexpected answer (HTTP %d)") % response.status_code)
     if not data.get("status"):  # i.e. not found
         log(__name__, "search failed: %s" % (data.get("error") or data.get("message")))
         return []
@@ -64,7 +65,7 @@ def _search(params):
 
 def test_credentials():
     _search({"film_name": "The Matrix", "type": "movie", "languages": "EN"})
-    return "SubDL API key OK"
+    return _("SubDL API key OK")
 
 
 def search_subtitles(file_original_path, title, tvshow, year, season, episode, set_temp, rar, lang1, lang2, lang3, stack):
@@ -121,6 +122,6 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
             break
         log(__name__, "download %s: HTTP %s" % (attempt.split("?")[0], response.status_code))
     if content is None:
-        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, "SubDL download failed")
+        raise BaseSubtitlesError(SubtitlesErrors.UNKNOWN_ERROR, _("SubDL download failed"))
     filepath = saveSubtitle(tmp_sub_dir, subtitle["id"].rsplit("/", 1)[-1] or "subdl.zip", content)
     return False, subtitle["language_name"], filepath

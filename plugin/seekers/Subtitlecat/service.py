@@ -9,6 +9,7 @@ from urllib.parse import unquote, urljoin
 import requests
 from bs4 import BeautifulSoup
 
+from .. import _
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..utilities import createSession, episodeFilters, langCode, log, normalizeTitle, releaseKind, releaseYearMatch, \
     saveSubtitle, wantedLanguages
@@ -94,9 +95,9 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
         links = get_page_links(sub['url'])
         url = links.get(SITE_CODES.get(sub['code'], sub['code'])) or links.get('')  # else the original file
     if not url:
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, "no %s subtitle on %s" % (sub['language_name'], sub['url']))
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("no %s subtitle on %s") % (sub['language_name'], sub['url']))
     r = session.get(url, timeout=DOWNLOAD_TIMEOUT)
     r.raise_for_status()
     if b'-->' not in r.content and '-->'.encode('utf-16-le') not in r.content:  # some files are (translated) error pages
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, "no subtitle in %s" % url)
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("no subtitle in %s") % url)
     return False, sub['language_name'], saveSubtitle(tmp_sub_dir, unquote(url), r.content)

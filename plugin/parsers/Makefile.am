@@ -1,3 +1,3 @@
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/SubsSupport/parsers
-install_PYTHON = __init__.py assparser.py baseparser.py microdvd.py subrip.py subviewer.py
+install_PYTHON = __init__.py assparser.py baseparser.py microdvd.py subrip.py subviewer.py webvtt.py
 

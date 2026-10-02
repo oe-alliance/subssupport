@@ -2,6 +2,7 @@
 # SubSource API (https://subsource.net/api-docs), an API key from the user profile page is required
 import requests
 
+from .. import _
 from ..seeker import BaseSubtitlesError, SubtitlesErrors
 from ..user_agents import get_api_user_agent
 from ..utilities import downloadRating, episodeFilters, langCode, languageTranslate, saveSubtitle, stripYear, \
@@ -21,18 +22,18 @@ settings_provider = None
 def _get(path, params=None, timeout=API_TIMEOUT):
     key = settings_provider.getSetting("SubSource_API_KEY").strip()
     if not key:
-        raise BaseSubtitlesError(SubtitlesErrors.NO_CREDENTIALS_ERROR, "SubSource requires an API key")
+        raise BaseSubtitlesError(SubtitlesErrors.NO_CREDENTIALS_ERROR, _("SubSource requires an API key"))
     headers = {"X-API-Key": key, "User-Agent": get_api_user_agent(), "Accept": "application/json"}
     response = requests.get(API_URL + path, params=params, headers=headers, timeout=timeout)
     if response.status_code in (401, 403):
-        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, "SubSource API key rejected")
+        raise BaseSubtitlesError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, _("SubSource API key rejected"))
     response.raise_for_status()
     return response
 
 
 def test_credentials():
     _get("/movies/search", {"searchType": "text", "q": "The Matrix"})
-    return "SubSource API key OK"
+    return _("SubSource API key OK")
 
 
 def _lang_param(code):

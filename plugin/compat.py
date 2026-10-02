@@ -5,9 +5,6 @@ Created on Feb 19, 2015
 
 '''
 
-
-from . import _
-
 # taken from IPTVPlayer
 
 
@@ -37,4 +34,3 @@ def eConnectCallback(obj, callbackFun):
         else:
             obj.append(callbackFun)
         return eConnectCallbackObj(obj, callbackFun)
-    return eConnectCallbackObj()

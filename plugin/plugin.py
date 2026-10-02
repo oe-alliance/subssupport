@@ -1,4 +1,4 @@
-from . import _
+from . import _, __version__
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Plugins.Plugin import PluginDescriptor
@@ -7,7 +7,7 @@ from Screens.Screen import Screen
 from Screens.Setup import Setup
 
 from .subtitles import E2SubsSeeker, SubsSearch, initSubsSettings, \
-    SubsSetupGeneral, SubsSearchSettings, SubsSetupExternal, SubsSetupEmbedded
+    SubsSetupGeneral, SubsSearchSettings, SubsSetupExternal
 from .subtitlesdvb import SubsSupportDVB, SubsSetupDVBPlayer
 
 
@@ -66,7 +66,7 @@ class SubsSupportSettings(Screen):
             "cancel": self.close,
         })
         self.onLayoutFinish.append(self.layoutFinished)
-        self.setTitle(_("SubsSupport settings"))
+        self.setTitle("%s (%s)" % (_("SubsSupport settings"), __version__))
 
     def layoutFinished(self):
         self["menuList"].setList([
@@ -109,7 +109,7 @@ class SubsSupportSettings(Screen):
 def Plugins(**kwargs):
     from enigma import getDesktop
     screenwidth = getDesktop(0).size().width()
-    if screenwidth and screenwidth == 1920:
+    if screenwidth >= 1920:  # FHD icons from FHD up
         iconSET = 'ss_set_FHD.png'
         iconDWN = 'ss_dwn_FHD.png'
         iconPLY = 'ss_ply_FHD.png'

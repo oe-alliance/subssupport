@@ -6,6 +6,7 @@ Download: https://titlovi.com/download/?type=<Type>&mediaid=<Id> (no login)
 """
 import time
 
+from .. import _
 from ..seeker import SubtitlesErrors, SubtitlesSearchError
 from ..utilities import createSession, log, saveSubtitle, wantedLanguages, yearMatch
 
@@ -45,7 +46,7 @@ def _login(username, password, force=False):
                      timeout=SEARCH_TIMEOUT)
     if r.status_code == 401:
         _token_cache.pop(username, None)
-        raise SubtitlesSearchError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, 'Titlovi.com login failed, check username/password')
+        raise SubtitlesSearchError(SubtitlesErrors.INVALID_CREDENTIALS_ERROR, _("Titlovi.com login failed, check username/password"))
     r.raise_for_status()
     data = r.json()
     # tokens live for days (ExpirationDate), renewing once a day is enough

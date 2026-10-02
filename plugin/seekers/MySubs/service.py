@@ -4,6 +4,7 @@ import re
 
 from bs4 import BeautifulSoup
 
+from .. import _
 from ..seeker import SubtitlesDownloadError, SubtitlesErrors
 from ..utilities import createSession, langCode, log, matchTitle, saveSubtitle, splitYear, wantedLanguages
 
@@ -84,7 +85,7 @@ def download_subtitles(subtitles_list, pos, zip_subs, tmp_sub_dir, sub_folder, s
     page.raise_for_status()
     m = re.search(r'REAL_URL\s*=\s*"([^"]+)"', page.text)
     if not m:
-        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, 'my-subs.co: no download link on %s' % sub['link'])
+        raise SubtitlesDownloadError(SubtitlesErrors.UNKNOWN_ERROR, _("my-subs.co: no download link on %s") % sub['link'])
     link = MAIN_URL + m.group(1).replace('\\/', '/')
     log(__name__, "downloading %s" % link)
     r = session.get(link, headers={'Referer': sub['link']}, timeout=DOWNLOAD_TIMEOUT)
