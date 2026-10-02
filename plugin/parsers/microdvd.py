@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 import re
 import traceback
 from .baseparser import BaseParser, ParseError, HEX_COLORS
@@ -76,6 +75,8 @@ class MicroDVDParser(BaseParser):
             raise ParseError("cannot parse, FPS not provided")
 
         for m in re.finditer(r"\{(\d+)\}\{(\d+)\}(.*)", text):
+            if m.group(1) == m.group(2) and re.match(r'^\s*\d+([.,]\d+)?\s*$', m.group(3)):
+                continue  # {1}{1}23.976 fps header
             try:
                 startTime = float(int(m.group(1)) / float(fps)) * 1000
                 endTime = float(int(m.group(2)) / float(fps)) * 1000

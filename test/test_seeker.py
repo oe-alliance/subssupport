@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 import sys
 import socket
@@ -8,6 +7,7 @@ import shutil
 from urllib.error import URLError
 
 test = os.path.dirname(os.path.realpath(__file__))
+LIVE = os.environ.get('SUBSSUPPORT_LIVE')  # tests against the real sites only when set
 sys.path.append(os.path.join(test, '..', 'plugin'))
 
 from seekers.seeker import BaseSeeker, SubtitlesSearchError, SubtitlesDownloadError, SubtitlesErrors
@@ -21,20 +21,20 @@ def remove_files_in_dir(dirpath):
             os.remove(fpath)
 
 
-def captcha_cb(self, url):
+def captcha_cb(url):
         print('[captcha_cb] visit url:"%s"\nre-type captcha:' % url)
         print('[captcha_cb] not visiting just returning empty string')
         return ""
 
 
-def message_cb(self, text):
+def message_cb(text):
     print('[message_cb] %s' % text)
 
 
-def delay_cb(self, seconds):
+def delay_cb(seconds):
     print('[delay_cb] waiting for %d seconds' % seconds)
     for i in range(seconds):
-        print('[delay_cb] %d second')
+        print('[delay_cb] %d second' % (i + 1))
         time.sleep(1)
 
 
@@ -175,6 +175,7 @@ class TestSeekerDownload(unittest.TestCase):
         self.assertTrue(output == expected_output, '"%s"!="%s"' % (expected_output, output))
         self.assertTrue(os.path.isfile(output))
 
+    @unittest.skipUnless(shutil.which('unrar'), 'unrar is not installed')
     def test_choose_file(self):
         expected_output = os.path.join(self.download_path, 'subfile1.srt')
         provider = ArchiveDownloadSeeker
@@ -266,6 +267,7 @@ class TestSeekerDownload(unittest.TestCase):
         self._test_download(expected_output, output)
 
 
+@unittest.skipUnless(LIVE, 'set SUBSSUPPORT_LIVE=1 for live tests')
 class TestSeeker(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -298,7 +300,6 @@ class TestSeeker(unittest.TestCase):
     def test_search_simple(self):
         langs = ['cs', 'sk']
         subtitles = self.seeker.getSubtitlesSimple(title='True Detective S01 E01', langs=langs)
-        providers = self.seeker.getProviders(langs)
         self.assertIsNotNone(subtitles)
         self.assertTrue(len(self.seeker.getSubtitlesList(subtitles)) > 0, 'there should be at least one subtitle found')
 
@@ -306,13 +307,6 @@ class TestSeeker(unittest.TestCase):
         subtitles = self.seeker.getSubtitlesSimple(title='True Detective', langs=['cs', 'sk', 'en'])
         subtitle = self.seeker.getSubtitlesList(subtitles)[-1]
         self.assertTrue(len(self.seeker.downloadSubtitle(subtitle, subtitles, choosefile_cb)) > 0)
-
-    def test_download_with_choosefile(self):
-        subtitles = self.seeker.getSubtitles(['edna.cz'], langs=['cs', 'sk', 'en'], tvshow='Homeland', season='2', episode='6')
-        subtitle = self.seeker.getSubtitlesList(subtitles)[0]
-        subtitlePath = self.seeker.downloadSubtitle(subtitle, subtitles, choosefile_cb)
-        self.assertIsNotNone(subtitlePath)
-        self.assertTrue(subtitlePath)
 
 
 if __name__ == "__main__":

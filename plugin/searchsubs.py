@@ -110,13 +110,22 @@ def downloadSubtitles(seeker, options):
         options.get("settings"))
 
 
+def masked(value):
+    """copy of the options without credentials (api keys, logins) for the log"""
+    if isinstance(value, dict):
+        return {k: '***' if v and any(s in str(k).lower() for s in ('key', 'pass', 'user', 'token')) else masked(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [masked(v) for v in value]
+    return value
+
+
 def main():
     global stdout
     stdout = sys.stdout
     sys.stdout = open('/tmp/subssupport.log', 'w')
     sys.stderr = sys.stdout
     options = recieve()
-    print('recieved options: %r' % options)
+    print('recieved options: %r' % masked(options))
     try:
         from .seek import SubsSeeker
     except (ValueError, ImportError):

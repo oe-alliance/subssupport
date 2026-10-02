@@ -16,17 +16,15 @@
 #
 #################################################################################
 
-from __future__ import absolute_import, division
 import os
 import traceback
 
-from urllib.error import URLError, HTTPError
 from .parsers.baseparser import ParseError, NoSubtitlesParseError
 from .seekers.utilities import getFileSize, SimpleLogger
 from .utils import load, decode
 
 
-SUBTITLES_FILE_MAX_SIZE = 400 * 1024  # 400KB
+SUBTITLES_FILE_MAX_SIZE = 2 * 1024 * 1024  # 2MB, ASS files with styles
 
 
 class ParserNotFoundError(Exception):
@@ -102,11 +100,11 @@ class SubsLoader(object):
         filename = os.path.basename(subfile)
         size = getFileSize(subfile)
         if size and size > SUBTITLES_FILE_MAX_SIZE:
-            self.log.error("<%s> not supported subtitles size ({%d}KB > {%d}KB)!", filename, size // 1024, SUBTITLES_FILE_MAX_SIZE // 1024)
-            raise LoadError('"%s" - not supported subtitles size: "%dKB"' % (os.path.basename(subfile), size // 1024))
+            self.log.error("<%s> subtitles file too big (%dKB > %dKB)!", filename, size // 1024, SUBTITLES_FILE_MAX_SIZE // 1024)
+            raise LoadError('"%s" - subtitles file too big: %dKB > %dKB' % (filename, size // 1024, SUBTITLES_FILE_MAX_SIZE // 1024))
         try:
             text = load(subfile)
-        except (URLError, HTTPError, IOError) as e:
+        except OSError as e:  # URLError too
             self.log.error("<%s> %s", filename, str(e))
             raise LoadError(subfile)
         try:
@@ -135,7 +133,7 @@ class SubsLoader(object):
             self.log.info("trying parsing with <%s>", parser)
             try:
                 return parser.parse(text, fps)
-            except NoSubtitlesParseError as e:
+            except NoSubtitlesParseError:
                 if parser == self._parsers[-1]:
                     raise
                 continue
